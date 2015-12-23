@@ -1702,6 +1702,7 @@ promptsep(buf, num_post_attribs)
 char *buf;
 int num_post_attribs;
 {
+#if 0 /*JP*/
     const char *conjuct = "and ";
 
     if (num_post_attribs > 1 && post_attribs < num_post_attribs
@@ -1711,6 +1712,13 @@ int num_post_attribs;
     --post_attribs;
     if (!post_attribs && num_post_attribs > 1)
         Strcat(buf, conjuct);
+#else
+    /*JP: 日本語では "A, B, and C" という処理は不要 */
+    if(num_post_attribs > post_attribs){
+        Strcat(buf, "，");
+    }
+    --post_attribs;
+#endif
     return buf;
 }
 
@@ -1756,7 +1764,10 @@ int buflen, rolenum, racenum, gendnum, alignnum;
 {
     int k, gendercount = 0, aligncount = 0;
     char buf[BUFSZ];
+/*JP
     static char err_ret[] = " character's";
+*/
+    static char err_ret[] = "キャラクターの";
     boolean donefirst = FALSE;
 
     if (!suppliedbuf || buflen < 1)
@@ -1777,13 +1788,17 @@ int buflen, rolenum, racenum, gendnum, alignnum;
         && ok_align(rolenum, racenum, gendnum, alignnum)) {
         /* if race specified, and multiple choice of alignments for it */
         if ((racenum >= 0) && (aligncount > 1)) {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, aligns[alignnum].adj);
             donefirst = TRUE;
         } else {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, aligns[alignnum].adj);
             donefirst = TRUE;
         }
@@ -1814,14 +1829,18 @@ int buflen, rolenum, racenum, gendnum, alignnum;
                and name of role itself does not distinguish gender */
             if ((rolenum != ROLE_NONE) && (gendercount > 1)
                 && !roles[rolenum].name.f) {
+#if 0 /*JP*/
                 if (donefirst)
                     Strcat(buf, " ");
+#endif
                 Strcat(buf, genders[gendnum].adj);
                 donefirst = TRUE;
             }
         } else {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, genders[gendnum].adj);
             donefirst = TRUE;
         }
@@ -1840,14 +1859,18 @@ int buflen, rolenum, racenum, gendnum, alignnum;
     if (racenum != ROLE_NONE && racenum != ROLE_RANDOM) {
         if (validrole(rolenum)
             && ok_race(rolenum, racenum, gendnum, alignnum)) {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, (rolenum == ROLE_NONE) ? races[racenum].noun
                                                : races[racenum].adj);
             donefirst = TRUE;
         } else if (!validrole(rolenum)) {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, races[racenum].noun);
             donefirst = TRUE;
         } else {
@@ -1861,8 +1884,10 @@ int buflen, rolenum, racenum, gendnum, alignnum;
     /* <your lawful female gnomish> || <your lawful female gnome> */
 
     if (validrole(rolenum)) {
+#if 0 /*JP*/
         if (donefirst)
             Strcat(buf, " ");
+#endif
         if (gendnum != ROLE_NONE) {
             if (gendnum == 1 && roles[rolenum].name.f)
                 Strcat(buf, roles[rolenum].name.f);
@@ -1884,8 +1909,10 @@ int buflen, rolenum, racenum, gendnum, alignnum;
 
     if ((racenum == ROLE_NONE || racenum == ROLE_RANDOM)
         && !validrole(rolenum)) {
+#if 0 /*JP*/
         if (donefirst)
             Strcat(buf, " ");
+#endif
         Strcat(buf, "character");
         donefirst = TRUE;
     }
@@ -1904,19 +1931,26 @@ build_plselection_prompt(buf, buflen, rolenum, racenum, gendnum, alignnum)
 char *buf;
 int buflen, rolenum, racenum, gendnum, alignnum;
 {
+/*JP
     const char *defprompt = "Shall I pick a character for you? [ynaq] ";
+*/
+    const char *defprompt = "適当にキャラクターを選んでよいですか？[ynaq] ";
     int num_post_attribs = 0;
     char tmpbuf[BUFSZ], *p;
 
     if (buflen < QBUFSZ)
         return (char *) defprompt;
 
+#if 0 /*JP*/
     Strcpy(tmpbuf, "Shall I pick ");
     if (racenum != ROLE_NONE || validrole(rolenum))
         Strcat(tmpbuf, "your ");
     else {
         Strcat(tmpbuf, "a ");
     }
+#else
+    Strcpy(tmpbuf, "");
+#endif
     /* <your> */
 
     (void) root_plselection_prompt(eos(tmpbuf), buflen - strlen(tmpbuf),
@@ -1940,22 +1974,37 @@ int buflen, rolenum, racenum, gendnum, alignnum;
     if (post_attribs) {
         if (pa[BP_RACE]) {
             (void) promptsep(eos(buf), num_post_attribs);
+/*
             Strcat(buf, "race");
+*/
+	    Strcat(buf, "種族");
         }
         if (pa[BP_ROLE]) {
             (void) promptsep(eos(buf), num_post_attribs);
+/*
             Strcat(buf, "role");
+*/
+	    Strcat(buf, "職業");
         }
         if (pa[BP_GEND]) {
             (void) promptsep(eos(buf), num_post_attribs);
+/*JP
             Strcat(buf, "gender");
+*/
+	    Strcat(buf, "性別");
         }
         if (pa[BP_ALIGN]) {
             (void) promptsep(eos(buf), num_post_attribs);
+/*JP
             Strcat(buf, "alignment");
+*/
+	    Strcat(buf, "属性");
         }
     }
+/*JP
     Strcat(buf, " for you? [ynaq] ");
+*/
+    Strcat(buf, "を適当に選んでよろしいですか？[ynq] ");
     return buf;
 }
 
