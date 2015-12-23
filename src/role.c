@@ -2439,6 +2439,7 @@ const char *
 Hello(mtmp)
 struct monst *mtmp;
 {
+#if 0 /*JP*/
     switch (Role_switch) {
     case PM_KNIGHT:
         return "Salutations"; /* Olde English */
@@ -2457,11 +2458,38 @@ struct monst *mtmp;
     default:
         return "Hello";
     }
+#else
+/*
+  あいさつは日本語として自然になるよう大きく仕様を変更
+*/
+    static char helo_buf[BUFSZ];
+
+    switch (Role_switch) {
+    case PM_KNIGHT:
+        Sprintf(helo_buf, "よくぞ参った%sよ", plname);
+        break;
+    case PM_SAMURAI:
+        Sprintf(helo_buf, "よくぞ参られた%sよ", plname);
+        break;
+    case PM_TOURIST:
+        Sprintf(helo_buf, "アローハ%s", plname);
+        break;
+    case PM_VALKYRIE:
+        Sprintf(helo_buf, "魂の守護者%sよ", plname);
+        break;
+    default:
+        Sprintf(helo_buf, "ようこそ%s", plname);
+        break;
+    }
+
+    return helo_buf;
+#endif
 }
 
 const char *
 Goodbye()
 {
+#if 0 /*JP*/
     switch (Role_switch) {
     case PM_KNIGHT:
         return "Fare thee well"; /* Olde English */
@@ -2474,6 +2502,29 @@ Goodbye()
     default:
         return "Goodbye";
     }
+#else
+    static char helo_buf[BUFSZ];
+
+    switch (Role_switch) {
+    case PM_KNIGHT:
+        Sprintf(helo_buf, "さらば敬虔なる");
+        break;
+    case PM_SAMURAI:
+        Sprintf(helo_buf, "さらば武士道を志す");
+        break;
+    case PM_TOURIST:
+        Sprintf(helo_buf, "アローハ");
+        break;
+    case PM_VALKYRIE:
+        Sprintf(helo_buf, "さらば魂の守護者");
+        break;
+    default:
+        Sprintf(helo_buf, "さようなら");
+        break;
+    }
+
+    return helo_buf;
+#endif
 }
 
 /* role.c */
