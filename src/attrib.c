@@ -2,6 +2,14 @@
 /*      Copyright 1988, 1989, 1990, 1992, M. Stephenson           */
 /* NetHack may be freely redistributed.  See license for details. */
 
+/*
+**	Japanese version Copyright
+**	(c) Issei Numata, Naoki Hamada, Shigehiro Miyashita, 1994-2000
+**	For 3.4, Copyright (c) Kentaro Shirakata, 2002-2003
+**	JNetHack may be freely redistributed.  See license for details. 
+*/
+
+
 /*  attribute modification routines. */
 
 #include "hack.h"
@@ -9,11 +17,22 @@
 
 /* part of the output on gain or loss of attribute */
 static const char
+#if 0 /*JP*/
     *const plusattr[] = { "strong", "smart", "wise",
                           "agile",  "tough", "charismatic" },
+#else
+    *const plusattr[] = { "‹­‚¢", "Œ«–¾‚¾", "Œ«‚¢",
+                          "‹@•q‚¾", "Šæä‚¾", "–£—Í“I‚¾" },
+#endif
+#if 0 /*JP*/
     *const minusattr[] = { "weak",    "stupid",
                            "foolish", "clumsy",
                            "fragile", "repulsive" };
+#else
+    *const minusattr[] = { "ã‚¢", "‹ğ‚©‚¾",
+                           "ŠÔ”²‚¯‚¾", "•sŠí—p‚¾",
+                           "‚Ğã‚¾","X‚¢" };
+#endif
 
 static const struct innate {
     schar ulevel;
@@ -21,69 +40,147 @@ static const struct innate {
     const char *gainstr, *losestr;
 } arc_abil[] = { { 1, &(HStealth), "", "" },
                  { 1, &(HFast), "", "" },
+/*JP
                  { 10, &(HSearching), "perceptive", "" },
+*/
+                 { 10, &(HSearching), "’mŠo—Í‚ğ“¾‚½", "’mŠo—Í‚ğ¸‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
   bar_abil[] = { { 1, &(HPoison_resistance), "", "" },
+/*JP
                  { 7, &(HFast), "quick", "slow" },
+*/
+                 { 7, &(HFast), "‘f‘‚³‚ğ“¾‚½", "’x‚­‚È‚Á‚½" },
+/*JP
                  { 15, &(HStealth), "stealthy", "" },
+*/
+                 { 15, &(HStealth), "l–Ú‚ğ“‚Ş—Í‚ğ“¾‚½", "l–Ú‚ğ“‚Ş—Í‚ğ¸‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
+/*JP
   cav_abil[] = { { 7, &(HFast), "quick", "slow" },
+*/
+  cav_abil[] = { { 7, &(HFast), "‘f‘‚³‚ğ“¾‚½", "’x‚­‚È‚Á‚½" },
+/*JP
                  { 15, &(HWarning), "sensitive", "" },
+*/
+                 { 15, &(HWarning), "•qŠ´‚É‚È‚Á‚½", "“İŠ´‚É‚È‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
   hea_abil[] = { { 1, &(HPoison_resistance), "", "" },
+/*JP
                  { 15, &(HWarning), "sensitive", "" },
+*/
+                 { 15, &(HWarning), "•qŠ´‚É‚È‚Á‚½", "“İŠ´‚É‚È‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
+/*JP
   kni_abil[] = { { 7, &(HFast), "quick", "slow" }, { 0, 0, 0, 0 } },
+*/
+  kni_abil[] = { { 7, &(HFast), "‘f‘‚³‚ğ“¾‚½", "’x‚­‚È‚Á‚½" }, { 0, 0, 0, 0 } },
 
   mon_abil[] = { { 1, &(HFast), "", "" },
                  { 1, &(HSleep_resistance), "", "" },
                  { 1, &(HSee_invisible), "", "" },
+/*JP
                  { 3, &(HPoison_resistance), "healthy", "" },
+*/
+                 { 3, &(HPoison_resistance), "Œ’N‚É‚È‚Á‚½", "•sŒ’N‚É‚È‚Á‚½" },
+/*JP
                  { 5, &(HStealth), "stealthy", "" },
+*/
+                 { 5, &(HStealth), "l–Ú‚ğ“‚Ş—Í‚ğ“¾‚½", "l–Ú‚ğ“‚Ş—Í‚ğ¸‚Á‚½" },
+/*JP
                  { 7, &(HWarning), "sensitive", "" },
+*/
+                 { 7, &(HWarning), "•qŠ´‚É‚È‚Á‚½", "“İŠ´‚É‚È‚Á‚½" },
+/*JP
                  { 9, &(HSearching), "perceptive", "unaware" },
+*/
+                 { 9, &(HSearching), "’mŠo—Í‚ğ“¾‚½", "’mŠo—Í‚ğ¸‚Á‚½" },
+/*JP
                  { 11, &(HFire_resistance), "cool", "warmer" },
+*/
+                 { 11, &(HFire_resistance), "—â‚½‚­‚È‚Á‚½", "’g‚©‚­‚È‚Á‚½" },
+/*JP
                  { 13, &(HCold_resistance), "warm", "cooler" },
+*/
+                 { 13, &(HCold_resistance), "’g‚©‚­‚È‚Á‚½", "—â‚½‚­‚È‚Á‚½"},
+/*JP
                  { 15, &(HShock_resistance), "insulated", "conductive" },
+*/
+                 { 15, &(HShock_resistance), "â‰‚³‚ê‚½", "“±“d‚³‚ê‚½" },
+/*JP
                  { 17, &(HTeleport_control), "controlled", "uncontrolled" },
+*/
+                 { 17, &(HTeleport_control), "§Œä—Í‚ğ“¾‚½","§Œä—Í‚ğ¸‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
+/*JP
   pri_abil[] = { { 15, &(HWarning), "sensitive", "" },
+*/
+  pri_abil[] = { { 15, &(HWarning), "•qŠ´‚É‚È‚Á‚½", "“İŠ´‚É‚È‚Á‚½" },
+/*JP
                  { 20, &(HFire_resistance), "cool", "warmer" },
+*/
+                 { 20, &(HFire_resistance), "—â‚½‚­‚È‚Á‚½", "’g‚©‚­‚È‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
   ran_abil[] = { { 1, &(HSearching), "", "" },
+/*JP
                  { 7, &(HStealth), "stealthy", "" },
+*/
+                 { 7, &(HStealth), "l–Ú‚ğ“‚Ş—Í‚ğ“¾‚½", "l–Ú‚ğ“‚Ş—Í‚ğ¸‚Á‚½" },
                  { 15, &(HSee_invisible), "", "" },
                  { 0, 0, 0, 0 } },
 
   rog_abil[] = { { 1, &(HStealth), "", "" },
+/*JP
                  { 10, &(HSearching), "perceptive", "" },
+*/
+                 { 10, &(HSearching), "’mŠo—Í‚ğ“¾‚½", "’mŠo—Í‚ğ¸‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
   sam_abil[] = { { 1, &(HFast), "", "" },
+/*JP
                  { 15, &(HStealth), "stealthy", "" },
+*/
+                 { 15, &(HStealth), "l–Ú‚ğ“‚Ş—Í‚ğ“¾‚½", "l–Ú‚ğ“‚Ş—Í‚ğ¸‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
+/*JP
   tou_abil[] = { { 10, &(HSearching), "perceptive", "" },
+*/
+  tou_abil[] = { { 10, &(HSearching), "’mŠo—Í‚ğ“¾‚½", "’mŠo—Í‚ğ¸‚Á‚½" },
+/*JP
                  { 20, &(HPoison_resistance), "hardy", "" },
+*/
+                 { 20, &(HPoison_resistance), "–Æ‰u—Í‚ğ“¾‚½", "–Æ‰u—Í‚ğ¸‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
   val_abil[] = { { 1, &(HCold_resistance), "", "" },
                  { 1, &(HStealth), "", "" },
+/*JP
                  { 7, &(HFast), "quick", "slow" },
+*/
+                 { 7, &(HFast), "‘f‘‚³‚ğ“¾‚½", "’x‚­‚È‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
+/*JP
   wiz_abil[] = { { 15, &(HWarning), "sensitive", "" },
+*/
+  wiz_abil[] = { { 15, &(HWarning), "•qŠ´‚É‚È‚Á‚½", "“İŠ´‚É‚È‚Á‚½" },
+/*JP
                  { 17, &(HTeleport_control), "controlled", "uncontrolled" },
+*/
+                 { 17, &(HTeleport_control), "§Œä—Í‚ğ“¾‚½","§Œä—Í‚ğ¸‚Á‚½" },
                  { 0, 0, 0, 0 } },
 
   /* Intrinsics conferred by race */
+/*JP
     elf_abil[] = { { 4, &(HSleep_resistance), "awake", "tired" },
+*/
+    elf_abil[] = { { 4, &(HSleep_resistance), "–Ú‚ªŠo‚ß‚½", "–°‚­‚È‚Á‚½" },
                    { 0, 0, 0, 0 } },
 
   orc_abil[] = { { 1, &(HPoison_resistance), "", "" }, { 0, 0, 0, 0 } };
@@ -108,7 +205,10 @@ int msgflg; /* positive => no message, zero => message, and */
 
     if ((ndx == A_INT || ndx == A_WIS) && uarmh && uarmh->otyp == DUNCE_CAP) {
         if (msgflg == 0)
+/*JP
             Your("cap constricts briefly, then relaxes again.");
+*/
+            Your("–Xq‚ª‚µ‚Î‚ç‚­‚ÌŠÔƒLƒ…‚Á‚Æ’÷‚ß‚Â‚¯C‚»‚µ‚Ä‚ä‚é‚ñ‚¾D");
         return FALSE;
     }
 
@@ -138,13 +238,21 @@ int msgflg; /* positive => no message, zero => message, and */
     }
     if (ACURR(ndx) == old_acurr) {
         if (msgflg == 0 && flags.verbose)
+#if 0 /*JP*/
             pline("You're %s as %s as you can get.",
                   abonflg ? "currently" : "already", attrstr);
+#else
+            You("%s\•ª‚É%sD",
+                  abonflg ? "¡‚Ì‚Æ‚±‚ë" : "Šù‚É", attrstr);
+#endif
         return FALSE;
     }
 
     if (msgflg <= 0)
+/*JP
         You_feel("%s%s!", (incr > 1 || incr < -1) ? "very " : "", attrstr);
+*/
+        You("%s%s‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½I", (incr > 1 || incr < -1) ? "‚Æ‚Ä‚à" : "", attrstr);
     context.botl = 1;
     if (moves > 1 && (ndx == A_STR || ndx == A_CON))
         (void) encumber_msg();
