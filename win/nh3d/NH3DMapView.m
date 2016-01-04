@@ -59,11 +59,11 @@
 		if ( TRADITIONAL_MAP ) {
 			[ self setFrame:NSMakeRect(183.0, 222.0, 440.0, 320.0) ];
 			mapBezel = nil;
-			mapBase = [ NSImage imageNamed:@"trBase" ];
+			mapBase = [[ NSImage imageNamed:@"trBase" ] retain];
 			trMapImage = nil;
 		} else {
-			mapBezel = [ NSImage imageNamed:@"asciiMapMask" ];
-			mapBase = [ NSImage imageNamed:@"asciiMapBase" ];
+			mapBezel = [[ NSImage imageNamed:@"asciiMapMask" ] retain];
+			mapBase = [[ NSImage imageNamed:@"asciiMapBase" ] retain];
 			trMapImage = nil;
 		}
 
@@ -125,8 +125,8 @@
 		
 		if ( mapBezel != nil ) [ mapBezel release ];
 		if ( mapBase != nil ) [ mapBase release ];
-		mapBezel = [ NSImage imageNamed:@"asciiMapMask" ];
-		mapBase = [ NSImage imageNamed:@"asciiMapBase" ];
+		mapBezel = [[ NSImage imageNamed:@"asciiMapMask" ] retain];
+		mapBase = [[ NSImage imageNamed:@"asciiMapBase" ] retain];
 		
 		if ( trMapImage != nil ) [ trMapImage release ];
 		trMapImage = nil;
