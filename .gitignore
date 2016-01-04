@@ -1,0 +1,6 @@
+.DS_Store
+
+*.pbxuser
+*.perspective
+xcuserdata/
+project.xcworkspace/
