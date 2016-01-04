@@ -4036,6 +4036,7 @@
 				REZ_SCRIPT_TYPE = Japanese;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
+				WARNING_CFLAGS = "-Wno-invalid-source-encoding";
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -4051,6 +4052,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PRODUCT_NAME = NetHack3D;
 				SDKROOT = macosx;
+				WARNING_CFLAGS = "-Wno-invalid-source-encoding";
 			};
 			name = Release;
 		};
