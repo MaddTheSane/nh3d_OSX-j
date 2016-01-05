@@ -1349,3 +1349,66 @@ jrubout(engr, nxt, use_rubout, select_rnd)
 
     return 1;
 }
+
+static struct trans_verb trans_verb_list[] = {
+    {"adjust",	"‚Ç‚ê", "‚ğ", "’²®‚·‚é"},
+    {"call",	"‚Ç‚ê", "‚ğ", "ŒÄ‚Ô"},
+    {"charge",	"‚Ç‚ê", "‚ğ", "[“U‚·‚é"},
+    {"dip into", "‚Ç‚ê", "‚É", "Z‚·"},
+    {"dip",	"‚Ç‚ê", "‚ğ", "Z‚·"},
+    {"drink",	"‚Ç‚ê", "‚ğ", "ˆù‚Ş"},
+    {"drop",	"‚Ç‚ê", "‚ğ", "’u‚­"},
+    {"eat",	"‚Ç‚ê", "‚ğ", "H‚×‚é"},
+    {"grease",	"‚Ç‚ê", "‚É", "“h‚é"},
+    {"identify", "‚Ç‚ê", "‚ğ", "¯•Ê‚·‚é"},
+    {"invoke",	"‚Ç", "‚Ì", "–‚—Í‚ğg‚¤"},
+    {"name",	"‚Ç‚ê", "‚ğ", "–¼‚Ã‚¯‚é"},
+    {"put on",	"‚Ç‚ê", "‚ğ", "g‚É‚Â‚¯‚é"},
+    {"read",	"‚Ç‚ê", "‚ğ", "“Ç‚Ş"},
+    {"ready",	"‚Ç‚ê", "‚ğ", "‘•“U‚·‚é"},
+    {"remove",	"‚Ç‚ê", "‚ğ", "‚Í‚¸‚·"},
+    {"rub",	"‚Ç‚ê", "‚ğ", "‚±‚·‚é"},
+    {"rub on the stone", "‚Ç‚ê", "‚ğ", "Î‚Å‚±‚·‚é"},
+    {"sacrifice", "‚Ç‚ê", "‚ğ", "•ù‚°‚é"},
+    {"take off", "‚Ç", "‚Ì", "‘•”õ‚ğ‰ğ‚­"},
+    {"throw",	"‚Ç‚ê", "‚ğ", "“Š‚°‚é"},
+    {"tin",	"‚Ç‚ê", "‚ğ", "ŠÊ‹l‚ß‚É‚·‚é"},
+    {"untrap with", "‚Ç‚ê", "‚ğ", "g‚Á‚Ä‰ğœ‚·‚é"},
+    {"use or apply", "‚Ç‚ê", "‚ğ", "g‚¤"},
+    {"wear",	"‚Ç‚ê", "‚ğ", "g‚É‚Â‚¯‚é"},
+    {"write on", "‚Ç‚ê", "‚É", "‘‚­"},
+    {"write with", "‚Ç‚ê", "‚ğ", "g‚Á‚Ä‘‚­"},
+    {"zap",	"‚Ç‚ê", "‚ğ", "U‚è‚©‚´‚·"},
+    {(void *)0, (void *)0},
+};
+
+static struct trans_verb wield = 
+    {"wield",	"‚Ç‚ê", "‚ğ", (void *)0}
+;
+
+static struct trans_verb dummyverb = 
+    {(void *)0,	"‚Ç‚ê", "‚ğ", (void *)0}
+;
+
+struct trans_verb
+*trans_verb(const char *en){
+    struct trans_verb *list = trans_verb_list;
+
+    if(!strcmp(en, wield.en)){
+	wield.jp = body_part(HANDED);
+	return &wield;
+    }
+    
+
+    while(list->en){
+	if(!strcmp(en, list->en)){
+	    return list;
+	}
+	list++;
+    }
+
+    dummyverb.en = en;
+    dummyverb.jp = en;
+
+    return &dummyverb;;
+}
