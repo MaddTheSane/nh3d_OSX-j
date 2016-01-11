@@ -1074,7 +1074,10 @@ STATIC_DCL int FDECL(role_gendercount, (int));
 STATIC_DCL int FDECL(race_alignmentcount, (int));
 
 /* used by str2XXX() */
+/*JP
 static char NEARDATA randomstr[] = "random";
+*/
+static char NEARDATA randomstr[] = "ランダム";
 
 boolean
 validrole(rolenum)
@@ -1913,7 +1916,10 @@ int buflen, rolenum, racenum, gendnum, alignnum;
         if (donefirst)
             Strcat(buf, " ");
 #endif
+/*JP
         Strcat(buf, "character");
+*/
+        Strcat(buf, "キャラクター");
         donefirst = TRUE;
     }
     /* <your lawful female gnomish cavewoman> || <your lawful female gnome>
@@ -1955,13 +1961,19 @@ int buflen, rolenum, racenum, gendnum, alignnum;
 
     (void) root_plselection_prompt(eos(tmpbuf), buflen - strlen(tmpbuf),
                                    rolenum, racenum, gendnum, alignnum);
+#if 0 /*JP*/
     Sprintf(buf, "%s", s_suffix(tmpbuf));
+#else
+    Sprintf(buf, "%sの", tmpbuf);
+#endif
+#if 0 /*JP:日本語では不要*/
     /* don't bother splitting caveman/cavewoman or priest/priestess
        in order to apply possessive suffix to both halves, but do
        change "priest/priestess'" to "priest/priestess's" */
     if ((p = strstri(buf, "priest/priestess'")) != 0
         && p[sizeof "priest/priestess'" - sizeof ""] == '\0')
         strkitten(buf, 's');
+#endif
 
     /* buf should now be:
      *    <your lawful female gnomish cavewoman's>
@@ -2072,9 +2084,18 @@ role_selection_prolog(which, where)
 int which;
 winid where;
 {
+/*JP
     static const char NEARDATA choosing[] = " choosing now",
+*/
+    static const char NEARDATA choosing[] = " 現在選択中",
+/*JP
                                not_yet[] = " not yet specified",
+*/
+                               not_yet[] = " 未選択",
+/*JP
                                rand_choice[] = " random";
+*/
+                               rand_choice[] = " ランダム";
     char buf[BUFSZ];
     int r, c, g, a, allowmask;
 
@@ -2131,26 +2152,39 @@ winid where;
             Sprintf(eos(buf), "/%s", roles[r].name.f);
     }
     putstr(where, 0, buf);
+/*JP
     Sprintf(buf, "%12s ", "race:");
+*/
+    Sprintf(buf, "%12s ", "種族:");
     Strcat(buf, (which == RS_RACE) ? choosing : (c == ROLE_NONE)
                                                     ? not_yet
                                                     : (c == ROLE_RANDOM)
                                                           ? rand_choice
                                                           : races[c].noun);
     putstr(where, 0, buf);
+/*JP
     Sprintf(buf, "%12s ", "gender:");
+*/
+    Sprintf(buf, "%12s ", "性別:");
     Strcat(buf, (which == RS_GENDER) ? choosing : (g == ROLE_NONE)
                                                       ? not_yet
                                                       : (g == ROLE_RANDOM)
                                                             ? rand_choice
                                                             : genders[g].adj);
     putstr(where, 0, buf);
+/*JP
     Sprintf(buf, "%12s ", "alignment:");
+*/
+    Sprintf(buf, "%12s ", "属性:");
     Strcat(buf, (which == RS_ALGNMNT) ? choosing : (a == ROLE_NONE)
                                                        ? not_yet
                                                        : (a == ROLE_RANDOM)
                                                              ? rand_choice
+#if 0 /*JP:日本語では名詞が自然*/
                                                              : aligns[a].adj);
+#else
+                                                             : aligns[a].noun);
+#endif
     putstr(where, 0, buf);
 }
 
