@@ -47,6 +47,9 @@ STATIC_VAR const char *const A_gush_of_water_hits = "A gush of water hits";
 STATIC_VAR const char *const blindgas[6] = { "humid",   "odorless",
                                              "pungent", "chilling",
                                              "acrid",   "biting" };
+#if 1 /*JP*/
+const char *set_you[2] = { "", "‚ ‚È‚½‚ÌŽdŠ|‚¯‚½" };
+#endif
 
 /* called when you're hit by fire (dofiretrap,buzz,zapyourself,explode);
    returns TRUE if hit on torso */
