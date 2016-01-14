@@ -1497,10 +1497,18 @@ int final; /* ENL_GAMEINPROGRESS:0, ENL_GAMEOVERALIVE, ENL_GAMEOVERDEAD */
     *tmpbuf = highc(*tmpbuf); /* same adjustment as bottom line */
     /* as in background_enlightenment, when poly'd we need to use the saved
        gender in u.mfemale rather than the current you-as-monster gender */
+#if 0 /*JP*/
     Sprintf(buf, "%s the %s's attributes:", tmpbuf,
             ((Upolyd ? u.mfemale : flags.female) && urole.name.f)
                 ? urole.name.f
                 : urole.name.m);
+#else
+    Sprintf(buf, "%sÇÃ%sÇÃëÆê´:",
+            ((Upolyd ? u.mfemale : flags.female) && urole.name.f)
+                ? urole.name.f
+                : urole.name.m,
+	     tmpbuf);
+#endif
 
     en_win = create_nhwindow(NHW_MENU);
     /* title */
@@ -1547,7 +1555,10 @@ int final;
     rank_titl = rank_of(u.ulevel, Role_switch, innategend);
 
     putstr(en_win, 0, ""); /* separator after title */
+/*JP
     putstr(en_win, 0, "Background:");
+*/
+    putstr(en_win, 0, "îwåièÓïÒ:");
 
     /* if polymorphed, report current shape before underlying role;
        will be repeated as first status: "you are transformed" and also
@@ -1561,7 +1572,10 @@ int final;
         tmpbuf[0] = '\0';
         /* here we always use current gender, not saved role gender */
         if (!is_male(uasmon) && !is_female(uasmon) && !is_neuter(uasmon))
+/*JP
             Sprintf(tmpbuf, "%s ", genders[flags.female ? 1 : 0].adj);
+*/
+            Sprintf(tmpbuf, "%s", genders[flags.female ? 1 : 0].adj);
         Sprintf(buf, "%sin %s%s form", !final ? "currently " : "", tmpbuf,
                 uasmon->mname);
         you_are(buf, "");
@@ -1572,21 +1586,35 @@ int final;
     if (!urole.name.f
         && ((urole.allow & ROLE_GENDMASK) == (ROLE_MALE | ROLE_FEMALE)
             || innategend != flags.initgend))
+/*JP
         Sprintf(tmpbuf, "%s ", genders[innategend].adj);
+*/
+        Sprintf(tmpbuf, "%s", genders[innategend].adj);
     buf[0] = '\0';
     if (Upolyd)
         Strcpy(buf, "actually "); /* "You are actually a ..." */
     if (!strcmpi(rank_titl, role_titl)) {
         /* omit role when rank title matches it */
+#if 0 /*JP*/
         Sprintf(eos(buf), "%s, level %d %s%s", an(rank_titl), u.ulevel,
                 tmpbuf, urace.noun);
+#else
+	Sprintf(eos(buf), "ÉåÉxÉã%dÇÃ%sÇÃ%s%s", u.ulevel,
+		tmpbuf, urace.adj, role_titl);
+#endif
     } else {
+#if 0 /*JP*/
         Sprintf(eos(buf), "%s, a level %d %s%s %s", an(rank_titl), u.ulevel,
                 tmpbuf, urace.adj, role_titl);
+#else
+	Sprintf(eos(buf), "ÉåÉxÉã%dÇÃ%sÇÃ%s%sÇÃ%s", u.ulevel,
+		tmpbuf, urace.adj, role_titl, rank_titl);
+#endif
     }
     you_are(buf, "");
 
     /* report alignment (bypass you_are() in order to omit ending period) */
+#if 0 /*JP*/
     Sprintf(buf, " %s%s%s, %son a mission for %s",
             You_, !final ? are : were,
             align_str(u.ualign.type),
@@ -1599,22 +1627,60 @@ int final;
                      /* lastly, normal case */
                      : "",
             u_gname());
+#else
+    Sprintf(buf, " Ç†Ç»ÇΩÇÕ%sÇ≈, %s%sÇÃÇΩÇﬂÇÃîCñ±ÇçsÇ¡Çƒ%s",
+            align_str(u.ualign.type),
+            /* helm of opposite alignment (might hide conversion) */
+            (u.ualign.type != u.ualignbase[A_CURRENT]) ? "àÍéûìIÇ…"
+               /* permanent conversion */
+               : (u.ualign.type != u.ualignbase[A_ORIGINAL]) ? "åªç›"
+                  /* atheist (ignored in very early game) */
+                  : (!u.uconduct.gnostic && moves > 1000L) ? "ñºã`è„"
+                     /* lastly, normal case */
+                     : "",
+	    u_gname(), !final ? iru : ita);
+#endif
     putstr(en_win, 0, buf);
     /* show the rest of this game's pantheon (finishes previous sentence)
        [appending "also Moloch" at the end would allow for straightforward
        trailing "and" on all three aligned entries but looks too verbose] */
+#if 0 /*JP*/
     Sprintf(buf, " who %s opposed by", !final ? "is" : "was");
+#else
+    Strcpy(buf, "Ç†Ç»ÇΩÇÕ");
+#endif
     if (u.ualign.type != A_LAWFUL)
+#if 0 /*JP*/
         Sprintf(eos(buf), " %s (%s) and", align_gname(A_LAWFUL),
                 align_str(A_LAWFUL));
+#else
+        Sprintf(eos(buf), "%s(%s)Ç®ÇÊÇ—", align_gname(A_LAWFUL),
+                align_str(A_LAWFUL));
+#endif
     if (u.ualign.type != A_NEUTRAL)
+#if 0 /*JP*/
         Sprintf(eos(buf), " %s (%s)%s", align_gname(A_NEUTRAL),
                 align_str(A_NEUTRAL),
                 (u.ualign.type != A_CHAOTIC) ? " and" : "");
+#else
+        Sprintf(eos(buf), "%s(%s)%s", align_gname(A_NEUTRAL),
+                align_str(A_NEUTRAL),
+                (u.ualign.type != A_CHAOTIC) ? "Ç®ÇÊÇ—" : "");
+#endif
+#if 0 /*JP*/
     if (u.ualign.type != A_CHAOTIC)
         Sprintf(eos(buf), " %s (%s)", align_gname(A_CHAOTIC),
                 align_str(A_CHAOTIC));
+#else
+    if (u.ualign.type != A_CHAOTIC)
+        Sprintf(eos(buf), "%s(%s)", align_gname(A_CHAOTIC),
+                align_str(A_CHAOTIC));
+#endif
+#if 0 /*JP*/
     Strcat(buf, "."); /* terminate sentence */
+#else
+    Sprintf(eos(buf), "Ç∆ëŒóßÇµÇƒ%sÅD", !final ? iru : ita);
+#endif
     putstr(en_win, 0, buf);
 
     /* show original alignment,gender,race,role if any have been changed;
