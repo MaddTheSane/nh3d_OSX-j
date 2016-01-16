@@ -335,7 +335,7 @@ register struct obj *obj;
 #else
         pline("%s‚ªÕ’d‚ÉG‚ê‚é‚Æ%sŒõ‚Á‚½D",
               doname(obj),
-              hcolor(obj->blessed ? NH_AMBER : NH_BLACK));
+              jconj_adj(hcolor(obj->blessed ? NH_AMBER : NH_BLACK)));
 #endif
         if (!Hallucination)
             obj->bknown = 1;
