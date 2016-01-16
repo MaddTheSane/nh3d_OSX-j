@@ -337,20 +337,38 @@ boolean thrown_weapon; /* thrown weapons are less deadly */
     /* inform player about being poisoned unless that's already been done;
        "blast" has given a "blast of poison gas" message; "poison arrow",
        "poison dart", etc have implicitly given poison messages too... */
+#if 0 /*JP*/
     if (strcmp(reason, "blast") && !strstri(reason, "poison")) {
+#else
+    if (strcmp(reason, "風") && strcmp(reason, "息") && !strstri(reason, "毒")) {
+#endif
+#if 0 /*JP*/
         boolean plural = (reason[strlen(reason) - 1] == 's') ? 1 : 0;
+#endif
 
         /* avoid "The" Orcus's sting was poisoned... */
+#if 0 /*JP*/
         pline("%s%s %s poisoned!", isupper(*reason) ? "" : "The ", reason,
               plural ? "were" : "was");
+#else
+        pline("%sは毒におかされている！", reason);
+#endif
     }
     if (Poison_resistance) {
+#if 0 /*JP*/
         if (!strcmp(reason, "blast"))
+#else
+        if (!strcmp(reason, "風") || !strcmp(reason, "息"))
+#endif
             shieldeff(u.ux, u.uy);
+/*JP
         pline_The("poison doesn't seem to affect you.");
+*/
+        pline("毒は効かなかったようだ．");
         return;
     }
 
+#if 0 /*JP*//*日本語では不要*/
     /* suppress killer prefix if it already has one */
     i = name_to_mon(pkiller);
     if (i >= LOW_PM && (mons[i].geno & G_UNIQ)) {
@@ -362,12 +380,16 @@ boolean thrown_weapon; /* thrown weapons are less deadly */
         /*[ does this need a plural check too? ]*/
         kprefix = KILLED_BY;
     }
+#endif
 
     i = !fatal ? 1 : rn2(fatal + (thrown_weapon ? 20 : 0));
     if (i == 0 && typ != A_CHA) {
         /* instant kill */
         u.uhp = -1;
+/*JP
         pline_The("poison was deadly...");
+*/
+        pline("毒は致死量だった．．．");
     } else if (i > 5) {
         /* HP damage; more likely--but less severe--with missiles */
         loss = thrown_weapon ? rnd(6) : rn1(10, 6);
@@ -384,8 +406,12 @@ boolean thrown_weapon; /* thrown weapons are less deadly */
     if (u.uhp < 1) {
         killer.format = kprefix;
         Strcpy(killer.name, pkiller);
+#if 0 /*JP*/
         /* "Poisoned by a poisoned ___" is redundant */
         done(strstri(pkiller, "poison") ? DIED : POISONING);
+#else /*JP:日本語では区別していない*/
+        done(POISONING);
+#endif
     }
     (void) encumber_msg();
 }
