@@ -1145,7 +1145,10 @@ boolean with_price;
              /* not bag of tricks: empty if container which has no contents */
              : (Is_container(obj) || obj->otyp == STATUE)
             && !Has_contents(obj)))
+/*JP
         Strcat(prefix, "empty ");
+*/
+        Strcat(prefix, "‹ó‚Ì");
 
     if (bknown && obj->oclass != COIN_CLASS
         && (obj->otyp != POT_WATER || !objects[POT_WATER].oc_name_known
@@ -1191,11 +1194,20 @@ boolean with_price;
 
     if (lknown && Is_box(obj)) {
         if (obj->obroken)
+/*JP
             Strcat(prefix, "unlockable ");
+*/
+            Strcat(prefix, "Œ®‚Ì‰ó‚ê‚½");
         else if (obj->olocked)
+/*JP
             Strcat(prefix, "locked ");
+*/
+            Strcat(prefix, "Œ®‚ÌŠ|‚©‚Á‚½");
         else
+/*JP
             Strcat(prefix, "unlocked ");
+*/
+            Strcat(prefix, "Œ®‚ÌŠ|‚©‚Á‚Ä‚¢‚È‚¢");
     }
 
     if (obj->greased)
@@ -1212,8 +1224,12 @@ boolean with_price;
            when there are 2 scrolls plus 1000 gold pieces */
         long itemcount = count_contents(obj, FALSE, FALSE, TRUE);
 
+#if 0 /*JP*/
         Sprintf(eos(bp), " containing %ld item%s", itemcount,
                 plur(itemcount));
+#else
+        Sprintf(eos(bp), "(%ldŒÂ“ü‚Á‚Ä‚¢‚é)", itemcount);
+#endif
     }
 
     switch (obj->oclass) {
@@ -1413,10 +1429,13 @@ boolean with_price;
 
             if (warn_obj_cnt && obj == uwep && (EWarn_of_mon & W_WEP) != 0L) {
                 /* presumably can be felt when blind */
-                Strcat(bp, " (glowing");
+#if 0 /*JP*/
+                Strcat(bp, " (");
                 if (!Blind)
-                    Sprintf(eos(bp), " %s", glow_color(obj->oartifact));
-                Strcat(bp, ")");
+                    Sprintf(eos(bp), "%sF‚É", glow_color(obj->oartifact));
+                Strcat(bp, "‹P‚¢‚Ä‚¢‚é)");
+#else
+#endif
             }
         }
     }
@@ -1441,16 +1460,22 @@ boolean with_price;
 /*JP
                     Strcat(bp, " (in quiver)");
 */
-                    Strcat(bp, "(‘•“U‚µ‚Ä‚¢‚é)");
+                    Strcat(bp, "(–î“›‚É“ü‚Á‚Ä‚¢‚é)");
                     break;
                 } else {
                     /* Ammo not for a bow */
+/*JP
                     Strcat(bp, " (in quiver pouch)");
+*/
+                    Strcat(bp, "(’e“ü‚ê‚É“ü‚Á‚Ä‚¢‚é)");
                     break;
                 }
             } else {
                 /* Weapons not considered ammo */
+/*JP
                 Strcat(bp, " (at the ready)");
+*/
+                Strcat(bp, "(€”õ‚µ‚Ä‚¢‚é)");
                 break;
             }
         /* Small things and ammo not for a bow */
@@ -1459,10 +1484,16 @@ boolean with_price;
         case WAND_CLASS:
         case COIN_CLASS:
         case GEM_CLASS:
+/*JP
             Strcat(bp, " (in quiver pouch)");
+*/
+            Strcat(bp, "(’e“ü‚ê‚É“ü‚Á‚Ä‚¢‚é)");
             break;
         default: /* odd things */
+/*JP
             Strcat(bp, " (at the ready)");
+*/
+            Strcat(bp, "(€”õ‚µ‚Ä‚¢‚é)");
         }
     }
     if (!iflags.suppress_price && is_unpaid(obj)) {
@@ -1477,6 +1508,7 @@ boolean with_price;
         if (price > 0)
             Sprintf(eos(bp), " (%ld %s)", price, currency(price));
     }
+#if 0 /*JP*//*“ú–{Œê‚Å‚Í•s—v*/
     if (!strncmp(prefix, "a ", 2)
         && index(vowels, *(prefix + 2) ? *(prefix + 2) : *bp)
         && (*(prefix + 2)
@@ -1486,6 +1518,7 @@ boolean with_price;
         Strcpy(prefix, "an ");
         Strcpy(prefix + 3, tmpbuf + 2);
     }
+#endif
 
     /* show weight for items (debug tourist info)
      * aum is stolen from Crawl's "Arbitrary Unit of Measure" */
@@ -1725,13 +1758,18 @@ struct obj *obj;
            devnull tournament, suppress player supplied fruit names because
            those can be used to fake other objects and dungeon features */
         buf = nextobuf();
+/*JP
         Sprintf(buf, "deadly slime mold%s", plur(obj->quan));
+*/
+        Strcpy(buf, "ŠëŒ¯‚È‚Ë‚Î‚Ë‚ÎƒJƒr");
     } else {
         buf = xname(obj);
     }
     /* apply an article if appropriate; caller should always use KILLED_BY */
+#if 0 /*JP*//*“ú–{Œê‚Å‚Í•s—v*/
     if (obj->quan == 1L && !strstri(buf, "'s ") && !strstri(buf, "s' "))
         buf = (obj_is_pname(obj) || the_unique_obj(obj)) ? the(buf) : an(buf);
+#endif
 
     objects[obj->otyp].oc_name_known = save_ocknown;
     objects[obj->otyp].oc_uname = save_ocuname;
