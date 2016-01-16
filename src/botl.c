@@ -186,7 +186,7 @@ bot2()
 /*JP
         Sprintf(nb = eos(nb), " Hallu");
 */
-        Sprintf(nb = eos(nb), " бњЭт");
+        Sprintf(nb = eos(nb), " МґКo");
     if (Slimed)
 /*JP
         Sprintf(nb = eos(nb), " Slime");
