@@ -1593,7 +1593,7 @@ boolean identified, all_containers, reportempty;
                 pline("%s Schroedinger's %scat!", Tobjnam(box, "contain"),
                       deadcat ? "dead " : "");
 #else
-                pline("%sにはシュレディンガーの猫%sが入っていた！", box,
+                pline("%sにはシュレディンガーの猫%sが入っていた！", xname(box),
                       deadcat ? "の死体" : "");
 #endif
                 display_nhwindow(WIN_MESSAGE, FALSE);
