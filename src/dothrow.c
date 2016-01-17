@@ -451,7 +451,7 @@ boolean verbose;
                 m_shot.s ? "firing" : "throwing", m_shot.i, ordin(m_shot.i),
                 m_shot.s ? "shot" : "toss");
 #else
-            You("%s発目を%sところで残りを%sのをやめた．", m_shot.i,
+            You("%d発目を%sところで残りを%sのをやめた．", m_shot.i,
                 m_shot.s ? "撃った" : "投げた",
                 m_shot.s ? "撃つ" : "投げる");
 #endif
