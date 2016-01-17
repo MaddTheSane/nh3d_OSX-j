@@ -1149,8 +1149,8 @@ boolean gone;
             Your("body seems to unfade%s.",
                  See_invisible ? " completely" : "..");
 #else
-            Your("体が%s現われ%s．",
-                 See_invisible ? "完全に現われ" : "次第に現われてきた");
+            Your("体が%s．",
+                 See_invisible ? "完全に現われた" : "次第に現われてきた．．");
 #endif
             learnring(obj, TRUE);
         }
