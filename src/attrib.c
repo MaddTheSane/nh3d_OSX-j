@@ -252,7 +252,7 @@ int msgflg; /* positive => no message, zero => message, and */
 /*JP
         You_feel("%s%s!", (incr > 1 || incr < -1) ? "very " : "", attrstr);
 */
-        You("%s%sなったような気がした！", (incr > 1 || incr < -1) ? "とても" : "", attrstr);
+        You("%s%sなったような気がした！", (incr > 1 || incr < -1) ? "とても" : "", jconj_adj(attrstr));
     context.botl = 1;
     if (moves > 1 && (ndx == A_STR || ndx == A_CON))
         (void) encumber_msg();
@@ -588,12 +588,21 @@ exerper()
 /* exercise/abuse text (must be in attribute order, not botl order);
    phrased as "You must have been [][0]." or "You haven't been [][1]." */
 static NEARDATA const char *const exertext[A_MAX][2] = {
+#if 0 /*JP*/
     { "exercising diligently", "exercising properly" },           /* Str */
     { 0, 0 },                                                     /* Int */
     { "very observant", "paying attention" },                     /* Wis */
     { "working on your reflexes", "working on reflexes lately" }, /* Dex */
     { "leading a healthy life-style", "watching your health" },   /* Con */
     { 0, 0 },                                                     /* Cha */
+#else
+    { "念入りに運動していた", "適切に運動していなかった" },       /* Str */
+    { 0, 0 },                                                     /* Int */
+    { "慎重に行動していた", "注意不足だった" },                   /* Wis */
+    { "反射神経を使っていた", "最近反射神経を使っていなかった" }, /* Dex */
+    { "健康的な生活をしていた", "健康管理を怠っていた" },         /* Con */
+    { 0, 0 },                                                     /* Cha */
+#endif
 };
 
 void
@@ -669,9 +678,14 @@ exerchk()
                 /* if you actually changed an attrib - zero accumulation */
                 AEXE(i) = ax = 0;
                 /* then print an explanation */
+#if 0 /*JP*/
                 You("%s %s.",
                     (mod_val > 0) ? "must have been" : "haven't been",
                     exertext[i][(mod_val > 0) ? 0 : 1]);
+#else
+                You("%sに違いない．",
+                    exertext[i][(mod_val > 0) ? 0 : 1]);
+#endif
             }
         nextattrib:
             /* this used to be ``AEXE(i) /= 2'' but that would produce
