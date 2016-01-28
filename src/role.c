@@ -47,7 +47,7 @@ const struct Role roles[] = {
         { "洞窟学者", 0 },
         { "美術収集者", 0 },
         { "館長", 0 } },
-      "Quetzalcoatl", "Camaxtli", "Huhetotl", /* Central American */
+      "ケツアルカトル", "カマキシトリ", "フヘトトル", /* Central American */
 #endif
       "Arc",
 #if 0 /*JP*/
@@ -108,7 +108,7 @@ const struct Role roles[] = {
         { "殺戮者", 0 },
         { "首領", 0 },
         { "征服者", 0 } },
-      "Mitra", "Crom", "Set", /* Hyborian */
+      "ミトラ", "クロム", "セト", /* Hyborian */
 #endif
       "Bar",
 #if 0 /*JP*/
@@ -169,7 +169,7 @@ const struct Role roles[] = {
         { "遊牧民", 0 },
         { "流浪者", 0 },
         { "先駆者", 0 } },
-      "Anu", "_Ishtar", "Anshar", /* Babylonian */
+      "アヌ", "_イシュタル", "アンシャル", /* Babylonian */
 #endif
       "Cav",
 #if 0 /*JP*/
@@ -230,7 +230,7 @@ const struct Role roles[] = {
         { "医師主任", 0 },
         { "内科医", 0 },
         { "外科医", 0 } },
-      "_Athena", "Hermes", "Poseidon", /* Greek */
+      "_アテナ", "ヘルメス", "ポセイドン", /* Greek */
 #endif
       "Hea",
 #if 0 /*JP*/
@@ -290,7 +290,7 @@ const struct Role roles[] = {
         { "重騎士", 0 },
         { "勲騎士", 0 },
         { "聖騎士", 0 } },
-      "Lugh", "_Brigit", "Manannan Mac Lir", /* Celtic */
+      "ルーフ", "_ブリジット", "マナンナン・マクリール", /* Celtic */
 #endif
       "Kni",
 #if 0 /*JP*/
@@ -350,7 +350,7 @@ const struct Role roles[] = {
         { "木の習い手", 0 },
         { "火の習い手", 0 },
         { "免許皆伝", 0 } },
-      "Shan Lai Ching", "Chih Sung-tzu", "Huan Ti", /* Chinese */
+      "山雷精", "赤松子", "黄帝", /* Chinese */
 #endif
       "Mon",
 #if 0 /*JP*/
@@ -474,7 +474,7 @@ const struct Role roles[] = {
         { "泥棒", 0 },
         { "強盗", 0 },
         { "大泥棒", 0 } },
-      "Issek", "Mog", "Kos", /* Nehwon */
+      "イセック", "モグ", "コス", /* Nehwon */
 #endif
       "Rog",
 #if 0 /*JP*/
@@ -609,7 +609,7 @@ const struct Role roles[] = {
         { "大名", "腰元" },         /* a samurai lord */
         { "公家", 0 },           /* Noble of the Court */
         { "公家", "大奥" } },       /* supreme commander, warlord */
-      "_Amaterasu Omikami", "Raijin", "Susanowo", /* Japanese */
+      "_天照大神", "雷神", "須佐之男", /* Japanese */
 #endif
       "Sam",
 #if 0 /*JP*/
@@ -669,7 +669,7 @@ const struct Role roles[] = {
         { "航海者", 0 },
         { "探検家", 0 },
         { "冒険者", 0 } },
-      "Blind Io", "_The Lady", "Offler", /* Discworld */
+      "盲目のイロ", "_＜女神＞", "オフラー", /* Discworld */
 #endif
       "Tou",
 #if 0 /*JP*/
@@ -729,7 +729,7 @@ const struct Role roles[] = {
         { "英雄", 0 },
         { "先導者", 0 },
         { "ロード", "レディ" } },
-      "Tyr", "Odin", "Loki", /* Norse */
+      "チュール", "オーディン", "ロキ", /* Norse */
 #endif
       "Val",
 #if 0 /*JP*/
@@ -789,7 +789,7 @@ const struct Role roles[] = {
         { "魔術師", 0 },
         { "魔法使い", 0 },
         { "大魔法使い", 0 } },
-      "Ptah", "Thoth", "Anhur", /* Egyptian */
+      "プタハ", "トート", "アンフル", /* Egyptian */
 #endif
       "Wiz",
 #if 0 /*JP*/
