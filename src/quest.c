@@ -2,6 +2,13 @@
 /*      Copyright 1991, M. Stephenson             */
 /* NetHack may be freely redistributed.  See license for details. */
 
+/*
+**	Japanese version Copyright
+**	(c) Issei Numata, Naoki Hamada, Shigehiro Miyashita, 1994-2000
+**	For 3.4, Copyright (c) Kentaro Shirakata, 2002-2003
+**	JNetHack may be freely redistributed.  See license for details. 
+*/
+
 #include "hack.h"
 
 /*  quest dungeon branch routines. */
@@ -138,14 +145,30 @@ boolean talk;
 
     if (wizard && talk) {
         if (u.ualign.type != original_alignment) {
+#if 0 /*JP*/
             You("are currently %s instead of %s.", align_str(u.ualign.type),
                 align_str(original_alignment));
+#else
+            You("%sではなく%sの属性である．", align_str(original_alignment),
+                align_str(u.ualign.type));
+#endif
         } else if (u.ualignbase[A_CURRENT] != original_alignment) {
+/*JP
             You("have converted.");
+*/
+            You("転向している．");
         } else if (u.ualign.record < MIN_QUEST_ALIGN) {
+#if 0 /*JP*/
             You("are currently %d and require %d.", u.ualign.record,
                 MIN_QUEST_ALIGN);
+#else
+            Your("属性値は現在%dで%d必要だ．", u.ualign.record,
+                 MIN_QUEST_ALIGN);
+#endif
+/*JP
             if (yn_function("adjust?", (char *) 0, 'y') == 'y')
+*/
+            if (yn_function("直す？", (char *) 0, 'y') == 'y')
                 u.ualign.record = MIN_QUEST_ALIGN;
         }
     }
@@ -371,8 +394,14 @@ struct monst *mtmp;
         && (mtmp->mstrategy & STRAT_WAITMASK)) {
         /* Awaken the prisoner */
         if (canseemon(mtmp))
+/*JP
             pline("%s speaks:", Monnam(mtmp));
+*/
+            pline("%sは話した：", Monnam(mtmp));
+/*JP
         verbalize("I'm finally free!");
+*/
+        verbalize("ついに自由だ！");
         mtmp->mstrategy &= ~STRAT_WAITMASK;
         mtmp->mpeaceful = 1;
 
