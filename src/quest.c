@@ -195,7 +195,10 @@ boolean seal;
     struct trap *t;
     int portal_flag;
 
+/*JP
     br = dungeon_branch("The Quest");
+*/
+    br = dungeon_branch("クエスト");
     dest = (br->end1.dnum == u.uz.dnum) ? &br->end2 : &br->end1;
     portal_flag = u.uevent.qexpelled ? 0 /* returned via artifact? */
                                      : !seal ? 1 : -1;

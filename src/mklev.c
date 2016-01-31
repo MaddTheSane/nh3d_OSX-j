@@ -1695,7 +1695,10 @@ xchar x, y;
     branch *br;
     schar u_depth;
 
+/*JP
     br = dungeon_branch("Fort Ludios");
+*/
+    br = dungeon_branch("ローディオス砦");
     if (on_level(&knox_level, &br->end1)) {
         source = &br->end2;
     } else {
@@ -1710,7 +1713,11 @@ xchar x, y;
         return;
 
     if (!(u.uz.dnum == oracle_level.dnum      /* in main dungeon */
+#if 0 /*JP*/
           && !at_dgn_entrance("The Quest")    /* but not Quest's entry */
+#else
+          && !at_dgn_entrance("クエスト")     /* but not Quest's entry */
+#endif
           && (u_depth = depth(&u.uz)) > 10    /* beneath 10 */
           && u_depth < depth(&medusa_level))) /* and above Medusa */
         return;

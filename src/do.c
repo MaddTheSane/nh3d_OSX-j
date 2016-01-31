@@ -1866,7 +1866,10 @@ boolean at_stairs, falling, portal;
 */
             You("古くさく，ずいぶん単純な世界に見える部屋に入った．");
         /* main dungeon message from your quest leader */
+/*JP
         if (!In_quest(&u.uz0) && at_dgn_entrance("The Quest")
+*/
+        if (!In_quest(&u.uz0) && at_dgn_entrance("クエスト")
             && !(u.uevent.qcompleted || u.uevent.qexpelled
                  || quest_status.leader_is_dead)) {
             if (!u.uevent.qcalled) {
