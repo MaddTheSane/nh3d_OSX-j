@@ -540,6 +540,23 @@ int how;
         && (mvitals[u.ugrave_arise].mvflags & G_GENOD))
         u.ugrave_arise = NON_PM;
 
+#if 1 /*JP*/
+    if (how == STONING){
+        /*JP
+              topten.c の killed_by_prefix を参照のこと。
+              STONING の場合は "石化した" が補われる。
+         */
+        Strcat(buf, "の攻撃で");
+    }
+    if (how == DIED){
+        /*JP
+              DIED の場合は通常 "死んだ" が補われるが、
+              怪物による場合は "に殺された" を補う。
+         */
+        killer.format = KILLED_SUFFIX;
+        done(DIED);
+    }
+#endif
     done(how);
     return;
 }
