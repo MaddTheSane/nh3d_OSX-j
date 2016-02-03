@@ -544,9 +544,15 @@ do_mname()
     else if (mtmp->isshk
              && !(Deaf || mtmp->msleeping || !mtmp->mcanmove
                   || mtmp->data->msound <= MS_ANIMAL))
+/*JP
         verbalize("I'm %s, not %s.", shkname(mtmp), buf);
+*/
+        verbalize("私は%sだ，%sではない．", shkname(mtmp), buf);
     else if (mtmp->ispriest || mtmp->isminion || mtmp->isshk)
+/*JP
         pline("%s will not accept the name %s.", upstart(monnambuf), buf);
+*/
+        pline("%sは%sという名前を受けいれなかった．", monnambuf, buf);
     else
         (void) christen_monst(mtmp, buf);
 }
@@ -570,17 +576,20 @@ register struct obj *obj;
 
     /* Do this now because there's no point in even asking for a name */
     if (obj->otyp == SPE_NOVEL) {
+/*JP
         pline("%s already has a published name.", Ysimple_name2(obj));
+*/
+        pline("%sにはすでに出版時の名前がある．", Ysimple_name2(obj));
         return;
     }
 
 #if 0 /*JP*/
     Sprintf(qbuf, "What do you want to name %s ",
             is_plural(obj) ? "these" : "this");
-#else
-        Sprintf(qbuf, "%sを何と名づけますか？", xname(obj));
-#endif
     (void) safe_qbuf(qbuf, qbuf, "?", obj, xname, simpleonames, "item");
+#else
+    (void) safe_qbuf(qbuf, "", "を何と名づけますか？", obj, xname, simpleonames, "item");
+#endif
     getlin(qbuf, buf);
     if (!*buf || *buf == '\033')
         return;
@@ -716,27 +725,48 @@ docallcmd()
     any = zeroany;
     any.a_char = 'm'; /* group accelerator 'C' */
     add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, 'C', ATR_NONE,
+/*JP
              "a monster", MENU_UNSELECTED);
+*/
+             "怪物", MENU_UNSELECTED);
     if (invent) {
         /* we use y and n as accelerators so that we can accept user's
            response keyed to old "name an individual object?" prompt */
         any.a_char = 'i'; /* group accelerator 'y' */
         add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, 'y', ATR_NONE,
+/*JP
                  "a particular object in inventory", MENU_UNSELECTED);
+*/
+                 "持ち物の中の一つのアイテム", MENU_UNSELECTED);
         any.a_char = 'o'; /* group accelerator 'n' */
         add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, 'n', ATR_NONE,
+/*JP
                  "the type of an object in inventory", MENU_UNSELECTED);
+*/
+                 "持ち物の中の一つのアイテムの種類", MENU_UNSELECTED);
     }
     any.a_char = 'f'; /* group accelerator ',' (or ':' instead?) */
     add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, ',', ATR_NONE,
+/*JP
              "the type of an object upon the floor", MENU_UNSELECTED);
+*/
+             "床の上にある一つのアイテムの種類", MENU_UNSELECTED);
     any.a_char = 'd'; /* group accelerator '\' */
     add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, '\\', ATR_NONE,
+/*JP
              "the type of an object on discoveries list", MENU_UNSELECTED);
+*/
+             "発見物一覧にある一つのアイテムの種類", MENU_UNSELECTED);
     any.a_char = 'a'; /* group accelerator 'l' */
     add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, 'l', ATR_NONE,
+/*JP
              "record an annotation for the current level", MENU_UNSELECTED);
+*/
+             "現在の階に対するメモの記録", MENU_UNSELECTED);
+/*JP
     end_menu(win, "What do you want to name?");
+*/
+    end_menu(win, "どれに名前をつけますか？");
     if (select_menu(win, PICK_ONE, &pick_list) > 0) {
         ch = pick_list[0].item.a_char;
         free((genericptr_t) pick_list);
