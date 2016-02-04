@@ -766,13 +766,23 @@ makepicks:
         if (!roles[ROLE].name.f
             && (roles[ROLE].allow & ROLE_GENDMASK)
                    == (ROLE_MALE | ROLE_FEMALE))
+/*JP
             Sprintf(plbuf, " %s", genders[GEND].adj);
+*/
+            Sprintf(plbuf, "%sの", genders[GEND].adj);
         else
             *plbuf = '\0'; /* omit redundant gender */
+#if 0 /*JP*/
         Sprintf(pbuf, "%s, %s%s %s %s", plname, aligns[ALGN].adj, plbuf,
                 races[RACE].adj,
                 (GEND == 1 && roles[ROLE].name.f) ? roles[ROLE].name.f
                                                   : roles[ROLE].name.m);
+#else
+        Sprintf(pbuf, "%s, %s%s%s%s", plname, aligns[ALGN].adj, plbuf,
+                races[RACE].adj,
+                (GEND == 1 && roles[ROLE].name.f) ? roles[ROLE].name.f
+                                                  : roles[ROLE].name.m);
+#endif
         add_menu(win, NO_GLYPH, &any, ' ', 0, ATR_NONE, pbuf,
                  MENU_UNSELECTED);
         /* blank separator */
@@ -780,20 +790,35 @@ makepicks:
         add_menu(win, NO_GLYPH, &any, ' ', 0, ATR_NONE, "", MENU_UNSELECTED);
         /* [ynaq] menu choices */
         any.a_int = 1;
+/*JP
         add_menu(win, NO_GLYPH, &any, 'y', 0, ATR_NONE, "Yes; start game",
+*/
+        add_menu(win, NO_GLYPH, &any, 'y', 0, ATR_NONE, "はい; ゲームを始める",
                  MENU_SELECTED);
         any.a_int = 2;
         add_menu(win, NO_GLYPH, &any, 'n', 0, ATR_NONE,
+/*JP
                  "No; choose role again", MENU_UNSELECTED);
+*/
+                 "いいえ; 職業を選び直す", MENU_UNSELECTED);
         if (iflags.renameallowed) {
             any.a_int = 3;
             add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
+/*JP
                      "Not yet; choose another name", MENU_UNSELECTED);
+*/
+                     "まだ; 名前を変える", MENU_UNSELECTED);
         }
         any.a_int = -1;
+/*JP
         add_menu(win, NO_GLYPH, &any, 'q', 0, ATR_NONE, "Quit",
+*/
+        add_menu(win, NO_GLYPH, &any, 'q', 0, ATR_NONE, "抜ける",
                  MENU_UNSELECTED);
+/*JP
         Sprintf(pbuf, "Is this ok? [yn%sq]", iflags.renameallowed ? "a" : "");
+*/
+        Sprintf(pbuf, "これでよい？ [yn%sq]", iflags.renameallowed ? "a" : "");
         end_menu(win, pbuf);
         n = select_menu(win, PICK_ONE, &selected);
         /* [pick-one menus with a preselected entry behave oddly...] */
