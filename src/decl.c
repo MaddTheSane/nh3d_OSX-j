@@ -284,7 +284,7 @@ struct c_common_strings c_common_strings = { "何も起きなかった．",
                                              "また動けるようになった．",
                                              "え？",
                                              "視界がはっきりした．",
-                                             { "", "" } };
+                                             { "", "あなたの" } };
 #endif
 
 /* NOTE: the order of these words exactly corresponds to the
