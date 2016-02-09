@@ -4,3 +4,7 @@
 *.perspective
 xcuserdata/
 project.xcworkspace/
+*.o
+src/config.h-t
+src/NetHack3D
+src/hack.h-t

@@ -14,7 +14,7 @@
 #import <sys/fcntl.h>
 #endif
 #ifdef XI18N
-#include <X11/Xlocale.h>
+//#include <X11/Xlocale.h>
 #endif
 
 #if !defined(_BULL_SOURCE) && !defined(__sgi) && !defined(_M_UNIX)
@@ -60,7 +60,7 @@ static void NDECL(wd_message);
 
 // set Localized String's Text encoding(used only for hard corded strings in 'C' source files)
 // localized 'Cocoa' Strings use '<your locale>.iproj/Localizable.strings'file. that format is "baseStr"="LocalStr";.  
-const int NH3DTEXTENCODING = NSJapaneseEUCStringEncoding; 
+const NSStringEncoding NH3DTEXTENCODING = NSJapaneseEUCStringEncoding;
 
 
 // UserDefaultKeys
