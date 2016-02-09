@@ -1660,11 +1660,18 @@ do_data()
     entry_cnt = line_cnt = 0;
     /* read through the input file and split it into two sections */
     while ((line = fgetline(ifp)) != 0) {
+#if 0 /*JP*/
         if (d_filter(line)) {
             free(line);
             continue;
         }
         if (*line > ' ') { /* got an entry name */
+#else
+            unsigned char uc;
+            uc = *((unsigned char *)line);
+            if (d_filter(line)) continue;
+            if (uc > ' ') { /* got an entry name */
+#endif
             /* first finish previous entry */
             if (line_cnt)
                 Fprintf(ofp, "%d\n", line_cnt), line_cnt = 0;
@@ -1753,6 +1760,7 @@ char *line;
 }
 
 static const char *special_oracle[] = {
+#if 0 /*JP*/
     "\"...it is rather disconcerting to be confronted with the",
     "following theorem from [Baker, Gill, and Solovay, 1975].", "",
     "Theorem 7.18  There exist recursive languages A and B such that",
@@ -1761,6 +1769,18 @@ static const char *special_oracle[] = {
     "currently available will not suffice for proving that P != NP or        "
     "  ",
     "that P == NP.\"  [Garey and Johnson, p. 185.]"
+#else
+    "「次の定理[Baker, Gill, and Solovay, 1975]に直面することは",
+    "むしろ困惑することである．",
+    "",
+    "定理 7.18 次のような再帰的言語 A，Bが存在する",
+    "  (1)  P(A) == NP(A)，かつ",
+    "  (2)  P(B) != NP(B)",
+    "",
+    "これは現在 P != NPであるかまたは P == NPであるかを証明する",
+    "有効な手法がないことを強く示している．」",
+    "[Garey and Johnson, p. 185.]"
+#endif
 };
 
 /*

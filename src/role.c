@@ -24,6 +24,7 @@
  * God names use a leading underscore to flag goddesses.
  */
 const struct Role roles[] = {
+#if 0 /*JP*/
     { { "Archeologist", 0 },
       { { "Digger", 0 },
         { "Field Worker", 0 },
@@ -35,9 +36,27 @@ const struct Role roles[] = {
         { "Collector", 0 },
         { "Curator", 0 } },
       "Quetzalcoatl", "Camaxtli", "Huhetotl", /* Central American */
+#else
+    { { "考古学者", 0 },
+      { { "鉱員", 0 },
+        { "労働者", 0 },
+        { "調査者", 0 },
+        { "発掘者", 0 },
+        { "掘削者", 0 },
+        { "探検者", 0 },
+        { "洞窟学者", 0 },
+        { "美術収集者", 0 },
+        { "館長", 0 } },
+      "ケツアルカトル", "カマキシトリ", "フヘトトル", /* Central American */
+#endif
       "Arc",
+#if 0 /*JP*/
       "the College of Archeology",
       "the Tomb of the Toltec Kings",
+#else
+      "考古学大学",
+      "トルテカ王家の墓",
+#endif
       PM_ARCHEOLOGIST,
       NON_PM,
       NON_PM,
@@ -66,6 +85,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_MAGIC_MAPPING,
       -4 },
+#if 0 /*JP*/
     { { "Barbarian", 0 },
       { { "Plunderer", "Plunderess" },
         { "Pillager", 0 },
@@ -77,9 +97,27 @@ const struct Role roles[] = {
         { "Chieftain", "Chieftainess" },
         { "Conqueror", "Conqueress" } },
       "Mitra", "Crom", "Set", /* Hyborian */
+#else
+    { { "野蛮人", 0 },
+      { { "盗賊", 0 },
+        { "略奪者", 0 },
+        { "悪漢", 0 },
+        { "山賊", 0 },
+        { "侵略者", 0 },
+        { "強盗", 0 },
+        { "殺戮者", 0 },
+        { "首領", 0 },
+        { "征服者", 0 } },
+      "ミトラ", "クロム", "セト", /* Hyborian */
+#endif
       "Bar",
+#if 0 /*JP*/
       "the Camp of the Duali Tribe",
       "the Duali Oasis",
+#else
+      "デュアリ族のキャンプ",
+      "デュアリ族のオアシス",
+#endif
       PM_BARBARIAN,
       NON_PM,
       NON_PM,
@@ -108,6 +146,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_HASTE_SELF,
       -4 },
+#if 0 /*JP*/
     { { "Caveman", "Cavewoman" },
       { { "Troglodyte", 0 },
         { "Aborigine", 0 },
@@ -119,9 +158,27 @@ const struct Role roles[] = {
         { "Rover", 0 },
         { "Pioneer", 0 } },
       "Anu", "_Ishtar", "Anshar", /* Babylonian */
+#else
+    { { "洞窟人", 0 },
+      { { "穴居人", 0 },
+        { "原住民", 0 },
+        { "放浪者", 0 },
+        { "浮浪者", 0 },
+        { "旅行者", 0 },
+        { "放遊者", 0 },
+        { "遊牧民", 0 },
+        { "流浪者", 0 },
+        { "先駆者", 0 } },
+      "アヌ", "_イシュタル", "アンシャル", /* Babylonian */
+#endif
       "Cav",
+#if 0 /*JP*/
       "the Caves of the Ancestors",
       "the Dragon's Lair",
+#else
+      "太古の洞窟",
+      "竜の隠れ家",
+#endif
       PM_CAVEMAN,
       PM_CAVEWOMAN,
       PM_LITTLE_DOG,
@@ -150,6 +207,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_DIG,
       -4 },
+#if 0 /*JP*/
     { { "Healer", 0 },
       { { "Rhizotomist", 0 },
         { "Empiric", 0 },
@@ -161,9 +219,27 @@ const struct Role roles[] = {
         { "Physician", 0 },
         { "Chirurgeon", 0 } },
       "_Athena", "Hermes", "Poseidon", /* Greek */
+#else
+    { { "薬師", 0 },
+      { { "見習い", 0 },
+        { "医師見習い", 0 },
+        { "看護師", "看護婦" },
+        { "医師助手", 0 },
+        { "薬物主任", 0 },
+        { "漢方医", 0 },
+        { "医師主任", 0 },
+        { "内科医", 0 },
+        { "外科医", 0 } },
+      "_アテナ", "ヘルメス", "ポセイドン", /* Greek */
+#endif
       "Hea",
+#if 0 /*JP*/
       "the Temple of Epidaurus",
       "the Temple of Coeus",
+#else
+      "エピダウロス寺院",
+      "コイオス寺院",
+#endif
       PM_HEALER,
       NON_PM,
       NON_PM,
@@ -191,6 +267,7 @@ const struct Role roles[] = {
       A_WIS,
       SPE_CURE_SICKNESS,
       -4 },
+#if 0 /*JP*/
     { { "Knight", 0 },
       { { "Gallant", 0 },
         { "Esquire", 0 },
@@ -202,9 +279,27 @@ const struct Role roles[] = {
         { "Seignieur", "Dame" },
         { "Paladin", 0 } },
       "Lugh", "_Brigit", "Manannan Mac Lir", /* Celtic */
+#else
+    { { "騎士", 0 },
+      { { "見習い", 0 },
+        { "歩兵", 0 },
+        { "戦士", 0 },
+        { "騎兵", 0 },
+        { "重戦士", 0 },
+        { "騎士", 0 },
+        { "重騎士", 0 },
+        { "勲騎士", 0 },
+        { "聖騎士", 0 } },
+      "ルーフ", "_ブリジット", "マナンナン・マクリール", /* Celtic */
+#endif
       "Kni",
+#if 0 /*JP*/
       "Camelot Castle",
       "the Isle of Glass",
+#else
+      "キャメロット城",
+      "ガラスの島",
+#endif
       PM_KNIGHT,
       NON_PM,
       PM_PONY,
@@ -232,6 +327,7 @@ const struct Role roles[] = {
       A_WIS,
       SPE_TURN_UNDEAD,
       -4 },
+#if 0 /*JP*/
     { { "Monk", 0 },
       { { "Candidate", 0 },
         { "Novice", 0 },
@@ -243,9 +339,27 @@ const struct Role roles[] = {
         { "Student of Fire", 0 },
         { "Master", 0 } },
       "Shan Lai Ching", "Chih Sung-tzu", "Huan Ti", /* Chinese */
+#else
+    { { "武闘家", 0 },
+      { { "入門希望者", 0 },
+        { "初心者", 0 },
+        { "入門者伝", 0 },
+        { "土の習い手", 0 },
+        { "水の習い手", 0 },
+        { "金の習い手", 0 },
+        { "木の習い手", 0 },
+        { "火の習い手", 0 },
+        { "免許皆伝", 0 } },
+      "山雷精", "赤松子", "黄帝", /* Chinese */
+#endif
       "Mon",
+#if 0 /*JP*/
       "the Monastery of Chan-Sune",
       "the Monastery of the Earth-Lord",
+#else
+      "チャン・スー修道院",
+      "地王の修道院",
+#endif
       PM_MONK,
       NON_PM,
       NON_PM,
@@ -274,6 +388,7 @@ const struct Role roles[] = {
       A_WIS,
       SPE_RESTORE_ABILITY,
       -4 },
+#if 0 /*JP*/
     { { "Priest", "Priestess" },
       { { "Aspirant", 0 },
         { "Acolyte", 0 },
@@ -285,9 +400,27 @@ const struct Role roles[] = {
         { "Patriarch", "Matriarch" },
         { "High Priest", "High Priestess" } },
       0, 0, 0, /* deities from a randomly chosen other role will be used */
+#else
+    { { "僧侶", "尼僧" },
+      { { "修道者", "修道女" },
+        { "侍者", 0 },
+        { "侍祭", 0 },
+        { "僧侶", "尼僧" },
+        { "助任司祭", 0 },
+        { "聖者", "聖女" },
+        { "司教", 0 },
+        { "大司教", 0 },
+        { "大僧上", 0 } },
+      0, 0, 0, /* deities from a randomly chosen other role will be used */
+#endif
       "Pri",
+#if 0 /*JP*/
       "the Great Temple",
       "the Temple of Nalzok",
+#else
+      "偉大なる寺院",
+      "ナルゾク寺院",
+#endif
       PM_PRIEST,
       PM_PRIESTESS,
       NON_PM,
@@ -318,6 +451,7 @@ const struct Role roles[] = {
       -4 },
     /* Note:  Rogue precedes Ranger so that use of `-R' on the command line
        retains its traditional meaning. */
+#if 0 /*JP*/
     { { "Rogue", 0 },
       { { "Footpad", 0 },
         { "Cutpurse", 0 },
@@ -329,9 +463,27 @@ const struct Role roles[] = {
         { "Magsman", "Magswoman" },
         { "Thief", 0 } },
       "Issek", "Mog", "Kos", /* Nehwon */
+#else
+    { { "盗賊", 0 },
+      { { "追いはぎ", 0 },
+        { "ひったくり", 0 },
+        { "スリ", 0 },
+        { "ごろつき", 0 },
+        { "こそどろ", 0 },
+        { "空巣", 0 },
+        { "泥棒", 0 },
+        { "強盗", 0 },
+        { "大泥棒", 0 } },
+      "イセック", "モグ", "コス", /* Nehwon */
+#endif
       "Rog",
+#if 0 /*JP*/
       "the Thieves' Guild Hall",
       "the Assassins' Guild Hall",
+#else
+      "盗賊ギルド",
+      "暗殺者ギルド",
+#endif
       PM_ROGUE,
       NON_PM,
       NON_PM,
@@ -359,6 +511,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_DETECT_TREASURE,
       -4 },
+#if 0 /*JP*/
     { { "Ranger", 0 },
       {
 #if 0 /* OBSOLETE */
@@ -384,9 +537,27 @@ const struct Role roles[] = {
         { "Sharpshooter", 0 },
         { "Marksman", "Markswoman" } },
       "Mercury", "_Venus", "Mars", /* Roman/planets */
+#else
+    { { "レンジャー", 0 },
+      { { "新米", 0 },
+        { "見張り", 0 },
+        { "先導", 0 },
+        { "偵察", 0 },
+        { "斥候", 0 },
+        { "弓兵", 0 }, /* One skilled at crossbows */
+        { "中級弓兵", 0 },
+        { "上級弓兵", 0 },
+        { "上級弓兵", 0 } },
+      "Mercury", "_Venus", "Mars", /* Roman/planets */
+#endif
       "Ran",
+#if 0 /*JP*/
       "Orion's camp",
       "the cave of the wumpus",
+#else
+      "オリオンのキャンプ",
+      "ワンパスの洞窟",
+#endif
       PM_RANGER,
       NON_PM,
       PM_LITTLE_DOG /* Orion & canis major */,
@@ -415,6 +586,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_INVISIBILITY,
       -4 },
+#if 0 /*JP*/
     { { "Samurai", 0 },
       { { "Hatamoto", 0 },       /* Banner Knight */
         { "Ronin", 0 },          /* no allegiance */
@@ -426,9 +598,27 @@ const struct Role roles[] = {
         { "Kuge", 0 },           /* Noble of the Court */
         { "Shogun", 0 } },       /* supreme commander, warlord */
       "_Amaterasu Omikami", "Raijin", "Susanowo", /* Japanese */
+#else
+    { { "侍", 0 },
+      { { "旗本", 0 },       /* Banner Knight */
+        { "浪人", 0 },          /* no allegiance */
+        { "忍者", "くノ一" }, /* secret society */
+        { "城主", 0 },          /* heads a castle */
+        { "領主", 0 },         /* has a territory */
+        { "領主", 0 },        /* heads a province */
+        { "大名", "腰元" },         /* a samurai lord */
+        { "公家", 0 },           /* Noble of the Court */
+        { "公家", "大奥" } },       /* supreme commander, warlord */
+      "_天照大神", "雷神", "須佐之男", /* Japanese */
+#endif
       "Sam",
+#if 0 /*JP*/
       "the Castle of the Taro Clan",
       "the Shogun's Castle",
+#else
+      "太郎一族の城",
+      "将軍の城",
+#endif
       PM_SAMURAI,
       NON_PM,
       PM_LITTLE_DOG,
@@ -456,6 +646,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_CLAIRVOYANCE,
       -4 },
+#if 0 /*JP*/
     { { "Tourist", 0 },
       { { "Rambler", 0 },
         { "Sightseer", 0 },
@@ -467,9 +658,27 @@ const struct Role roles[] = {
         { "Explorer", 0 },
         { "Adventurer", 0 } },
       "Blind Io", "_The Lady", "Offler", /* Discworld */
+#else
+    { { "観光客", 0 },
+      { { "プー太郎", "プー子" },
+        { "観光客", 0 },
+        { "周遊旅行者", 0 },
+        { "遍歴者", 0 },
+        { "旅行者", 0 },
+        { "旅人", 0 },
+        { "航海者", 0 },
+        { "探検家", 0 },
+        { "冒険者", 0 } },
+      "盲目のイロ", "_＜女神＞", "オフラー", /* Discworld */
+#endif
       "Tou",
+#if 0 /*JP*/
       "Ankh-Morpork",
       "the Thieves' Guild Hall",
+#else
+      "冒険者",
+      "盗賊ギルド",
+#endif
       PM_TOURIST,
       NON_PM,
       NON_PM,
@@ -497,6 +706,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_CHARM_MONSTER,
       -4 },
+#if 0 /*JP*/
     { { "Valkyrie", 0 },
       { { "Stripling", 0 },
         { "Skirmisher", 0 },
@@ -508,9 +718,27 @@ const struct Role roles[] = {
         { "Champion", 0 },
         { "Lord", "Lady" } },
       "Tyr", "Odin", "Loki", /* Norse */
+#else
+    { { "ワルキューレ", 0 },
+      { { "見習い", 0 },
+        { "歩兵", 0 },
+        { "戦士", 0 },
+        { "騎兵", 0 },
+        { "戦闘兵", 0 },
+        { "攻撃兵", 0 },
+        { "英雄", 0 },
+        { "先導者", 0 },
+        { "ロード", "レディ" } },
+      "チュール", "オーディン", "ロキ", /* Norse */
+#endif
       "Val",
+#if 0 /*JP*/
       "the Shrine of Destiny",
       "the cave of Surtur",
+#else
+      "運命の聖堂",
+      "スルトの洞窟",
+#endif
       PM_VALKYRIE,
       NON_PM,
       NON_PM /*PM_WINTER_WOLF_CUB*/,
@@ -538,6 +766,7 @@ const struct Role roles[] = {
       A_WIS,
       SPE_CONE_OF_COLD,
       -4 },
+#if 0 /*JP*/
     { { "Wizard", 0 },
       { { "Evoker", 0 },
         { "Conjurer", 0 },
@@ -549,9 +778,27 @@ const struct Role roles[] = {
         { "Wizard", 0 },
         { "Mage", 0 } },
       "Ptah", "Thoth", "Anhur", /* Egyptian */
+#else
+    { { "魔法使い", 0 },
+      { { "手品師", 0 },
+        { "奇術師", 0 },
+        { "占い師", 0 },
+        { "霊感師", 0 },
+        { "召喚師", 0 },
+        { "妖術師", 0 },
+        { "魔術師", 0 },
+        { "魔法使い", 0 },
+        { "大魔法使い", 0 } },
+      "プタハ", "トート", "アンフル", /* Egyptian */
+#endif
       "Wiz",
+#if 0 /*JP*/
       "the Lonely Tower",
       "the Tower of Darkness",
+#else
+      "孤高の塔",
+      "暗黒の塔",
+#endif
       PM_WIZARD,
       NON_PM,
       PM_KITTEN,
@@ -615,11 +862,21 @@ struct Role urole = {
 /* Table of all races */
 const struct Race races[] = {
     {
+#if 0 /*JP*/
         "human",
         "human",
         "humanity",
+#else
+        "人間",
+        "人間の",
+        "人間",
+#endif
         "Hum",
+#if 0 /*JP*/
         { "man", "woman" },
+#else
+        { "男", "女" },
+#endif
         PM_HUMAN,
         NON_PM,
         PM_HUMAN_MUMMY,
@@ -637,9 +894,15 @@ const struct Race races[] = {
         { 1, 0, 2, 0, 2, 0 }  /* Energy */
     },
     {
+#if 0 /*JP*/
         "elf",
         "elven",
         "elvenkind",
+#else
+        "エルフ",
+        "エルフの",
+        "エルフ",
+#endif
         "Elf",
         { 0, 0 },
         PM_ELF,
@@ -658,9 +921,15 @@ const struct Race races[] = {
         { 2, 0, 3, 0, 3, 0 }  /* Energy */
     },
     {
+#if 0 /*JP*/
         "dwarf",
         "dwarven",
         "dwarvenkind",
+#else
+        "ドワーフ",
+        "ドワーフの",
+        "ドワーフ",
+#endif
         "Dwa",
         { 0, 0 },
         PM_DWARF,
@@ -679,9 +948,15 @@ const struct Race races[] = {
         { 0, 0, 0, 0, 0, 0 }  /* Energy */
     },
     {
+#if 0 /*JP*/
         "gnome",
         "gnomish",
         "gnomehood",
+#else
+        "ノーム",
+        "ノームの",
+        "ノーム",
+#endif
         "Gno",
         { 0, 0 },
         PM_GNOME,
@@ -700,9 +975,15 @@ const struct Race races[] = {
         { 2, 0, 2, 0, 2, 0 }  /* Energy */
     },
     {
+#if 0 /*JP*/
         "orc",
         "orcish",
         "orcdom",
+#else
+        "オーク",
+        "オークの",
+        "オーク",
+#endif
         "Orc",
         { 0, 0 },
         PM_ORC,
@@ -750,18 +1031,35 @@ struct Race urace = {
 };
 
 /* Table of all genders */
+/*JP:
+- steed.c kick_steed() He[] に値がコピーされるので長さを変えたときには
+  該当部も要修正。
+*/
 const struct Gender genders[] = {
+#if 0 /*JP*/
     { "male", "he", "him", "his", "Mal", ROLE_MALE },
     { "female", "she", "her", "her", "Fem", ROLE_FEMALE },
     { "neuter", "it", "it", "its", "Ntr", ROLE_NEUTER }
+#else
+    { "男性", "彼", "彼", "彼の", "Mal", ROLE_MALE },
+    { "女性", "彼女", "彼女", "彼女の", "Fem", ROLE_FEMALE },
+    { "中性", "それ", "それ", "その", "Ntr", ROLE_NEUTER }
+#endif
 };
 
 /* Table of all alignments */
 const struct Align aligns[] = {
+#if 0 /*JP*/
     { "law", "lawful", "Law", ROLE_LAWFUL, A_LAWFUL },
     { "balance", "neutral", "Neu", ROLE_NEUTRAL, A_NEUTRAL },
     { "chaos", "chaotic", "Cha", ROLE_CHAOTIC, A_CHAOTIC },
     { "evil", "unaligned", "Una", 0, A_NONE }
+#else
+    { "秩序", "秩序の", "Law", ROLE_LAWFUL, A_LAWFUL },
+    { "中立", "中立の", "Neu", ROLE_NEUTRAL, A_NEUTRAL },
+    { "混沌", "混沌の", "Cha", ROLE_CHAOTIC, A_CHAOTIC },
+    { "無心", "無心の", "Una", 0, A_NONE }
+#endif
 };
 
 /* Filters */
@@ -776,7 +1074,10 @@ STATIC_DCL int FDECL(role_gendercount, (int));
 STATIC_DCL int FDECL(race_alignmentcount, (int));
 
 /* used by str2XXX() */
+/*JP
 static char NEARDATA randomstr[] = "random";
+*/
+static char NEARDATA randomstr[] = "ランダム";
 
 boolean
 validrole(rolenum)
@@ -1404,6 +1705,7 @@ promptsep(buf, num_post_attribs)
 char *buf;
 int num_post_attribs;
 {
+#if 0 /*JP*/
     const char *conjuct = "and ";
 
     if (num_post_attribs > 1 && post_attribs < num_post_attribs
@@ -1413,6 +1715,13 @@ int num_post_attribs;
     --post_attribs;
     if (!post_attribs && num_post_attribs > 1)
         Strcat(buf, conjuct);
+#else
+    /*JP: 日本語では "A, B, and C" という処理は不要 */
+    if(num_post_attribs > post_attribs){
+        Strcat(buf, "，");
+    }
+    --post_attribs;
+#endif
     return buf;
 }
 
@@ -1458,7 +1767,10 @@ int buflen, rolenum, racenum, gendnum, alignnum;
 {
     int k, gendercount = 0, aligncount = 0;
     char buf[BUFSZ];
+/*JP
     static char err_ret[] = " character's";
+*/
+    static char err_ret[] = "キャラクターの";
     boolean donefirst = FALSE;
 
     if (!suppliedbuf || buflen < 1)
@@ -1479,13 +1791,17 @@ int buflen, rolenum, racenum, gendnum, alignnum;
         && ok_align(rolenum, racenum, gendnum, alignnum)) {
         /* if race specified, and multiple choice of alignments for it */
         if ((racenum >= 0) && (aligncount > 1)) {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, aligns[alignnum].adj);
             donefirst = TRUE;
         } else {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, aligns[alignnum].adj);
             donefirst = TRUE;
         }
@@ -1516,14 +1832,18 @@ int buflen, rolenum, racenum, gendnum, alignnum;
                and name of role itself does not distinguish gender */
             if ((rolenum != ROLE_NONE) && (gendercount > 1)
                 && !roles[rolenum].name.f) {
+#if 0 /*JP*/
                 if (donefirst)
                     Strcat(buf, " ");
+#endif
                 Strcat(buf, genders[gendnum].adj);
                 donefirst = TRUE;
             }
         } else {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, genders[gendnum].adj);
             donefirst = TRUE;
         }
@@ -1542,14 +1862,18 @@ int buflen, rolenum, racenum, gendnum, alignnum;
     if (racenum != ROLE_NONE && racenum != ROLE_RANDOM) {
         if (validrole(rolenum)
             && ok_race(rolenum, racenum, gendnum, alignnum)) {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, (rolenum == ROLE_NONE) ? races[racenum].noun
                                                : races[racenum].adj);
             donefirst = TRUE;
         } else if (!validrole(rolenum)) {
+#if 0 /*JP*/
             if (donefirst)
                 Strcat(buf, " ");
+#endif
             Strcat(buf, races[racenum].noun);
             donefirst = TRUE;
         } else {
@@ -1563,8 +1887,10 @@ int buflen, rolenum, racenum, gendnum, alignnum;
     /* <your lawful female gnomish> || <your lawful female gnome> */
 
     if (validrole(rolenum)) {
+#if 0 /*JP*/
         if (donefirst)
             Strcat(buf, " ");
+#endif
         if (gendnum != ROLE_NONE) {
             if (gendnum == 1 && roles[rolenum].name.f)
                 Strcat(buf, roles[rolenum].name.f);
@@ -1586,9 +1912,14 @@ int buflen, rolenum, racenum, gendnum, alignnum;
 
     if ((racenum == ROLE_NONE || racenum == ROLE_RANDOM)
         && !validrole(rolenum)) {
+#if 0 /*JP*/
         if (donefirst)
             Strcat(buf, " ");
+#endif
+/*JP
         Strcat(buf, "character");
+*/
+        Strcat(buf, "キャラクター");
         donefirst = TRUE;
     }
     /* <your lawful female gnomish cavewoman> || <your lawful female gnome>
@@ -1606,30 +1937,43 @@ build_plselection_prompt(buf, buflen, rolenum, racenum, gendnum, alignnum)
 char *buf;
 int buflen, rolenum, racenum, gendnum, alignnum;
 {
+/*JP
     const char *defprompt = "Shall I pick a character for you? [ynaq] ";
+*/
+    const char *defprompt = "適当にキャラクターを選んでよいですか？[ynaq] ";
     int num_post_attribs = 0;
     char tmpbuf[BUFSZ], *p;
 
     if (buflen < QBUFSZ)
         return (char *) defprompt;
 
+#if 0 /*JP*/
     Strcpy(tmpbuf, "Shall I pick ");
     if (racenum != ROLE_NONE || validrole(rolenum))
         Strcat(tmpbuf, "your ");
     else {
         Strcat(tmpbuf, "a ");
     }
+#else
+    Strcpy(tmpbuf, "");
+#endif
     /* <your> */
 
     (void) root_plselection_prompt(eos(tmpbuf), buflen - strlen(tmpbuf),
                                    rolenum, racenum, gendnum, alignnum);
+#if 0 /*JP*/
     Sprintf(buf, "%s", s_suffix(tmpbuf));
+#else
+    Sprintf(buf, "%sの", tmpbuf);
+#endif
+#if 0 /*JP:日本語では不要*/
     /* don't bother splitting caveman/cavewoman or priest/priestess
        in order to apply possessive suffix to both halves, but do
        change "priest/priestess'" to "priest/priestess's" */
     if ((p = strstri(buf, "priest/priestess'")) != 0
         && p[sizeof "priest/priestess'" - sizeof ""] == '\0')
         strkitten(buf, 's');
+#endif
 
     /* buf should now be:
      *    <your lawful female gnomish cavewoman's>
@@ -1642,22 +1986,37 @@ int buflen, rolenum, racenum, gendnum, alignnum;
     if (post_attribs) {
         if (pa[BP_RACE]) {
             (void) promptsep(eos(buf), num_post_attribs);
+/*
             Strcat(buf, "race");
+*/
+	    Strcat(buf, "種族");
         }
         if (pa[BP_ROLE]) {
             (void) promptsep(eos(buf), num_post_attribs);
+/*
             Strcat(buf, "role");
+*/
+	    Strcat(buf, "職業");
         }
         if (pa[BP_GEND]) {
             (void) promptsep(eos(buf), num_post_attribs);
+/*JP
             Strcat(buf, "gender");
+*/
+	    Strcat(buf, "性別");
         }
         if (pa[BP_ALIGN]) {
             (void) promptsep(eos(buf), num_post_attribs);
+/*JP
             Strcat(buf, "alignment");
+*/
+	    Strcat(buf, "属性");
         }
     }
+/*JP
     Strcat(buf, " for you? [ynaq] ");
+*/
+    Strcat(buf, "を適当に選んでよろしいですか？[ynq] ");
     return buf;
 }
 
@@ -1725,9 +2084,18 @@ role_selection_prolog(which, where)
 int which;
 winid where;
 {
+/*JP
     static const char NEARDATA choosing[] = " choosing now",
+*/
+    static const char NEARDATA choosing[] = " 現在選択中",
+/*JP
                                not_yet[] = " not yet specified",
+*/
+                               not_yet[] = " 未選択",
+/*JP
                                rand_choice[] = " random";
+*/
+                               rand_choice[] = " ランダム";
     char buf[BUFSZ];
     int r, c, g, a, allowmask;
 
@@ -1784,26 +2152,39 @@ winid where;
             Sprintf(eos(buf), "/%s", roles[r].name.f);
     }
     putstr(where, 0, buf);
+/*JP
     Sprintf(buf, "%12s ", "race:");
+*/
+    Sprintf(buf, "%12s ", "種族:");
     Strcat(buf, (which == RS_RACE) ? choosing : (c == ROLE_NONE)
                                                     ? not_yet
                                                     : (c == ROLE_RANDOM)
                                                           ? rand_choice
                                                           : races[c].noun);
     putstr(where, 0, buf);
+/*JP
     Sprintf(buf, "%12s ", "gender:");
+*/
+    Sprintf(buf, "%12s ", "性別:");
     Strcat(buf, (which == RS_GENDER) ? choosing : (g == ROLE_NONE)
                                                       ? not_yet
                                                       : (g == ROLE_RANDOM)
                                                             ? rand_choice
                                                             : genders[g].adj);
     putstr(where, 0, buf);
+/*JP
     Sprintf(buf, "%12s ", "alignment:");
+*/
+    Sprintf(buf, "%12s ", "属性:");
     Strcat(buf, (which == RS_ALGNMNT) ? choosing : (a == ROLE_NONE)
                                                        ? not_yet
                                                        : (a == ROLE_RANDOM)
                                                              ? rand_choice
+#if 0 /*JP:日本語では名詞が自然*/
                                                              : aligns[a].adj);
+#else
+                                                             : aligns[a].noun);
+#endif
     putstr(where, 0, buf);
 }
 
@@ -2092,6 +2473,7 @@ const char *
 Hello(mtmp)
 struct monst *mtmp;
 {
+#if 0 /*JP*/
     switch (Role_switch) {
     case PM_KNIGHT:
         return "Salutations"; /* Olde English */
@@ -2110,11 +2492,38 @@ struct monst *mtmp;
     default:
         return "Hello";
     }
+#else
+/*
+  あいさつは日本語として自然になるよう大きく仕様を変更
+*/
+    static char helo_buf[BUFSZ];
+
+    switch (Role_switch) {
+    case PM_KNIGHT:
+        Sprintf(helo_buf, "よくぞ参った%sよ", plname);
+        break;
+    case PM_SAMURAI:
+        Sprintf(helo_buf, "よくぞ参られた%sよ", plname);
+        break;
+    case PM_TOURIST:
+        Sprintf(helo_buf, "アローハ%s", plname);
+        break;
+    case PM_VALKYRIE:
+        Sprintf(helo_buf, "魂の守護者%sよ", plname);
+        break;
+    default:
+        Sprintf(helo_buf, "ようこそ%s", plname);
+        break;
+    }
+
+    return helo_buf;
+#endif
 }
 
 const char *
 Goodbye()
 {
+#if 0 /*JP*/
     switch (Role_switch) {
     case PM_KNIGHT:
         return "Fare thee well"; /* Olde English */
@@ -2127,6 +2536,29 @@ Goodbye()
     default:
         return "Goodbye";
     }
+#else
+    static char helo_buf[BUFSZ];
+
+    switch (Role_switch) {
+    case PM_KNIGHT:
+        Sprintf(helo_buf, "さらば敬虔なる");
+        break;
+    case PM_SAMURAI:
+        Sprintf(helo_buf, "さらば武士道を志す");
+        break;
+    case PM_TOURIST:
+        Sprintf(helo_buf, "アローハ");
+        break;
+    case PM_VALKYRIE:
+        Sprintf(helo_buf, "さらば魂の守護者");
+        break;
+    default:
+        Sprintf(helo_buf, "さようなら");
+        break;
+    }
+
+    return helo_buf;
+#endif
 }
 
 /* role.c */

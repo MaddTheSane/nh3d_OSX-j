@@ -4,6 +4,13 @@
 
 /* shknam.c -- initialize a shop */
 
+/*
+**	Japanese version Copyright
+**	(c) Issei Numata, Naoki Hamada, Shigehiro Miyashita, 1994-2000
+**	For 3.4, Copyright (c) Kentaro Shirakata, 2002-2003
+**	JNetHack may be freely redistributed.  See license for details. 
+*/
+
 #include "hack.h"
 
 STATIC_DCL boolean FDECL(veggy_item, (struct obj * obj, int));
@@ -200,7 +207,10 @@ static const char *const shkhealthfoods[] = {
  * (by testing the sign) whether to use mkobj() or mksobj().
  */
 const struct shclass shtypes[] = {
+/*JP
     { "general store",
+*/
+    { "éGâ›âÆ",
       RANDOM_CLASS,
       42,
       D_SHOP,
@@ -211,7 +221,10 @@ const struct shclass shtypes[] = {
         { 0, 0 },
         { 0, 0 } },
       shkgeneral },
+/*JP
     { "used armor dealership",
+*/
+    { "íÜå√äZè§âÔ",
       ARMOR_CLASS,
       14,
       D_SHOP,
@@ -222,7 +235,10 @@ const struct shclass shtypes[] = {
         { 0, 0 },
         { 0, 0 } },
       shkarmors },
+/*JP
     { "second-hand bookstore",
+*/
+    { "å√èëìX",
       SCROLL_CLASS,
       10,
       D_SHOP,
@@ -233,7 +249,10 @@ const struct shclass shtypes[] = {
         { 0, 0 },
         { 0, 0 } },
       shkbooks },
+/*JP
     { "liquor emporium",
+*/
+    {"Ç®éÇÃïSâ›ìX",
       POTION_CLASS,
       10,
       D_SHOP,
@@ -244,7 +263,10 @@ const struct shclass shtypes[] = {
         { 0, 0 },
         { 0, 0 } },
       shkliquors },
+/*JP
     { "antique weapons outlet",
+*/
+    { "å√ïêäÌêÍñÂè¨îÑìX",
       WEAPON_CLASS,
       5,
       D_SHOP,
@@ -255,7 +277,10 @@ const struct shclass shtypes[] = {
         { 0, 0 },
         { 0, 0 } },
       shkweapons },
+/*JP
     { "delicatessen",
+*/
+    { "êHïiìX",
       FOOD_CLASS,
       5,
       D_SHOP,
@@ -266,7 +291,10 @@ const struct shclass shtypes[] = {
         { 3, -ICE_BOX },
         { 0, 0 } },
       shkfoods },
+/*JP
     { "jewelers",
+*/
+    { "ïÛêŒìX",
       RING_CLASS,
       3,
       D_SHOP,
@@ -277,7 +305,10 @@ const struct shclass shtypes[] = {
         { 0, 0 },
         { 0, 0 } },
       shkrings },
+/*JP
     { "quality apparel and accessories",
+*/
+    { "Ç®ÉVÉÉÉåÇ»ómïiìX",
       WAND_CLASS,
       3,
       D_SHOP,
@@ -286,7 +317,10 @@ const struct shclass shtypes[] = {
         { 5, -ELVEN_CLOAK },
         { 0, 0 } },
       shkwands },
+/*JP
     { "hardware store",
+*/
+    { "ìπãÔâÆ",
       TOOL_CLASS,
       3,
       D_SHOP,
@@ -297,7 +331,10 @@ const struct shclass shtypes[] = {
         { 0, 0 },
         { 0, 0 } },
       shktools },
+/*JP
     { "rare books",
+*/
+    { "å∂ÇÃñ{âÆ",
       SPBOOK_CLASS,
       3,
       D_SHOP,
@@ -308,7 +345,10 @@ const struct shclass shtypes[] = {
         { 0, 0 },
         { 0, 0 } },
       shkbooks },
+/*JP
     { "health food store",
+*/
+    { "åíçNêHïiÇÃìX",
       FOOD_CLASS,
       2,
       D_SHOP,
@@ -323,7 +363,10 @@ const struct shclass shtypes[] = {
      * probability of zero.  They are only created via the special level
      * loader.
      */
+/*JP
     { "lighting store",
+*/
+    { "è∆ñæìX",
       TOOL_CLASS,
       0,
       D_SHOP,
@@ -722,7 +765,10 @@ register struct mkroom *sroom;
             n--;
         else if (inside_shop(sx, sy - 1))
             n++;
+/*JP
         Sprintf(buf, "Closed for inventory");
+*/
+        Sprintf(buf, "íIâµÇµÇÃÇΩÇﬂï¬ìX");
         make_engr_at(m, n, buf, 0L, DUST);
     }
 

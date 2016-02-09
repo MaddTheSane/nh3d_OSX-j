@@ -1392,6 +1392,9 @@ E const char *FDECL(stagger, (const struct permonst *, const char *));
 E const char *FDECL(on_fire, (struct permonst *, struct attack *));
 E const struct permonst *FDECL(raceptr, (struct monst *));
 E boolean FDECL(olfaction, (struct permonst *));
+#if 1 /*JP*/
+E const char *FDECL(jumpedthrough, (const struct permonst *,const char *));
+#endif
 
 /* ### monmove.c ### */
 
@@ -2771,6 +2774,45 @@ E int FDECL(resist, (struct monst *, CHAR_P, int, int));
 E void NDECL(makewish);
 
 #endif /* !MAKEDEFS_C && !LEV_LEX_C */
+
+#if 1 /*JP*/
+
+/* ### jlib.c  ### */
+
+E int FDECL(is_kanji, (unsigned int));
+E void FDECL(setkcode,(int));
+E unsigned char *FDECL(e2sj, (unsigned char *));
+E unsigned char *FDECL(sj2e, (unsigned char *));
+E const char *FDECL(str2ic, (const char *));
+#ifdef SJIS_FILESYSTEM
+E const char *FDECL(ic2str, (const char *));
+#endif
+E int FDECL(jbuffer, (unsigned int, unsigned int *, void (*)(), void (*)(unsigned int), void (*)(unsigned int, unsigned int)));
+E int FDECL(cbuffer, (unsigned int, unsigned int *, void (*)(), void (*)(unsigned int), void (*)(unsigned int, unsigned int)));
+E void FDECL(cputchar,(int));
+E void FDECL(jputchar,(int));
+E void FDECL(jputs,(const char *));
+E int FDECL(is_kanji2, (const char *,int));
+E int FDECL(is_kanji1, (const char *,int));
+E int FDECL(isspace_8, (int));
+E void FDECL(split_japanese, (char *,char *,char *,int));
+E void FDECL(jrndm_replace, (char *));
+E const char *FDECL(joffmsg, (struct obj *, const char **));
+E const char *FDECL(jonmsg, (struct obj *, const char **));
+E const char *FDECL(numeral, (struct obj *));
+E struct trans_verb *FDECL(trans_verb, (const char *));
+
+/* ### jconj.c  ### */
+
+E const char *FDECL(jconj, (const char *,const char *));
+E const char *FDECL(jcan, (const char *));
+E const char *FDECL(jcannot, (const char *));
+E const char *FDECL(jpast, (const char *));
+E const char *FDECL(jpolite, (const char *));
+E const char *FDECL(jconj_adj, (const char *));
+E int FDECL(jrubout, (char *, int, int, int));
+
+#endif
 
 #undef E
 

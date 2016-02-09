@@ -79,13 +79,19 @@ int
 dosave()
 {
     clear_nhwindow(WIN_MESSAGE);
+/*JP
     if (yn("Really save?") == 'n') {
+*/
+    if(yn("本当に保存する？") == 'n') {
         clear_nhwindow(WIN_MESSAGE);
         if (multi > 0)
             nomul(0);
     } else {
         clear_nhwindow(WIN_MESSAGE);
+/*JP
         pline("Saving...");
+*/
+        pline("保存中．．．");
 #if defined(UNIX) || defined(VMS) || defined(__EMX__)
         program_state.done_hup = 0;
 #endif
@@ -93,7 +99,10 @@ dosave()
             u.uhp = -1; /* universal game's over indicator */
             /* make sure they see the Saving message */
             display_nhwindow(WIN_MESSAGE, TRUE);
+/*JP
             exit_nhwindows("Be seeing you...");
+*/
+            exit_nhwindows("また会いましょう．．．");
             terminate(EXIT_SUCCESS);
         } else
             (void) doredraw();
@@ -143,8 +152,14 @@ dosave0()
         if (fd > 0) {
             (void) nhclose(fd);
             clear_nhwindow(WIN_MESSAGE);
+/*JP
             There("seems to be an old save file.");
+*/
+            pline("前にセーブしたファイルがあります．");
+/*JP
             if (yn("Overwrite the old file?") == 'n') {
+*/
+            if (yn("古いファイルに上書きしますか？") == 'n') {
                 nh_compress(fq_save);
                 return 0;
             }
@@ -289,12 +304,15 @@ register int fd, mode;
 #ifdef SYSFLAGS
     bwrite(fd, (genericptr_t) &sysflags, sizeof(struct sysflag));
 #endif
-    urealtime.realtime += (long) (getnow() - urealtime.restored);
+    urealtime.finish_time = getnow();
+    urealtime.realtime += (long) (urealtime.finish_time
+                                  - urealtime.start_timing);
     bwrite(fd, (genericptr_t) &u, sizeof(struct you));
     bwrite(fd, yyyymmddhhmmss(ubirthday), 14);
-    bwrite(fd, (genericptr_t) &urealtime.realtime,
-           sizeof(urealtime.realtime));
-    bwrite(fd, yyyymmddhhmmss(urealtime.restored), 14);
+    bwrite(fd, (genericptr_t) &urealtime.realtime, sizeof urealtime.realtime);
+    bwrite(fd, yyyymmddhhmmss(urealtime.start_timing), 14);  /** Why? **/
+    /* this is the value to use for the next update of urealtime.realtime */
+    urealtime.start_timing = urealtime.finish_time;
     save_killers(fd, mode);
 
     /* must come before migrating_objs and migrating_mons are freed */
