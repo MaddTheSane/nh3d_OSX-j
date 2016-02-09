@@ -7,36 +7,47 @@
 //
 
 #import "NH3DMapItem.h"
-#import "NH3DMapModel.h"
 #import "NH3DTileCache.h"
 
+#import "NetHack3D-Swift.h"
+
 /*from winnh3d.m*/
-extern id _NH3DTileCache;
+extern NH3DTileCache *_NH3DTileCache;
 
+@implementation NH3DMapItem {
+	NSRecursiveLock *lock;
+}
 
-
-@implementation NH3DMapItem
+@synthesize player;
+@synthesize hasAlternateSymbol;
+@synthesize hasCursor;
+@synthesize posX;
+@synthesize posY;
+@synthesize glyph;
+@synthesize cSymbol = symbol;
+@synthesize modelDrawingType;
+@synthesize special;
+@synthesize material = color;
 
 - (void)checkDrawingType
 {
-	
 	if ( glyph ==  S_stone+GLYPH_CMAP_OFF &&
-		 (!IS_ROOM( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ ) && !IS_WALL( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ ) )
-		 ) {	
-	// draw type is corrwall object (10 = stone wall type / 0 = black wall type) 
-		modelDrawingType = 0 ;	
+		(!IS_ROOM( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ ) && !IS_WALL( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ ) )
+		) {
+		// draw type is corrwall object (10 = stone wall type / 0 = black wall type)
+		modelDrawingType = 0 ;
 	} else if ( player ) {
-	// draw type is playerpositon
+		// draw type is playerpositon
 		modelDrawingType = 1;
 		
 	} else {
 		
 		switch (glyph) {
 			case S_stone + GLYPH_CMAP_OFF:
-				modelDrawingType = (    IS_WALL( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ ) 
-									 || IS_STWALL( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ )
-									 || IS_DOOR( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ) ) ? 0 : 1 ;
-				break;				
+				modelDrawingType = (    IS_WALL( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ )
+									|| IS_STWALL( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ )
+									|| IS_DOOR( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ) ) ? 0 : 1 ;
+				break;
 			case S_room + GLYPH_CMAP_OFF:
 			case S_corr + GLYPH_CMAP_OFF:
 			case S_litcorr  + GLYPH_CMAP_OFF:
@@ -44,19 +55,19 @@ extern id _NH3DTileCache;
 				break;
 			case S_pool + GLYPH_CMAP_OFF: modelDrawingType = 4;
 				break;
-			
+				
 			case S_ice + GLYPH_CMAP_OFF: modelDrawingType = 5;
 				break;
-			
+				
 			case S_lava + GLYPH_CMAP_OFF: modelDrawingType = 6;
 				break;
-			
+				
 			case S_air + GLYPH_CMAP_OFF: modelDrawingType = 7;
 				break;
-
+				
 			case S_cloud + GLYPH_CMAP_OFF: modelDrawingType = 8;
 				break;
-
+				
 			case S_water + GLYPH_CMAP_OFF: modelDrawingType = 9;
 				break;
 				
@@ -109,19 +120,15 @@ extern id _NH3DTileCache;
 				
 			default :
 				modelDrawingType = ( (glyph >= PM_LORD_CARNARVON + GLYPH_MON_OFF && glyph <= PM_DARK_ONE + GLYPH_MON_OFF)
-									 || (glyph >= GLYPH_EXPLODE_OFF && glyph < GLYPH_SWALLOW_OFF) ) ? 10 : 3 ;
+									|| (glyph >= GLYPH_EXPLODE_OFF && glyph < GLYPH_SWALLOW_OFF) ) ? 10 : 3 ;
 				break;
 		}
 	}
-				
 }
 
 
-
-
-
-//Over wride NSObject designated initializer. Normary dont use this.
-- (id) init {
+/// Override NSObject designated initializer. Normary don't use this.
+- (instancetype) init {
 	
 	return [ self initWithParameter:' ' 
 							  glyph:S_stone+GLYPH_CMAP_OFF 
@@ -133,20 +140,17 @@ extern id _NH3DTileCache;
 
 
 // This is designated initializer.
-- (id)initWithParameter:(char)ch 
-				  glyph:(int)glf 
-				  color:(int)col 
-				   posX:(int)x 
-				   posY:(int)y 
-				special:(int)sp
+- (instancetype)initWithParameter:(char)ch 
+							glyph:(int)glf
+							color:(int)col
+							 posX:(int)x
+							 posY:(int)y
+						  special:(int)sp
 {
-	
-	self = [ super init ];
-	if ( self != nil ) {
+	if (self = [super init]) {
+		lock = [[NSRecursiveLock alloc] init];
 		
-		lock = [ [NSRecursiveLock alloc] init ];
-		
-		[ lock lock ];
+		[lock lock];
 		
 		symbol = ch;
 		glyph = glf;
@@ -168,22 +172,9 @@ extern id _NH3DTileCache;
 }
 
 
-
-- (void) dealloc {
-	//[ tile release ];
-	[ lock release ];
-	[ super dealloc ];
-}
-
 - (NSString *)symbol
 {
 	return [ NSString stringWithFormat:@"%c",symbol ];
-}
-
-
-- (int)glyph
-{
-	return glyph;
 }
 
 
@@ -191,120 +182,92 @@ extern id _NH3DTileCache;
 {
 	NSColor *aColor;
 	
-	switch ( color )
-	{
-		case 0:	aColor = [ NSColor darkGrayColor ];
+	switch (color) {
+		case 0:
+			aColor = [ NSColor darkGrayColor ];
 			break;
-		case 1: aColor = [ NSColor redColor ];
+		case 1:
+			aColor = [ NSColor redColor ];
 			break;
-		case 2:	aColor = [ NSColor greenColor ];
+		case 2:
+			aColor = [ NSColor greenColor ];
 			break;
-		case 3: aColor = [ NSColor brownColor ];
+		case 3:
+			aColor = [ NSColor brownColor ];
 			break;
-		case 4: aColor = [ NSColor blueColor ];
+		case 4:
+			aColor = [ NSColor blueColor ];
 			break;
-		case 5:	aColor = [ NSColor magentaColor ];
+		case 5:
+			aColor = [ NSColor magentaColor ];
 			break;
-		case 6: aColor = [ NSColor cyanColor ];
+		case 6:
+			aColor = [ NSColor cyanColor ];
 			break;
-		case 7: aColor = [ NSColor grayColor ];
+		case 7:
+			aColor = [ NSColor grayColor ];
 			break;
-		case 8: aColor = [ [NSColor grayColor] highlightWithLevel:0.5 ];
+		case 8:
+			aColor = [ [NSColor grayColor] highlightWithLevel:0.5 ];
 			break;
-		case 9: aColor = [ NSColor orangeColor ];
+		case 9:
+			aColor = [ NSColor orangeColor ];
 			break;
-		case 10: aColor = [ [NSColor greenColor] highlightWithLevel:0.5 ];
+		case 10:
+			aColor = [ [NSColor greenColor] highlightWithLevel:0.5 ];
 			break;
-		case 11: aColor = [ NSColor yellowColor ];
+		case 11:
+			aColor = [ NSColor yellowColor ];
 			break;
-		case 12: aColor = [ [NSColor blueColor] highlightWithLevel:0.5 ];
+		case 12:
+			aColor = [ [NSColor blueColor] highlightWithLevel:0.5 ];
 			break;
-		case 13: aColor = [ [NSColor magentaColor] highlightWithLevel:0.5 ];
+		case 13:
+			aColor = [ [NSColor magentaColor] highlightWithLevel:0.5 ];
 			break;
-		case 14: aColor = [ [NSColor cyanColor] highlightWithLevel:0.5 ];
+		case 14:
+			aColor = [ [NSColor cyanColor] highlightWithLevel:0.5 ];
 			break;
-		case 15: aColor = [ NSColor whiteColor ];
+		case 15:
+			aColor = [ NSColor whiteColor ];
 			break;
-		default: aColor = [ NSColor windowBackgroundColor ];
+		default:
+			aColor = [ NSColor windowBackgroundColor ];
 	}
 
 	return aColor;
 }
 
-- (int)material
-{
-	return color;
-}
-
-
-- (int)posX
-{
-	return posX;
-}
-
-
-- (int)posY
-{
-	return posY;
-}
-- (unsigned)special
-{
-	return special;
-}
-
-
-- (BOOL)isPlayer
-{
-	return player;
-}
 
 - (void)setPlayer:(BOOL)flag
 {
 	[ lock lock ];
 	player = flag;
-	[ self checkDrawingType ];	
+	[ self checkDrawingType ];
 	[ lock unlock ];
-	 
 }
 
 
-- (void)setSymbol:(char)chr
+- (void)setCSymbol:(char)chr
 {
-	[ lock lock ]; 
+	[ lock lock ];
 	symbol = chr;
 	[ self checkDrawingType ];
 	[ lock unlock ];
-	 
 }
 
 - (void)setHasAlternateSymbol:(BOOL)flag
 {
-	 
 	[ lock lock ];
 	hasAlternateSymbol = flag;
 	[ lock unlock ];
 }
 
-- (BOOL)hasAlternateSymbol
-{
-	return hasAlternateSymbol;
-}
-
 - (void)setHasCursor:(BOOL)flag
 {
-	[ lock lock ]; 
+	[ lock lock ];
 	hasCursor = flag;
 	[ lock unlock ];
-}
-
-- (BOOL)hasCursor
-{
-	return hasCursor;
-}
-
-- (char)cSymbol
-{
-	return symbol;
 }
 
 - (NSImage *)tile
@@ -319,12 +282,6 @@ extern id _NH3DTileCache;
 		return [_NH3DTileCache tileImageFromGlyph:glyph];
 	else 
 		return nil;
-}
-
-
-- (int)modelDrawingType
-{
-	return modelDrawingType;
 }
 
 @end

@@ -57,6 +57,9 @@ struct termio termio;
 # if defined(AMIX) || defined(__MACH__)
 #include <sys/ioctl.h>
 # endif /* AMIX */
+# ifdef __MACH__
+#include <sys/ioctl.h>
+# endif
 #endif
 
 #ifdef SUSPEND	/* BSD isn't alone anymore... */

@@ -7,9 +7,11 @@
  *
  */
 
-//#import <Cocoa/Cocoa.h>
+#import <Cocoa/Cocoa.h>
 #import "NH3Dcommon.h"
 #import "hack.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *NH3DMsgFontKey;
 extern NSString *NH3DMapFontKey;
@@ -43,7 +45,7 @@ extern NSString *NH3DOpenGLWaitSyncKey;
 extern NSString *NH3DOpenGLUseWaitRateKey;
 extern NSString *NH3DOpenGLNumberOfThreadsKey;
 
-#define OPENGLVIEW_WAITRATE [ [NSUserDefaults standardUserDefaults] floatForKey:NH3DOpenGLWaitRateKey ]
+#define OPENGLVIEW_WAITRATE [ [NSUserDefaults standardUserDefaults] doubleForKey:NH3DOpenGLWaitRateKey ]
 #define OPENGLVIEW_WAITSYNC	[ [NSUserDefaults standardUserDefaults] boolForKey:NH3DOpenGLWaitSyncKey ]
 #define OPENGLVIEW_USEWAIT	[ [NSUserDefaults standardUserDefaults] boolForKey:NH3DOpenGLUseWaitRateKey ]
 #define OPENGLVIEW_NUMBER_OF_THREADS	[ [NSUserDefaults standardUserDefaults] integerForKey:NH3DOpenGLNumberOfThreadsKey ]
@@ -150,13 +152,23 @@ extern NSString *NH3DGLTileKey;
 #define MAX_POLYGONS 8000 // Max number of polygons (for each object)
 #define MAX_PARTICLES 150 // Max number of Particle effects
 
-#define MODEL_IS_OBJECT 0
-#define MODEL_IS_TEXTURED_OBJECT 1
-#define MODEL_IS_EMITTER 2
+typedef NS_ENUM(int, NH3DModelType) {
+	NH3DModelTypeObject = 0,
+	NH3DModelTypeTexturedObject = 1,
+	NH3DModelTypeEmitter = 2
+};
 
-#define PARTICLE_POINTS 0
-#define PARTICLE_LINES 1
-#define PARTICLE_BOTH 2
-#define PARTICLE_AURA 3
+typedef NS_ENUM(int, NH3DParticleType) {
+	NH3DParticleTypePoints = 0,
+	NH3DParticleTypeLines = 1,
+	NH3DParticleTypeBoth = 2,
+	NH3DParticleTypeAura = 3
+};
 
 #define MAX_TEXTURES 10
+
+#pragma mark - General NetHack preference Keys
+extern NSString * const NHUseNumPad;
+extern NSString * const NHMaxMessages;
+
+NS_ASSUME_NONNULL_END

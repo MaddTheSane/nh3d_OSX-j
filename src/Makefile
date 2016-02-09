@@ -165,12 +165,13 @@ GNOMEINC=-I/usr/lib/glib/include -I/usr/lib/gnome-libs/include -I../win/gnome
 # For MacOSX (Cocoa10.4)
 MACOSXDIR = /System/Library
 #OSXARCH = -arch ppc
-OSXARCH = -arch i386
+OSXARCH = -arch x86_64
 #OSXVECTOR = -faltivec -mtune=G5 -ftree-vectorize
-#OSXVECTOR = -msse3 -ftree-vectorize
+OSXVECTOR = -msse3 -ftree-vectorize
 CFLAGS = $(OSXARCH) $(OSXVECTOR) -I../include -Os
 OBJCFLAG = $(OSXARCH) $(OSXVECTOR) -I../include -Os -x objective-c -Wno-trigraphs -fobjc-exceptions -mdynamic-no-pic -Wreturn-type -Wunused-variable -fmessage-length=0 -fvisibility=hidden
 
+LFLAGS = $(OSXARCH)
 
 NH3DINC = -I../win/nh3d -I$(MACOSXDIR)/Frameworks -I/usr/include
 
@@ -303,7 +304,7 @@ WINGNOMELIB = -lgnomeui -lgnome -lart_lgpl -lgtk -lgdk -lpopt
 # For Linux?
 #WINNH3DLIB = -L$(GNUSTEPDIR)/Libraries -lgnustep-gui -lgnustep-base -lobjc -lGL -lGLU
 # For MacOSX_PPC
-WINNH3DLIB = -L$(MACOSXDIR) -F$(MACOSXDIR)/Frameworks -framework AppKit -framework OpenGL -framework Cocoa -framework Foundation $(OSXARCH)
+WINNH3DLIB = -L$(MACOSXDIR) -F$(MACOSXDIR)/Frameworks -framework AppKit -framework OpenGL -framework Cocoa -framework Foundation -framework QTKit $(OSXARCH)
 #
 # libraries for Gem port
 WINGEMLIB = -le_gem -lgem

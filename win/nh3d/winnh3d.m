@@ -6,6 +6,9 @@
 //  Copyright 2005 Haruumi Yoshino.
 //
 #import "winnh3d.h"
+#import "NetHack3D-Swift.h"
+#import "NH3DMapView.h"
+#import "NetHack3D-Swift.h"
 
 #import <sys/stat.h>
 #import <signal.h>
@@ -46,21 +49,22 @@ extern char **NXArgv;
 
 //bind NetHack C routines to NH3DObjects.
 //set object's instance pointer to work.
-static id _NH3DBindController;
-static id _NH3DUserStatusModel;
-static id _NH3DMapModel;
-static id _NH3DMessenger;
-static id _NH3DMenuWindow;
-static id _NH3DKeyBuffer;
-static id _NH3DOpenGLView;
+static __strong NH3DBindController *_NH3DBindController;
+static __strong NH3DUserStatusModel *_NH3DUserStatusModel;
+static __strong MapModel *_NH3DMapModel;
+static __strong NH3DMessaging *_NH3DMessenger;
+static __strong NH3DMenuWindow *_NH3DMenuWindow;
+static __strong NH3DMapView *_NH3DKeyBuffer;
+static __strong NH3DOpenGLView *_NH3DOpenGLView;
 
-id _NH3DTileCache;
+__strong NH3DTileCache *_NH3DTileCache;
 
 static void NDECL(wd_message);
 
 // set Localized String's Text encoding(used only for hard corded strings in 'C' source files)
 // localized 'Cocoa' Strings use '<your locale>.iproj/Localizable.strings'file. that format is "baseStr"="LocalStr";.  
 const NSStringEncoding NH3DTEXTENCODING = NSJapaneseEUCStringEncoding;
+//const NSStringEncoding NH3DTEXTENCODING = NSASCIIStringEncoding;
 
 
 // UserDefaultKeys
@@ -95,6 +99,9 @@ NSString *NH3DTilesPerLineKey = @"TilesPerLine";
 NSString *NH3DNumberOfTilesRowKey = @"NumberOfTilesRow";
 
 NSString *NH3DSoundMuteKey = @"SoundMute";
+
+NSString * const NHUseNumPad = @"Use Num Pad";
+NSString * const NHMaxMessages = @"Max messages";
 
 static void
 process_options(argc, argv)
@@ -218,43 +225,52 @@ chdirx(dir, wr)
 const char *dir;
 boolean wr;
 {
-	if (dir) {
+	if (dir					/* User specified directory? */
+# ifdef HACKDIR
+		&& strcmp(dir, HACKDIR)		/* and not the default? */
+# endif
+		) {
 # ifdef SECURE
-	    (void) setgid(getgid());
-	    (void) setuid(getuid());		/* Ron Wessels */
+		(void) setgid(getgid());
+		(void) setuid(getuid());		/* Ron Wessels */
 # endif
 	} else {
-	    /* non-default data files is a sign that scores may not be
-		* compatible, or perhaps that a binary not fitting this
-		* system's layout is being used.
-		*/
+		/* non-default data files is a sign that scores may not be
+		 * compatible, or perhaps that a binary not fitting this
+		 * system's layout is being used.
+		 */
 # ifdef VAR_PLAYGROUND
-	    int len = strlen(VAR_PLAYGROUND);
+		int len = strlen(VAR_PLAYGROUND);
 		
-	    fqn_prefix[ SCOREPREFIX ] = (char *)alloc(len+2);
-	    Strcpy(fqn_prefix[ SCOREPREFIX ], VAR_PLAYGROUND);
-	    if (fqn_prefix[ SCOREPREFIX ][ len-1 ] != '/') {
-			fqn_prefix[ SCOREPREFIX ][ len ] = '/';
-			fqn_prefix[ SCOREPREFIX ][ len+1 ] = '\0';
-	    }
+		fqn_prefix[SCOREPREFIX] = (char *)alloc(len+2);
+		Strcpy(fqn_prefix[SCOREPREFIX], VAR_PLAYGROUND);
+		if (fqn_prefix[SCOREPREFIX][len-1] != '/') {
+			fqn_prefix[SCOREPREFIX][len] = '/';
+			fqn_prefix[SCOREPREFIX][len+1] = '\0';
+		}
 # endif
 	}
 	
-	if (dir && chdir(dir) < 0) {
-		perror(dir);
-		error("Cannot chdir to %s.", dir);
-	}
+# ifdef HACKDIR
+	if (dir == (const char *)0)
+		dir = HACKDIR;
+# endif
+		
+		if (dir && chdir(dir) < 0) {
+			perror(dir);
+			error("Cannot chdir to %s.", dir);
+		}
 	
 	/* warn the player if we can't write the record file */
 	/* perhaps we should also test whether . is writable */
 	/* unfortunately the access system-call is worthless */
 	if (wr) {
 # ifdef VAR_PLAYGROUND
-		fqn_prefix[ LEVELPREFIX ] = fqn_prefix[ SCOREPREFIX ];
-		fqn_prefix[ SAVEPREFIX ] = fqn_prefix[ SCOREPREFIX ];
-		fqn_prefix[ BONESPREFIX ] = fqn_prefix[ SCOREPREFIX ];
-		fqn_prefix[ LOCKPREFIX ] = fqn_prefix[ SCOREPREFIX ];
-		fqn_prefix[ TROUBLEPREFIX ] = fqn_prefix[ SCOREPREFIX ];
+		fqn_prefix[LEVELPREFIX] = fqn_prefix[SCOREPREFIX];
+		fqn_prefix[SAVEPREFIX] = fqn_prefix[SCOREPREFIX];
+		fqn_prefix[BONESPREFIX] = fqn_prefix[SCOREPREFIX];
+		fqn_prefix[LOCKPREFIX] = fqn_prefix[SCOREPREFIX];
+		fqn_prefix[TROUBLEPREFIX] = fqn_prefix[SCOREPREFIX];
 # endif
 		check_recordfile(dir);
 	}
@@ -262,7 +278,7 @@ boolean wr;
 #endif /* CHDIR */
 
 #ifdef PORT_HELP
-void 
+void
 port_help()
 {
 	display_file(PORT_HELP, TRUE);
@@ -291,93 +307,97 @@ void nh3d_init_nhwindows(int* argc, char** argv)
 
 void nh3d_player_selection()
 {			
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	[ _NH3DBindController showUserMakeSheet ];
-	[ pool release ];
+	@autoreleasepool {
+		[ _NH3DBindController showUserMakeSheet ];
+	}
 }
 
 
 void nh3d_askname()
 {		
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	nh3d_getlin( [ NSLocalizedString(@"Who are you?",@"") cStringUsingEncoding:NH3DTEXTENCODING ],plname );
-	
-	if ( [ [ NSString stringWithCString:plname encoding:NH3DTEXTENCODING ] cStringLength ] >= PL_NSIZ-11 ) {
-		plname[ 0 ] = 0;
+	@autoreleasepool {
+		nh3d_getlin([NSLocalizedString(@"Who are you?", @"") cStringUsingEncoding:NH3DTEXTENCODING], plname);
 		
-		NSRunAlertPanel(NSLocalizedString(@"A name is too long, and it is difficult to learn.",@""),
-						NSLocalizedString(@"Please input it within 1 to 20 characters.",@""),
-						@"OK",nil,nil);
-		
-	} else {
-		NSString *pcName = [ [ NSString alloc ] initWithCString:plname encoding:NH3DTEXTENCODING ];
-		[ _NH3DUserStatusModel setPlayerName:pcName ];
-		[ pcName release ];
+		if ([NSString stringWithCString:plname encoding:NH3DTEXTENCODING].length >= PL_NSIZ-11 ) {
+			plname[ 0 ] = 0;
+			
+			NSRunAlertPanel(NSLocalizedString(@"A name is too long, and it is difficult to learn.",@""),
+							NSLocalizedString(@"Please input it within 1 to 20 characters.",@""),
+							@"OK",nil,nil);
+			
+		} else {
+			NSString *pcName = [ [ NSString alloc ] initWithCString:plname encoding:NH3DTEXTENCODING ];
+			[ _NH3DUserStatusModel setPlayerName:pcName ];
+		}
 	}
-	
-	[ pool release ];
 }
 
 
 void nh3d_get_nh_event()
 {
-	
-	static NSAutoreleasePool* NH3DfirstPool;
-	
 	NSSound *soundEffect = nil;
 	
-	
-	if ( NH3DfirstPool != nil ) {
-		[ NH3DfirstPool release ];
-		NH3DfirstPool = [ [ NSAutoreleasePool alloc ] init ];
-	} else {
-		NH3DfirstPool = [ [ NSAutoreleasePool alloc ] init ];
-	}
-	
-	if ( SOUND_MUTE ) return;
-	
+	@autoreleasepool {
+		if (SOUND_MUTE) return;
+		
 		int se = random() %150;
-	
+		
 		switch (se) {
-			case 1:  soundEffect = [ NSSound soundNamed:@"waterDrop.wav" ];
-					 [ soundEffect play ];
+			case 1:
+				soundEffect = [NSSound soundNamed:@"waterDrop"];
+				[soundEffect play];
 				break;
-			case 8:  soundEffect = [ NSSound soundNamed:@"hearnoise.wav" ];
-					 [ soundEffect play ];
+				
+			case 8:
+				soundEffect = [NSSound soundNamed:@"hearnoise"];
+				[soundEffect play];
 				break;
-			case 13: soundEffect = [ NSSound soundNamed:@"waterDrop5.wav" ];
-					[ soundEffect play ];
+			case 13:
+				soundEffect = [NSSound soundNamed:@"waterDrop5"];
+				[soundEffect play];
 				break;
-			case 18:  soundEffect = [ NSSound soundNamed:@"hearnoise.wav" ];
-					 [ soundEffect play ];
+				
+			case 18:
+				soundEffect = [NSSound soundNamed:@"hearnoise"];
+				[soundEffect play];
 				break;
-			case 25:  soundEffect = [ NSSound soundNamed:@"waterDrop2.wav" ];
-					 [ soundEffect play ];
+				
+			case 25:
+				soundEffect = [NSSound soundNamed:@"waterDrop2"];
+				[soundEffect play];
 				break;
-			case 32: soundEffect = [ NSSound soundNamed:@"waterDrop4.wav" ];
-					[ soundEffect play ];
+				
+			case 32:
+				soundEffect = [NSSound soundNamed:@"waterDrop4"];
+				[soundEffect play];
 				break;
-			case 48:  soundEffect = [ NSSound soundNamed:@"hearnoise.wav" ];
-					 [ soundEffect play ];
+				
+			case 48:
+				soundEffect = [NSSound soundNamed:@"hearnoise"];
+				[soundEffect play];
 				break;
-			case 57:  soundEffect = [ NSSound soundNamed:@"waterDrop4.wav" ];
-					 [ soundEffect play ];
+				
+			case 57:
+				soundEffect = [NSSound soundNamed:@"waterDrop4"];
+				[soundEffect play];
 				break;
-			case 80: soundEffect = [ NSSound soundNamed:@"waterDrop3.wav" ];
-					[ soundEffect play ];
-				break;	
+				
+			case 80:
+				soundEffect = [NSSound soundNamed:@"waterDrop3"];
+				[soundEffect play];
+				break;
+				
 			default:
 				soundEffect = nil;
-			break;
+				break;
 		}
-		
-	
+	}
 }
 
 
 void nh3d_exit_nhwindows(const char *str)
 {
-	[ _NH3DOpenGLView setRunnning:NO ];
+	[ _NH3DOpenGLView setRunning:NO ];
 }
 
 
@@ -404,152 +424,151 @@ NHW_TEXT    5
 
 winid nh3d_create_nhwindow(int type)
 {
-	int i;
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	
-	for ( i=1 ; i<10 ; i++ )
-		if ( nh3d_windowlist[ i ].win == nil )
-			break;
-	if ( i > 10 )
-		NSLog(@"ERROR:  No windows available...\n");
-	nh3d_create_nhwindow_by_id( type, i);
-	
-	[ pool release ];
-	
-	return i;
-	
+	@autoreleasepool {
+		int i;
+
+		for ( i=1 ; i<10 ; i++ )
+			if ( nh3d_windowlist[ i ].win == nil )
+				break;
+		if ( i > 10 )
+			NSLog(@"ERROR:  No windows available...\n");
+		nh3d_create_nhwindow_by_id( type, i);
+		
+		
+		return i;
+	}
 }
 
 void nh3d_create_nhwindow_by_id( int type, winid i)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	switch ( type )
-	{
-		case NHW_MAP:
+	@autoreleasepool {
+		switch ( type )
 		{
-			nh3d_windowlist[ i ].win = _NH3DMapModel;
-			nh3d_windowlist[ i ].type = NHW_MAP;
-			break;
-		}
-		case NHW_MESSAGE:
-		{
-			nh3d_windowlist[ i ].win = _NH3DMessenger;
-			nh3d_windowlist[ i ].type = NHW_MESSAGE;
-			break; 
-		}
-		case NHW_STATUS:
-		{
-			nh3d_windowlist[ i ].win = _NH3DUserStatusModel;
-			nh3d_windowlist[ i ].type = NHW_STATUS;
-			break;
-		}    
-		case NHW_MENU:
-		{
-			nh3d_windowlist[ i ].win = _NH3DMenuWindow;
-			nh3d_windowlist[ i ].type = NHW_MENU;
-			break;
-		} 
-		case NHW_TEXT:
-		{
-			nh3d_windowlist[ i ].win = _NH3DMenuWindow;
-			nh3d_windowlist[ i ].type = NHW_TEXT;
-			break;
+			case NHW_MAP:
+			{
+				nh3d_windowlist[ i ].win = _NH3DMapModel;
+				nh3d_windowlist[ i ].type = NHW_MAP;
+				break;
+			}
+			case NHW_MESSAGE:
+			{
+				nh3d_windowlist[ i ].win = _NH3DMessenger;
+				nh3d_windowlist[ i ].type = NHW_MESSAGE;
+				break; 
+			}
+			case NHW_STATUS:
+			{
+				nh3d_windowlist[ i ].win = _NH3DUserStatusModel;
+				nh3d_windowlist[ i ].type = NHW_STATUS;
+				break;
+			}    
+			case NHW_MENU:
+			{
+				nh3d_windowlist[ i ].win = _NH3DMenuWindow;
+				nh3d_windowlist[ i ].type = NHW_MENU;
+				break;
+			} 
+			case NHW_TEXT:
+			{
+				nh3d_windowlist[ i ].win = _NH3DMenuWindow;
+				nh3d_windowlist[ i ].type = NHW_TEXT;
+				break;
+			}
 		}
 	}
-	[ pool release ];
 }
 
 
 void nh3d_clear_nhwindow(winid wid)
 {
 	
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	switch ( nh3d_windowlist[ wid ].type ) {
+	@autoreleasepool {
+		switch ( nh3d_windowlist[ wid ].type ) {
       case NHW_MAP:
-		[ _NH3DMapModel clearMapModel ];
-		break;
+			[ _NH3DMapModel clearMapModel ];
+			break;
       case NHW_MESSAGE:
-	//	[ _NH3DMessenger clearMainMessarge ];
-	  break; 
+		//	[ _NH3DMessenger clearMainMessage ];
+		  break; 
       case NHW_STATUS:
-	  break;   
+		  break;   
       case NHW_MENU:
-		if ([ _NH3DMenuWindow isMenu ]) {
-			[ _NH3DMenuWindow clearMenuWindow ];
-		} else {
-			[ _NH3DMenuWindow clearTextMessarge ];
-		}
-	  break;
+			if ( _NH3DMenuWindow.isMenu ) {
+				[ _NH3DMenuWindow clearMenuWindow ];
+			} else {
+				[ _NH3DMenuWindow clearTextMessage ];
+			}
+		  break;
       case NHW_TEXT:
-		[ _NH3DMenuWindow clearTextMessarge ];
-	  break;
+			[ _NH3DMenuWindow clearTextMessage ];
+		  break;
       }
 	
-	[ pool release ];
+	}
 }
 
 void nh3d_display_nhwindow(winid wid, BOOLEAN_P block)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
+	@autoreleasepool {
 	
-	switch ( nh3d_windowlist[ wid ].type )
-	{
-		case NHW_MENU:
+		switch ( nh3d_windowlist[ wid ].type )
 		{
-			if ( [ _NH3DMenuWindow isMenu ] ) {	
-				[ _NH3DMenuWindow showMenuPanel:"" ];
-			} else {
+			case NHW_MENU:
+			{
+				if ( _NH3DMenuWindow.isMenu ) {	
+					[ _NH3DMenuWindow showMenuPanel:"" ];
+				} else {
+					[ _NH3DMenuWindow showTextPanel ];
+				}
+				break;
+			} 
+			case NHW_TEXT:
+			{
 				[ _NH3DMenuWindow showTextPanel ];
+				break;
 			}
-			break;
-		} 
-		case NHW_TEXT:
-		{
-			[ _NH3DMenuWindow showTextPanel ];
-			break;
 		}
-	}
 	
-	[ pool release ];
+	}
 }
 
 
 void nh3d_destroy_nhwindow(winid wid)
 {	
 	
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
+	@autoreleasepool {
 	
-	switch ( nh3d_windowlist[ wid ].type )
-	{
-		case NHW_MAP:
-		case NHW_MESSAGE:
-		case NHW_STATUS:
+		switch ( nh3d_windowlist[ wid ].type )
 		{
-			/* No thanks */
-			return;
-			break;
+			case NHW_MAP:
+			case NHW_MESSAGE:
+			case NHW_STATUS:
+			{
+				/* No thanks */
+				return;
+				break;
+			}
+			case NHW_MENU:
+			{
+				
+				[ _NH3DMenuWindow clearMenuWindow ];
+				[ _NH3DMenuWindow setIsMenu:NO ];
+				[ _NH3DMenuWindow clearTextMessage ];
+		
+				nh3d_windowlist[ wid ].win = nil;
+				nh3d_windowlist[ wid ].type = 0;
+				break;
+			} 
+			case NHW_TEXT:
+			{
+				[ _NH3DMenuWindow clearTextMessage ];
+				nh3d_windowlist[ wid ].win = nil;
+				nh3d_windowlist[ wid ].type = 0;
+				break;
+			}
 		}
-		case NHW_MENU:
-		{
-			
-			[ _NH3DMenuWindow clearMenuWindow ];
-			[ _NH3DMenuWindow setIsMenu:NO ];
-			[ _NH3DMenuWindow clearTextMessarge ];
 	
-			nh3d_windowlist[ wid ].win = nil;
-			nh3d_windowlist[ wid ].type = 0;
-			break;
-		} 
-		case NHW_TEXT:
-		{
-			[ _NH3DMenuWindow clearTextMessarge ];
-			nh3d_windowlist[ wid ].win = nil;
-			nh3d_windowlist[ wid ].type = 0;
-			break;
-		}
 	}
-	
-	[ pool release ];
 	
 }
 
@@ -557,100 +576,100 @@ void nh3d_curs(winid wid, int x, int y)
 {
 	if ( wid != -1 && nh3d_windowlist[ wid ].type == NHW_MAP && nh3d_windowlist[ wid ].win != nil )
     {
-		NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
+		@autoreleasepool {
 		/* this function Implementation being completed only to type NHW_MAP   */
 		[ _NH3DMapModel setPosCursorAtX:x atY:y ];
 		[ _NH3DBindController updateAll ];
-		[ pool release ];
+		}
     }
 	
 }
 
 void nh3d_putstr(winid wid, int attr, const char *text)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
+	@autoreleasepool {
 	
-	switch ( nh3d_windowlist[ wid ].type )
-	{
-		case NHW_MESSAGE:
-			[ _NH3DMessenger putMainMessarge:attr:text ];
-			break;
-		case NHW_TEXT:
-			[ _NH3DMenuWindow putTextMessarge:
-					[ NSString stringWithCString:text
-										encoding:NH3DTEXTENCODING ] ];
-			break;
-		case NHW_MENU:
-			if ( ![ _NH3DMenuWindow isMenu ] ) {
-				[ _NH3DMenuWindow putTextMessarge:
+		switch ( nh3d_windowlist[ wid ].type )
+		{
+			case NHW_MESSAGE:
+				[ _NH3DMessenger putMainMessage:attr text:text ];
+				break;
+			case NHW_TEXT:
+				[ _NH3DMenuWindow putTextMessage:
 						[ NSString stringWithCString:text
 											encoding:NH3DTEXTENCODING ] ];
-			} 
-			break;
-		case NHW_MAP:
-			/* NO PUT MESSARGE FOR MAP */
-			break;
-		case NHW_STATUS:
-			[ _NH3DUserStatusModel setPlayerStatusLine:
-				[ NSString stringWithCString:text encoding:NH3DTEXTENCODING ] ];
-			break;
-		default:
-			NSLog (@"ERROR Window type does not exist. win id is %d :type is %d:messarge %@"
-				   ,wid,nh3d_windowlist[ wid ].type,[ NSString stringWithCString:text encoding:NH3DTEXTENCODING ]);
-			break;
+				break;
+			case NHW_MENU:
+				if ( ! _NH3DMenuWindow.isMenu ) {
+					[ _NH3DMenuWindow putTextMessage:
+							[ NSString stringWithCString:text
+												encoding:NH3DTEXTENCODING ] ];
+				} 
+				break;
+			case NHW_MAP:
+				/* NO PUT MESSARGE FOR MAP */
+				break;
+			case NHW_STATUS:
+				[ _NH3DUserStatusModel setPlayerStatusLine:
+					[ NSString stringWithCString:text encoding:NH3DTEXTENCODING ] ];
+				break;
+			default:
+				NSLog (@"ERROR Window type does not exist. win id is %d :type is %d:messarge %@"
+					   ,wid,nh3d_windowlist[ wid ].type,[ NSString stringWithCString:text encoding:NH3DTEXTENCODING ]);
+				break;
 
-	}
+		}
 	
-	[ pool release ];
+	}
 }
 
 
 void nh3d_display_file(const char *filename, BOOLEAN_P must_exist)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	NSString *contentsOfFile = nil;
-	NSError *lerror = nil;
-	// try same Japanese encodeing. see 'NSString.h' for more infomation. nethack3d default encoding is '3'(EUC-JP)
-	unsigned int fileEncoding[ 6 ] = {3,4,8,10,21,30};
-	int i = 0;
-	
-	while ( contentsOfFile == nil  ) {
-		contentsOfFile = [ NSString stringWithContentsOfFile:
-			[ NSString stringWithCString:filename encoding:NH3DTEXTENCODING ]
-												   encoding:fileEncoding[ i ]
-													  error:&lerror ];
+	@autoreleasepool {
+		NSString *contentsOfFile = nil;
+		NSError *lerror = nil;
+		// try same Japanese encodeing. see 'NSString.h' for more infomation. nethack3d default encoding is '3'(EUC-JP)
+		unsigned int fileEncoding[ 6 ] = {3,4,8,10,21,30};
+		int i = 0;
 		
-		if (contentsOfFile != nil || i == 6) {
-			break;
+		while ( contentsOfFile == nil  ) {
+			contentsOfFile = [ NSString stringWithContentsOfFile:
+				[ NSString stringWithCString:filename encoding:NH3DTEXTENCODING ]
+													   encoding:fileEncoding[ i ]
+														  error:&lerror ];
+			
+			if (contentsOfFile != nil || i == 6) {
+				break;
+			} else {
+				i++ ;
+			}
+		}
+		
+		if (contentsOfFile != nil) {
+			[ _NH3DMenuWindow putTextMessage:contentsOfFile ];
+			[ _NH3DMenuWindow showTextPanel ];
 		} else {
-			i++ ;
+			if ( must_exist ) {
+				NSLog(@"Failed to Load %s",filename);
+				[ _NH3DBindController didPresentError:lerror ];
+			}
 		}
-	}
 	
-	if (contentsOfFile != nil) {
-		[ _NH3DMenuWindow putTextMessarge:contentsOfFile ];
-		[ _NH3DMenuWindow showTextPanel ];
-	} else {
-		if ( must_exist ) {
-			NSLog(@"Failed to Load %s",filename);
-			[ _NH3DBindController didPresentError:lerror ];
-		}
 	}
-	
-	[ pool release ];
 }
 
 
 void nh3d_start_menu(winid wid)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
+	@autoreleasepool {
 	
-	if ( nh3d_windowlist[ wid ].win != nil && nh3d_windowlist[ wid ].type == NHW_MENU ) {		
-		[ nh3d_windowlist[ wid ].win createMenuWindow:wid ];
-		[ nh3d_windowlist[ wid ].win setIsMenu:YES ];
+		if ( nh3d_windowlist[ wid ].win != nil && nh3d_windowlist[ wid ].type == NHW_MENU ) {		
+			[ nh3d_windowlist[ wid ].win createMenuWindow:wid ];
+			[ nh3d_windowlist[ wid ].win setIsMenu:YES ];
+		}
+	
 	}
-	
-	[ pool release ];
 }
 
 
@@ -658,43 +677,37 @@ void nh3d_add_menu(winid wid, int glyph, const ANY_P *identifier,
 		CHAR_P accelerator, CHAR_P group_accel, int attr, 
 		const char *str, BOOLEAN_P presel)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	
-	if ( nh3d_windowlist[ wid ].win != nil && nh3d_windowlist[ wid ].type == NHW_MENU ) {
-		[ nh3d_windowlist[ wid ].win addMenuItem:wid:glyph:identifier:accelerator:group_accel:attr:str:presel ];
+	@autoreleasepool {
+		if ( nh3d_windowlist[wid].win != nil && nh3d_windowlist[wid].type == NHW_MENU ) {
+			[nh3d_windowlist[wid].win addMenuItem:wid glyph:glyph identifier:identifier accelerator:accelerator groupAccel:group_accel attr:attr str:str presel:presel];
+		}
 	}
-	
-	[ pool release ];
 }
 
 
 void nh3d_end_menu(winid wid, const char *prompt)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	
-	if ( nh3d_windowlist[ wid ].win != nil && nh3d_windowlist[ wid ].type == NHW_MENU ) {
-		[ nh3d_windowlist[ wid ].win updateMenuWindow ];
-		[ nh3d_windowlist[ wid ].win showMenuPanel:prompt ];
+	@autoreleasepool {
+		if ( nh3d_windowlist[ wid ].win != nil && nh3d_windowlist[ wid ].type == NHW_MENU ) {
+			[ nh3d_windowlist[ wid ].win updateMenuWindow ];
+			[ nh3d_windowlist[ wid ].win showMenuPanel:prompt ];
+		}
 	}
-	
-	[ pool release ];
 }
 
 
 int nh3d_select_menu(winid wid, int how, menu_item **selected)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
 	int ret = -1;
-	
-	if ( nh3d_windowlist[ wid ].win != nil && nh3d_windowlist[ wid ].type == NHW_MENU ) {
-		if ( [ _NH3DMenuWindow isMenu ] ) {
-			ret = [ nh3d_windowlist[ wid ].win selectMenu:wid :how :selected ];
-			[ nh3d_windowlist[ wid ].win setIsMenu:NO ];
-			
+	@autoreleasepool {
+		if ( nh3d_windowlist[ wid ].win != nil && nh3d_windowlist[ wid ].type == NHW_MENU ) {
+			if ( _NH3DMenuWindow.isMenu ) {
+				ret = [ nh3d_windowlist[ wid ].win selectMenu:wid how:how selected:selected ];
+				[nh3d_windowlist[wid].win setIsMenu:NO];
+				
+			}
 		}
 	}
-	
-	[ pool release ];
 	return ret;
 }
 
@@ -729,25 +742,35 @@ void nh3d_cliparound_window(winid wid, int x, int y)
 
 void nh3d_print_glyph(winid wid,XCHAR_P x,XCHAR_P y,int glyph)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	[ _NH3DBindController printGlyph:wid xPos:x yPos:y glyph:glyph ];
-	[ pool release ];
+	@autoreleasepool {
+		[ _NH3DBindController printGlyph:wid xPos:x yPos:y glyph:glyph ];
+	}
 }
 
 
 void nh3d_raw_print(const char *str)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	[ _NH3DMessenger putLogMessarge:[ NSString stringWithCString:str encoding:NH3DTEXTENCODING ] ];
-	[ pool release ];
+	@autoreleasepool {
+		NSString *aStr = [[NSString alloc] initWithCString:str encoding:NH3DTEXTENCODING];
+//#if DEBUG
+#if 1
+		NSLog(@"%@", aStr);
+#endif
+		[_NH3DMessenger putLogMessage:aStr bold:NO];
+	}
 }
 
 
 void nh3d_raw_print_bold(const char *str)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	[ _NH3DMessenger putLogMessarge:[ NSString stringWithCString:str encoding:NH3DTEXTENCODING ] ];
-	[ pool release ];
+	@autoreleasepool {
+		NSString *aStr = [[NSString alloc] initWithCString:str encoding:NH3DTEXTENCODING];
+//#if DEBUG
+#if 1
+		NSLog(@"%@", aStr);
+#endif
+		[_NH3DMessenger putLogMessage:aStr bold:YES];
+	}
 }
 
 
@@ -765,10 +788,10 @@ int nh3d_nh_poskey(int *x, int *y, int *mod)
 
 void nh3d_nhbell()
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	NSSound *bell = [ NSSound soundNamed:@"Sosumi" ];
-	[ bell play ];
-	[ pool release ];
+	@autoreleasepool {
+		NSSound *bell = [ NSSound soundNamed:@"Sosumi" ];
+		[ bell play ];
+	}
 }
 
 
@@ -781,122 +804,122 @@ int nh3d_doprev_message()
 
 char nh3d_yn_function(const char *question, const char *choices, CHAR_P def)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	char yn;
-	char buf[ BUFSZ ];
-	int result;
-	BOOL ynfunc;
-	
-	if ( question != nil ) Strcpy(buf,question);
-	if ( choices != nil ) Strcat(buf,choices);
-	putstr(WIN_MESSAGE, ATR_BOLD, buf);
-	
-	if ( choices == "yn" ) {
-		ynfunc = YES;
-		result = NSRunAlertPanel(
+	@autoreleasepool {
+		char yn;
+		char buf[ BUFSZ ];
+		int result;
+		BOOL ynfunc;
+		
+		if ( question != nil ) Strcpy(buf,question);
+		if ( choices != nil ) Strcat(buf,choices);
+		putstr(WIN_MESSAGE, ATR_BOLD, buf);
+		
+		if (choices && strcmp(choices, "yn") == 0 ) {
+			ynfunc = YES;
+			result = NSRunAlertPanel(
                 [ NSString stringWithCString:question encoding:NH3DTEXTENCODING ], 
                 @" ", 
                 @"YES", 
                 @"NO", 
                 @"Cancel",nil);
-	
-	} else if ( choices == "ynq" ) {
-		ynfunc = YES;
-		result = NSRunAlertPanel(
-				[ NSString stringWithCString:question encoding:NH3DTEXTENCODING ], 
-				@" ", 
-				@"YES", 
-				@"NO", 
-				@"Quit",nil);
-	} else if ( [ [ NSString stringWithCString:question encoding:NH3DTEXTENCODING ] isLike:
-											NSLocalizedString(@"*what direction*",@"") ] ) {
-		// hmm... These letters from cmd.c will not there be a good method?
-		int x = u.ux; int y = u.uy; int mod = 0;
-		ynfunc = NO;
-		result = nh_poskey(&x, &y, &mod);
 		
-		if ( !result ) {
-			int hdirect,vdirect;
-			hdirect = ( x > u.ux ) ? 1 : 2;
-			vdirect = ( y < u.uy ) ? 3 : 6;
-			hdirect = ( x == u.ux ) ? 0 : hdirect;
-			vdirect = ( y == u.uy ) ? 0 : vdirect;
+		} else if (choices && strcmp(choices, "ynq") == 0 ) {
+			ynfunc = YES;
+			result = NSRunAlertPanel(
+					[ NSString stringWithCString:question encoding:NH3DTEXTENCODING ], 
+					@" ", 
+					@"YES", 
+					@"NO", 
+					@"Quit",nil);
+		} else if ([[NSString stringWithCString:question encoding:NH3DTEXTENCODING ] isLike:
+												NSLocalizedString(@"*what direction*",@"") ] ) {
+			// hmm... These letters from cmd.c will not there be a good method?
+			int x = u.ux; int y = u.uy; int mod = 0;
+			ynfunc = NO;
+			result = nh_poskey(&x, &y, &mod);
 			
-			switch ( hdirect + vdirect ) {
-				case 1 : // choice right
-					result = ( iflags.num_pad ) ? '6' : 'l' ;
-					[ _NH3DMessenger setLastAttackDirection:0 ];
-					break;
-				case 2 : // choice left
-					result = ( iflags.num_pad ) ? '4' : 'h' ;
-					[ _NH3DMessenger setLastAttackDirection:0 ];
-					break;
-				case 3 : // choice front
-					result = ( iflags.num_pad ) ? '8' : 'k' ;
-					[ _NH3DMessenger setLastAttackDirection:2 ];
-					break;
-				case 4 : // choice front right
-					result = ( iflags.num_pad ) ? '9' : 'u' ;
-					[ _NH3DMessenger setLastAttackDirection:3 ];
-					break;
-				case 5 : // choice front left
-					result = ( iflags.num_pad ) ? '7' : 'y' ;
-					[ _NH3DMessenger setLastAttackDirection:1 ];
-					break;
-				case 6 : // choice back
-					result = ( iflags.num_pad ) ? '2' : 'j' ;
-					[ _NH3DMessenger setLastAttackDirection:0 ];
-					break;
-				case 7 : // choice back right
-					result = ( iflags.num_pad ) ? '3' : 'n' ;
-					[ _NH3DMessenger setLastAttackDirection:0 ];
-					break;
-				case 8 : // choice back left
-					result = ( iflags.num_pad ) ? '1' : 'b' ;
-					[ _NH3DMessenger setLastAttackDirection:0 ];
-					break;
+			if ( !result ) {
+				int hdirect,vdirect;
+				hdirect = ( x > u.ux ) ? 1 : 2;
+				vdirect = ( y < u.uy ) ? 3 : 6;
+				hdirect = ( x == u.ux ) ? 0 : hdirect;
+				vdirect = ( y == u.uy ) ? 0 : vdirect;
+				
+				switch ( hdirect + vdirect ) {
+					case 1 : // choice right
+						result = ( iflags.num_pad ) ? '6' : 'l' ;
+						[ _NH3DMessenger setLastAttackDirection:0 ];
+						break;
+					case 2 : // choice left
+						result = ( iflags.num_pad ) ? '4' : 'h' ;
+						[ _NH3DMessenger setLastAttackDirection:0 ];
+						break;
+					case 3 : // choice front
+						result = ( iflags.num_pad ) ? '8' : 'k' ;
+						[ _NH3DMessenger setLastAttackDirection:2 ];
+						break;
+					case 4 : // choice front right
+						result = ( iflags.num_pad ) ? '9' : 'u' ;
+						[ _NH3DMessenger setLastAttackDirection:3 ];
+						break;
+					case 5 : // choice front left
+						result = ( iflags.num_pad ) ? '7' : 'y' ;
+						[ _NH3DMessenger setLastAttackDirection:1 ];
+						break;
+					case 6 : // choice back
+						result = ( iflags.num_pad ) ? '2' : 'j' ;
+						[ _NH3DMessenger setLastAttackDirection:0 ];
+						break;
+					case 7 : // choice back right
+						result = ( iflags.num_pad ) ? '3' : 'n' ;
+						[ _NH3DMessenger setLastAttackDirection:0 ];
+						break;
+					case 8 : // choice back left
+						result = ( iflags.num_pad ) ? '1' : 'b' ;
+						[ _NH3DMessenger setLastAttackDirection:0 ];
+						break;
+				}
+			}
+
+		} else {
+			char *p;
+			ynfunc = NO;
+			result = nhgetch();
+			
+			if (choices != nil) {
+				buf[ 0 ] = result;
+				buf[ 1 ] = '\0';
+				p = strstr(choices,buf);
+				if (p == NULL) result = 'n';
+				
+				sprintf(buf,"> [ %c ]",result);
+				putstr(WIN_MESSAGE, ATR_ULINE, buf);
 			}
 		}
-
-	} else {
-		char *p;
-		ynfunc = NO;
-		result = nhgetch();
 		
-		if (choices != nil) {
-			buf[ 0 ] = result;
-			buf[ 1 ] = '\0';
-			p = strstr(choices,buf);
-			if (p == NULL) result = 'n';
-			
-			sprintf(buf,"> [ %c ]",result);
+		
+		if(result == NSAlertDefaultReturn && ynfunc) {
+			yn = 'y';
+		}
+		else if(result == NSAlertAlternateReturn && ynfunc) {
+			yn = 'n';
+		}
+		else if(result == NSAlertOtherReturn && strcmp(choices, "ynq") == 0 && ynfunc) {
+			yn = 'q';
+		} else if (result == NSAlertOtherReturn && ynfunc) {
+			yn = 'n';
+		} else {
+			yn = result;
+		}
+		
+		if (ynfunc) {
+			sprintf(buf,"> [ %c ]",yn);		
 			putstr(WIN_MESSAGE, ATR_ULINE, buf);
 		}
+		
+		
+		return yn;
 	}
-	
-	
-	if(result == NSAlertDefaultReturn && ynfunc) {
-		yn = 'y';
-	}
-	else if(result == NSAlertAlternateReturn && ynfunc) {
-		yn = 'n';
-	}
-	else if(result == NSAlertOtherReturn && choices == "ynq" && ynfunc) {
-		yn = 'q';
-	} else if (result == NSAlertOtherReturn && ynfunc) {
-		yn = 'n';
-	} else {
-		yn = result;
-	}
-	
-	if (ynfunc) {
-		sprintf(buf,"> [ %c ]",yn);		
-		putstr(WIN_MESSAGE, ATR_ULINE, buf);
-	}
-	
-	[ pool release ];
-	
-	return yn;
 
 }
 
@@ -905,9 +928,9 @@ void nh3d_getlin(const char *prompt, char *line)
 {
 	int ret = 0;
 	
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	ret = [ _NH3DMessenger showInputPanel:prompt:line ];
-	[ pool release ];
+	@autoreleasepool {
+	ret = [ _NH3DMessenger showInputPanel:prompt line:line ];
+	}
 	if (ret == -1) line[ 0 ] = (char)0;
 	
 }
@@ -915,11 +938,10 @@ void nh3d_getlin(const char *prompt, char *line)
 
 int nh3d_get_ext_cmd()
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	int ret = [ _NH3DKeyBuffer extendKey ];
+	@autoreleasepool {
+	int ret = _NH3DKeyBuffer.extendKey ;
 	if (ret != -1 ) {
-		[ _NH3DKeyBuffer setExtendKey:-1 ];
-		[ pool release ];
+		_NH3DKeyBuffer.extendKey = -1 ;
 		return ret;
 	} else {
 		menu_item *mi;
@@ -933,7 +955,7 @@ int nh3d_get_ext_cmd()
 			 sprintf( buf, "%-10s - %s ",
 					  extcmdlist[ ret ].ef_txt,
 					  extcmdlist[ ret ].ef_desc );
-			 add_menu( win, NO_GLYPH, &ident, 0, 0, 0, buf, MENU_UNSELECTED);
+			 add_menu(win, NO_GLYPH, &ident, 0, 0, 0, buf, MENU_UNSELECTED);
 		 }
 		 
 		 end_menu(win,(char*)0);
@@ -942,15 +964,15 @@ int nh3d_get_ext_cmd()
 		 
 		 if( ret >= 1 )
 		 {
-			 ret = [ _NH3DMenuWindow selectedRow ];
+			 ret = _NH3DMenuWindow.selectedRow ;
 		 } else {
 			 ret = -1;
 		 }
 			 
-		 [ _NH3DKeyBuffer setExtendKey:-1 ];
+		 _NH3DKeyBuffer.extendKey = -1 ;
 		 free(mi);
-		 [ pool release ];
 		 return ret;
+	}
 	}
 }
 
@@ -963,12 +985,10 @@ void nh3d_number_pad(int num)
 
 void nh3d_delay_output()
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	
-	[ _NH3DMapModel updateAllMaps ];
-	[ NSThread sleepUntilDate:[ NSDate dateWithTimeIntervalSinceNow:0.01 ] ];
-	
-	[ pool release ];
+	@autoreleasepool {
+		[ _NH3DMapModel updateAllMaps ];
+		[ NSThread sleepUntilDate:[ NSDate dateWithTimeIntervalSinceNow:0.01 ] ];
+	}
 }
 
 
@@ -990,74 +1010,75 @@ void nh3d_end_screen()
 
 void nh3d_outrip(winid wid, int how)
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	char buf[ BUFSZ ];
-    char ripString[ BUFSZ ]="\0";
-    extern const char *killed_by_prefix[ ];
-	
-	[ _NH3DMenuWindow setDoneRip:YES ];
-	
-	Sprintf(buf, "%s\n", plname);
-    Strcat(ripString, buf);
-    
-    /* Put $ on stone */
-    Sprintf(buf, "%ld Au\n",
+	@autoreleasepool {
+		char buf[ BUFSZ ];
+		NSMutableString *ripString = [[NSMutableString alloc] initWithCapacity:100];
+		extern const char *killed_by_prefix[ ];
+		
+		[ _NH3DMenuWindow setDoneRip:YES ];
+		
+		Sprintf(buf, "%s\n", plname);
+		[ripString appendString:[NSString stringWithCString:buf encoding:NH3DTEXTENCODING]];
+		
+		/* Put $ on stone */
+		Sprintf(buf, "%ld Au\n",
 #ifndef GOLDOBJ
-			u.ugold);
+				u.ugold);
 #else
-	done_money);
+		done_money);
 #endif
-Strcat(ripString, buf);
-
-/* Put together death description */
-/* English version
-switch (killer_format) {
-	default: impossible("bad killer format?");
-	case KILLED_BY_AN:
-		Strcpy(buf, killed_by_prefix[how]);
-		Strcat(buf, an(killer));
-		break;
-	case KILLED_BY:
-		Strcpy(buf, killed_by_prefix[how]);
-		Strcat(buf, killer);
-		break;
-	case NO_KILLER_PREFIX:
-		Strcpy(buf, killer);
-		break;		
-}
-*/
-
-/* Japanese version */
-switch (killer_format) {
-	default: impossible("bad killer format?");
-	case KILLED_BY_AN:
-		Strcpy(buf, killed_by_prefix[ how ]);
-		Strcat(buf, an(killer));
-		break;
-	case KILLED_BY:
-		Strcpy(buf, killed_by_prefix[ how ]);
-		Strcat(buf, killer);
-		break;
-	case NO_KILLER_PREFIX:
-		Strcpy(buf, killer);
-		break;
-	case KILLED_SUFFIX:
-		Strcpy(buf, killer);
-		Strcat(buf, "に殺された");
-}
-/**/
-/* Put death type on stone */
-	Strcat(ripString, buf);
-	Strcat(ripString, "\n");
-
-/* Put year on stone */
-	Sprintf(buf, "%4d\n", getyear());
-	Strcat(ripString, buf);
-
-	[ _NH3DMapModel stopIndicator ];
-	[ _NH3DMessenger showOutRip:ripString ];
-
-	[ pool release ];
+		[ripString appendString:[NSString stringWithCString:buf encoding:NH3DTEXTENCODING]];
+		
+		/* Put together death description */
+		/* English version
+		switch (killer_format) {
+			default: impossible("bad killer format?");
+			case KILLED_BY_AN:
+				Strcpy(buf, killed_by_prefix[how]);
+				Strcat(buf, an(killer));
+				break;
+			case KILLED_BY:
+				Strcpy(buf, killed_by_prefix[how]);
+				Strcat(buf, killer);
+				break;
+			case NO_KILLER_PREFIX:
+				Strcpy(buf, killer);
+				break;
+		}
+		*/
+		
+		
+		/* Japanese version */
+		 switch (killer_format) {
+		 default: impossible("bad killer format?");
+		 case KILLED_BY_AN:
+			Strcpy(buf, killed_by_prefix[ how ]);
+			Strcat(buf, an(killer));
+			break;
+		 case KILLED_BY:
+			Strcpy(buf, killed_by_prefix[ how ]);
+			Strcat(buf, killer);
+			break;
+		 case NO_KILLER_PREFIX:
+			Strcpy(buf, killer);
+			break;
+		 case KILLED_SUFFIX:
+			Strcpy(buf, killer);
+			Strcat(buf, "に殺された");
+		 }
+		
+		/**/
+		/* Put death type on stone */
+		[ripString appendString:[NSString stringWithCString:buf encoding:NH3DTEXTENCODING]];
+		[ripString appendString:@"\n"];
+		
+		/* Put year on stone */
+		Sprintf(buf, "%4d\n", getyear());
+		[ripString appendString:[NSString stringWithCString:buf encoding:NH3DTEXTENCODING]];
+		
+		[_NH3DMapModel stopIndicator];
+		[_NH3DMessenger showOutRipString:[ripString copy]];
+	}
 }
 
 /*
@@ -1070,18 +1091,18 @@ int nh3d_kbhit()
 
 void nethack3d_exit(int status)
 {
-	[ NSApp terminate:nil ];
+	[NSApp terminate:nil];
 }
 
 #ifndef GNUSTEP
 //  UTF8 file Handring
 void nh3d_set_savefile_name()
 {
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
-	NSString *saveString;
-	saveString = [ NSString stringWithFormat:@"%d%@",(int)getuid(),[ NSString stringWithCString:plname encoding:NH3DTEXTENCODING ] ];
-	Strcpy(SAVEF,[ saveString UTF8String ]);
-	[ pool release ];
+	@autoreleasepool {
+		NSString *saveString;
+		saveString = [ NSString stringWithFormat:@"%d%@",(int)getuid(),[ NSString stringWithCString:plname encoding:NH3DTEXTENCODING ] ];
+		Strcpy(SAVEF, saveString.fileSystemRepresentation );
+	}
 }
 #endif
 
@@ -1184,76 +1205,78 @@ You("スコアの載らない発見モードで起動した．");
 //--------------------------------------------------------------//
 
 
-@implementation NH3DBindController
+@implementation NH3DBindController {
+	NH3DPreferenceController *_prefPanel;
+	NH3DTileCache			*_tileCache;
+}
 
 
 // for UserDefaults
-
+// set user defaults
 + (void) initialize
 {
-	NSMutableDictionary *defaultValues = [ NSMutableDictionary dictionary ];
-
-	[ defaultValues setObject:[ NSNumber numberWithBool:NO ] forKey:NH3DUseTraditionalMapKey ];
-	[ defaultValues setObject:[ NSNumber numberWithBool:NO ] forKey:NH3DTraditionalMapModeKey ];
-
-	
-	[ defaultValues setObject:@"nhtiles.tiff" forKey:NH3DTileNameKey ];
-	[ defaultValues setObject:[ NSNumber numberWithInt:16 ] forKey:NH3DTileSizeWidthKey ];
-	[ defaultValues setObject:[ NSNumber numberWithInt:16 ] forKey:NH3DTileSizeHeightKey ];
-	[ defaultValues setObject:[ NSNumber numberWithInt:40 ] forKey:NH3DTilesPerLineKey ];
-	[ defaultValues setObject:[ NSNumber numberWithInt:30 ] forKey:NH3DNumberOfTilesRowKey ];
-	
-	[ defaultValues setObject:[ NSNumber numberWithBool:YES ] forKey:NH3DUseTileInLevelMapKey ];
-	[ defaultValues setObject:[ NSNumber numberWithBool:YES ] forKey:NH3DUseSightRestrictionKey ];
-	
-	[ defaultValues setObject:[ NSNumber numberWithBool:YES ] forKey:NH3DOpenGLWaitSyncKey ];
-	[ defaultValues setObject:[ NSNumber numberWithBool:YES ] forKey:NH3DOpenGLUseWaitRateKey ];
-	[ defaultValues setObject:[ NSNumber numberWithInt:1 ] forKey:NH3DOpenGLNumberOfThreadsKey ];
-	
-	[ defaultValues setObject:[ NSNumber numberWithBool:NO ] forKey:NH3DGLTileKey ];
-	
-	[ defaultValues setObject:[ NSNumber numberWithFloat:WAIT_NORMAL ] forKey:NH3DOpenGLWaitRateKey ];
-	
-	[ defaultValues setObject:@"Hiragino Maru Gothic Pro" forKey:NH3DMsgFontKey ];
-	[ defaultValues setObject:@"Courier Bold" forKey:NH3DMapFontKey ];
-	[ defaultValues setObject:@"Lucida Grande Bold" forKey:NH3DBoldFontKey ];
-	[ defaultValues setObject:@"Courier New Bold" forKey:NH3DInventryFontKey ];
-	[ defaultValues setObject:@"Optima Bold" forKey:NH3DWindowFontKey ];
-	
-	[ defaultValues setObject:[ NSNumber numberWithFloat:13 ] forKey:NH3DMsgFontSizeKey ];
-	[ defaultValues setObject:[ NSNumber numberWithFloat:13 ] forKey:NH3DMapFontSizeKey ];
-	[ defaultValues setObject:[ NSNumber numberWithFloat:13 ] forKey:NH3DBoldFontSizeKey ];
-	[ defaultValues setObject:[ NSNumber numberWithFloat:13 ] forKey:NH3DInventryFontSizeKey ];
-	[ defaultValues setObject:[ NSNumber numberWithFloat:13 ] forKey:NH3DWindowFontSizeKey ];
-	
-	[ defaultValues setObject:[ NSNumber numberWithBool:NO ] forKey:NH3DSoundMuteKey ];
-	
-	[ [NSUserDefaults standardUserDefaults] registerDefaults:defaultValues ];
-	
-	[ [NSUserDefaultsController sharedUserDefaultsController] setInitialValues:defaultValues ];
-
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSDictionary *defaultValues;
+		
+		defaultValues = @{
+						  NH3DUseTraditionalMapKey: @NO,
+						  NH3DTraditionalMapModeKey: @NO,
+						  
+						  NH3DTileNameKey: @"nhtiles.tiff",
+						  NH3DTileSizeWidthKey: @16,
+						  NH3DTileSizeHeightKey: @16,
+						  NH3DTilesPerLineKey: @40,
+						  NH3DNumberOfTilesRowKey: @30,
+						  
+						  NH3DUseTileInLevelMapKey: @YES,
+						  NH3DUseSightRestrictionKey: @YES,
+						  
+						  NH3DOpenGLWaitSyncKey: @YES,
+						  NH3DOpenGLUseWaitRateKey: @YES,
+						  NH3DOpenGLNumberOfThreadsKey: @1,
+						  
+						  NH3DOpenGLWaitRateKey: @(WAIT_NORMAL),
+						  
+						  NH3DMsgFontKey: @"Hiragino Maru Gothic Pro",
+						  NH3DMapFontKey: @"Courier Bold",
+						  NH3DBoldFontKey: @"Lucida Grande Bold",
+						  NH3DInventryFontKey: @"Courier New Bold",
+						  NH3DWindowFontKey: @"Optima Bold",
+						  
+						  NH3DGLTileKey: @NO,
+						  
+						  NH3DMsgFontSizeKey: @13.0f,
+						  NH3DMapFontSizeKey: @13.0f,
+						  NH3DBoldFontSizeKey: @13.0f,
+						  NH3DInventryFontSizeKey: @13.0f,
+						  NH3DWindowFontSizeKey: @13.0f,
+						  
+						  NH3DSoundMuteKey: @NO,
+						  
+						  NHUseNumPad: @NO,
+						  NHMaxMessages: @30,
+						  };
+		
+		[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+		
+		[NSUserDefaultsController sharedUserDefaultsController].initialValues = defaultValues;
+	});
 }
 
 
-- (id)init
+- (instancetype)init
 {
-		self = [ super init ];
-		_prefPanel = nil;
-		return self;
-}
-
-- (void)dealloc
-{
-	[ _prefPanel release ];
-	[ super dealloc ];
+	self = [ super init ];
+	_prefPanel = nil;
+	return self;
 }
 
 
 - (void)awakeFromNib
 {		
-	[ _window setAlphaValue:0 ];
-	[ _window setMovableByWindowBackground:NO ];
-	
+	_window.alphaValue = 0;
+	[_window setMovableByWindowBackground:NO];
 }
 
 
@@ -1263,9 +1286,9 @@ You("スコアの載らない発見モードで起動した．");
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {	
-	NSAutoreleasePool* pool = [ [NSAutoreleasePool alloc] init ];
+	@autoreleasepool {
 	
-	_tileCache = [ [ NH3DTileCache alloc ] initWithNamed:TILE_FILE_NAME ];
+	_tileCache = [[NH3DTileCache alloc] initWithNamed:TILE_FILE_NAME];
 	
 	_NH3DBindController = self;
 	_NH3DUserStatusModel = _userStatus;
@@ -1276,8 +1299,7 @@ You("スコアの載らない発見モードで起動した．");
 	_NH3DOpenGLView = _glMapView;
 	_NH3DTileCache = _tileCache;
 	
-	[ pool release ];
-
+	}
 }
 
 - (BOOL)windowShouldClose:(id)sender
@@ -1299,19 +1321,22 @@ You("スコアの載らない発見モードで起動した．");
 {
 	BOOL ret;
 	
-	if ( !iflags.window_inited ) return YES;
+	if ( !iflags.window_inited )
+		return YES;
 	
-	if ([ _stDrawer state ] != NSDrawerClosedState) {
+	if ( _stDrawer.state != NSDrawerClosedState) {
 		[ _stDrawer close:self ];
 	} 
 	
 	raw_print([ NSLocalizedString(@"NetHack3D say,'See you again.'",@"") cStringUsingEncoding:NH3DTEXTENCODING ]);
 	ret = [ _messenger showLogPanel ];
 	
-	if (ret == YES) { clearlocks(); [ _glMapView setRunnning:NO ]; }
+	if (ret == YES) {
+		clearlocks();
+		[_glMapView setRunning:NO];
+	}
 	
 	return ret;
-	
 }
 
 
@@ -1322,13 +1347,11 @@ You("スコアの載らない発見モードで起動した．");
 
 - (void)setTile
 {
-	if ( _tileCache != nil ) [ _tileCache release ];
 	_tileCache = [ [ NH3DTileCache alloc ] initWithNamed:TILE_FILE_NAME ];
 	_NH3DTileCache = _tileCache;
 	
-	[ [NSUserDefaults standardUserDefaults] setObject:[ NSNumber numberWithBool:NO ] forKey:NH3DTraditionalMapModeKey ];
-	[ [NSUserDefaults standardUserDefaults] setObject:[ NSNumber numberWithBool:YES ] forKey:NH3DTraditionalMapModeKey ];
-	
+	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:NH3DTraditionalMapModeKey ];
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:NH3DTraditionalMapModeKey ];
 }
 
 
@@ -1338,32 +1361,31 @@ You("スコアの載らない発見モードで起動した．");
 {
 	NH3DUserMakeSheetController *userMakeSheet = nil;
 	
-	if ([ [ [ _userStatus playerName ] string ] isEqualToString:@"" ]) {
+	if ([ [ _userStatus playerName ].string isEqualToString:@"" ]) {
 	
-		NSString *pName = [ [ NSString alloc ] initWithCString:plname encoding:NH3DTEXTENCODING ];
+		//NSString *pName = [ [ NSString alloc ] initWithCString:plname encoding:NH3DTEXTENCODING ];
 		[ _userStatus setPlayerName:[ NSString stringWithCString:plname encoding:NH3DTEXTENCODING ] ];
-		[ pName release ];
 	}
 	
 	// Display sheet dialog
 	
 	if (!userMakeSheet) {
-		userMakeSheet = [ [[NH3DUserMakeSheetController alloc] init] autorelease ];
+		userMakeSheet = [[NH3DUserMakeSheetController alloc] init];
 	}
 		
 	[ userMakeSheet startSheet:_userStatus ];
-
 }
 
 
 - (void)showMainWindow
 {
-	int i;
-	// window fade in 
-	for (i=0;i<=10;i++) {
-	[ _window setAlphaValue:((float)i)/10 ];
-	[ NSThread sleepUntilDate:[ NSDate dateWithTimeIntervalSinceNow:0.1 ] ]; 
-	} 
+	// window fade in
+	[NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
+		context.duration = 1.0;
+		_window.animator.alphaValue = 1;
+	} completionHandler:^{
+		
+	}];
 }
 
 
@@ -1375,11 +1397,9 @@ You("スコアの載らない発見モードで起動した．");
 
 - (void)didPresentError:(NSError *)error
 {
-			
-	int result;
+	NSInteger result;
 	NSAlert *alert = [ NSAlert alertWithError:error ];
 	result = [ alert runModal ];
-
 }
 
 
@@ -1392,24 +1412,23 @@ You("スコアの載らない発見モードで起動した．");
 	default:
 		break;
 	}
-	
 }	
 
 
 - (int)nhPosKeyAtX:(int *)x atY:(int *)y keyMod:(int *)mod
 {
 	int ret = 0;
-	unsigned int mask = ( NSAnyEventMask );
+	NSUInteger mask = ( NSAnyEventMask );
 
 	//Wait next Event
 	[ _asciiMapView nh3dEventHandlerLoopWithMask:mask ];	
 	
-	ret = [ _asciiMapView keyBuffer ];
+	ret = _asciiMapView.keyBuffer;
 
 	if (ret == 0) {
-		*x = [ _mapModel cursX ];
-		*y = [ _mapModel cursY ];
-		*mod = [ _asciiMapView clickType ];
+		*x = _mapModel.cursX ;
+		*y = _mapModel.cursY ;
+		*mod = _asciiMapView.clickType ;
 	}
 	[ _asciiMapView setKeyUpdated:NO ];
 
@@ -1420,15 +1439,15 @@ You("スコアの載らない発見モードで起動した．");
 - (int)nhGetKey
 {
 	int ret;
-	unsigned int mask = ( NSLeftMouseDownMask	|
-						  NSKeyDownMask			|
-						  NSApplicationDefinedMask);
+	NSEventMask mask = (NSLeftMouseDownMask	|
+						NSKeyDownMask		|
+						NSApplicationDefinedMask);
 	
 	[ _asciiMapView setGetCharMode:YES ];
 	//Wait next Event
 	[ _asciiMapView nh3dEventHandlerLoopWithMask:mask ];
 
-	ret = [ _asciiMapView keyBuffer ];
+	ret = _asciiMapView.keyBuffer;
 	[ _asciiMapView setKeyUpdated:NO ];
 	[ _asciiMapView setGetCharMode:NO ];
 	return ret;
@@ -1439,36 +1458,41 @@ You("スコアの載らない発見モードで起動した．");
 - (void)updateAll
 {
 	char buf[ BUFSZ ] = " ";
-	[ _asciiMapView setNeedClear:YES ];
-	[ _asciiMapView updateMap ];
-	[ _glMapView updateMap ];
-	[ _userStatus updatePlayerInventory ];
-	[ _userStatus updatePlayer ];
-#if 0 /*JP*/	
+	_asciiMapView.needClear = YES;
+	[_asciiMapView updateMap];
+	[_glMapView updateMap];
+	[_userStatus updatePlayerInventory];
+	[_userStatus updatePlayer];
+#if 0 /*JP*/
 	Sprintf(buf, "%s, level %d", dungeons[ u.uz.dnum ].dname, depth(&u.uz));
 #else
 	Sprintf(buf, "%s  地下%d階", jtrns_obj('d',dungeons[ u.uz.dnum ].dname), depth(&u.uz));
 #endif
-	[ _mapModel setDungeonNameString:[ NSString stringWithCString:buf encoding:NH3DTEXTENCODING ] ];
+	[ _mapModel setDungeonName:[ NSString stringWithCString:buf encoding:NH3DTEXTENCODING ] ];
 }
 
 
 - (IBAction)showPreferencePanel:(id)sender
 {
+	if (_prefPanel == nil)
+		_prefPanel = [[NH3DPreferenceController alloc] init];
 	
-	if ( _prefPanel == nil )
-		_prefPanel = [ [NH3DPreferenceController alloc] init ];
-	
-	[ _prefPanel showPreferencePanel:self ];
-	
-	
+	[_prefPanel showPreferencePanel:self];
 }
 
 
 - (void)endPreferencePanel
 {
-	[ _prefPanel release ];
 	_prefPanel = nil;
+}
+
+/// Loads Nethack-specific preferences
+- (void)loadNethackOptions
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	iflags.num_pad = [defaults boolForKey:NHUseNumPad];
+	iflags.msg_history = [defaults integerForKey:NHMaxMessages];
 }
 
 // ---------------------------------------------------------------------------- //
@@ -1486,8 +1510,8 @@ You("スコアの載らない発見モードで起動した．");
 	const char *dir;
 #endif
 #endif	
-	[ [sender window] close ];
-	[ _window makeKeyAndOrderFront:self ];
+	[[sender window] close];
+	[_window makeKeyAndOrderFront:self];
 
 #ifndef GNUSTEP	
 
@@ -1505,7 +1529,27 @@ You("スコアの載らない発見モードで起動した．");
 #ifdef CHDIR
 	
 	/* get resourcePath */
-	dir = [ [[NSBundle mainBundle] resourcePath] UTF8String ];
+	//dir = [NSBundle mainBundle].resourcePath.fileSystemRepresentation;
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSURL *aURL = [fm URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:NULL];
+	aURL = [aURL URLByAppendingPathComponent:@"NetHack3D" isDirectory:YES];
+	if (![aURL checkResourceIsReachableAndReturnError:NULL]) {
+		[fm createDirectoryAtURL:aURL withIntermediateDirectories:YES attributes:@{NSFilePosixPermissions:@(S_IRWXU)} error:NULL];
+	}
+	{
+		//Make sure the rest of the directory structure is okay
+		NSURL *permURL = [aURL URLByAppendingPathComponent:@"perm"];
+		NSURL *logURL = [aURL URLByAppendingPathComponent:@"logfile"];
+		if (![permURL checkResourceIsReachableAndReturnError:NULL]) {
+			//touch perm
+			[@"" writeToURL:permURL atomically:NO encoding:NSUTF8StringEncoding error:NULL];
+		}
+		if (![logURL checkResourceIsReachableAndReturnError:NULL]) {
+			//touch logfile
+			[@"" writeToURL:logURL atomically:NO encoding:NSUTF8StringEncoding error:NULL];
+		}
+	}
+	dir = aURL.fileSystemRepresentation;
 	
 #endif
 	
@@ -1546,6 +1590,7 @@ You("スコアの載らない発見モードで起動した．");
 				prscore(argc, argv);
 				jputchar('\0'); /* reset */
 #else
+
 						 prscore(argc, argv);
 #endif
 						 exit(EXIT_SUCCESS);
@@ -1570,6 +1615,7 @@ You("スコアの載らない発見モードで起動した．");
 #endif
 	initoptions();
 	init_nhwindows(&argc,argv);
+	[_NH3DBindController loadNethackOptions];
 
 #endif // GNUSTEP
 /*
@@ -1615,8 +1661,8 @@ You("スコアの載らない発見モードで起動した．");
 #ifndef GNUSTEP
 	//for OSX (UTF8) File System
 		NSString *lockString;
-		lockString = [ NSString stringWithFormat:@"%d%@",(int)getuid(),[ NSString stringWithCString:plname encoding:NH3DTEXTENCODING ] ];
-		Strcpy(lock,[ lockString UTF8String ]);
+		lockString = [NSString stringWithFormat:@"%d%@",(int)getuid(), [NSString stringWithCString:plname encoding:NH3DTEXTENCODING]];
+		Strcpy(lock, lockString.fileSystemRepresentation);
 #else
 		Sprintf(lock, "%d%s", (int)getuid(), plname);
 #endif
@@ -1712,12 +1758,26 @@ not_recovered:
 	Sprintf(buf, "%s  地下%d階", jtrns_obj('d',dungeons[ u.uz.dnum ].dname), depth(&u.uz));
 #endif
 
-	[ _mapModel setDungeonNameString:[ NSString stringWithCString:buf encoding:NH3DTEXTENCODING ] ];
+	[_mapModel setDungeonName:[ NSString stringWithCString:buf encoding:NH3DTEXTENCODING ]];
 	[ _mapModel updateAllMaps ];
 
-	moveloop();   
-
+	moveloop();
 }
 
 
 @end
+
+FILE *cocoa_dlb_fopen(const char *filename, const char *mode)
+{
+	FILE *file = NULL;
+	static NSURL *resDir;
+	@autoreleasepool {
+		if (!resDir) {
+			resDir = [[NSBundle mainBundle] resourceURL];
+		}
+		NSString *aFile = @(filename);
+		NSURL *toRet = [resDir URLByAppendingPathComponent:aFile];
+		file = fopen(toRet.fileSystemRepresentation, mode);
+	}
+	return file;
+}

@@ -1,9 +1,10 @@
 #import "NH3DPanel.h"
+#import "NH3DMenuWindow.h"
 
 @implementation NH3DPanel
 
-- (id)initWithContentRect:(NSRect)contentRect 
-				styleMask:(unsigned int)aStyle 
+- (instancetype)initWithContentRect:(NSRect)contentRect 
+				styleMask:(NSUInteger)aStyle
 				  backing:(NSBackingStoreType)bufferingType 
 					defer:(BOOL)flag
 {
@@ -47,7 +48,7 @@
 
 - (void)keyDown:(NSEvent*)event
 {
-	[[self delegate] keyDown:event];
+	[(NH3DMenuWindow*)self.delegate keyDown:event];
 }
 
 //

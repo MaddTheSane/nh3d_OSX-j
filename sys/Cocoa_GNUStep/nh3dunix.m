@@ -214,11 +214,7 @@ void
 regularize(s)	/* normalize file name - we don't like .'s, /'s, spaces */
 register char *s;
 {
-#if 0 /*JP*/
-	register char *lp;
-#else
 	register unsigned char *lp;
-#endif
 	
 #ifdef SJIS_FILESYSTEM
 	lp = (unsigned char *)ic2str( s );

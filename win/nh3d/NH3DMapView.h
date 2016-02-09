@@ -7,24 +7,26 @@
 //  Copyright 2005 Haruumi Yoshino.
 //
 
-//#import <Cocoa/Cocoa.h>
+#import <Cocoa/Cocoa.h>
 #import "NH3Dcommon.h"
 #import "NH3DMapItem.h"
 #import "NH3DUserDefaultsExtern.h"
 
-@class NH3DMapModel;
+@class MapModel;
 @class NH3DBindController;
-@class NH3DMessenger;
+@class NH3DMessaging;
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NH3DMapView : NSView
 {
 	
-	IBOutlet NH3DMapModel *_mapModel;
+	IBOutlet MapModel *_mapModel;
 	IBOutlet NH3DBindController *_bindController;
-	IBOutlet NH3DMessenger *_messenger;
+	IBOutlet NH3DMessaging *_messenger;
 	IBOutlet NSImageView *_mapLview;
 	IBOutlet NSPanel	*_mapLpanel;
+@private
 	NSColor	*bgColor;
 	int	centerX;
 	int centerY;
@@ -45,6 +47,7 @@
 	// ----------------------------------------------------------//
 	int extendKey;
 	
+@package
 	IBOutlet NSButton *_num1;
 	IBOutlet NSButton *_num2;
 	IBOutlet NSButton *_num3;
@@ -63,7 +66,8 @@
 	
 	IBOutlet NSButton *_help1;
 	IBOutlet NSButton *_help2;
-	
+
+@private
 	NSPoint downPoint;
 	int		clickType;
 	int		viewCursX;
@@ -81,7 +85,7 @@
 	//NSShadow *fontShadow;
 	//NSMutableDictionary *fontAttributes;
 
-	float	cursOpacity;
+	CGFloat	cursOpacity;
 		
 	NH3DMapItem *mapItemValue[MAPVIEWSIZE_COLUMN][MAPVIEWSIZE_ROW];
 	
@@ -91,15 +95,12 @@
 	
 }
 
-- (void)setBgColor:(NSColor *)colr;
-- (NSColor *)bgColor;
+@property (nonatomic, strong) NSColor *bgColor;
 
-- (void)setCenter:(int)x:(int)y:(int)depth;
-- (BOOL)isReady;
-- (void)setIsReady:(BOOL)flag;
+- (void)setCenterAtX:(int)x y:(int)y depth:(int)depth;
+@property BOOL isReady;
 
-- (BOOL)needClear;
-- (void)setNeedClear:(BOOL)flag;
+@property BOOL needClear;
 
 - (void)makeTraditionalMap;
 - (void)drawTraditionalMapAtX:(int)x atY:(int)y;
@@ -108,24 +109,17 @@
 - (void)reloadMap;
 - (void)enemyCheck;
 
-- (void)setCursOpacity:(float)opaq;
+@property (nonatomic) CGFloat cursorOpacity;
 - (void)drawMask;
 
-- (int)keyBuffer;
-- (void)setKeyBufffer:(int)value;
+@property (nonatomic) int keyBuffer;
+@property (atomic) BOOL keyUpdated;
+@property int extendKey;
+@property BOOL getCharMode;
 
-- (BOOL)keyUpdated;
-- (void)setKeyUpdated:(BOOL)flag;
+@property (readonly) int clickType;
 
-- (int)extendKey;
-- (void)setExtendKey:(int)value;
-
-- (BOOL)getCharMode;
-- (void)setGetCharMode:(BOOL)flag;
-
-- (int)clickType;
-
-- (void)nh3dEventHandlerLoopWithMask:(unsigned int)mask;
+- (void)nh3dEventHandlerLoopWithMask:(NSUInteger)mask;
 
 // Notification
 - (void)defaultDidChange:(NSNotification *)notification;
@@ -134,16 +128,18 @@
 //				Actions
 //-----------------------------------------------------------------------------//
 
-- (IBAction)gearMenuActions:(id)sender;
-- (IBAction)actionMenuActions:(id)sender;
-- (IBAction)magicMenuActions:(id)sender;
-- (IBAction)infoMenuActions:(id)sender;
-- (IBAction)otherMenuActions:(id)sender;
-- (IBAction)controllerActions:(id)sender;
-- (IBAction)setRestrictedView:(id)sender;
-- (IBAction)showGlobalMap:(id)sender;
-- (IBAction)setUseTileInGlobalMap:(id)sender;
-- (IBAction)closeModalDialog: (id)sender;
-- (IBAction)zoomLevelMap: (id)sender;
+- (IBAction)gearMenuActions:(nullable id)sender;
+- (IBAction)actionMenuActions:(nullable id)sender;
+- (IBAction)magicMenuActions:(nullable id)sender;
+- (IBAction)infoMenuActions:(nullable id)sender;
+- (IBAction)otherMenuActions:(nullable id)sender;
+- (IBAction)controllerActions:(nullable id)sender;
+- (IBAction)setRestrictedView:(nullable id)sender;
+- (IBAction)showGlobalMap:(nullable id)sender;
+- (IBAction)setUseTileInGlobalMap:(nullable id)sender;
+- (IBAction)closeModalDialog:(nullable id)sender;
+- (IBAction)zoomLevelMap:(nullable id)sender;
 
 @end
+
+NS_ASSUME_NONNULL_END

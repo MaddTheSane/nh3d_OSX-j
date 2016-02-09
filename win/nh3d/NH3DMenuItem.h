@@ -6,14 +6,16 @@
 //  Copyright 2005 Haruumi Yoshino.
 //
 
-//#import <Cocoa/Cocoa.h>
+#import <Cocoa/Cocoa.h>
 #import "NH3Dcommon.h"
 
 #import "NH3DTileCache.h"
 #import "NH3DUserDefaultsExtern.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NH3DMenuItem : NSObject {
-	
+@private
 	NSString		*name;
 	anything		identifier;
 	char			accelerator;
@@ -26,30 +28,30 @@
 	
 	//NSImage			*img;
 	NSSize			stringSize;
-	unsigned		strLength;
+	NSUInteger		strLength;
 	
 }
 
 // This is designated initializer.
--(id)initWithParameter:(const char*)cName
+-(instancetype)initWithParameter:(const char*)cName
 			identifier:(const anything *)ident
 		   accelerator:(char)accel
 		   group_accel:(char)gaccel
 				 glyph:(int)glf
 			 attribute:(int)attr
-			 preSelect:(boolean)presel;
+			 preSelect:(boolean)presel NS_DESIGNATED_INITIALIZER;
 
 - (NSAttributedString *)name;
 - (NSAttributedString *)accelerator;
-- (NSImage *)glyph;
-- (NSImage *)smallGlyph;
+- (nullable NSImage *)glyph;
+@property (readonly, copy, nullable) NSImage *smallGlyph;
 - (anything)identifier;
-- (BOOL)isSelectable;
-- (BOOL)isPreSelected;
-- (BOOL)isSelected;
+@property (readwrite, getter=isSelectable) BOOL selectable;
+@property (readonly, getter=isPreSelected) BOOL preSelected;
+@property (readwrite, getter=isSelected) BOOL selected;
 
-- (NSSize)stringSize;
-- (unsigned)strLength;
+@property (readonly) NSSize stringSize;
+@property (readonly) NSUInteger strLength;
 
 
 - (void)setName:(const char*)nameStr;
@@ -60,6 +62,6 @@
 - (void)setAttribute:(int)attrValue;
 
 - (void)setPreselect:(BOOLEAN_P)preselectValue;
-- (void)setSelectable:(BOOL)flag;
-- (void)setSelected:(BOOL)flag;
 @end
+
+NS_ASSUME_NONNULL_END

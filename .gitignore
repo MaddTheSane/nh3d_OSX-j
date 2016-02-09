@@ -5,6 +5,9 @@
 xcuserdata/
 project.xcworkspace/
 *.o
-src/config.h-t
+util/makedefs
+*.h-t
 src/NetHack3D
-src/hack.h-t
+util/tilemap
+util/dgn_comp
+util/lev_comp

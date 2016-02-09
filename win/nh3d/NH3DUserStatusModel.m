@@ -13,24 +13,39 @@
 extern const char *enc_stat[ ]; /* from botl.c */
 extern const char *hu_stat[ ]; /* from eat.c */
 
-static const int DIALOG_OK		= 128;
-static const int DIALOG_CANCEL	= 129;
+#define DIALOG_OK		 128
+#define DIALOG_CANCEL	 129
 
 
 //from nh3d_win.m
-extern id _NH3DTileCache;
+extern NH3DTileCache *_NH3DTileCache;
 
 
 @implementation NH3DUserStatusModel
+@synthesize playerDex;
+@synthesize playerCon;
+@synthesize playerInt;
+@synthesize playerWis;
+@synthesize playerCha;
 
-- ( id )init
+@synthesize playerGold;
+@synthesize playerScore;
+@synthesize playerTime;
+@synthesize playerExp;
+
+@synthesize playerHp;
+@synthesize playerMaxhp;
+@synthesize playerPow;
+@synthesize playerMaxpow;
+@synthesize playerAc;
+@synthesize playerLv;
+
+- (instancetype)init
 {
-	self = [ super init ];
-    if ( self != nil ) {
-					
-		shadow = [ [ NSShadow alloc ] init ];
-		style = [ [ NSMutableParagraphStyle alloc ] init ];
-		strAttributes = [ [ NSMutableDictionary alloc ] init ];
+    if (self = [super init]) {
+		shadow = [[NSShadow alloc] init];
+		style = [[NSMutableParagraphStyle alloc] init];
+		strAttributes = [[NSMutableDictionary alloc] init];
 		
 		[ self setPlayerCriticalHp: 0 ];
 		[ self setPlayerCriticalPow:0 ];
@@ -68,28 +83,22 @@ extern id _NH3DTileCache;
 		[ self setAcUpdate:NO ];
 				
 		firstTime = YES;
-
-   
     }
     return self;
 }
 
-- ( void )prepareAttributes
+- (void)prepareAttributes
 {
-
-	[ shadow setShadowColor:[ NSColor colorWithCalibratedWhite:0.1 alpha:0.8 ] ];
-	[ shadow setShadowOffset:NSMakeSize( 2, -2 ) ];
-	[ shadow setShadowBlurRadius:0.5 ];
+	shadow.shadowColor = [NSColor colorWithCalibratedWhite:0.1 alpha:0.8];
+	shadow.shadowOffset = NSMakeSize(2, -2);
+	shadow.shadowBlurRadius = 0.5;
 			
-	[ style setAlignment:NSCenterTextAlignment ];
+	style.alignment = NSCenterTextAlignment;
 			
 	
-	[ strAttributes setObject:[ NSFont fontWithName:NH3DWINDOWFONT size: 14 ]
-					   forKey:NSFontAttributeName ];
-	[ strAttributes setObject:shadow
-					   forKey:NSShadowAttributeName ];
-	[ strAttributes setObject:style
-					   forKey:NSParagraphStyleAttributeName ];
+	strAttributes[NSFontAttributeName] = [NSFont fontWithName:NH3DWINDOWFONT size: 14];
+	strAttributes[NSShadowAttributeName] = shadow;
+	strAttributes[NSParagraphStyleAttributeName] = style;
 }
 /*
 - ( id )initWithCoder:( NSCoder * )coder
@@ -104,7 +113,7 @@ extern id _NH3DTileCache;
 	return self;
 }
 
-- ( void )encodeWithCoder:( NSCoder * )coder
+- (void)encodeWithCoder:( NSCoder * )coder
 {
 	[ coder encodeObject:playerName forKey:@"playerName" ];
 	[ coder encodeObject:playerClass forKey:@"playerClass" ];
@@ -115,37 +124,7 @@ extern id _NH3DTileCache;
 }
 */
 
-- ( void )dealloc
-{
-	[ strAttributes release ];
-	[ shadow release ];
-	[ style release ];
-	
-	[ playerName release ];
-	[ playerClass release ];
-	[ playerRace release ];
-	[ playerRole release ];
-	[ playerAlign release ];
-	[ playerGender release ];
-	[ playerStatusLine release ];
-		
-	[ playerArmour release ];
-	[ playerCloak release ];
-	[ playerHelmet release ];
-	[ playerShield release ];
-	[ playerGloves release ];
-	[ playerShoes release ];
-	[ playerRingL release ];
-	[ playerRingR release ];
-	[ playerWeapon release ];
-	[ playerSubWeapon release ];
-	[ playerAmulet release ];
-	[ playerBlindFold release ];
-
-	[ super dealloc ];
-}
-
-- ( void )awakeFromNib {
+- (void)awakeFromNib {
 	[ self prepareAttributes ];
 	[ self setPlayerArmour:0 ];
 	[ self setPlayerCloak:0 ];
@@ -164,7 +143,7 @@ extern id _NH3DTileCache;
 
 
 /*
-- ( void )controlTextDidChange:( NSNotification * )notification
+- (void)controlTextDidChange:( NSNotification * )notification
 {	
 	if ( [ [ inputName stringValue ] isEqual:@"" ] || [ [ inputName stringValue ] cStringLength ] >= PL_NSIZ-11 ) {
 		[ self setPlayerName:[ NSString stringWithFormat:@"%@%d%@",@"input 1to",PL_NSIZ-12,@"Chars." ] ];
@@ -179,323 +158,257 @@ extern id _NH3DTileCache;
 //
 //
 
-- ( NSAttributedString * )playerName
+- (NSAttributedString *)playerName
 {
 	int fSize;
-	switch ( [ playerName cStringLength ] ) 
-	{
+	switch ( playerName.length ) {
 		case 15:
 		case 16:
 			fSize = 16;
-		break;
+			break;
 		case 17:
 		case 18:
 			fSize = 14;
-		break;
+			break;
 		case 19:
 		case 20:
 			fSize = 12;
-		break;
+			break;
 		default:
 			fSize = 17;
 	}
 	
-	[ strAttributes setObject:
-						[ NSFont fontWithName:NH3DWINDOWFONT
-								size:fSize ]
-								forKey:NSFontAttributeName ];
-	return [ [ [ NSAttributedString alloc ] 
-								initWithString:playerName 
-								attributes:strAttributes ] autorelease ];
+	strAttributes[NSFontAttributeName] = [NSFont fontWithName:NH3DWINDOWFONT
+														 size:fSize];
+	return [[NSAttributedString alloc] initWithString:playerName
+										   attributes:strAttributes];
 }
 
-- ( NSString * )playerRole 
+- (NSString*)playerRole 
 {
 	return playerRole;
 }
 
-- ( NSString * )playerRace 
+- (NSString*)playerRace 
 {
 	return playerRace;
 }
 
-- ( NSString * )playerAlign 
+- (NSString*)playerAlign 
 {
 	return playerAlign;
 }
 
-- ( NSString * )playerGender 
+- (NSString*)playerGender 
 {
 	return playerGender;
 }
 
-- ( NSAttributedString * )playerClass 
+- (NSAttributedString *)playerClass
 {
-	[ strAttributes setObject:
-						[ NSFont fontWithName:NH3DWINDOWFONT
-								size: 13 ]
-								forKey:NSFontAttributeName ];
-	return [ [ [ NSAttributedString alloc ] 
-								initWithString:playerClass 
-								attributes:strAttributes ] autorelease ];
+	strAttributes[NSFontAttributeName] = [NSFont fontWithName:NH3DWINDOWFONT
+														 size: 13];
+	return [[NSAttributedString alloc] initWithString:playerClass
+										   attributes:strAttributes];
 }
 
-
-- ( NSString * )playerStatusLine
+- (NSString*)playerStatusLine
 {
 	return playerStatusLine;
 }
 
-
-
-
-- ( int )playerHp 
-{
-	return playerHp;
-}
-
-- ( int )playerMaxhp 
-{
-	return playerMaxhp;
-}
-
-- ( int )playerPow 
-{
-	return playerPow;
-}
-
-- ( int )playerMaxpow 
-{
-	return playerMaxpow;
-}
-
-- ( float )playerWaningHp 
+- (float)playerWaningHp 
 {
 	return playerWaningHp;
 }
 
-- ( float )playerCriticalHp 
+- (float)playerCriticalHp 
 {
 	return playerCriticalHp;
 }
 
-- ( float )playerWaningPow
+- (float)playerWaningPow
 {
 	return playerWaningPow;
 }
 
-- ( float )playerCriticalPow 
+- (float)playerCriticalPow 
 {
 	return playerCriticalPow;
 }
 
-- ( int )playerAc 
-{
-	return playerAc;
-}
-
-- ( int )playerLv 
-{
-	return playerLv;
-}
-
-
-- ( NSImage * )playerArmour
+- (NSImage*)playerArmour
 {
 	return playerArmour;
 }
 
-- ( void )setPlayerArmour:( int )glyph
+- (void)setPlayerArmour:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerArmour release ];
 		playerArmour = nil;
 	} else {
-		[ playerArmour release ];
 		playerArmour = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerCloak
+- (NSImage*)playerCloak
 {
 	return playerCloak;
 }
 
-- ( void )setPlayerCloak:( int )glyph
+- (void)setPlayerCloak:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerCloak release ];
 		playerCloak = nil;
 	} else {
-		[ playerCloak release ];
 		playerCloak = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerHelmet
+- (NSImage*)playerHelmet
 {
 	return playerHelmet;
 }
 
 
 
-- ( void )setPlayerHelmet:( int )glyph
+- (void)setPlayerHelmet:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerHelmet release ];
 		playerHelmet = nil;
 	} else {
-		[ playerHelmet release ];
 		playerHelmet = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerShield
+- (NSImage*)playerShield
 {
 	return playerShield;
 }
 
-- ( void )setPlayerShield:( int )glyph
+- (void)setPlayerShield:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerShield release ];
 		playerShield = nil;
 	} else {
-		[ playerShield release ];
 		playerShield = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerGloves
+- (NSImage*)playerGloves
 {
 	return playerGloves;
 }
 
-- ( void )setPlayerGloves:( int )glyph
+- (void)setPlayerGloves:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerGloves release ];
 		playerGloves = nil;
 	} else {
-		[ playerGloves release ];
 		playerGloves = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerShoes
+- (NSImage*)playerShoes
 {
 	return playerShoes;
 }
 
-- ( void )setPlayerShoes:( int )glyph
+- (void)setPlayerShoes:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerShoes release ];
 		playerShoes = nil;
 	} else {
-		[ playerShoes release ];
 		playerShoes = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerRingL
+- (NSImage*)playerRingL
 {
 	return playerRingL;
 }
 
-- ( void )setPlayerRingL:( int )glyph
+- (void)setPlayerRingL:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerRingL release ]; 
 		playerRingL = nil;
 	} else {
-		[ playerRingL release ]; 
 		playerRingL = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerRingR
+- (NSImage*)playerRingR
 {
 	return playerRingR;
 }
  
-- ( void )setPlayerRingR:( int )glyph
+- (void)setPlayerRingR:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerRingR release ];
 		playerRingR = nil;		
 	} else {
-		[ playerRingR release ];
 		playerRingR = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerWeapon
+- (NSImage*)playerWeapon
 {
 	return playerWeapon ;
 }
 
-- ( void )setPlayerWeapon:( int )glyph
+- (void)setPlayerWeapon:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerWeapon release ];
 		playerWeapon = nil;
 	} else {		
-		[ playerWeapon release ];
 		playerWeapon = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerSubWeapon
+- (NSImage*)playerSubWeapon
 {
 	return playerSubWeapon;
 }
 
-- ( void )setPlayerSubWeapon:( int )glyph
+- (void)setPlayerSubWeapon:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerSubWeapon release ];
 		playerSubWeapon = nil;
 	} else {
-		[ playerSubWeapon release ];
 		playerSubWeapon = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerAmulet
+- (NSImage*)playerAmulet
 {
 	return playerAmulet;
 }
 
-- ( void )setPlayerAmulet:( int )glyph
+- (void)setPlayerAmulet:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerAmulet release ];
 		playerAmulet = nil;
 	} else {
-		[ playerAmulet release ];
 		playerAmulet = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
-- ( NSImage * )playerBlindFold
+- (NSImage*)playerBlindFold
 {
 	return playerBlindFold;
 }
 
-- ( void )setPlayerBlindFold:( int )glyph
+- (void)setPlayerBlindFold:(int)glyph
 {
 	if ( !glyph ) {
-		[ playerBlindFold release ];
 		playerBlindFold = nil;
 	} else {
-		[ playerBlindFold release ];
 		playerBlindFold = [ [ _NH3DTileCache tileImageFromGlyph:glyph ] copy ];
 	}
 }
 
 
-- ( void )updatePlayerInventory
+- (void)updatePlayerInventory
 {
 	if ( uarm ) { 
 		[ self setPlayerArmour:obj_to_glyph( uarm ) ];
@@ -583,7 +496,7 @@ extern id _NH3DTileCache;
 //
 //
 
-- ( NSString * )playerStr {
+- (NSString*)playerStr {
 	NSString* strStr = nil; 
 	
 	if ( playerStr > 118 ) {
@@ -598,208 +511,143 @@ extern id _NH3DTileCache;
 	return strStr;
 }
 
-- ( int )playerDex {
-	return playerDex;
-}
-
-- ( int )playerCon {
-	return playerCon;
-}
-
-- ( int )playerInt {
-	return playerInt;
-}
-
-- ( int )playerWis {
-	return playerWis;
-}
-
-- ( int )playerCha {
-	return playerCha;
-}
-
-- ( int )playerGold {
-	return playerGold;
-}
-
-- ( unsigned )playerScore {
-	return playerScore;
-}
-
-- ( unsigned )playerTime {
-	return playerTime;
-}
-
-- ( int )playerExp {
-	return playerExp;
-}
-
-- ( NSString * )strUpdate
+- (NSImage *)strUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"STR",strUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"STR", (int)strUpdate]];
 }
-- ( NSString * )dexUpdate
+- (NSImage *)dexUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"DEX",dexUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"DEX", (int)dexUpdate]];
 }
-- ( NSString * )conUpdate
+- (NSImage *)conUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"CON",conUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"CON", (int)conUpdate]];
 }
-- ( NSString * )intUpdate
+- (NSImage *)intUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"INT",intUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"INT", (int)intUpdate]];
 }
-- ( NSString * )wisUpdate
+- (NSImage *)wisUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"WIS",wisUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"WIS", (int)wisUpdate]];
 }
-- ( NSString * )chaUpdate
+- (NSImage *)chaUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"CHA",chaUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"CHA", (int)chaUpdate]];
 }
-- ( NSString * )hpUpdate
+- (NSImage *)hpUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"HP",hpUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"HP", (int)hpUpdate]];
 }
-- ( NSString * )powUpdate
+- (NSImage *)powUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Pow",powUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Pow", (int)powUpdate]];
 }
-- ( NSString * )acUpdate
+- (NSImage *)acUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Ac",acUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Ac", (int)acUpdate]];
 }
-- ( NSString * )lvUpdate
+- (NSImage *)lvUpdate
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Lv",lvUpdate ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Lv", (int)lvUpdate]];
 }
 
 
-- ( NSString * )lowfulIcon 
+- (NSImage *)lowfulIcon
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Lowful",lowfulIcon ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Lowful", (int)lowfulIcon]];
 }
-- ( NSString * )newtralIcon
+- (NSImage *)newtralIcon
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Newtral",newtralIcon ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Newtral", (int)newtralIcon]];
 }
-- ( NSString * )chaosIcon
+- (NSImage *)chaosIcon
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Chaos",chaosIcon ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Chaos", (int)chaosIcon]];
 }
 
-- ( NSString * )stHunger
+- (NSImage *)stHunger
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Hunger",stHunger ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Hunger", (int)stHunger]];
 }
-- ( NSString * )stConfuse
+- (NSImage *)stConfuse
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Confuse",stConfuse ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Confuse", (int)stConfuse]];
 }
-- ( NSString * )stSick
+- (NSImage *)stSick
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Sick",stSick ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Sick", (int)stSick]];
 }
-- ( NSString * )stIll
+- (NSImage *)stIll
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Ill",stIll ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Ill", (int)stIll]];
 }
-- ( NSString * )stBlind
+- (NSImage *)stBlind
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Blind",stBlind ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Blind", (int)stBlind]];
 }
-- ( NSString * )stStun
+- (NSImage *)stStun
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Stun",stStun ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Stun", (int)stStun]];
 }
-- ( NSString * )stHallu
+- (NSImage *)stHallu
 {
-	return [ [ NSBundle mainBundle ] pathForImageResource:
-										[ NSString stringWithFormat:@"%@%d",@"Hallu",stHallu ] ];
+	return [NSImage imageNamed:[NSString stringWithFormat:@"%@%d", @"Hallu", (int)stHallu]];
 }
 
 //
 //
 //
 
-- ( void )setPlayerName:( NSString * )aString {
-	if ( ![ playerName isEqualToString: aString ] && [ aString cStringLength ] <= PL_NSIZ-11 ) {
-		[ playerName release ];
-		playerName = [ aString retain ];
+- (void)setPlayerName:(NSString *)aString {
+	if ( ![ playerName isEqualToString: aString ] && aString.length <= PL_NSIZ-11 ) {
+		playerName = aString;
 		//strcpy( plname,[ playerName cStringUsingEncoding:NH3DTEXTENCODING ] );
 	}
 }
 
-- ( void )setPlayerClass:( NSString * )aString {
-		if ( ![ playerClass isEqualToString: aString ] ) {
-		[ playerClass release ];
-		playerClass = [ aString retain ];
-		}
-}
-
-- ( void )setPlayerRace:( NSString * )aString {
-		if ( ![ playerRace isEqualToString: NSLocalizedString(aString,@"") ] ) {
-		[ playerRace release ];
-		playerRace = [ NSLocalizedString(aString,@"") retain ];
+- (void)setPlayerClass:(NSString *)aString {
+	if (![playerClass isEqualToString: aString]) {
+		playerClass = [aString copy];
 	}
-	
+}
+
+- (void)setPlayerRace:(NSString *)aString {
+	if (![playerRace isEqualToString: NSLocalizedString(aString,@"") ] ) {
+		playerRace = NSLocalizedString(aString,@"");
+	}
 }
 
 
-- ( void )setPlayerRole:( NSString * )aString {
+- (void)setPlayerRole:(NSString *)aString {
 	if ( playerRole != NSLocalizedString(aString,@"") ) {
-		[ playerRole release ];
-		playerRole = [ NSLocalizedString(aString,@"") retain ];
-	}
-
-}
-
-
-- ( void )setPlayerAlign:( NSString * )aString {
-	if ( playerAlign != NSLocalizedString(aString,@"") ) {
-		[ playerAlign release ];
-		playerAlign = [ NSLocalizedString(aString,@"") retain ];
-	}
-}
-
-- ( void )setPlayerGender:( NSString * )aString {
-	if ( playerGender != NSLocalizedString(aString,@"") ) {
-		[ playerGender release ];
-		playerGender = [ NSLocalizedString(aString,@"") retain ];
+		playerRole = NSLocalizedString(aString,@"");
 	}
 }
 
 
-- ( void )setPlayerStatusLine:( NSString * )aString
+- (void)setPlayerAlign:(NSString *)aString {
+	if (![playerAlign isEqualToString: NSLocalizedString(aString,@"")]) {
+		playerAlign = NSLocalizedString(aString,@"");
+	}
+}
+
+- (void)setPlayerGender:(NSString *)aString {
+	if (![playerGender isEqualToString: NSLocalizedString(aString,@"")]) {
+		playerGender = NSLocalizedString(aString,@"");
+	}
+}
+
+
+- (void)setPlayerStatusLine:(NSString *)aString
 {
 	if ( ![ playerStatusLine isEqualToString:aString ] ) {
-		[ playerStatusLine release ];
-		playerStatusLine = [ aString retain ];
+		playerStatusLine = [aString copy];
 	}
 }
 
 
-- ( void )setPlayerStr:( int )aValue {
+- (void)setPlayerStr:(int)aValue {
 	static unsigned strcount;
 	
 	if ( playerStr != aValue && playerStr < aValue ) {
@@ -808,11 +656,11 @@ extern id _NH3DTileCache;
 		strcount = playerTime;
 	} else {
 		playerStr = aValue;
-		if ( strcount < playerTime-15 ) [ self setStrUpdate:NO ]; 
+		if ( strcount < playerTime-15 ) [ self setStrUpdate:NO ];
 	}
 }
 
-- ( void )setPlayerDex:( int )aValue {
+- (void)setPlayerDex:(int)aValue {
 	static unsigned dexcount;
 	
 	if ( playerDex != aValue && playerDex < aValue ) {
@@ -822,10 +670,10 @@ extern id _NH3DTileCache;
 	} else {
 		playerDex = aValue;
 		if ( dexcount < playerTime-15 ) [ self setDexUpdate:NO ];
-	}	
+	}
 }
 
-- ( void )setPlayerCon:( int )aValue {
+- (void)setPlayerCon:(int)aValue {
 	static unsigned concount;
 	
 	if ( playerCon != aValue && playerCon < aValue ) {
@@ -838,7 +686,7 @@ extern id _NH3DTileCache;
 	}
 }
 
-- ( void )setPlayerInt:( int )aValue {
+- (void)setPlayerInt:(int)aValue {
 	static unsigned intcount;
 	
 	if ( playerInt != aValue && playerInt < aValue ) {
@@ -851,7 +699,7 @@ extern id _NH3DTileCache;
 	}
 }
 
-- ( void )setPlayerWis:( int )aValue {
+- (void)setPlayerWis:(int)aValue {
 	static unsigned wiscount;
 	
 	if ( playerWis != aValue && playerWis < aValue ) {
@@ -864,7 +712,7 @@ extern id _NH3DTileCache;
 	}
 }
 
-- ( void )setPlayerCha:( int )aValue {
+- (void)setPlayerCha:(int)aValue {
 	static unsigned chacount;
 	
 	if ( playerCha != aValue && playerCha < aValue ) {
@@ -873,120 +721,102 @@ extern id _NH3DTileCache;
 		chacount = playerTime;
 	} else {
 		playerCha = aValue;
-		if ( chacount < playerTime-15 ) [ self setChaUpdate:NO ];
+		if ( chacount < playerTime-15 )
+			[ self setChaUpdate:NO ];
 	}
 }
 
-- ( void )setPlayerGold:( int )aValue {
-	playerGold = aValue;
-}
-
-- ( void )setPlayerScore:( unsigned )aValue {
-	playerScore = aValue;
-}
-
-- ( void )setPlayerTime:( unsigned )aValue{
-	playerTime = aValue;
-}
-
-- ( void )setPlayerExp:( int )aValue{
-	playerExp = aValue;
-}
 
 //
 //
 //
 
 
-- ( void )setPlayerMaxhp:( int )aValue {
+- (void)setPlayerMaxhp:(int)aValue {
 	static unsigned hpcount;
 	
 	if ( playerMaxhp != aValue && playerMaxhp < aValue ) {
-			playerMaxhp = aValue;
+		playerMaxhp = aValue;
 		[ self setPlayerWaningHp:aValue ];
 		[ self setPlayerCriticalHp:aValue ];
-			if ( !firstTime ) [ self setHpUpdate:YES ];
-			hpcount = playerTime;
-		} else if ( playerMaxhp != aValue ) {
+		if ( !firstTime ) [ self setHpUpdate:YES ];
+		hpcount = playerTime;
+	} else if ( playerMaxhp != aValue ) {
 		playerMaxhp = aValue;
-			[ self setPlayerWaningHp:aValue ];
-			[ self setPlayerCriticalHp:aValue ];
+		[ self setPlayerWaningHp:aValue ];
+		[ self setPlayerCriticalHp:aValue ];
 	}
-	if ( hpcount < playerTime-15 ) [ self setHpUpdate:NO ];
+	if ( hpcount < playerTime-15 )
+		[ self setHpUpdate:NO ];
 }
 
-- ( void )setPlayerMaxpow:( int )aValue {
+- (void)setPlayerMaxpow:(int)aValue {
 	static unsigned powcount;
 	
 	if ( playerMaxpow != aValue && playerMaxpow < aValue ) {
-			playerMaxpow = aValue;
+		playerMaxpow = aValue;
 		[ self setPlayerWaningPow:aValue ];
 		[ self setPlayerCriticalPow:aValue ];
-			if ( !firstTime )	[ self setPowUpdate:YES ];
-			powcount = playerTime;
-			
-	}else if ( playerMaxpow != aValue ) {
+		if (!firstTime)
+			[self setPowUpdate:YES];
+		powcount = playerTime;
+		
+	} else if ( playerMaxpow != aValue ) {
 		playerMaxpow = aValue;
 		[ self setPlayerWaningPow:aValue ];
 		[ self setPlayerCriticalPow:aValue ];
 	}
-	if ( powcount < playerTime-15 ) [ self setPowUpdate:NO ];
+	if ( powcount < playerTime-15 )
+		[ self setPowUpdate:NO ];
 }
 
-- ( void )setPlayerHp:( int )aValue {
-	playerHp = aValue;
-}
-
-- ( void )setPlayerPow:( int )aValue {
-	playerPow = aValue;
-}
-
-- ( void )setPlayerAc:( int )aValue {
+- (void)setPlayerAc:(int)aValue {
 	static unsigned account;
 	
 	if ( playerAc != aValue && playerAc > aValue ) {
 		playerAc = aValue;
 		[ self setAcUpdate:YES ];
-		account = playerTime; 
+		account = playerTime;
 	} else {
 		playerAc = aValue;
-		if ( account < playerTime-15 ) [ self setAcUpdate:NO ];
-	}	
-	
+		if (account < playerTime-15)
+			[ self setAcUpdate:NO];
+	}
 }
 
-- ( void )setPlayerLv:( int )aValue {
+- (void)setPlayerLv:(int)aValue {
 	static unsigned lvcount;
 	
 	if ( playerLv != aValue && playerLv < aValue ) {
 		playerLv = aValue;
 		[ self setLvUpdate:YES ];
-		lvcount = playerTime; 
+		lvcount = playerTime;
 	} else {
 		playerLv = aValue;
-		if ( lvcount < playerTime-15 ) [ self setLvUpdate:NO ];
-	}	
+		if ( lvcount < playerTime-15 )
+			[ self setLvUpdate:NO ];
+	}
 }
 
-- ( void )setPlayerWaningHp:( int )maxHp
+- (void)setPlayerWaningHp:(int)maxHp
 {
 	playerWaningHp = maxHp/10*5;
 }
 
 
-- ( void )setPlayerCriticalHp:( int )maxHp
+- (void)setPlayerCriticalHp:(int)maxHp
 {
 	playerCriticalHp = maxHp/10*3;
 }
 
 
-- ( void )setPlayerWaningPow:( int )maxPow
+- (void)setPlayerWaningPow:(int)maxPow
 {
 	playerWaningPow = maxPow/10*5;
 }
 
 
-- ( void )setPlayerCriticalPow:( int )maxPow
+- (void)setPlayerCriticalPow:(int)maxPow
 {
 	playerCriticalPow = maxPow/10*3;
 }
@@ -995,110 +825,109 @@ extern id _NH3DTileCache;
 //
 //
 
-- ( void )setStrUpdate:( BOOL )update {
+- (void)setStrUpdate:( BOOL )update {
 	strUpdate = update;
 }
-- ( void )setDexUpdate:( BOOL )update {
+- (void)setDexUpdate:( BOOL )update {
 	dexUpdate = update;
 }
-- ( void )setConUpdate:( BOOL )update {
+- (void)setConUpdate:( BOOL )update {
 	conUpdate = update;
 }
-- ( void )setIntUpdate:( BOOL )update {
+- (void)setIntUpdate:( BOOL )update {
 	intUpdate = update;
 }
-- ( void )setWisUpdate:( BOOL )update {
+- (void)setWisUpdate:( BOOL )update {
 	wisUpdate = update;
 }
-- ( void )setChaUpdate:( BOOL )update {
+- (void)setChaUpdate:( BOOL )update {
 	chaUpdate = update;
 }
-- ( void )setHpUpdate:( BOOL )update {
+- (void)setHpUpdate:( BOOL )update {
 	hpUpdate = update;
 }
-- ( void )setPowUpdate:( BOOL )update {
+- (void)setPowUpdate:( BOOL )update {
 	powUpdate = update;
 }
-- ( void )setAcUpdate:( BOOL )update {
+- (void)setAcUpdate:( BOOL )update {
 	acUpdate = update;
 }
-- ( void )setLvUpdate:( BOOL )update {
+- (void)setLvUpdate:(BOOL)update {
 	lvUpdate = update;
 }
 
-- ( void )setLowfulIcon:( BOOL )enable {
+- (void)setLowfulIcon:(BOOL)enable {
 	lowfulIcon = enable;
 }
-- ( void )setNewtralIcon:( BOOL )enable {
+
+- (void)setNewtralIcon:(BOOL)enable {
 	newtralIcon = enable;
 }
-- ( void )setChaosIcon:( BOOL )enable {
+
+- (void)setChaosIcon:(BOOL)enable {
 	chaosIcon = enable;
 }
 
-- ( void )setStHunger:( BOOL )aBool 
+- (void)setStHunger:(BOOL)aBool
 {
 	stHunger = aBool;
-	[ self checkStDrawer ];
-	
+	[self checkStDrawer];
 }
 
-- ( void )setStConfuse:( BOOL )aBool
+- (void)setStConfuse:( BOOL )aBool
 {
 	stConfuse = aBool;
-	[ self checkStDrawer ];	
+	[self checkStDrawer];
 }
 
-- ( void )setStSick:( BOOL )aBool
+- (void)setStSick:( BOOL )aBool
 {
 	stSick = aBool;
-	[ self checkStDrawer ];
+	[self checkStDrawer];
 }
 
-- ( void )setStIll:( BOOL )aBool
+- (void)setStIll:( BOOL )aBool
 {
 	stIll = aBool;
-	[ self checkStDrawer ];
+	[self checkStDrawer];
 }
 
-- ( void )setStBlind:( BOOL )aBool
+- (void)setStBlind:( BOOL )aBool
 {
 	stBlind = aBool;
-	[ self checkStDrawer ];
+	[self checkStDrawer];
 }
 
-- ( void )setStStun:( BOOL )aBool
+- (void)setStStun:( BOOL )aBool
 {
 	stStun = aBool;
-	[ self checkStDrawer ];	
+	[self checkStDrawer];
 }
 
-- ( void )setStHallu:( BOOL )aBool
+- (void)setStHallu:( BOOL )aBool
 {
 	stHallu = aBool;
-	[ self checkStDrawer ];
-	
+	[self checkStDrawer];
 }
 
-- ( void )checkStDrawer
+- (void)checkStDrawer
 {
-	if ( stHunger || stConfuse || stSick || stIll || stBlind || stStun || stHallu )
-		{	
-		if ( [ stDrawer state ] == NSDrawerClosedState ) {
-			[ stDrawer open ];
-			[ [ NSSound soundNamed:@"Purr" ] play ];
+	if ( stHunger || stConfuse || stSick || stIll || stBlind || stStun || stHallu ) {
+		if (stDrawer.state == NSDrawerClosedState) {
+			[stDrawer open];
+			[[NSSound soundNamed:@"Purr"] play];
 		}
-	} else if ( [ stDrawer state ] != NSDrawerClosedState ) [ stDrawer close ];
-		
+	} else if (stDrawer.state != NSDrawerClosedState) {
+		[stDrawer close];
+	}
 }
 
 //
 //
 //
 
-- ( void )updatePlayer
-{	
-
+- (void)updatePlayer
+{
 	const char* hung = hu_stat[ u.uhs ];
 	
 	[ self setPlayerClass:[ NSString stringWithFormat:NSLocalizedString( @"the %@",@"" ),
@@ -1182,7 +1011,7 @@ extern id _NH3DTileCache;
 	
 	firstTime = NO;
 
-	[ window displayIfNeeded ];
+	[window displayIfNeeded];
 }
 
 @end
