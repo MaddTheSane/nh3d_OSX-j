@@ -13,6 +13,7 @@
  *              provide it (no need to change sec#1, vmsconf.h handles it).
  */
 
+#define JNETHACK
 #define UNIX /* delete if no fork(), exec() available */
 
 /* #define MSDOS */ /* in case it's not auto-detected */
@@ -47,6 +48,7 @@
 /* #define QT_GRAPHICS */    /* Qt interface */
 /* #define GNOME_GRAPHICS */ /* Gnome interface */
 /* #define MSWIN_GRAPHICS */ /* Windows NT, CE, Graphics */
+#define NH3D_GRAPHICS		/* MacOSXCocoa/GNUStep Graphics with OpenGL */
 
 /*
  * Define the default window system.  This should be one that is compiled
@@ -110,6 +112,23 @@
 #define DEFAULT_WINDOW_SYS "mswin"
 #endif
 #define HACKDIR "\\nethack"
+#endif
+
+/*NetHack3D*/
+#ifdef NH3D_GRAPHICS
+/*# define GNUSTEP */ /* use GNUStep framework */
+# define GRAPHIC_TOMBSTONE	/* Use graphical tombstone (rip.png) */
+# define CHDIR
+# define HACKDIR "Resources"
+# ifndef DEFAULT_WINDOW_SYS
+#  define DEFAULT_WINDOW_SYS "nh3d"
+# endif
+#endif
+
+#ifndef DEFAULT_WINDOW_SYS
+# ifdef X11_GRAPHICS
+#  define DEFAULT_WINDOW_SYS "x11"
+# endif
 #endif
 
 #ifndef DEFAULT_WINDOW_SYS
@@ -230,6 +249,12 @@
 #endif
 #endif
 
+#ifdef JNETHACK
+/*#define NH_EXTENSION*/	/* Some extension for game */
+# define XI18N
+# define INSTALLCOLORMAP
+#endif
+
 /*
  *      If COMPRESS is defined, it should contain the full path name of your
  *      'compress' program.
@@ -317,7 +342,7 @@
  * otherwise it will be the current directory.
  */
 #ifndef HACKDIR
-#define HACKDIR "/usr/games/lib/nethackdir"
+#define HACKDIR "."
 #endif
 
 /*
@@ -426,6 +451,13 @@ typedef unsigned char uchar;
 #endif
 
 #define DOAGAIN '\001' /* ^A, the "redo" key used in cmd.c and getline.c */
+
+#define EXP_ON_BOTL	/* Show experience on bottom line */
+#define SCORE_ON_BOTL 	/* added by Gary Erickson (erickson@ucivax) */
+
+#ifdef JNETHACK
+/*# define USE_MAKESINGULAR */	/* Enable singularize */
+#endif
 
 /*
  * Section 4:  EXPERIMENTAL STUFF

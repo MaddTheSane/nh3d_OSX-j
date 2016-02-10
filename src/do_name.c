@@ -59,31 +59,31 @@ const char *goal;
 #if 0 /*JP*/
     Sprintf(sbuf, "Use [%c%c%c%c] to move the cursor to %s.", /* hjkl */
 #else
-    Sprintf(sbuf, "[%c%c%c%c]‚Å%s‚ÖˆÚ“®‚Å‚«‚éD",
+    Sprintf(sbuf, "[%c%c%c%c]¤Ç%s¤Ø°ÜÆ°¤Ç¤­¤ë¡¥",
 #endif
             Cmd.move_W, Cmd.move_S, Cmd.move_N, Cmd.move_E, goal);
     putstr(tmpwin, 0, sbuf);
 /*JP
     putstr(tmpwin, 0, "Use [HJKL] to move the cursor 8 units at a time.");
 */
-    putstr(tmpwin, 0, "[HJKL]‚Åˆê“x‚É8•àˆÚ“®‚Å‚«‚éD");
+    putstr(tmpwin, 0, "[HJKL]¤Ç°ìÅÙ¤Ë8Êâ°ÜÆ°¤Ç¤­¤ë¡¥");
 /*JP
     putstr(tmpwin, 0, "Or enter a background symbol (ex. <).");
 */
-    putstr(tmpwin, 0, "”wŒi‚ÌƒVƒ“ƒ{ƒ‹‚ğ“ü—Í‚·‚é‚Æ‚»‚ÌˆÊ’u‚ÉˆÚ“®‚·‚é(—áF<)D");
+    putstr(tmpwin, 0, "ÇØ·Ê¤Î¥·¥ó¥Ü¥ë¤òÆşÎÏ¤¹¤ë¤È¤½¤Î°ÌÃÖ¤Ë°ÜÆ°¤¹¤ë(Îã¡§<)¡¥");
 /*JP
     putstr(tmpwin, 0, "Use @ to move the cursor on yourself.");
 */
-    putstr(tmpwin, 0, "@‚Å©•ª©g‚ÌˆÊ’u‚ÉˆÚ“®‚·‚éD");
+    putstr(tmpwin, 0, "@¤Ç¼«Ê¬¼«¿È¤Î°ÌÃÖ¤Ë°ÜÆ°¤¹¤ë¡¥");
     if (getpos_hilitefunc != NULL)
 /*JP
         putstr(tmpwin, 0, "Use $ to display valid locations.");
 */
-        putstr(tmpwin, 0, "$‚Å‰Â”\‚ÈˆÊ’u‚ğ•\¦‚·‚éD");
+        putstr(tmpwin, 0, "$¤Ç²ÄÇ½¤Ê°ÌÃÖ¤òÉ½¼¨¤¹¤ë¡¥");
 /*JP
     putstr(tmpwin, 0, "Use # to toggle automatic description.");
 */
-    putstr(tmpwin, 0, "#‚Åà–¾‚Ì©“®•\¦‚ğØ‚è‘Ö‚¦‚éD");
+    putstr(tmpwin, 0, "#¤ÇÀâÌÀ¤Î¼«Æ°É½¼¨¤òÀÚ¤êÂØ¤¨¤ë¡¥");
     /* disgusting hack; the alternate selection characters work for any
        getpos call, but they only matter for dowhatis (and doquickwhatis) */
     doing_what_is = (goal == what_is_an_unknown_object);
@@ -91,7 +91,7 @@ const char *goal;
     Sprintf(sbuf, "Type a .%s when you are at the right place.",
             doing_what_is ? " or , or ; or :" : "");
 #else
-    Sprintf(sbuf, "[.]%s‚ÅŒˆ’èD",
+    Sprintf(sbuf, "[.]%s¤Ç·èÄê¡¥",
             doing_what_is ? "[,][;][:]" : "");
 #endif
     putstr(tmpwin, 0, sbuf);
@@ -99,7 +99,7 @@ const char *goal;
 /*JP
         putstr(tmpwin, 0, "Type Space or Escape when you're done.");
 */
-        putstr(tmpwin, 0, "ƒXƒy[ƒX‚Ü‚½‚ÍƒGƒXƒP[ƒv‚ÅI—¹D");
+        putstr(tmpwin, 0, "¥¹¥Ú¡¼¥¹¤Ş¤¿¤Ï¥¨¥¹¥±¡¼¥×¤Ç½ªÎ»¡¥");
     putstr(tmpwin, 0, "");
     display_nhwindow(tmpwin, TRUE);
     destroy_nhwindow(tmpwin);
@@ -127,7 +127,7 @@ const char *goal;
 /*JP
         pline("(For instructions type a ?)");
 */
-        pline("(?‚Åƒwƒ‹ƒv)");
+        pline("(?¤Ç¥Ø¥ë¥×)");
         msg_given = TRUE;
     }
     cx = ccp->x;
@@ -307,7 +307,7 @@ const char *goal;
 /*JP
                     pline("Can't find dungeon feature '%c'.", c);
 */
-                    pline("'%c'H", c);
+                    pline("'%c'¡©", c);
                     msg_given = TRUE;
                     goto nxtc;
                 } else {
@@ -317,19 +317,19 @@ const char *goal;
 /*JP
                         Strcpy(note, "aborted");
 */
-                        Strcpy(note, "’†’f‚µ‚½");
+                        Strcpy(note, "ÃæÃÇ¤·¤¿");
                     else
 #if 0 /*JP*/
                         Sprintf(note, "use %c%c%c%c or .", /* hjkl */
 #else
-                        Sprintf(note, "%c%c%c%c‚ÅˆÚ“®C.‚ÅI—¹", /* hjkl */
+                        Sprintf(note, "%c%c%c%c¤Ç°ÜÆ°¡¤.¤Ç½ªÎ»", /* hjkl */
 #endif
                                 Cmd.move_W, Cmd.move_S, Cmd.move_N,
                                 Cmd.move_E);
 /*JP
                     pline("Unknown direction: '%s' (%s).", visctrl((char) c),
 */
-                    pline("‚»‚Ì•ûŒü‚Í‚È‚¢F'%s' (%s)", visctrl((char) c),
+                    pline("¤½¤ÎÊı¸ş¤Ï¤Ê¤¤¡§'%s' (%s)", visctrl((char) c),
                           note);
                     msg_given = TRUE;
                 } /* k => matching */
@@ -339,7 +339,7 @@ const char *goal;
 /*JP
             pline("Done.");
 */
-            pline("ˆÈãD");
+            pline("°Ê¾å¡¥");
             msg_given = FALSE; /* suppress clear */
             cx = -1;
             cy = 0;
@@ -482,7 +482,7 @@ do_mname()
 /*JP
         You("would never recognize it anyway.");
 */
-        You("‚»‚ê‚ğ”F¯‚Å‚«‚È‚¢D");
+        You("¤½¤ì¤òÇ§¼±¤Ç¤­¤Ê¤¤¡¥");
         return;
     }
     cc.x = u.ux;
@@ -490,7 +490,7 @@ do_mname()
 /*JP
     if (getpos(&cc, FALSE, "the monster you want to name") < 0
 */
-    if (getpos(&cc, FALSE, "‚ ‚È‚½‚ª–¼‚Ã‚¯‚½‚¢‰ö•¨") < 0
+    if (getpos(&cc, FALSE, "¤¢¤Ê¤¿¤¬Ì¾¤Å¤±¤¿¤¤²øÊª") < 0
         || (cx = cc.x) < 0)
         return;
     cy = cc.y;
@@ -502,7 +502,7 @@ do_mname()
 /*JP
             pline("This %s creature is called %s and cannot be renamed.",
 */
-            pline("‚±‚Ì%s¶‚«•¨‚Í%s‚ÆŒÄ‚Î‚ê‚Ä‚¢‚ÄC–¼‘O‚Í•ÏX‚Å‚«‚È‚¢D",
+            pline("¤³¤Î%sÀ¸¤­Êª¤Ï%s¤È¸Æ¤Ğ¤ì¤Æ¤¤¤Æ¡¤Ì¾Á°¤ÏÊÑ¹¹¤Ç¤­¤Ê¤¤¡¥",
                   beautiful(), plname);
             return;
         }
@@ -518,14 +518,14 @@ do_mname()
 /*JP
         pline("I see no monster there.");
 */
-        pline("‚»‚±‚É‰ö•¨‚Í‚¢‚È‚¢D");
+        pline("¤½¤³¤Ë²øÊª¤Ï¤¤¤Ê¤¤¡¥");
         return;
     }
     /* special case similar to the one in lookat() */
 /*JP
     Sprintf(qbuf, "What do you want to call %s?",
 */
-    Sprintf(qbuf, "%s‚ğ‰½‚ÆŒÄ‚Ñ‚Ü‚·‚©H",
+    Sprintf(qbuf, "%s¤ò²¿¤È¸Æ¤Ó¤Ş¤¹¤«¡©",
             distant_monnam(mtmp, ARTICLE_THE, monnambuf));
     getlin(qbuf, buf);
     if (!*buf || *buf == '\033')
@@ -540,19 +540,19 @@ do_mname()
 /*JP
         pline("%s doesn't like being called names!", upstart(monnambuf));
 */
-        pline("%s‚Í‚ ‚¾–¼‚ÅŒÄ‚Î‚ê‚é‚Ì‚ªŒ™‚¢‚È‚æ‚¤‚¾I", Monnam(mtmp));
+        pline("%s¤Ï¤¢¤ÀÌ¾¤Ç¸Æ¤Ğ¤ì¤ë¤Î¤¬·ù¤¤¤Ê¤è¤¦¤À¡ª", Monnam(mtmp));
     else if (mtmp->isshk
              && !(Deaf || mtmp->msleeping || !mtmp->mcanmove
                   || mtmp->data->msound <= MS_ANIMAL))
 /*JP
         verbalize("I'm %s, not %s.", shkname(mtmp), buf);
 */
-        verbalize("„‚Í%s‚¾C%s‚Å‚Í‚È‚¢D", shkname(mtmp), buf);
+        verbalize("»ä¤Ï%s¤À¡¤%s¤Ç¤Ï¤Ê¤¤¡¥", shkname(mtmp), buf);
     else if (mtmp->ispriest || mtmp->isminion || mtmp->isshk)
 /*JP
         pline("%s will not accept the name %s.", upstart(monnambuf), buf);
 */
-        pline("%s‚Í%s‚Æ‚¢‚¤–¼‘O‚ğó‚¯‚¢‚ê‚È‚©‚Á‚½D", monnambuf, buf);
+        pline("%s¤Ï%s¤È¤¤¤¦Ì¾Á°¤ò¼õ¤±¤¤¤ì¤Ê¤«¤Ã¤¿¡¥", monnambuf, buf);
     else
         (void) christen_monst(mtmp, buf);
 }
@@ -579,7 +579,7 @@ register struct obj *obj;
 /*JP
         pline("%s already has a published name.", Ysimple_name2(obj));
 */
-        pline("%s‚É‚Í‚·‚Å‚Éo”Å‚Ì–¼‘O‚ª‚ ‚éD", Ysimple_name2(obj));
+        pline("%s¤Ë¤Ï¤¹¤Ç¤Ë½ĞÈÇ»ş¤ÎÌ¾Á°¤¬¤¢¤ë¡¥", Ysimple_name2(obj));
         return;
     }
 
@@ -588,7 +588,7 @@ register struct obj *obj;
             is_plural(obj) ? "these" : "this");
     (void) safe_qbuf(qbuf, qbuf, "?", obj, xname, simpleonames, "item");
 #else
-    (void) safe_qbuf(qbuf, "", "‚ğ‰½‚Æ–¼‚Ã‚¯‚Ü‚·‚©H", obj, xname, simpleonames, "item");
+    (void) safe_qbuf(qbuf, "", "¤ò²¿¤ÈÌ¾¤Å¤±¤Ş¤¹¤«¡©", obj, xname, simpleonames, "item");
 #endif
     getlin(qbuf, buf);
     if (!*buf || *buf == '\033')
@@ -611,7 +611,7 @@ register struct obj *obj;
 /*JP
         pline_The("artifact seems to resist the attempt.");
 */
-        pline("¹Ší‚Í–¼‚Ã‚¯‚ğ‹‘”Û‚µ‚Ä‚¢‚é‚æ‚¤‚¾D");
+        pline("À»´ï¤ÏÌ¾¤Å¤±¤òµñÈİ¤·¤Æ¤¤¤ë¤è¤¦¤À¡¥");
         return;
     } else if (restrict_name(obj, buf) || exist_artifact(obj->otyp, buf)) {
         /* this used to change one letter, substituting a value
@@ -634,12 +634,12 @@ register struct obj *obj;
 /*JP
         pline("While engraving, your %s slips.", body_part(HAND));
 */
-        pline("‚ñ‚Å‚¢‚éŠÔ‚É%s‚ªŠŠ‚Á‚Ä‚µ‚Ü‚Á‚½D", body_part(HAND));
+        pline("¹ï¤ó¤Ç¤¤¤ë´Ö¤Ë%s¤¬³ê¤Ã¤Æ¤·¤Ş¤Ã¤¿¡¥", body_part(HAND));
         display_nhwindow(WIN_MESSAGE, FALSE);
 /*JP
         You("engrave: \"%s\".", buf);
 */
-        You("‚ñ‚¾: u%svD",buf);
+        You("¹ï¤ó¤À: ¡Ö%s¡×¡¥",buf);
     }
     obj = oname(obj, buf);
 }
@@ -728,7 +728,7 @@ docallcmd()
 /*JP
              "a monster", MENU_UNSELECTED);
 */
-             "‰ö•¨", MENU_UNSELECTED);
+             "²øÊª", MENU_UNSELECTED);
     if (invent) {
         /* we use y and n as accelerators so that we can accept user's
            response keyed to old "name an individual object?" prompt */
@@ -737,36 +737,36 @@ docallcmd()
 /*JP
                  "a particular object in inventory", MENU_UNSELECTED);
 */
-                 "‚¿•¨‚Ì’†‚Ìˆê‚Â‚ÌƒAƒCƒeƒ€", MENU_UNSELECTED);
+                 "»ı¤ÁÊª¤ÎÃæ¤Î°ì¤Ä¤Î¥¢¥¤¥Æ¥à", MENU_UNSELECTED);
         any.a_char = 'o'; /* group accelerator 'n' */
         add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, 'n', ATR_NONE,
 /*JP
                  "the type of an object in inventory", MENU_UNSELECTED);
 */
-                 "‚¿•¨‚Ì’†‚Ìˆê‚Â‚ÌƒAƒCƒeƒ€‚Ìí—Ş", MENU_UNSELECTED);
+                 "»ı¤ÁÊª¤ÎÃæ¤Î°ì¤Ä¤Î¥¢¥¤¥Æ¥à¤Î¼ïÎà", MENU_UNSELECTED);
     }
     any.a_char = 'f'; /* group accelerator ',' (or ':' instead?) */
     add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, ',', ATR_NONE,
 /*JP
              "the type of an object upon the floor", MENU_UNSELECTED);
 */
-             "°‚Ìã‚É‚ ‚éˆê‚Â‚ÌƒAƒCƒeƒ€‚Ìí—Ş", MENU_UNSELECTED);
+             "¾²¤Î¾å¤Ë¤¢¤ë°ì¤Ä¤Î¥¢¥¤¥Æ¥à¤Î¼ïÎà", MENU_UNSELECTED);
     any.a_char = 'd'; /* group accelerator '\' */
     add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, '\\', ATR_NONE,
 /*JP
              "the type of an object on discoveries list", MENU_UNSELECTED);
 */
-             "”­Œ©•¨ˆê——‚É‚ ‚éˆê‚Â‚ÌƒAƒCƒeƒ€‚Ìí—Ş", MENU_UNSELECTED);
+             "È¯¸«Êª°ìÍ÷¤Ë¤¢¤ë°ì¤Ä¤Î¥¢¥¤¥Æ¥à¤Î¼ïÎà", MENU_UNSELECTED);
     any.a_char = 'a'; /* group accelerator 'l' */
     add_menu(win, NO_GLYPH, &any, abc ? 0 : any.a_char, 'l', ATR_NONE,
 /*JP
              "record an annotation for the current level", MENU_UNSELECTED);
 */
-             "Œ»İ‚ÌŠK‚É‘Î‚·‚éƒƒ‚‚Ì‹L˜^", MENU_UNSELECTED);
+             "¸½ºß¤Î³¬¤ËÂĞ¤¹¤ë¥á¥â¤Îµ­Ï¿", MENU_UNSELECTED);
 /*JP
     end_menu(win, "What do you want to name?");
 */
-    end_menu(win, "‚Ç‚ê‚É–¼‘O‚ğ‚Â‚¯‚Ü‚·‚©H");
+    end_menu(win, "¤É¤ì¤ËÌ¾Á°¤ò¤Ä¤±¤Ş¤¹¤«¡©");
     if (select_menu(win, PICK_ONE, &pick_list) > 0) {
         ch = pick_list[0].item.a_char;
         free((genericptr_t) pick_list);
@@ -800,7 +800,7 @@ docallcmd()
 /*JP
                 You("would never recognize another one.");
 */
-                You("‘¼‚É”F¯‚Å‚«‚È‚¢D");
+                You("Â¾¤ËÇ§¼±¤Ç¤­¤Ê¤¤¡¥");
 #if 0
             } else if (!objtyp_is_callable(obj->otyp)) {
                 You("know those as well as you ever will.");
@@ -842,13 +842,13 @@ register struct obj *obj;
 /*JP
         Sprintf(qbuf, "Call a stream of %s fluid:",
 */
-        Sprintf(qbuf, "%s‰t‘Ì:",
+        Sprintf(qbuf, "%s±ÕÂÎ:",
                 OBJ_DESCR(objects[otemp.otyp]));
     else
 /*JP
         Sprintf(qbuf, "Call %s:", an(xname(&otemp)));
 */
-        Sprintf(qbuf, "%s‚É‰½‚Æ–¼‘O‚ğ‚Â‚¯‚éH", an(xname(&otemp)));
+        Sprintf(qbuf, "%s¤Ë²¿¤ÈÌ¾Á°¤ò¤Ä¤±¤ë¡©", an(xname(&otemp)));
     getlin(qbuf, buf);
     if (!*buf || *buf == '\033')
         return;
@@ -1030,7 +1030,7 @@ boolean called;
 /*JP
         Strcpy(buf, "it");
 */
-        Strcpy(buf, "‰½Ò‚©");
+        Strcpy(buf, "²¿¼Ô¤«");
         return buf;
     }
 
@@ -1089,8 +1089,8 @@ boolean called;
         if (mdat == &mons[PM_SHOPKEEPER] && !do_invis){
             Strcpy(buf, shkname(mtmp));
         } else {
-            Sprintf(buf, "%s‚Æ‚¢‚¤–¼‚Ì%s%s",
-                    shkname(mtmp), do_invis ? "p‚ÌŒ©‚¦‚È‚¢" : "",
+            Sprintf(buf, "%s¤È¤¤¤¦Ì¾¤Î%s%s",
+                    shkname(mtmp), do_invis ? "»Ñ¤Î¸«¤¨¤Ê¤¤" : "",
                     pm_name);
         }
         return buf;
@@ -1107,13 +1107,13 @@ boolean called;
 /*JP
         Strcat(buf, "invisible ");
 */
-        Strcat(buf, "p‚ÌŒ©‚¦‚È‚¢");
+        Strcat(buf, "»Ñ¤Î¸«¤¨¤Ê¤¤");
     if (do_saddle && (mtmp->misc_worn_check & W_SADDLE) && !Blind
         && !Hallucination)
 /*JP
         Strcat(buf, "saddled ");
 */
-        Strcat(buf, "ˆÆ‚Ì‚Â‚¢‚Ä‚¢‚é");
+        Strcat(buf, "°È¤Î¤Ä¤¤¤Æ¤¤¤ë");
 #if 0 /*JP*/
     if (buf[0] != 0)
         has_adjectives = TRUE;
@@ -1138,7 +1138,7 @@ boolean called;
 /*JP
             Sprintf(eos(buf), "%s ghost", s_suffix(name));
 */
-            Sprintf(buf, "%s‚Ì—H—ì", name);
+            Sprintf(buf, "%s¤ÎÍ©Îî", name);
 #if 0 /*JP*/
             name_at_start = TRUE;
 #endif
@@ -1146,11 +1146,11 @@ boolean called;
 /*JP
             Sprintf(eos(buf), "%s called %s", pm_name, name);
 */
-            Sprintf(eos(buf), "%s‚Æ‚¢‚¤–¼‚Ì%s", name, pm_name);
+            Sprintf(eos(buf), "%s¤È¤¤¤¦Ì¾¤Î%s", name, pm_name);
 #if 0 /*JP*/
             name_at_start = (boolean) type_is_pname(mdat);
 #endif
-#if 0 /*JP*//*’èŠ¥Œ‚Ìˆ—‚Í•s—v*/
+#if 0 /*JP*//*Äê´§»ì¤Î½èÍı¤ÏÉÔÍ×*/
         } else if (is_mplayer(mdat) && (bp = strstri(name, " the ")) != 0) {
             /* <name> the <adjective> <invisible> <saddled> <rank> */
             char pbuf[BUFSZ];
@@ -1190,7 +1190,7 @@ boolean called;
 #endif
     }
 
-#if 0 /*JP*//*“ú–{Œê‚ÉŠ¥Œ‚Í‚È‚¢*/
+#if 0 /*JP*//*ÆüËÜ¸ì¤Ë´§»ì¤Ï¤Ê¤¤*/
     if (name_at_start && (article == ARTICLE_YOUR || !has_adjectives)) {
         if (mdat == &mons[PM_WIZARD_OF_YENDOR])
             article = ARTICLE_THE;
@@ -1348,7 +1348,7 @@ char *outbuf;
         Strcpy(outbuf, article == ARTICLE_THE ? "the " : "");
         Strcat(outbuf, mon->female ? "high priestess" : "high priest");
 #else
-        Strcpy(outbuf, "–@‰¤");
+        Strcpy(outbuf, "Ë¡²¦");
 #endif
     } else {
         Strcpy(outbuf, x_monnam(mon, article, (char *) 0, 0, TRUE));
@@ -1442,13 +1442,13 @@ static NEARDATA const char *const hcolors[] = {
     "strawberry-banana", "peppermint", "romantic", "incandescent",
     "octarine", /* Discworld: the Colour of Magic */
 #else
-    "‡ŠOF‚Ì", "ÔŠOF‚Ì", "ÂF‚ª‚©‚Á‚½ƒIƒŒƒ“ƒWF‚Ì", "Ô‚İ‚ª‚©‚Á‚½—ÎF‚Ì", "ˆÃ‚¢”’F‚Ì",
-    "–¾‚é‚¢•‚Ì", "…F‚ª‚©‚Á‚½ƒsƒ“ƒNF‚Ì", "‰–h‚¢", "ŠÃ‚¢", "‚·‚Á‚Ï‚¢", "‹ê‚¢",
-    "‚µ‚Ü–Í—l‚Ì", "‚ç‚¹‚ñó‚Ì", "”gó‚Ì", "Šiq–Í—ló‚Ì", "ƒ`ƒFƒbƒNó‚Ì", "•úËó‚Ì", "ƒy[ƒYƒŠ[–Í—l‚Ì",
-    "‚µ‚İó‚Ì", "ÂF‚Ì”Á“_ó‚Ì", "“_ó‚Ì", "lŠpŒ`ó‚Ì", "ŠÛó‚Ì",
-    "OŠpó‚Ì", "ƒJƒxƒ‹ƒlF‚Ì", "ƒTƒ“ƒOƒŠƒAF‚Ì", "‘N‚â‚©‚ÈÔ‡F‚Ì", "“¡F‚Ì", "ƒŒƒ‚ƒ“ƒ‰ƒCƒ€F‚Ì",
-    "ä•ƒoƒiƒiF‚Ì", "ƒyƒp[ƒ~ƒ“ƒgF‚Ì", "ƒƒ}ƒ“ƒ`ƒbƒN‚ÈF‚Ì", "”’”MF‚Ì",
-    "ƒIƒNƒ^ƒŠƒ“F‚Ì",
+    "»ç³°¿§¤Î", "ÀÖ³°¿§¤Î", "ÀÄ¿§¤¬¤«¤Ã¤¿¥ª¥ì¥ó¥¸¿§¤Î", "ÀÖ¤ß¤¬¤«¤Ã¤¿ÎĞ¿§¤Î", "°Å¤¤Çò¿§¤Î",
+    "ÌÀ¤ë¤¤¹õ¤Î", "¿å¿§¤¬¤«¤Ã¤¿¥Ô¥ó¥¯¿§¤Î", "±ö¿É¤¤", "´Å¤¤", "¤¹¤Ã¤Ñ¤¤", "¶ì¤¤",
+    "¤·¤ŞÌÏÍÍ¤Î", "¤é¤»¤ó¾õ¤Î", "ÇÈ¾õ¤Î", "³Ê»ÒÌÏÍÍ¾õ¤Î", "¥Á¥§¥Ã¥¯¾õ¤Î", "Êü¼Í¾õ¤Î", "¥Ú¡¼¥º¥ê¡¼ÌÏÍÍ¤Î",
+    "¤·¤ß¾õ¤Î", "ÀÄ¿§¤ÎÈÃÅÀ¾õ¤Î", "ÅÀ¾õ¤Î", "»Í³Ñ·Á¾õ¤Î", "´İ¾õ¤Î",
+    "»°³Ñ¾õ¤Î", "¥«¥Ù¥ë¥Í¿§¤Î", "¥µ¥ó¥°¥ê¥¢¿§¤Î", "Á¯¤ä¤«¤ÊÀÖ»ç¿§¤Î", "Æ£¿§¤Î", "¥ì¥â¥ó¥é¥¤¥à¿§¤Î",
+    "çõ¥Ğ¥Ê¥Ê¿§¤Î", "¥Ú¥Ñ¡¼¥ß¥ó¥È¿§¤Î", "¥í¥Ş¥ó¥Á¥Ã¥¯¤Ê¿§¤Î", "ÇòÇ®¿§¤Î",
+    "¥ª¥¯¥¿¥ê¥ó¿§¤Î",
 #endif
 };
 
@@ -1470,7 +1470,7 @@ rndcolor()
 /*JP
                          : (k == NO_COLOR) ? "colorless"
 */
-                         : (k == NO_COLOR) ? "–³F‚Ì"
+                         : (k == NO_COLOR) ? "Ìµ¿§¤Î"
                                            : c_obj_colors[k];
 }
 

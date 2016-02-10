@@ -935,22 +935,22 @@ genericptr_t p2;
             pline("%s is burning your %s!", Something,
                   makeplural(body_part(LUNG)));
 #else
-            pline("‰½‚©–­‚È‚à‚Ì‚ð‹z‚¢‚±‚ñ‚¾I");
+            pline("²¿¤«Ì¯¤Ê¤â¤Î¤òµÛ¤¤¤³¤ó¤À¡ª");
 #endif
 /*JP
             You("cough and spit blood!");
 */
-            You("ŠP‚«‚±‚ÝCŒŒ‚ð“f‚¢‚½I");
+            You("³±¤­¤³¤ß¡¤·ì¤òÅÇ¤¤¤¿¡ª");
 /*JP
             losehp(Maybe_Half_Phys(rnd(dam) + 5), "gas cloud", KILLED_BY_AN);
 */
-            losehp(Maybe_Half_Phys(rnd(dam) + 5), "ƒKƒX‰_‚Å", KILLED_BY_AN);
+            losehp(Maybe_Half_Phys(rnd(dam) + 5), "¥¬¥¹±À¤Ç", KILLED_BY_AN);
             return FALSE;
         } else {
 /*JP
             You("cough!");
 */
-            You("ŠP‚«‚±‚ñ‚¾I");
+            You("³±¤­¤³¤ó¤À¡ª");
             return FALSE;
         }
     } else { /* A monster is inside the cloud */
@@ -963,7 +963,7 @@ genericptr_t p2;
 /*JP
                 pline("%s coughs!", Monnam(mtmp));
 */
-                pline("%s‚ÍŠP‚«‚±‚ñ‚¾I", Monnam(mtmp));
+                pline("%s¤Ï³±¤­¤³¤ó¤À¡ª", Monnam(mtmp));
             if (heros_fault(reg))
                 setmangry(mtmp);
             if (haseyes(mtmp->data) && mtmp->mcansee) {
@@ -980,7 +980,7 @@ genericptr_t p2;
 /*JP
                     monkilled(mtmp, "gas cloud", AD_DRST);
 */
-                    monkilled(mtmp, "ƒKƒX‰_", AD_DRST);
+                    monkilled(mtmp, "¥¬¥¹±À", AD_DRST);
                 if (mtmp->mhp <= 0) { /* not lifesaved */
                     return TRUE;
                 }

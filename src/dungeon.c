@@ -951,19 +951,19 @@ init_dungeons()
 /*JP
     quest_dnum = dname_to_dnum("The Quest");
 */
-    quest_dnum = dname_to_dnum("ƒNƒGƒXƒg");
+    quest_dnum = dname_to_dnum("¥¯¥¨¥¹¥È");
 /*JP
     sokoban_dnum = dname_to_dnum("Sokoban");
 */
-    sokoban_dnum = dname_to_dnum("‘qŒÉ”Ô");
+    sokoban_dnum = dname_to_dnum("ÁÒ¸ËÈÖ");
 /*JP
     mines_dnum = dname_to_dnum("The Gnomish Mines");
 */
-    mines_dnum = dname_to_dnum("ƒm[ƒ€‚ÌzŽR");
+    mines_dnum = dname_to_dnum("¥Î¡¼¥à¤Î¹Û»³");
 /*JP
     tower_dnum = dname_to_dnum("Vlad's Tower");
 */
-    tower_dnum = dname_to_dnum("ƒ”ƒ‰ƒhŒò‚Ì“ƒ");
+    tower_dnum = dname_to_dnum("¥ô¥é¥É¸ô¤ÎÅã");
 
     /* one special fixup for dummy surface level */
     if ((x = find_level("dummy")) != 0) {
@@ -2295,7 +2295,7 @@ recalc_mapseen()
 /*JP
     mptr->flags.quest_summons = (at_dgn_entrance("The Quest")
 */
-    mptr->flags.quest_summons = (at_dgn_entrance("ƒNƒGƒXƒg")
+    mptr->flags.quest_summons = (at_dgn_entrance("¥¯¥¨¥¹¥È")
                                  && u.uevent.qcalled
                                  && !(u.uevent.qcompleted
                                       || u.uevent.qexpelled

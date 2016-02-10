@@ -91,17 +91,17 @@ int how;
 /*JP
         "killed by ", "choked on ", "poisoned by ", "died of ",
 */
-        "Ž€‚ñ‚¾", "‚Å’‚‘§‚µ‚½", "‚Ì“Å‚ÅŽ€‚ñ‚¾", "",
+        "»à¤ó¤À", "¤ÇÃâÂ©¤·¤¿", "¤ÎÆÇ¤Ç»à¤ó¤À", "",
         /* DROWNING, BURNING, DISSOLVED, CRUSHING, */
 /*JP
         "drowned in ", "burned by ", "dissolved in ", "crushed to death by ",
 */
-         "“MŽ€‚µ‚½","ÄŽ€‚µ‚½", "—nŠâ‚É—n‚¯‚½", "‰Ÿ‚µ’×‚³‚ê‚½",
+         "Å®»à¤·¤¿","¾Æ»à¤·¤¿", "ÍÏ´ä¤ËÍÏ¤±¤¿", "²¡¤·ÄÙ¤µ¤ì¤¿",
         /* STONING, TURNED_SLIME, GENOCIDED, */
 /*JP
         "petrified by ", "turned to slime by ", "killed by ",
 */
-         "Î‚É‚È‚Á‚½", "‚ÉƒXƒ‰ƒCƒ€‚É‚³‚ê‚½", "‹sŽE‚³‚ê‚½",
+         "ÀÐ¤Ë¤Ê¤Ã¤¿", "¤Ë¥¹¥é¥¤¥à¤Ë¤µ¤ì¤¿", "µÔ»¦¤µ¤ì¤¿",
         /* PANICKED, TRICKED, QUIT, ESCAPED, ASCENDED */
         "", "", "", "", ""
     };
@@ -109,7 +109,7 @@ int how;
     char *kname = killer.name;
 
     buf[0] = '\0'; /* so strncat() can find the end */
-#if 1 /*JP*//*æ‚É‘ÎÛ‚ðƒRƒs[*/
+#if 1 /*JP*//*Àè¤ËÂÐ¾Ý¤ò¥³¥Ô¡¼*/
     strncat(buf, kname, siz - 1);
     siz -= strlen(buf);
 #endif
@@ -120,7 +120,7 @@ int how;
     case NO_KILLER_PREFIX:
         break;
     case KILLED_BY_AN:
-#if 0 /*JP*//*“ú–{Œê‚Å‚Í•s—v*/
+#if 0 /*JP*//*ÆüËÜ¸ì¤Ç¤ÏÉÔÍ×*/
         kname = an(kname);
 #endif
         /*FALLTHRU*/
@@ -129,16 +129,16 @@ int how;
         (void) strncat(buf, killed_by_prefix[how], siz - 1);
         l = strlen(buf);
         buf += l, siz -= l;
-#else /*JP:Šù‚É‘ÎÛ‚ðƒRƒs[‚µ‚Ä‚¢‚é‚Ì‚Å’P‚É’Ç‰Á*/
+#else /*JP:´û¤ËÂÐ¾Ý¤ò¥³¥Ô¡¼¤·¤Æ¤¤¤ë¤Î¤ÇÃ±¤ËÄÉ²Ã*/
         (void) strncat(buf, killed_by_prefix[how], siz - 1);
 #endif
         break;
 #if 1 /*JP*/
       case KILLED_SUFFIX:
-        (void) strncat(buf, "‚ÉŽE‚³‚ê‚½", siz - 1);
+        (void) strncat(buf, "¤Ë»¦¤µ¤ì¤¿", siz - 1);
 #endif
     }
-#if 0 /*JP*//*Šù‚ÉƒRƒs[Ï‚Ý*/
+#if 0 /*JP*//*´û¤Ë¥³¥Ô¡¼ºÑ¤ß*/
     /* we're writing into buf[0] (after possibly advancing buf) rather than
        appending, but strncat() appends a terminator and strncpy() doesn't */
     (void) strncat(buf, kname, siz - 1);
@@ -578,8 +578,8 @@ time_t when;
              "Since you were in %s mode, the score list will not be checked.",
                         wizard ? "wizard" : "discover");
 #else
-             "%sƒ‚[ƒh‚ÅƒvƒŒƒC‚µ‚½‚Ì‚ÅƒXƒRƒAƒŠƒXƒg‚É‚ÍÚ‚ç‚È‚¢D",
-                        wizard ? "ƒEƒBƒU[ƒh" : "”­Œ©");
+             "%s¥â¡¼¥É¤Ç¥×¥ì¥¤¤·¤¿¤Î¤Ç¥¹¥³¥¢¥ê¥¹¥È¤Ë¤ÏºÜ¤é¤Ê¤¤¡¥",
+                        wizard ? "¥¦¥£¥¶¡¼¥É" : "È¯¸«");
 #endif
                 topten_print(pbuf);
             }
@@ -645,7 +645,7 @@ time_t when;
 /*JP
                         "You didn't beat your previous score of %ld points.",
 */
-                        "‚ ‚È‚½‚ÍˆÈ‘O‚Ì%ldƒ|ƒCƒ“ƒg‚ÌƒXƒRƒA‚É“Í‚©‚È‚©‚Á‚½D",
+                        "¤¢¤Ê¤¿¤Ï°ÊÁ°¤Î%ld¥Ý¥¤¥ó¥È¤Î¥¹¥³¥¢¤ËÆÏ¤«¤Ê¤«¤Ã¤¿¡¥",
                             t1->points);
                     topten_print(pbuf);
                     topten_print("");
@@ -685,7 +685,7 @@ time_t when;
 /*JP
                     topten_print("You made the top ten list!");
 */
-                    topten_print("‚ ‚È‚½‚Íƒgƒbƒv10ƒŠƒXƒg‚ÉÚ‚Á‚½I");
+                    topten_print("¤¢¤Ê¤¿¤Ï¥È¥Ã¥×10¥ê¥¹¥È¤ËºÜ¤Ã¤¿¡ª");
                 } else {
                     char pbuf[BUFSZ];
 
@@ -695,7 +695,7 @@ time_t when;
                             rank0, ordin(rank0), sysopt.entrymax);
 #else
                     Sprintf(pbuf,
-                            "‚ ‚È‚½‚ÍCƒgƒbƒv%dƒŠƒXƒg‚Ì%dˆÊ‚ÉÚ‚Á‚½D",
+                            "¤¢¤Ê¤¿¤Ï¡¤¥È¥Ã¥×%d¥ê¥¹¥È¤Î%d°Ì¤ËºÜ¤Ã¤¿¡¥",
                             sysopt.entrymax, rank0);
 #endif
                     topten_print(pbuf);
@@ -844,14 +844,14 @@ boolean so;
 */
         Strcat(linebuf, "");
 #if 1 /*JP*/
-        Strcat(linebuf, "‚Í");
-/*JP: “ú–{Œê‚Å‚Íu››‚ðŽè‚Év‚ðæ‚É’Ç‰Á‚µ‚È‚¢‚Æ•sŽ©‘R */
+        Strcat(linebuf, "¤Ï");
+/*JP: ÆüËÜ¸ì¤Ç¤Ï¡Ö¡û¡û¤ò¼ê¤Ë¡×¤òÀè¤ËÄÉ²Ã¤·¤Ê¤¤¤ÈÉÔ¼«Á³ */
         jdeath = t1->death;
-        if (!strncmp(jdeath, "–‚œ‚¯‚ðŽè‚É", 12))
+        if (!strncmp(jdeath, "Ëâ½ü¤±¤ò¼ê¤Ë", 12))
             jdeath += 12;
-        else if (!strncmp(jdeath, "“Vã‚Å’pJ‚ðŽó‚¯", 16))
+        else if (!strncmp(jdeath, "Å·¾å¤ÇÃÑ¿«¤ò¼õ¤±", 16))
             jdeath += 16;
-        else if (!strncmp(jdeath, "‹U•¨‚Ì–‚œ‚¯‚ð’Í‚Ü‚³‚ê", 24))
+        else if (!strncmp(jdeath, "µ¶Êª¤ÎËâ½ü¤±¤òÄÏ¤Þ¤µ¤ì", 24))
             jdeath += 24;
 #endif
 #if 0 /*JP*/
@@ -863,34 +863,34 @@ boolean so;
         if ((bp = index(linebuf, ')')) != 0)
             *bp = (t1->deathdnum == astral_level.dnum) ? '\0' : ' ';
 #else
-        if (!strncmp("’Eo‚µ‚½", jdeath, 8)
+        if (!strncmp("Ã¦½Ð¤·¤¿", jdeath, 8)
             || !strncmp("escaped", jdeath, 7)) {
             char jbuf[BUFSZ];
             strncpy(jbuf, t1->death, jdeath - t1->death);
             jbuf[jdeath - t1->death] = '\0';
-            Sprintf(action, "%s–À‹{‚©‚ç’Eo‚µ‚½[Å‘å’n‰º%dŠK]",
+            Sprintf(action, "%sÌÂµÜ¤«¤éÃ¦½Ð¤·¤¿[ºÇÂçÃÏ²¼%d³¬]",
                     jbuf, t1->maxlvl);
 #endif
         second_line = FALSE;
 #if 0 /*JP*/
     } else if (!strncmp("ascended", t1->death, 8)) {
 #else
-        } else if (!strncmp("¸“V‚µ‚½", jdeath, 8)
+        } else if (!strncmp("¾ºÅ·¤·¤¿", jdeath, 8)
                    || !strncmp("ascended", jdeath, 8)) {
 #endif
 #if 0 /*JP:T*/
         Sprintf(eos(linebuf), "ascended to demigod%s-hood",
                 (t1->plgend[0] == 'F') ? "dess" : "");
 #else
-            Sprintf(action, "¸“V‚µ%s_‚Æ‚È‚Á‚½",
-                    (t1->plgend[0] == 'F') ? "—" : "");
+            Sprintf(action, "¾ºÅ·¤·%s¿À¤È¤Ê¤Ã¤¿",
+                    (t1->plgend[0] == 'F') ? "½÷" : "");
 #endif
         second_line = FALSE;
     } else {
 /*JP
         if (!strncmp(t1->death, "quit", 4)) {
 */
-            if (!strncmp(jdeath, "”²‚¯‚½", 4)) {
+            if (!strncmp(jdeath, "È´¤±¤¿", 4)) {
 #if 0 /*JP*/
             Strcat(linebuf, "quit");
 #else
@@ -927,31 +927,31 @@ boolean so;
 /*JP
                 arg = "Astral";
 */
-                arg = "“VãŠE";
+                arg = "Å·¾å³¦";
                 break;
             case -4:
 /*JP
                 arg = "Water";
 */
-                arg = "…‚Ì¸—ìŠE";
+                arg = "¿å¤ÎÀºÎî³¦";
                 break;
             case -3:
 /*JP
                 arg = "Fire";
 */
-                arg = "‰Î‚Ì¸—ìŠE";
+                arg = "²Ð¤ÎÀºÎî³¦";
                 break;
             case -2:
 /*JP
                 arg = "Air";
 */
-                arg = "•—‚Ì¸—ìŠE";
+                arg = "É÷¤ÎÀºÎî³¦";
                 break;
             case -1:
 /*JP
                 arg = "Earth";
 */
-                arg = "’n‚Ì¸—ìŠE";
+                arg = "ÃÏ¤ÎÀºÎî³¦";
                 break;
             default:
                 arg = "Void";
@@ -960,7 +960,7 @@ boolean so;
 #if 0 /*JP*/
             Sprintf(eos(linebuf), fmt, arg);
 #else
-            Sprintf(where, "%s‚É‚Ä", arg);
+            Sprintf(where, "%s¤Ë¤Æ", arg);
 #endif
         } else {
 /*JP
@@ -971,12 +971,12 @@ boolean so;
 /*JP
                 Sprintf(eos(linebuf), " on level %d", t1->deathlev);
 */
-                Sprintf(eos(linebuf), "‚Ì’n‰º%dŠK‚É‚Ä", t1->deathlev);
+                Sprintf(eos(linebuf), "¤ÎÃÏ²¼%d³¬¤Ë¤Æ", t1->deathlev);
             if (t1->deathlev != t1->maxlvl)
 /*JP
                 Sprintf(eos(linebuf), " [max %d]", t1->maxlvl);
 */
-                Sprintf(eos(where), "[Å‘å’n‰º%dŠK]", t1->maxlvl);
+                Sprintf(eos(where), "[ºÇÂçÃÏ²¼%d³¬]", t1->maxlvl);
         }
 
         /* kludge for "quit while already on Charon's boat" */
@@ -995,7 +995,7 @@ boolean so;
         Sprintf(action, "%s", t1->death);
 
 #if 1 /*JP*/
-    Sprintf(eos(linebuf), "%s%s%sD", who, where, action);
+    Sprintf(eos(linebuf), "%s%s%s¡¥", who, where, action);
 #endif
     lngr = (int) strlen(linebuf);
     if (t1->hp <= 0)
@@ -1006,7 +1006,7 @@ boolean so;
     hppos = COLNO - (sizeof("  Hp [max]") - 1); /* sizeof(str) includes \0 */
 #if 1 /*JP*/
     while(lngr >= hppos ){
-/*JP hppos‚æ‚è‘O‚Ì“K“–‚ÈˆÊ’u‚Å•ªŠ„‚·‚éD*/
+/*JP hppos¤è¤êÁ°¤ÎÅ¬Åö¤Ê°ÌÃÖ¤ÇÊ¬³ä¤¹¤ë¡¥*/
         car[0] = '\0';
         cdr[0] = '\0';
         split_japanese(linebuf, car, cdr, hppos);
@@ -1022,7 +1022,7 @@ boolean so;
             Sprintf(linebuf, "%15s %s", "", cdr);
         lngr = (int)strlen(linebuf);
     }
-/*JP: “ú–{Œê‚ª“ü‚é‚Æ•¶Žš—ñ‚ðŒã‚©‚çŒ©‚Ä‚¢‚­‚±‚Æ‚Í‚Å‚«‚È‚¢‚½‚ßƒRƒƒ“ƒgƒAƒEƒg*/
+/*JP: ÆüËÜ¸ì¤¬Æþ¤ë¤ÈÊ¸»úÎó¤ò¸å¤«¤é¸«¤Æ¤¤¤¯¤³¤È¤Ï¤Ç¤­¤Ê¤¤¤¿¤á¥³¥á¥ó¥È¥¢¥¦¥È*/
 #else
     while (lngr >= hppos) {
         for (bp = eos(linebuf); !(*bp == ' ' && (bp - linebuf < hppos)); bp--)

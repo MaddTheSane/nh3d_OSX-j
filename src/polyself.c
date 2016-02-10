@@ -41,7 +41,7 @@ STATIC_VAR const char no_longer_petrify_resistant[] =
 /*JP
     "No longer petrify-resistant, you";
 */
-    "Î‰»‚Ö‚Ì’ïR—Í‚ª‚È‚­‚È‚Á‚ÄC‚ ‚È‚½‚Í";
+    "ÀĞ²½¤Ø¤ÎÄñ¹³ÎÏ¤¬¤Ê¤¯¤Ê¤Ã¤Æ¡¤¤¢¤Ê¤¿¤Ï";
 
 /* controls whether taking on new form or becoming new man can also
    change sex (ought to be an arg to polymon() and newman() instead) */
@@ -203,7 +203,7 @@ const char *fmt, *arg;
 /*JP
             Strcpy(killer.name, "self-genocide");
 */
-            Strcpy(killer.name, "©‹s“I‹sE‚Å");
+            Strcpy(killer.name, "¼«µÔÅªµÔ»¦¤Ç");
         }
         dealloc_killer(kptr);
         done(GENOCIDED);
@@ -358,12 +358,12 @@ newman()
 /*JP
             Your("new form doesn't seem healthy enough to survive.");
 */
-            Your("V‚µ‚¢p‚Í¶‚«‚Ä‚¢‚­‚¾‚¯‚Ì—Í‚ª‚È‚¢‚æ‚¤‚¾D");
+            Your("¿·¤·¤¤»Ñ¤ÏÀ¸¤­¤Æ¤¤¤¯¤À¤±¤ÎÎÏ¤¬¤Ê¤¤¤è¤¦¤À¡¥");
             killer.format = KILLED_BY_AN;
 /*JP
             Strcpy(killer.name, "unsuccessful polymorph");
 */
-            Strcpy(killer.name, "•Ï‰»‚Ì¸”s‚Å");
+            Strcpy(killer.name, "ÊÑ²½¤Î¼ºÇÔ¤Ç");
             done(DIED);
             newuhs(FALSE);
             (void) polysense(youmonst.data);
@@ -374,7 +374,7 @@ newman()
 /*JP
     polyman("feel like a new %s!",
 */
-    polyman("%s‚Æ‚µ‚Ä¶‚Ü‚ê‚©‚í‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½I",
+    polyman("%s¤È¤·¤ÆÀ¸¤Ş¤ì¤«¤ï¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡ª",
             /* use saved gender we're about to revert to, not current */
             (u.mfemale && urace.individual.f)
                 ? urace.individual.f
@@ -383,7 +383,7 @@ newman()
 /*JP
         Your("body transforms, but there is still slime on you.");
 */
-        Your("‘Ì‚Í•Ï‰»‚µ‚½‚ªCƒXƒ‰ƒCƒ€‚ª‚Â‚¢‚½‚Ü‚Ü‚¾D");
+        Your("ÂÎ¤ÏÊÑ²½¤·¤¿¤¬¡¤¥¹¥é¥¤¥à¤¬¤Ä¤¤¤¿¤Ş¤Ş¤À¡¥");
         make_slimed(10L, (const char *) 0);
     }
 
@@ -420,7 +420,7 @@ int psflags;
 /*JP
             losehp(rnd(30), "system shock", KILLED_BY_AN);
 */
-            losehp(rnd(30), "ƒVƒXƒeƒ€ƒVƒ‡ƒbƒN‚Å", KILLED_BY_AN);
+            losehp(rnd(30), "¥·¥¹¥Æ¥à¥·¥ç¥Ã¥¯¤Ç", KILLED_BY_AN);
             exercise(A_CON, FALSE);
             return;
         }
@@ -438,7 +438,7 @@ int psflags;
 /*JP
             getlin("Become what kind of monster? [type the name]", buf);
 */
-            getlin("‚Ç‚Ìí‚Ì‰ö•¨‚É‚È‚éH[–¼‘O‚ğ“ü‚ê‚Ä‚Ë]", buf);
+            getlin("¤É¤Î¼ï¤Î²øÊª¤Ë¤Ê¤ë¡©[Ì¾Á°¤òÆş¤ì¤Æ¤Í]", buf);
             (void) mungspaces(buf);
             if (*buf == '\033') {
                 /* user is cancelling controlled poly */
@@ -466,12 +466,12 @@ int psflags;
 /*JP
                     pline("I've never heard of such monsters.");
 */
-                    pline("‚»‚ñ‚È‰ö•¨‚Í•·‚¢‚½‚±‚Æ‚ª‚È‚¢D");
+                    pline("¤½¤ó¤Ê²øÊª¤ÏÊ¹¤¤¤¿¤³¤È¤¬¤Ê¤¤¡¥");
                 else
 /*JP
                     You_cant("polymorph into any of those.");
 */
-                    pline("‚»‚ê‚É‚È‚é‚±‚Æ‚Í‚Å‚«‚È‚¢D");
+                    pline("¤½¤ì¤Ë¤Ê¤ë¤³¤È¤Ï¤Ç¤­¤Ê¤¤¡¥");
             } else if (iswere && (were_beastie(mntmp) == u.ulycn
                                   || mntmp == counter_were(u.ulycn)
                                   || (Upolyd && mntmp == PM_HUMAN))) {
@@ -524,7 +524,7 @@ int psflags;
 /*JP
                     You("merge with your scaly armor.");
 */
-                    You("—Ø‚ÌŠZ‚Æˆê‘Ì‰»‚µ‚½D");
+                    You("ÎÚ¤Î³»¤È°ìÂÎ²½¤·¤¿¡¥");
                 } else { /* dragon scale mail */
                     /* d.scale mail first reverts to scales */
                     char *p, *dsmail;
@@ -629,7 +629,7 @@ int mntmp;
 /*JP
         You_feel("rather %s-ish.", mons[mntmp].mname);
 */
-        You("%s‚Á‚Û‚­‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½D", mons[mntmp].mname);
+        You("%s¤Ã¤İ¤¯¤Ê¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥", mons[mntmp].mname);
         exercise(A_WIS, TRUE);
         return 0;
     }
@@ -685,24 +685,24 @@ int mntmp;
                 : flags.female ? "female " : "male ",
             mons[mntmp].mname);
 #else
-        You("%s%s‚É‚È‚Á‚½%sI",
+        You("%s%s¤Ë¤Ê¤Ã¤¿%s¡ª",
             (is_male(&mons[mntmp]) || is_female(&mons[mntmp]))
                 ? ""
-                : flags.female ? "—‚Ì" : "’j‚Ì",
+                : flags.female ? "½÷¤Î" : "ÃË¤Î",
             mons[mntmp].mname,
-            (u.umonnum != mntmp) ? "" : "‚æ‚¤‚È‹C‚ª‚µ‚½");
+            (u.umonnum != mntmp) ? "" : "¤è¤¦¤Êµ¤¤¬¤·¤¿");
 #endif
     } else {
         if (u.umonnum != mntmp)
 /*JP
             You("turn into %s!", an(mons[mntmp].mname));
 */
-            You("%s‚É‚È‚Á‚½I", mons[mntmp].mname);
+            You("%s¤Ë¤Ê¤Ã¤¿¡ª", mons[mntmp].mname);
         else
 /*JP
             You_feel("like a new %s!", mons[mntmp].mname);
 */
-            You("•Ê‚Ì%s‚É‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½I", mons[mntmp].mname);
+            You("ÊÌ¤Î%s¤Ë¤Ê¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡ª", mons[mntmp].mname);
     }
     if (Stoned && poly_when_stoned(&mons[mntmp])) {
         /* poly_when_stoned already checked stone golem genocide */
@@ -710,7 +710,7 @@ int mntmp;
 /*JP
         make_stoned(0L, "You turn to stone!", 0, (char *) 0);
 */
-        make_stoned(0L, "Î‚É‚È‚Á‚½I", 0, (char *) 0);
+        make_stoned(0L, "ÀĞ¤Ë¤Ê¤Ã¤¿¡ª", 0, (char *) 0);
     }
 
     u.mtimedone = rn1(500, 500);
@@ -727,7 +727,7 @@ int mntmp;
 /*JP
         make_stoned(0L, "You no longer seem to be petrifying.", 0,
 */
-        make_stoned(0L, "Î‰»‚©‚ç‰ğ•ú‚³‚ê‚½‚æ‚¤‚¾D", 0,
+        make_stoned(0L, "ÀĞ²½¤«¤é²òÊü¤µ¤ì¤¿¤è¤¦¤À¡¥", 0,
                     (char *) 0);
     }
     if (Sick_resistance && Sick) {
@@ -735,14 +735,14 @@ int mntmp;
 /*JP
         You("no longer feel sick.");
 */
-        You("•a‹C‚©‚ç‰ğ•ú‚³‚ê‚½‚æ‚¤‚¾D");
+        You("ÉÂµ¤¤«¤é²òÊü¤µ¤ì¤¿¤è¤¦¤À¡¥");
     }
     if (Slimed) {
         if (flaming(youmonst.data)) {
 /*JP
             make_slimed(0L, "The slime burns away!");
 */
-            make_slimed(0L, "ƒXƒ‰ƒCƒ€‚Í”R‚¦‚½I");
+            make_slimed(0L, "¥¹¥é¥¤¥à¤ÏÇ³¤¨¤¿¡ª");
         } else if (mntmp == PM_GREEN_SLIME) {
             /* do it silently */
             make_slimed(0L, (char *) 0);
@@ -820,75 +820,75 @@ int mntmp;
 /*JP
         static const char use_thec[] = "Use the command #%s to %s.";
 */
-        static const char use_thec[] = "#%sƒRƒ}ƒ“ƒh‚Å%s‚±‚Æ‚ª‚Å‚«‚éD";
+        static const char use_thec[] = "#%s¥³¥Ş¥ó¥É¤Ç%s¤³¤È¤¬¤Ç¤­¤ë¡¥";
         static const char monsterc[] = "monster";
 
         if (can_breathe(youmonst.data))
 /*JP
             pline(use_thec, monsterc, "use your breath weapon");
 */
-            pline(use_thec,monsterc, "‘§‚ğ“f‚«‚©‚¯‚é");
+            pline(use_thec,monsterc, "Â©¤òÅÇ¤­¤«¤±¤ë");
         if (attacktype(youmonst.data, AT_SPIT))
 /*JP
             pline(use_thec, monsterc, "spit venom");
 */
-            pline(use_thec,monsterc, "“Å‚ğ“f‚­");
+            pline(use_thec,monsterc, "ÆÇ¤òÅÇ¤¯");
         if (youmonst.data->mlet == S_NYMPH)
 /*JP
             pline(use_thec, monsterc, "remove an iron ball");
 */
-            pline(use_thec,monsterc, "“S‹…‚ğ‚Í‚¸‚·");
+            pline(use_thec,monsterc, "Å´µå¤ò¤Ï¤º¤¹");
         if (attacktype(youmonst.data, AT_GAZE))
 /*JP
             pline(use_thec, monsterc, "gaze at monsters");
 */
-            pline(use_thec,monsterc, "‰ö•¨‚ğáÉ‚Ş");
+            pline(use_thec,monsterc, "²øÊª¤òâË¤à");
         if (is_hider(youmonst.data))
 /*JP
             pline(use_thec, monsterc, "hide");
 */
-            pline(use_thec,monsterc, "‰B‚ê‚é");
+            pline(use_thec,monsterc, "±£¤ì¤ë");
         if (is_were(youmonst.data))
 /*JP
             pline(use_thec, monsterc, "summon help");
 */
-            pline(use_thec,monsterc, "’‡ŠÔ‚ğ¢Š«‚·‚é");
+            pline(use_thec,monsterc, "Ãç´Ö¤ò¾¤´­¤¹¤ë");
         if (webmaker(youmonst.data))
 /*JP
             pline(use_thec, monsterc, "spin a web");
 */
-            pline(use_thec,monsterc, "‚­‚à‚Ì‘ƒ‚ğ’£‚é");
+            pline(use_thec,monsterc, "¤¯¤â¤ÎÁã¤òÄ¥¤ë");
         if (u.umonnum == PM_GREMLIN)
 /*JP
             pline(use_thec, monsterc, "multiply in a fountain");
 */
-            pline(use_thec,monsterc, "ò‚Ì’†‚Å•ª—ô‚·‚é");
+            pline(use_thec,monsterc, "Àô¤ÎÃæ¤ÇÊ¬Îö¤¹¤ë");
         if (is_unicorn(youmonst.data))
 /*JP
             pline(use_thec, monsterc, "use your horn");
 */
-            pline(use_thec,monsterc, "Šp‚ğg‚¤");
+            pline(use_thec,monsterc, "³Ñ¤ò»È¤¦");
         if (is_mind_flayer(youmonst.data))
 /*JP
             pline(use_thec, monsterc, "emit a mental blast");
 */
-            pline(use_thec,monsterc, "¸_”g‚ğ”­¶‚³‚¹‚é");
+            pline(use_thec,monsterc, "Àº¿ÀÇÈ¤òÈ¯À¸¤µ¤»¤ë");
         if (youmonst.data->msound == MS_SHRIEK) /* worthless, actually */
 /*JP
             pline(use_thec, monsterc, "shriek");
 */
-            pline(use_thec,monsterc, "‹àØ‚èº‚ğ‚ ‚°‚é");
+            pline(use_thec,monsterc, "¶âÀÚ¤êÀ¼¤ò¤¢¤²¤ë");
         if (is_vampire(youmonst.data))
 /*JP
             pline(use_thec, monsterc, "change shape");
 */
-            pline(use_thec, monsterc, "p‚ğ•Ï‚¦‚é");
+            pline(use_thec, monsterc, "»Ñ¤òÊÑ¤¨¤ë");
 
         if (lays_eggs(youmonst.data) && flags.female)
 /*JP
             pline(use_thec, "sit", "lay an egg");
 */
-            pline(use_thec, "sit", "—‘‚ğY‚Ş");
+            pline(use_thec, "sit", "Íñ¤ò»º¤à");
     }
 
     /* you now know what an egg of your type looks like */
@@ -908,12 +908,12 @@ int mntmp;
 /*JP
             pline_The("rock seems to no longer trap you.");
 */
-            pline("Šâ‚É•Â‚¶‚ß‚ç‚ê‚é‚±‚Æ‚Í‚È‚¢‚¾‚ë‚¤D");
+            pline("´ä¤ËÊÄ¤¸¹ş¤á¤é¤ì¤ë¤³¤È¤Ï¤Ê¤¤¤À¤í¤¦¡¥");
         else {
 /*JP
             pline_The("buried ball is no longer bound to you.");
 */
-            pline_The("–„‚Ü‚Á‚½‹…‚ª×–‚‚É‚È‚é‚±‚Æ‚Í‚È‚¢‚¾‚ë‚¤D");
+            pline_The("Ëä¤Ş¤Ã¤¿µå¤¬¼ÙËâ¤Ë¤Ê¤ë¤³¤È¤Ï¤Ê¤¤¤À¤í¤¦¡¥");
             buried_ball_to_freedom();
         }
     } else if (likes_lava(youmonst.data) && u.utrap
@@ -922,7 +922,7 @@ int mntmp;
 /*JP
         pline_The("lava now feels soothing.");
 */
-        pline("—nŠâ‚ª¸_‚ğ—‚¿‚Â‚©‚¹‚Ä‚­‚ê‚éD");
+        pline("ÍÏ´ä¤¬Àº¿À¤òÍî¤Á¤Ä¤«¤»¤Æ¤¯¤ì¤ë¡¥");
     }
     if (amorphous(youmonst.data) || is_whirly(youmonst.data)
         || unsolid(youmonst.data)) {
@@ -930,13 +930,13 @@ int mntmp;
 /*JP
             You("slip out of the iron chain.");
 */
-            You("“S‚Ì½‚©‚ç‚·‚é‚è‚Æ”²‚¯‚½D");
+            You("Å´¤Îº¿¤«¤é¤¹¤ë¤ê¤ÈÈ´¤±¤¿¡¥");
             unpunish();
         } else if (u.utrap && u.utraptype == TT_BURIEDBALL) {
 /*JP
             You("slip free of the buried ball and chain.");
 */
-            You("–„‚Ü‚Á‚Ä‚¢‚é‹…‚Æ½‚©‚ç‚·‚é‚è‚Æ”²‚¯‚½D");
+            You("Ëä¤Ş¤Ã¤Æ¤¤¤ëµå¤Èº¿¤«¤é¤¹¤ë¤ê¤ÈÈ´¤±¤¿¡¥");
             buried_ball_to_freedom();
         }
     }
@@ -948,8 +948,8 @@ int mntmp;
         You("are no longer stuck in the %s.",
             u.utraptype == TT_WEB ? "web" : "bear trap");
 #else
-        You("%s‚©‚ç’Eo‚µ‚½D",
-            u.utraptype == TT_WEB ? "‚­‚à‚Ì‘ƒ" : "ŒF‚Ìã©");
+        You("%s¤«¤éÃ¦½Ğ¤·¤¿¡¥",
+            u.utraptype == TT_WEB ? "¤¯¤â¤ÎÁã" : "·§¤Îæ«");
 #endif
         /* probably should burn webs too if PM_FIRE_ELEMENTAL */
         u.utrap = 0;
@@ -958,7 +958,7 @@ int mntmp;
 /*JP
         You("orient yourself on the web.");
 */
-        You("‚­‚à‚Ì‘ƒ‚É“K‰‚µ‚½D");
+        You("¤¯¤â¤ÎÁã¤ËÅ¬±ş¤·¤¿¡¥");
         u.utrap = 0;
     }
     check_strangling(TRUE); /* maybe start strangling */
@@ -990,7 +990,7 @@ break_armor()
 /*JP
             You("break out of your armor!");
 */
-            You("ŠZ‚ğ‰ó‚µ‚½I");
+            You("³»¤ò²õ¤·¤¿¡ª");
             exercise(A_STR, FALSE);
             (void) Armor_gone();
             useup(otmp);
@@ -1000,14 +1000,14 @@ break_armor()
 /*JP
                 Your("%s falls off!", cloak_simple_name(otmp));
 */
-                Your("%s‚Í’E‚°—‚¿‚½I", cloak_simple_name(otmp));
+                Your("%s¤ÏÃ¦¤²Íî¤Á¤¿¡ª", cloak_simple_name(otmp));
                 (void) Cloak_off();
                 dropx(otmp);
             } else {
 /*JP
                 Your("%s tears apart!", cloak_simple_name(otmp));
 */
-                Your("%s‚Í‚¸‚½‚¸‚½‚Éˆø‚«—ô‚©‚ê‚½I", cloak_simple_name(otmp));
+                Your("%s¤Ï¤º¤¿¤º¤¿¤Ë°ú¤­Îö¤«¤ì¤¿¡ª", cloak_simple_name(otmp));
                 (void) Cloak_off();
                 useup(otmp);
             }
@@ -1016,7 +1016,7 @@ break_armor()
 /*JP
             Your("shirt rips to shreds!");
 */
-            Your("ƒVƒƒƒc‚Íˆø‚«—ô‚©‚ê‚½I");
+            Your("¥·¥ã¥Ä¤Ï°ú¤­Îö¤«¤ì¤¿¡ª");
             useup(uarmu);
         }
     } else if (sliparm(youmonst.data)) {
@@ -1026,7 +1026,7 @@ break_armor()
 /*JP
             Your("armor falls around you!");
 */
-            Your("ŠZ‚Í‚ ‚È‚½‚Ì‚Ü‚í‚è‚É—‚¿‚½I");
+            Your("³»¤Ï¤¢¤Ê¤¿¤Î¤Ş¤ï¤ê¤ËÍî¤Á¤¿¡ª");
             (void) Armor_gone();
             dropx(otmp);
         }
@@ -1035,12 +1035,12 @@ break_armor()
 /*JP
                 Your("%s falls, unsupported!", cloak_simple_name(otmp));
 */
-                Your("%s‚Í‚·‚Æ‚ñ‚Æ—‚¿‚½I", cloak_simple_name(otmp));
+                Your("%s¤Ï¤¹¤È¤ó¤ÈÍî¤Á¤¿¡ª", cloak_simple_name(otmp));
             else
 /*JP
                 You("shrink out of your %s!", cloak_simple_name(otmp));
 */
-                You("%s‚©‚çk‚İo‚½I", cloak_simple_name(otmp));
+                You("%s¤«¤é½Ì¤ß½Ğ¤¿¡ª", cloak_simple_name(otmp));
             (void) Cloak_off();
             dropx(otmp);
         }
@@ -1049,12 +1049,12 @@ break_armor()
 /*JP
                 You("seep right through your shirt!");
 */
-                You("ƒVƒƒƒc‚©‚ç‚µ‚İo‚½I");
+                You("¥·¥ã¥Ä¤«¤é¤·¤ß½Ğ¤¿¡ª");
             else
 /*JP
                 You("become much too small for your shirt!");
 */
-                You("ƒVƒƒƒc‚æ‚è‚¸‚Á‚Æ¬‚³‚­‚È‚Á‚½I");
+                You("¥·¥ã¥Ä¤è¤ê¤º¤Ã¤È¾®¤µ¤¯¤Ê¤Ã¤¿¡ª");
             setworn((struct obj *) 0, otmp->owornmask & W_ARMU);
             dropx(otmp);
         }
@@ -1070,7 +1070,7 @@ break_armor()
                 Your("%s %s through %s.", hornbuf, vtense(hornbuf, "pierce"),
                      yname(otmp));
 #else
-                Your("Šp‚ª%s‚ğ‚Â‚ç‚Ê‚¢‚½D", yname(otmp));
+                Your("³Ñ¤¬%s¤ò¤Ä¤é¤Ì¤¤¤¿¡¥", yname(otmp));
 #endif
             } else {
                 if (donning(otmp))
@@ -1079,7 +1079,7 @@ break_armor()
                 Your("%s falls to the %s!", helm_simple_name(otmp),
                      surface(u.ux, u.uy));
 #else
-                Your("%s‚Í%s‚É—‚¿‚½I", helm_simple_name(otmp),
+                Your("%s¤Ï%s¤ËÍî¤Á¤¿¡ª", helm_simple_name(otmp),
                      surface(u.ux, u.uy));
 #endif
                 (void) Helmet_off();
@@ -1095,7 +1095,7 @@ break_armor()
 /*JP
             You("drop your gloves%s!", uwep ? " and weapon" : "");
 */
-            You("¬è%s‚ğ—‚µ‚½I", uwep ? "‚â•Ší" : "");
+            You("¾®¼ê%s¤òÍî¤·¤¿¡ª", uwep ? "¤äÉğ´ï" : "");
             drop_weapon(0);
             (void) Gloves_off();
             dropx(otmp);
@@ -1104,7 +1104,7 @@ break_armor()
 /*JP
             You("can no longer hold your shield!");
 */
-            You("‚à‚¤‚‚ğ‚Á‚Ä‚ç‚ê‚È‚¢I");
+            You("¤â¤¦½â¤ò»ı¤Ã¤Æ¤é¤ì¤Ê¤¤¡ª");
             (void) Shield_off();
             dropx(otmp);
         }
@@ -1115,7 +1115,7 @@ break_armor()
             Your("%s falls to the %s!", helm_simple_name(otmp),
                  surface(u.ux, u.uy));
 #else
-            Your("%s‚Í%s‚É—‚¿‚½I", helm_simple_name(otmp),
+            Your("%s¤Ï%s¤ËÍî¤Á¤¿¡ª", helm_simple_name(otmp),
                  surface(u.ux, u.uy));
 #endif
             (void) Helmet_off();
@@ -1131,14 +1131,14 @@ break_armor()
 /*JP
                 Your("boots fall away!");
 */
-                Your("ŒC‚Í’E‚°—‚¿‚½I");
+                Your("·¤¤ÏÃ¦¤²Íî¤Á¤¿¡ª");
             else
 #if 0 /*JP*/
                 Your("boots %s off your feet!",
                      verysmall(youmonst.data) ? "slide" : "are pushed");
 #else
-                Your("ŒC‚Í‚ ‚È‚½‚Ì‘«‚©‚ç%sI",
-                     verysmall(youmonst.data) ? "ŠŠ‚è—‚¿‚½" : "’E‚°—‚¿‚½");
+                Your("·¤¤Ï¤¢¤Ê¤¿¤ÎÂ­¤«¤é%s¡ª",
+                     verysmall(youmonst.data) ? "³ê¤êÍî¤Á¤¿" : "Ã¦¤²Íî¤Á¤¿");
 #endif
             (void) Boots_off();
             dropx(otmp);
@@ -1178,7 +1178,7 @@ int alone;
                 You("find you must %s %s %s!", what,
                     the_your[!!strncmp(which, "corpse", 6)], which);
 #else
-                You("%s‚ğ—‚Æ‚µ‚½‚±‚Æ‚É‹C‚Ã‚¢‚½I", what);
+                You("%s¤òÍî¤È¤·¤¿¤³¤È¤Ëµ¤¤Å¤¤¤¿¡ª", what);
 #endif
             }
             if (u.twoweap) {
@@ -1207,7 +1207,7 @@ rehumanize()
 /*JP
         Strcpy(killer.name, "killed while stuck in creature form");
 */
-        Strcpy(killer.name, "Œ³‚Ìp‚Ö–ß‚ê‚¸‚É");
+        Strcpy(killer.name, "¸µ¤Î»Ñ¤ØÌá¤ì¤º¤Ë");
         done(DIED);
     }
 
@@ -1216,7 +1216,7 @@ rehumanize()
 /*JP
     polyman("return to %s form!", urace.adj);
 */
-    polyman("%s‚É–ß‚Á‚½I", urace.adj);
+    polyman("%s¤ËÌá¤Ã¤¿¡ª", urace.adj);
 
     if (u.uhp < 1) {
         /* can only happen if some bit of code reduces u.uhp
@@ -1224,11 +1224,11 @@ rehumanize()
 /*JP
         Your("old form was not healthy enough to survive.");
 */
-        Your("Œ³‚Ìp‚Í¶‚«‚Ä‚¢‚­‚¾‚¯‚Ì—Í‚ª‚È‚¢D");
+        Your("¸µ¤Î»Ñ¤ÏÀ¸¤­¤Æ¤¤¤¯¤À¤±¤ÎÎÏ¤¬¤Ê¤¤¡¥");
 /*JP
         Sprintf(killer.name, "reverting to unhealthy %s form", urace.adj);
 */
-        Sprintf(killer.name, "•sŒ’N‚È%s‚Ìp‚É–ß‚Á‚Ä", urace.adj);
+        Sprintf(killer.name, "ÉÔ·ò¹¯¤Ê%s¤Î»Ñ¤ËÌá¤Ã¤Æ", urace.adj);
         killer.format = KILLED_BY;
         done(DIED);
     }
@@ -1252,14 +1252,14 @@ dobreathe()
 /*JP
         You_cant("breathe.  Sorry.");
 */
-        You_cant("‘§‚ğ“f‚­‚±‚Æ‚ª‚Å‚«‚È‚¢Dc”OD");
+        You_cant("Â©¤òÅÇ¤¯¤³¤È¤¬¤Ç¤­¤Ê¤¤¡¥»ÄÇ°¡¥");
         return 0;
     }
     if (u.uen < 15) {
 /*JP
         You("don't have enough energy to breathe!");
 */
-        You("‘§‚ğ“f‚­‚Ì‚É\•ª‚ÈƒGƒlƒ‹ƒM[‚ª‚È‚©‚Á‚½D");
+        You("Â©¤òÅÇ¤¯¤Î¤Ë½½Ê¬¤Ê¥¨¥Í¥ë¥®¡¼¤¬¤Ê¤«¤Ã¤¿¡¥");
         return 0;
     }
     u.uen -= 15;
@@ -1318,7 +1318,7 @@ doremove()
             pline_The("ball and chain are buried firmly in the %s.",
                       surface(u.ux, u.uy));
 #else
-            pline_The("‹…‚Æ½‚Í%s‚É‚µ‚Á‚©‚è‚Æ–„‚Ü‚Á‚Ä‚¢‚éD.",
+            pline_The("µå¤Èº¿¤Ï%s¤Ë¤·¤Ã¤«¤ê¤ÈËä¤Ş¤Ã¤Æ¤¤¤ë¡¥.",
                       surface(u.ux, u.uy));
 #endif
             return 0;
@@ -1326,7 +1326,7 @@ doremove()
 /*JP
         You("are not chained to anything!");
 */
-        You("‰½‚à‚Â‚È‚ª‚ê‚Ä‚¢‚È‚¢I");
+        You("²¿¤â¤Ä¤Ê¤¬¤ì¤Æ¤¤¤Ê¤¤¡ª");
         return 0;
     }
     unpunish();
@@ -1343,14 +1343,14 @@ dospinweb()
 /*JP
         You("must be on the ground to spin a web.");
 */
-        You("‚­‚à‚Ì‘ƒ‚ğ’£‚é‚É‚Í’n–Ê‚Ìã‚É‚¢‚È‚­‚Ä‚Í‚È‚ç‚È‚¢D");
+        You("¤¯¤â¤ÎÁã¤òÄ¥¤ë¤Ë¤ÏÃÏÌÌ¤Î¾å¤Ë¤¤¤Ê¤¯¤Æ¤Ï¤Ê¤é¤Ê¤¤¡¥");
         return 0;
     }
     if (u.uswallow) {
 /*JP
         You("release web fluid inside %s.", mon_nam(u.ustuck));
 */
-        You("%s‚Ì“à‚Å‚­‚à‚Ì‘ƒ‚ğ“f‚«o‚µ‚½D", mon_nam(u.ustuck));
+        You("%s¤ÎÆâ¤Ç¤¯¤â¤ÎÁã¤òÅÇ¤­½Ğ¤·¤¿¡¥", mon_nam(u.ustuck));
         if (is_animal(u.ustuck->data)) {
             expels(u.ustuck, u.ustuck->data, TRUE);
             return 0;
@@ -1372,39 +1372,39 @@ dospinweb()
 /*JP
                     Strcpy(sweep, "ignites and ");
 */
-                    Strcpy(sweep, "”­‰Î‚µ");
+                    Strcpy(sweep, "È¯²Ğ¤·");
                     break;
                 case AD_ELEC:
 /*JP
                     Strcpy(sweep, "fries and ");
 */
-                    Strcpy(sweep, "Å‚°");
+                    Strcpy(sweep, "¾Ç¤²");
                     break;
                 case AD_COLD:
 /*JP
                     Strcpy(sweep, "freezes, shatters and ");
 */
-                    Strcpy(sweep, "“€‚è‚Â‚«C‚±‚È‚²‚È‚É‚È‚è");
+                    Strcpy(sweep, "Åà¤ê¤Ä¤­¡¤¤³¤Ê¤´¤Ê¤Ë¤Ê¤ê");
                     break;
                 }
 /*JP
                 pline_The("web %sis swept away!", sweep);
 */
-                pline("‚­‚à‚Ì‘ƒ‚Í%s‚È‚­‚È‚Á‚½I", sweep);
+                pline("¤¯¤â¤ÎÁã¤Ï%s¤Ê¤¯¤Ê¤Ã¤¿¡ª", sweep);
             }
             return 0;
         } /* default: a nasty jelly-like creature */
 /*JP
         pline_The("web dissolves into %s.", mon_nam(u.ustuck));
 */
-        pline("‚­‚à‚Ì‘ƒ‚Í•ª‰ğ‚µ‚Ä%s‚É‚È‚Á‚½D", mon_nam(u.ustuck));
+        pline("¤¯¤â¤ÎÁã¤ÏÊ¬²ò¤·¤Æ%s¤Ë¤Ê¤Ã¤¿¡¥", mon_nam(u.ustuck));
         return 0;
     }
     if (u.utrap) {
 /*JP
         You("cannot spin webs while stuck in a trap.");
 */
-        You("ã©‚É‚Í‚Ü‚Á‚Ä‚¢‚éŠÔ‚Í‚­‚à‚Ì‘ƒ‚ğ’£‚ê‚È‚¢D");
+        You("æ«¤Ë¤Ï¤Ş¤Ã¤Æ¤¤¤ë´Ö¤Ï¤¯¤â¤ÎÁã¤òÄ¥¤ì¤Ê¤¤¡¥");
         return 0;
     }
     exercise(A_DEX, TRUE);
@@ -1415,7 +1415,7 @@ dospinweb()
 /*JP
             You("spin a web, covering up the pit.");
 */
-            You("‚­‚à‚Ì‘ƒ‚ğ’£‚èC—‚µŒŠ‚ğ•¢‚Á‚½D");
+            You("¤¯¤â¤ÎÁã¤òÄ¥¤ê¡¤Íî¤··ê¤òÊ¤¤Ã¤¿¡¥");
             deltrap(ttmp);
             bury_objs(u.ux, u.uy);
             newsym(u.ux, u.uy);
@@ -1424,7 +1424,7 @@ dospinweb()
 /*JP
             pline_The("squeaky board is muffled.");
 */
-            pline("‚«‚µ‚Ş”Â‚Í•¢‚í‚ê‚½D");
+            pline("¤­¤·¤àÈÄ¤ÏÊ¤¤ï¤ì¤¿¡¥");
             deltrap(ttmp);
             newsym(u.ux, u.uy);
             return 1;
@@ -1435,13 +1435,13 @@ dospinweb()
 /*JP
             Your("webbing vanishes!");
 */
-            Your("‚­‚à‚Ì‘ƒ‚ÍÁ‚¦‚½I");
+            Your("¤¯¤â¤ÎÁã¤Ï¾Ã¤¨¤¿¡ª");
             return 0;
         case WEB:
 /*JP
             You("make the web thicker.");
 */
-            You("‚­‚à‚Ì‘ƒ‚ğ‚æ‚èŒú‚­‚µ‚½D");
+            You("¤¯¤â¤ÎÁã¤ò¤è¤ê¸ü¤¯¤·¤¿¡¥");
             return 1;
         case HOLE:
         case TRAPDOOR:
@@ -1449,8 +1449,8 @@ dospinweb()
             You("web over the %s.",
                 (ttmp->ttyp == TRAPDOOR) ? "trap door" : "hole");
 #else
-            You("%s‚ğ‚­‚à‚Ì‘ƒ‚Å•¢‚Á‚½D",
-                (ttmp->ttyp == TRAPDOOR) ? "—‚µ”à" : "ŒŠ");
+            You("%s¤ò¤¯¤â¤ÎÁã¤ÇÊ¤¤Ã¤¿¡¥",
+                (ttmp->ttyp == TRAPDOOR) ? "Íî¤·Èâ" : "·ê");
 #endif
             deltrap(ttmp);
             newsym(u.ux, u.uy);
@@ -1459,7 +1459,7 @@ dospinweb()
 /*JP
             You("spin a web, jamming the trigger.");
 */
-            You("‚­‚à‚Ì‘ƒ‚ğ’£‚Á‚ÄCƒXƒCƒbƒ`‚ğ“®‚©‚È‚­‚µ‚½D");
+            You("¤¯¤â¤ÎÁã¤òÄ¥¤Ã¤Æ¡¤¥¹¥¤¥Ã¥Á¤òÆ°¤«¤Ê¤¯¤·¤¿¡¥");
             deltrap(ttmp);
             newsym(u.ux, u.uy);
             return 1;
@@ -1477,7 +1477,7 @@ dospinweb()
 /*JP
             You("have triggered a trap!");
 */
-            You("ã©‚ğn“®‚³‚¹‚Ä‚µ‚Ü‚Á‚½I");
+            You("æ«¤ò»ÏÆ°¤µ¤»¤Æ¤·¤Ş¤Ã¤¿¡ª");
             dotrap(ttmp, 0);
             return 1;
         default:
@@ -1490,8 +1490,8 @@ dospinweb()
         Your("web fails to impede access to the %s.",
              (levl[u.ux][u.uy].typ == STAIRS) ? "stairs" : "ladder");
 #else
-        Your("‚­‚à‚Ì‘ƒ‚Í%s‚Ö‚ÌˆÚ“®‚ğ×–‚‚Å‚«‚È‚¢D",
-             (levl[u.ux][u.uy].typ == STAIRS) ? "ŠK’i" : "‚Í‚µ‚²");
+        Your("¤¯¤â¤ÎÁã¤Ï%s¤Ø¤Î°ÜÆ°¤ò¼ÙËâ¤Ç¤­¤Ê¤¤¡¥",
+             (levl[u.ux][u.uy].typ == STAIRS) ? "³¬ÃÊ" : "¤Ï¤·¤´");
 #endif
         return 1;
     }
@@ -1511,7 +1511,7 @@ dosummon()
 /*JP
         You("lack the energy to send forth a call for help!");
 */
-        You("•‚¯‚ğŒÄ‚Ô‚¾‚¯‚Ì‘Ì—Í‚ª‚È‚¢I");
+        You("½õ¤±¤ò¸Æ¤Ö¤À¤±¤ÎÂÎÎÏ¤¬¤Ê¤¤¡ª");
         return 0;
     }
     u.uen -= 10;
@@ -1520,13 +1520,13 @@ dosummon()
 /*JP
     You("call upon your brethren for help!");
 */
-    You("’‡ŠÔ‚ğŒÄ‚ñ‚¾I");
+    You("Ãç´Ö¤ò¸Æ¤ó¤À¡ª");
     exercise(A_WIS, TRUE);
     if (!were_summon(youmonst.data, TRUE, &placeholder, (char *) 0))
 /*JP
         pline("But none arrive.");
 */
-        pline("‚µ‚©‚µC‰½‚à—ˆ‚È‚¢D");
+        pline("¤·¤«¤·¡¤²¿¤âÍè¤Ê¤¤¡¥");
     return 1;
 }
 
@@ -1554,20 +1554,20 @@ dogaze()
 /*JP
         You_cant("see anything to gaze at.");
 */
-        You("–Ú‚ªŒ©‚¦‚È‚¢‚Ì‚ÅC‚É‚ç‚ß‚È‚¢D");
+        You("ÌÜ¤¬¸«¤¨¤Ê¤¤¤Î¤Ç¡¤¤Ë¤é¤á¤Ê¤¤¡¥");
         return 0;
     } else if (Hallucination) {
 /*JP
         You_cant("gaze at anything you can see.");
 */
-        You_cant("Œ©‚¦‚é‚à‚Ì‚ğ‰½‚à‚É‚ç‚ß‚È‚¢D");
+        You_cant("¸«¤¨¤ë¤â¤Î¤ò²¿¤â¤Ë¤é¤á¤Ê¤¤¡¥");
         return 0;
     }
     if (u.uen < 15) {
 /*JP
         You("lack the energy to use your special gaze!");
 */
-        You("‚É‚ç‚Ş‚¾‚¯‚Ì‘Ì—Í‚ª‚È‚¢I");
+        You("¤Ë¤é¤à¤À¤±¤ÎÂÎÎÏ¤¬¤Ê¤¤¡ª");
         return 0;
     }
     u.uen -= 15;
@@ -1582,12 +1582,12 @@ dogaze()
 /*JP
                 pline("%s seems not to notice your gaze.", Monnam(mtmp));
 */
-                pline("%s‚Í‚ ‚È‚½‚Ì‚É‚ç‚İ‚É‹C‚ª‚Â‚¢‚Ä‚È‚¢‚æ‚¤‚¾D", Monnam(mtmp));
+                pline("%s¤Ï¤¢¤Ê¤¿¤Î¤Ë¤é¤ß¤Ëµ¤¤¬¤Ä¤¤¤Æ¤Ê¤¤¤è¤¦¤À¡¥", Monnam(mtmp));
             } else if (mtmp->minvis && !See_invisible) {
 /*JP
                 You_cant("see where to gaze at %s.", Monnam(mtmp));
 */
-                You("%s‚ÍŒ©‚¦‚È‚¢‚Ì‚ÅC‚É‚ç‚ß‚È‚¢", Monnam(mtmp));
+                You("%s¤Ï¸«¤¨¤Ê¤¤¤Î¤Ç¡¤¤Ë¤é¤á¤Ê¤¤", Monnam(mtmp));
             } else if (mtmp->m_ap_type == M_AP_FURNITURE
                        || mtmp->m_ap_type == M_AP_OBJECT) {
                 looked--;
@@ -1596,7 +1596,7 @@ dogaze()
 /*JP
                 You("avoid gazing at %s.", y_monnam(mtmp));
 */
-                You("%s‚©‚ç–Ú‚ğ‚»‚ç‚µ‚Ä‚µ‚Ü‚Á‚½D", y_monnam(mtmp));
+                You("%s¤«¤éÌÜ¤ò¤½¤é¤·¤Æ¤·¤Ş¤Ã¤¿¡¥", y_monnam(mtmp));
             } else {
                 if (flags.confirm && mtmp->mpeaceful && !Confusion) {
 #if 0 /*JP*/
@@ -1604,9 +1604,9 @@ dogaze()
                             (adtyp == AD_CONF) ? "confuse" : "attack",
                             mon_nam(mtmp));
 #else
-                    Sprintf(qbuf, "–{“–‚É%s‚ğ%sH",
+                    Sprintf(qbuf, "ËÜÅö¤Ë%s¤ò%s¡©",
                             mon_nam(mtmp),
-                            (adtyp == AD_CONF) ? "¬—‚³‚¹‚é" : "UŒ‚‚·‚é");
+                            (adtyp == AD_CONF) ? "º®Íğ¤µ¤»¤ë" : "¹¶·â¤¹¤ë");
 #endif
                     if (yn(qbuf) != 'y')
                         continue;
@@ -1625,12 +1625,12 @@ dogaze()
 /*JP
                         Your("gaze confuses %s!", mon_nam(mtmp));
 */
-                        Your("‚É‚ç‚İ‚Í%s‚ğ¬—‚³‚¹‚½I", mon_nam(mtmp));
+                        Your("¤Ë¤é¤ß¤Ï%s¤òº®Íğ¤µ¤»¤¿¡ª", mon_nam(mtmp));
                     else
 /*JP
                         pline("%s is getting more and more confused.",
 */
-                        pline("%s‚Í‚Ü‚·‚Ü‚·¬—‚µ‚½I",
+                        pline("%s¤Ï¤Ş¤¹¤Ş¤¹º®Íğ¤·¤¿¡ª",
                               Monnam(mtmp));
                     mtmp->mconf = 1;
                 } else if (adtyp == AD_FIRE) {
@@ -1639,12 +1639,12 @@ dogaze()
 /*JP
                     You("attack %s with a fiery gaze!", mon_nam(mtmp));
 */
-                    You("‰Š‚Ì‚É‚ç‚İ‚Å%s‚ğUŒ‚‚µ‚½I", mon_nam(mtmp));
+                    You("±ê¤Î¤Ë¤é¤ß¤Ç%s¤ò¹¶·â¤·¤¿¡ª", mon_nam(mtmp));
                     if (resists_fire(mtmp)) {
 /*JP
                         pline_The("fire doesn't burn %s!", mon_nam(mtmp));
 */
-                        pline("%s‚Í‰Š‚Å”R‚¦‚È‚©‚Á‚½I", mon_nam(mtmp));
+                        pline("%s¤Ï±ê¤ÇÇ³¤¨¤Ê¤«¤Ã¤¿¡ª", mon_nam(mtmp));
                         dmg = 0;
                     }
                     if (lev > rn2(20))
@@ -1669,7 +1669,7 @@ dogaze()
 /*JP
                         You("are frozen by %s gaze!",
 */
-                        You("%s‚Ì‚É‚ç‚İ‚Å“®‚¯‚È‚­‚È‚Á‚½I", 
+                        You("%s¤Î¤Ë¤é¤ß¤ÇÆ°¤±¤Ê¤¯¤Ê¤Ã¤¿¡ª", 
                             s_suffix(mon_nam(mtmp)));
                         nomul((u.ulevel > 6 || rn2(4))
                                   ? -d((int) mtmp->m_lev + 1,
@@ -1682,7 +1682,7 @@ dogaze()
 /*JP
                         You("stiffen momentarily under %s gaze.",
 */
-                        You("%s‚Ì‚É‚ç‚İ‚Åˆêud’¼‚µ‚½D",
+                        You("%s¤Î¤Ë¤é¤ß¤Ç°ì½Ö¹ÅÄ¾¤·¤¿¡¥",
                             s_suffix(mon_nam(mtmp)));
                 }
                 /* Technically this one shouldn't affect you at all because
@@ -1694,18 +1694,18 @@ dogaze()
 /*JP
                     pline("Gazing at the awake %s is not a very good idea.",
 */
-                    pline("–Ú‚ğŠo‚Ü‚µ‚Ä‚¢‚é%s‚ğ‚É‚ç‚Ş‚Ì‚ÍŒ«‚¢‚±‚Æ‚¶‚á‚È‚¢D",
+                    pline("ÌÜ¤ò³Ğ¤Ş¤·¤Æ¤¤¤ë%s¤ò¤Ë¤é¤à¤Î¤Ï¸­¤¤¤³¤È¤¸¤ã¤Ê¤¤¡¥",
                           l_monnam(mtmp));
                     /* as if gazing at a sleeping anything is fruitful... */
 /*JP
                     You("turn to stone...");
 */
-                    You("Î‚É‚È‚Á‚½DDD");
+                    You("ÀĞ¤Ë¤Ê¤Ã¤¿¡¥¡¥¡¥");
                     killer.format = KILLED_BY;
 /*JP
                     Strcpy(killer.name, "deliberately meeting Medusa's gaze");
 */
-                    Strcpy(killer.name, "‚í‚´‚í‚´ƒƒfƒ…[ƒT‚Ì‚É‚ç‚İ‚ğ‚Ü‚Æ‚à‚ÉŒ©‚Ä");
+                    Strcpy(killer.name, "¤ï¤¶¤ï¤¶¥á¥Ç¥å¡¼¥µ¤Î¤Ë¤é¤ß¤ò¤Ş¤È¤â¤Ë¸«¤Æ");
                     done(STONING);
                 }
             }
@@ -1715,7 +1715,7 @@ dogaze()
 /*JP
         You("gaze at no place in particular.");
 */
-        You("ÀÛ‚É‚Í‰½‚à‚É‚ç‚ß‚È‚©‚Á‚½D");
+        You("¼Âºİ¤Ë¤Ï²¿¤â¤Ë¤é¤á¤Ê¤«¤Ã¤¿¡¥");
     return 1;
 }
 
@@ -1813,7 +1813,7 @@ domindblast()
 /*JP
         You("concentrate but lack the energy to maintain doing so.");
 */
-        You("W’†‚µ‚½D‚µ‚©‚µƒGƒlƒ‹ƒM[‚ª‘«‚è‚È‚¢D");
+        You("½¸Ãæ¤·¤¿¡¥¤·¤«¤·¥¨¥Í¥ë¥®¡¼¤¬Â­¤ê¤Ê¤¤¡¥");
         return 0;
     }
     u.uen -= 10;
@@ -1822,11 +1822,11 @@ domindblast()
 /*JP
     You("concentrate.");
 */
-    You("W’†‚µ‚½D");
+    You("½¸Ãæ¤·¤¿¡¥");
 /*JP
     pline("A wave of psychic energy pours out.");
 */
-    pline("¸_ƒGƒlƒ‹ƒM[”g‚ª•úU‚µ‚½D");
+    pline("Àº¿À¥¨¥Í¥ë¥®¡¼ÇÈ¤¬Êü»¶¤·¤¿¡¥");
     for (mtmp = fmon; mtmp; mtmp = nmon) {
         int u_sen;
 
@@ -1844,9 +1844,9 @@ domindblast()
                 u_sen ? "telepathy"
                       : telepathic(mtmp->data) ? "latent telepathy" : "mind");
 #else
-            pline("%s‚Ì%s‚è‚ñ‚¾D", mon_nam(mtmp),
-                u_sen ? "¸_‚É“ü"
-                      : telepathic(mtmp->data) ? "öİ“I¸_‚É“ü" : "[‘wˆÓ¯‚Éö");
+            pline("%s¤Î%s¤ê¹ş¤ó¤À¡¥", mon_nam(mtmp),
+                u_sen ? "Àº¿À¤ËÆş"
+                      : telepathic(mtmp->data) ? "ÀøºßÅªÀº¿À¤ËÆş" : "¿¼ÁØ°Õ¼±¤ËÀø");
 #endif
             mtmp->mhp -= rnd(15);
             if (mtmp->mhp <= 0)
@@ -1862,7 +1862,7 @@ uunstick()
 /*JP
     pline("%s is no longer in your clutches.", Monnam(u.ustuck));
 */
-    pline("%s‚Í‚ ‚È‚½‚Ìè‚©‚ç“¦‚ê‚½D", Monnam(u.ustuck));
+    pline("%s¤Ï¤¢¤Ê¤¿¤Î¼ê¤«¤éÆ¨¤ì¤¿¡¥", Monnam(u.ustuck));
     u.ustuck = 0;
 }
 
@@ -1875,7 +1875,7 @@ boolean silently;
 /*JP
             Your("skin returns to its original form.");
 */
-            Your("”ç•†‚Í–{—ˆ‚Ìp‚É–ß‚Á‚½D");
+            Your("ÈéÉæ¤ÏËÜÍè¤Î»Ñ¤ËÌá¤Ã¤¿¡¥");
         uarm = uskin;
         uskin = (struct obj *) 0;
         /* undo save/restore hack */
@@ -1896,11 +1896,11 @@ int part;
                               "spine",     "toe",  "hair",         "blood",
                               "lung",      "nose", "stomach" },
 #else
-        *humanoid_parts[] = { "˜r", "–Ú", "Šç", "w",
-            "wæ", "‘«", "è", "è‚É‚·‚é",
-            "“ª", "‘«", "‚ß‚Ü‚¢‚ª‚µ‚½", "ñ",
-            "”wœ", "’Üæ", "”¯",  "ŒŒ",
-            "”x", "•@", "ˆİ"},
+        *humanoid_parts[] = { "ÏÓ", "ÌÜ", "´é", "»Ø",
+            "»ØÀè", "Â­", "¼ê", "¼ê¤Ë¤¹¤ë",
+            "Æ¬", "Â­", "¤á¤Ş¤¤¤¬¤·¤¿", "¼ó",
+            "ÇØ¹ü", "ÄŞÀè", "È±",  "·ì",
+            "ÇÙ", "É¡", "°ß"},
 #endif
 #if 0 /*JP*/
         *jelly_parts[] = { "pseudopod", "dark spot", "front",
@@ -1911,13 +1911,13 @@ int part;
                            "ripples", "juices", "surface", "sensor",
                            "stomach" },
 #else
-    *jelly_parts[] = { "‹[—Gè", "•‚¢”Á“_", "‘O–Ê",
-        "‹[—Gè‚Ìæ", "‹[—Gè",
-        "‹[—Gè‚ÌŠ²", "Gè", "ˆ¬‚é",
-        "”]‚Ì—Ìˆæ", "‰º•û‚Ì‹[—Gè", "‚Ë‚Î‚Ë‚Î‚µ‚Ä‚«‚½",
-        "’†ŠÔ—Ìˆæ", "•\–Ê",  "‹[—Gè",
-        "”g–ä", "‘Ì‰t", "•\–Ê", "Š´ŠoŠí",
-        "ˆİ"},
+    *jelly_parts[] = { "µ¼»÷¿¨¼ê", "¹õ¤¤ÈÃÅÀ", "Á°ÌÌ",
+        "µ¼»÷¿¨¼ê¤ÎÀè", "µ¼»÷¿¨¼ê",
+        "µ¼»÷¿¨¼ê¤Î´´", "¿¨¼ê", "°®¤ë",
+        "Ç¾¤ÎÎÎ°è", "²¼Êı¤Îµ¼»÷¿¨¼ê", "¤Í¤Ğ¤Í¤Ğ¤·¤Æ¤­¤¿",
+        "Ãæ´ÖÎÎ°è", "É½ÌÌ",  "µ¼»÷¿¨¼ê",
+        "ÇÈÌæ", "ÂÎ±Õ", "É½ÌÌ", "´¶³Ğ´ï",
+        "°ß"},
 #endif
 #if 0 /*JP*/
         *animal_parts[] = { "forelimb",  "eye",           "face",
@@ -1928,13 +1928,13 @@ int part;
                             "blood",     "lung",          "nose",
                             "stomach" },
 #else
-    *animal_parts[] = { "‘O‘«", "–Ú", "Šç",
-        "‘O’Ü", "’Üæ", "Œã’Ü",
-        "‘O’Ü", "‚Ğ‚Á‚©‚¯‚é", "“ª",
-        "Œã‘«", "‚ß‚Ü‚¢‚ª‚µ‚½", "ñ",
-        "”wœ", "Œã’Üæ", "–Ñ”ç",
-        "ŒŒ", "”x", "•@",
-        "ˆİ"},
+    *animal_parts[] = { "Á°Â­", "ÌÜ", "´é",
+        "Á°ÄŞ", "ÄŞÀè", "¸åÄŞ",
+        "Á°ÄŞ", "¤Ò¤Ã¤«¤±¤ë", "Æ¬",
+        "¸åÂ­", "¤á¤Ş¤¤¤¬¤·¤¿", "¼ó",
+        "ÇØ¹ü", "¸åÄŞÀè", "ÌÓÈé",
+        "·ì", "ÇÙ", "É¡",
+        "°ß"},
 #endif
 #if 0 /*JP*/
         *bird_parts[] = { "wing",     "eye",  "face",         "wing",
@@ -1943,11 +1943,11 @@ int part;
                           "spine",    "toe",  "feathers",     "blood",
                           "lung",     "bill", "stomach" },
 #else
-    *bird_parts[] = { "—ƒ", "–Ú", "Šç", "—ƒ",
-        "—ƒ‚Ìæ", "‘«", "—ƒ", "—ƒ‚É‚Æ‚é",
-        "“ª", "‘«", "‚ß‚Ü‚¢‚ª‚µ‚½", "ñ",
-        "”wœ", "’Üæ", "‰H–Ñ", "ŒŒ",
-        "”x", "‚­‚¿‚Î‚µ", "ˆİ" },
+    *bird_parts[] = { "Íã", "ÌÜ", "´é", "Íã",
+        "Íã¤ÎÀè", "Â­", "Íã", "Íã¤Ë¤È¤ë",
+        "Æ¬", "Â­", "¤á¤Ş¤¤¤¬¤·¤¿", "¼ó",
+        "ÇØ¹ü", "ÄŞÀè", "±©ÌÓ", "·ì",
+        "ÇÙ", "¤¯¤Á¤Ğ¤·", "°ß" },
 #endif
 #if 0 /*JP*/
         *horse_parts[] = { "foreleg",  "eye",           "face",
@@ -1958,13 +1958,13 @@ int part;
                            "blood",    "lung",          "nose",
                            "stomach" },
 #else
-    *horse_parts[] = { "‘O‘«", "–Ú", "Šç",
-        "‘O’û", "’û", "Œã’û",
-        "‘O’Ü", "’û‚É‚Í‚³‚Ş", "“ª",
-        "Œã‘«", "‚ß‚Ü‚¢‚ª‚µ‚½", "ñ",
-        "”wœ", "Œã’Üæ", "‚½‚Ä‚ª‚İ",
-        "ŒŒ", "”x", "•@",
-        "ˆİ" },
+    *horse_parts[] = { "Á°Â­", "ÌÜ", "´é",
+        "Á°Äı", "Äı", "¸åÄı",
+        "Á°ÄŞ", "Äı¤Ë¤Ï¤µ¤à", "Æ¬",
+        "¸åÂ­", "¤á¤Ş¤¤¤¬¤·¤¿", "¼ó",
+        "ÇØ¹ü", "¸åÄŞÀè", "¤¿¤Æ¤¬¤ß",
+        "·ì", "ÇÙ", "É¡",
+        "°ß" },
 #endif
 #if 0 /*JP*/
         *sphere_parts[] = { "appendage", "optic nerve", "body", "tentacle",
@@ -1974,12 +1974,12 @@ int part;
                             "lower tentacle tip", "cilia", "life force",
                             "retina", "olfactory nerve", "interior" },
 #else
-        *sphere_parts[] = { "“Ë‹N", "‹Šo_Œo", "‘Ì", "Gè",
-            "Gè‚Ìæ", "‰º‚Ì“Ë‹N", "Gè",
-            "Gè‚É‚Â", "‘Ì", "‰º‚ÌGè",
-            "‰ñ“]‚µ‚½", "’†Sü", "‘Ì",
-            "‰º‚ÌGè‚Ìæ", "‘@–Ñ", "¶–½—Í",
-            "–Ô–Œ", "škŠo’†•", "“à•”" },
+        *sphere_parts[] = { "ÆÍµ¯", "»ë³Ğ¿À·Ğ", "ÂÎ", "¿¨¼ê",
+            "¿¨¼ê¤ÎÀè", "²¼¤ÎÆÍµ¯", "¿¨¼ê",
+            "¿¨¼ê¤Ë»ı¤Ä", "ÂÎ", "²¼¤Î¿¨¼ê",
+            "²óÅ¾¤·¤¿", "Ãæ¿´Àş", "ÂÎ",
+            "²¼¤Î¿¨¼ê¤ÎÀè", "Á¡ÌÓ", "À¸Ì¿ÎÏ",
+            "ÌÖËì", "ÓÌ³ĞÃæ¿õ", "ÆâÉô" },
 #endif
 #if 0 /*JP*/
         *fungus_parts[] = { "mycelium", "visual area", "front",
@@ -1990,13 +1990,13 @@ int part;
                             "juices",   "gill",        "gill",
                             "interior" },
 #else
-        *fungus_parts[] = { "‹Û…‘Ì", "‹Šo—Ìˆæ", "‘O",
-            "‹Û…", "‹Û…", "ª",
-            "Gè", "Gè‚É‚©‚ç‚İ‚Â‚¯‚é", "P",
-            "ªŒs", "¬—‚·‚é", "²",
-            "ª", "ªŒs‚Ìæ", "‰è–E",
-            "‘Ì‰t", "‚¦‚ç", "‚¦‚ç",
-            "“à•”"},
+        *fungus_parts[] = { "¶İ»åÂÎ", "»ë³ĞÎÎ°è", "Á°",
+            "¶İ»å", "¶İ»å", "º¬",
+            "¿¨¼ê", "¿¨¼ê¤Ë¤«¤é¤ß¤Ä¤±¤ë", "»±",
+            "º¬·Ô", "º®Íğ¤¹¤ë", "¼´",
+            "º¬", "º¬·Ô¤ÎÀè", "²êË¦",
+            "ÂÎ±Õ", "¤¨¤é", "¤¨¤é",
+            "ÆâÉô"},
 #endif
 #if 0 /*JP*/
         *vortex_parts[] = { "region",        "eye",           "front",
@@ -2007,13 +2007,13 @@ int part;
                             "life force",    "center",        "leading edge",
                             "interior" },
 #else
-        *vortex_parts[] = { "—Ìˆæ", "–Ú", "‘O",
-            "¬‚³‚¢—¬‚ê", "¬‚³‚¢—¬‚ê", "‰º•”‚Ì—¬‚ê",
-            "‰QŠª", "‰Q‚ÉŠª‚­", "‰Q‚Ì’†S",
-            "‰º•”‚Ì—¬‚ê", "¬—‚µ‚½", "’†S•”",
-            "—¬‚ê", "ŠOü", "‹C—¬",
-            "¶–½—Í", "’†S", "‘O‰",
-            "“à•”" },
+        *vortex_parts[] = { "ÎÎ°è", "ÌÜ", "Á°",
+            "¾®¤µ¤¤Î®¤ì", "¾®¤µ¤¤Î®¤ì", "²¼Éô¤ÎÎ®¤ì",
+            "±²´¬", "±²¤Ë´¬¤¯", "±²¤ÎÃæ¿´",
+            "²¼Éô¤ÎÎ®¤ì", "º®Íğ¤·¤¿", "Ãæ¿´Éô",
+            "Î®¤ì", "³°¼ş", "µ¤Î®",
+            "À¸Ì¿ÎÏ", "Ãæ¿´", "Á°±ï",
+            "ÆâÉô" },
 #endif
 #if 0 /*JP*/
         *snake_parts[] = { "vestigial limb", "eye", "face", "large scale",
@@ -2023,12 +2023,12 @@ int part;
                            "scales", "blood", "lung", "forked tongue",
                            "stomach" },
 #else
-        *snake_parts[] = { "‘Ş‰»‚µ‚½‘«", "–Ú", "Šç", "‘å‚«‚È—Ø",
-            "‘å‚«‚È—Ø‚Ìæ", "Œã•”•ª", "—Ø‚ÌŒ„ŠÔ",
-            "—Ø‚ÌŒ„ŠÔ‚É‚Â‚¯‚é", "“ª", "Œã•”•ª",
-            "‚ß‚Ü‚¢‚ª‚µ‚½", "ñ", "‘Ì", "Œã•”•ª‚ÌŠZ",
-            "—Ø", "ŒŒ", "”x", "ã",
-            "ˆİ" },
+        *snake_parts[] = { "Âà²½¤·¤¿Â­", "ÌÜ", "´é", "Âç¤­¤ÊÎÚ",
+            "Âç¤­¤ÊÎÚ¤ÎÀè", "¸åÉôÊ¬", "ÎÚ¤Î·ä´Ö",
+            "ÎÚ¤Î·ä´Ö¤Ë¤Ä¤±¤ë", "Æ¬", "¸åÉôÊ¬",
+            "¤á¤Ş¤¤¤¬¤·¤¿", "¼ó", "ÂÎ", "¸åÉôÊ¬¤Î³»",
+            "ÎÚ", "·ì", "ÇÙ", "Àå",
+            "°ß" },
 #endif
 #if 0 /*JP*/
         *worm_parts[] = { "anterior segment", "light sensitive cell",
@@ -2038,12 +2038,12 @@ int part;
                           "length", "posterior setae", "setae", "blood",
                           "skin", "prostomium", "stomach" },
 #else
-        *worm_parts[] = { "‘O‹æ", "Š´Œõ«×–E",
-                          "ŠÂ‘Ñ", "Šp", "Šp", "Œã‹æ",
-                          "ß", "ß‚É‚Â‚¯‚é", "‘O‹æ",
-                          "Œã•”", "L‚Ñ‚·‚¬‚½", "ŠÂ‘Ñ",
-                          "‘Ì", "Œã•”‚ÌŠp", "Šp", "ŒŒ",
-                          "”ç•†", "Œû‘O—t", "ˆİ" },
+        *worm_parts[] = { "Á°¶è", "´¶¸÷À­ºÙË¦",
+                          "´ÄÂÓ", "³Ñ", "³Ñ", "¸å¶è",
+                          "Àá", "Àá¤Ë¤Ä¤±¤ë", "Á°¶è",
+                          "¸åÉô", "¿­¤Ó¤¹¤®¤¿", "´ÄÂÓ",
+                          "ÂÎ", "¸åÉô¤Î³Ñ", "³Ñ", "·ì",
+                          "ÈéÉæ", "¸ıÁ°ÍÕ", "°ß" },
 #endif
 #if 0 /*JP*/
         *fish_parts[] = { "fin", "eye", "premaxillary", "pelvic axillary",
@@ -2052,13 +2052,13 @@ int part;
                           "dorsal fin", "caudal fin", "scales", "blood",
                           "gill", "nostril", "stomach" };
 #else
-        *fish_parts[] = { "‚Ğ‚ê", "–Ú", "Šç", "‚Ğ‚ê‚Ìæ",
-            "‚Ğ‚ê‚Ìæ", "”ö‚Ñ‚ê", "‹¹‚Ğ‚ê", "‚Ğ‚ê‚Å‚Â",
-            "“ª", "”ö•¿", "‚ß‚Ü‚¢‚ª‚µ‚½", "‚¦‚ç",
-            "”w‚Ñ‚ê", "”ö‚Ñ‚ê", "—Ø", "ŒŒ",
-            "‚¦‚ç", "•@", "ˆİ" };
+        *fish_parts[] = { "¤Ò¤ì", "ÌÜ", "´é", "¤Ò¤ì¤ÎÀè",
+            "¤Ò¤ì¤ÎÀè", "Èø¤Ó¤ì", "¶»¤Ò¤ì", "¤Ò¤ì¤Ç»ı¤Ä",
+            "Æ¬", "ÈøÊÁ", "¤á¤Ş¤¤¤¬¤·¤¿", "¤¨¤é",
+            "ÇØ¤Ó¤ì", "Èø¤Ó¤ì", "ÎÚ", "·ì",
+            "¤¨¤é", "É¡", "°ß" };
 #endif
-#if 0 /*JP*//*g‚í‚È‚¢*/
+#if 0 /*JP*//*»È¤ï¤Ê¤¤*/
     /* claw attacks are overloaded in mons[]; most humanoids with
        such attacks should still reference hands rather than claws */
     static const char not_claws[] = {
@@ -2070,8 +2070,8 @@ int part;
     struct permonst *mptr = mon->data;
 
 #if 0 /*JP*/
-/* paw‚ÍŒ¢‚Æ‚©”L‚ÌèCclaw‚Íƒ^ƒJ‚Ì‘«‚Ì‚æ‚¤‚È‚©‚¬‚Â‚ßC
-   ‚Ç‚¿‚ç‚à“ú–{Œê‚¶‚áuèv‚Å‚¢‚¢‚Å‚µ‚å‚¤D
+/* paw¤Ï¸¤¤È¤«Ç­¤Î¼ê¡¤claw¤Ï¥¿¥«¤ÎÂ­¤Î¤è¤¦¤Ê¤«¤®¤Ä¤á¡¤
+   ¤É¤Á¤é¤âÆüËÜ¸ì¤¸¤ã¡Ö¼ê¡×¤Ç¤¤¤¤¤Ç¤·¤ç¤¦¡¥
 */
     /* some special cases */
     if (mptr->mlet == S_DOG || mptr->mlet == S_FELINE
@@ -2099,7 +2099,7 @@ int part;
             && mptr != &mons[PM_INCUBUS] && mptr != &mons[PM_SUCCUBUS]))
         return (part == HAND) ? "claw" : "clawed";
 #endif
-#if 0 /*JP*//*trunk‚ÍÛ‚Ì•@‚ğˆÓ–¡‚·‚é‚»‚¤‚Å‚·B“ú–{Œê‚Å‚Í’P‚É•@‚Å‚¢‚¢‚©‚ÆB*/
+#if 0 /*JP*//*trunk¤Ï¾İ¤ÎÉ¡¤ò°ÕÌ£¤¹¤ë¤½¤¦¤Ç¤¹¡£ÆüËÜ¸ì¤Ç¤ÏÃ±¤ËÉ¡¤Ç¤¤¤¤¤«¤È¡£*/
     if ((mptr == &mons[PM_MUMAK] || mptr == &mons[PM_MASTODON])
         && part == NOSE)
         return "trunk";
@@ -2108,7 +2108,7 @@ int part;
 #if 0 /*JP*/
         return "skin"; /* sharks don't have scales */
 #else
-        return "“ª"; /* sharks don't have scales */
+        return "Æ¬"; /* sharks don't have scales */
 #endif
     if ((mptr == &mons[PM_JELLYFISH] || mptr == &mons[PM_KRAKEN])
         && (part == ARM || part == FINGER || part == HAND || part == FOOT
@@ -2116,12 +2116,12 @@ int part;
 /*JP
         return "tentacle";
 */
-        return "Gè";
+        return "¿¨¼ê";
     if (mptr == &mons[PM_FLOATING_EYE] && part == EYE)
 /*JP
         return "cornea";
 */
-        return "Šp–Œ";
+        return "³ÑËì";
     if (humanoid(mptr) && (part == ARM || part == FINGER || part == FINGERTIP
                            || part == HAND || part == HANDED))
         return humanoid_parts[part];
@@ -2142,7 +2142,7 @@ int part;
 #else
         if (part == HANDED || part == ARM || part == FINGER
             || part == FINGERTIP || part == HAND) {
-            return "Œõ";
+            return "¸÷";
         }
 #endif
     }
@@ -2216,7 +2216,7 @@ int damtype, dam;
 /*JP
         pline("Strangely, you feel better than before.");
 */
-        pline("Šï–­‚È‚±‚Æ‚ÉC‘O‚æ‚è‹C•ª‚ª‚æ‚­‚È‚Á‚½D");
+        pline("´ñÌ¯¤Ê¤³¤È¤Ë¡¤Á°¤è¤êµ¤Ê¬¤¬¤è¤¯¤Ê¤Ã¤¿¡¥");
         exercise(A_STR, TRUE);
     }
 }

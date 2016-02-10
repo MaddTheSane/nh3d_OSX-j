@@ -1,0 +1,13 @@
+.DS_Store
+
+*.pbxuser
+*.perspective
+xcuserdata/
+project.xcworkspace/
+*.o
+util/makedefs
+*.h-t
+src/NetHack3D
+util/tilemap
+util/dgn_comp
+util/lev_comp

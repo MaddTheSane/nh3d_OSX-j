@@ -79,13 +79,13 @@ int shotlimit;
 /*JP
     if (!canletgo(obj, "throw"))
 */
-    if (!canletgo(obj, "ìäÇ∞ÇÈ"))
+    if (!canletgo(obj, "≈Í§≤§Î"))
         return 0;
     if (obj->oartifact == ART_MJOLLNIR && obj != uwep) {
 /*JP
         pline("%s must be wielded before it can be thrown.", The(xname(obj)));
 */
-        pline("ìäÇ∞ÇÈëOÇ…%sÇëïîıÇµÇ»Ç≠ÇƒÇÕÇ»ÇÁÇ»Ç¢ÅD", xname(obj));
+        pline("≈Í§≤§Î¡∞§À%s§Ú¡ı»˜§∑§ §Ø§∆§œ§ §È§ §§°•", xname(obj));
         return 0;
     }
     if ((obj->oartifact == ART_MJOLLNIR && ACURR(A_STR) < STR19(25))
@@ -93,14 +93,14 @@ int shotlimit;
 /*JP
         pline("It's too heavy.");
 */
-        pline("èdÇ∑Ç¨ÇƒìäÇ∞ÇÁÇÍÇ»Ç¢ÅD");
+        pline("Ω≈§π§Æ§∆≈Í§≤§È§Ï§ §§°•");
         return 1;
     }
     if (!u.dx && !u.dy && !u.dz) {
 /*JP
         You("cannot throw an object at yourself.");
 */
-        pline("é©ï™Ç…å¸Ç©Ç¡ÇƒÇÕìäÇ∞ÇÁÇÍÇ»Ç¢ÅD");
+        pline("º´ ¨§À∏˛§´§√§∆§œ≈Í§≤§È§Ï§ §§°•");
         return 0;
     }
     u_wipe_engr(2);
@@ -113,14 +113,14 @@ int shotlimit;
                expression "with your bare hands" sounds better */
             makeplural(body_part(HAND)));
 #else
-        You("ëf%sÇ≈%sÇÃéÄëÃÇìäÇ∞ÇΩÅD",
+        You("¡«%s§«%s§Œª‡¬Œ§Ú≈Í§≤§ø°•",
             body_part(HAND),
             corpse_xname(obj, (const char *) 0, CXN_PFX_THE));
 #endif
 /*JP
         Sprintf(killer.name, "throwing %s bare-handed", killer_xname(obj));
 */
-        Sprintf(killer.name, "%sÇÃéÄëÃÇëféËÇ≈ìäÇ∞Çƒ", killer_xname(obj));
+        Sprintf(killer.name, "%s§Œª‡¬Œ§Ú¡«ºÍ§«≈Í§≤§∆", killer_xname(obj));
         instapetrify(killer.name);
     }
     if (welded(obj)) {
@@ -239,10 +239,10 @@ int shotlimit;
             multishot, /* (might be 1 if player gave shotlimit) */
             (multishot == 1) ? singular(obj, xname) : xname(obj));
 #else
-        You("%d%sÇÃ%sÇ%sÅD",
+        You("%d%s§Œ%s§Ú%s°•",
             multishot,
             numeral(obj), xname(obj),
-            m_shot.s ? "åÇÇ¡ÇΩ" : "ìäÇ∞ÇΩ");
+            m_shot.s ? "∑‚§√§ø" : "≈Í§≤§ø");
 #endif
     }
 
@@ -282,7 +282,7 @@ int *shotlimit_p; /* (see dothrow()) */
 /*JP
         You("are physically incapable of throwing or shooting anything.");
 */
-        You("âΩÇ©ÇìäÇ∞ÇÈÇÃÇÕï®óùìIÇ…ñ≥óùÇæÅD");
+        You("≤ø§´§Ú≈Í§≤§Î§Œ§œ ™Õ˝≈™§ÀÃµÕ˝§¿°•");
         return FALSE;
     } else if (nohands(youmonst.data)) {
         You_cant("throw or shoot without hands."); /* not body_part(HAND) */
@@ -411,14 +411,14 @@ dofire()
 /*JP
             You("have no ammunition readied.");
 */
-            You("î≠éÀèÄîıÇ™êÆÇ¡ÇƒÇ¢Ç»Ç¢ÅI");
+            You("»ØºÕΩ‡»˜§¨¿∞§√§∆§§§ §§°™");
         } else {
             autoquiver();
             if ((obj = uquiver) == 0)
 /*JP
                 You("have nothing appropriate for your quiver.");
 */
-                You("î≠éÀÇ∑ÇÈÇ‡ÇÃÇ™Ç»Ç¢ÅD");
+                You("»ØºÕ§π§Î§‚§Œ§¨§ §§°•");
         }
         /* if autoquiver is disabled or has failed, prompt for missile;
            fill quiver with it if it's not wielded */
@@ -451,9 +451,9 @@ boolean verbose;
                 m_shot.s ? "firing" : "throwing", m_shot.i, ordin(m_shot.i),
                 m_shot.s ? "shot" : "toss");
 #else
-            You("%dî≠ñ⁄Ç%sÇ∆Ç±ÇÎÇ≈écÇËÇ%sÇÃÇÇ‚ÇﬂÇΩÅD", m_shot.i,
-                m_shot.s ? "åÇÇ¡ÇΩ" : "ìäÇ∞ÇΩ",
-                m_shot.s ? "åÇÇ¬" : "ìäÇ∞ÇÈ");
+            You("%d»ØÃ‹§Ú%s§»§≥§Ì§«ªƒ§Í§Ú%s§Œ§Ú§‰§·§ø°•", m_shot.i,
+                m_shot.s ? "∑‚§√§ø" : "≈Í§≤§ø",
+                m_shot.s ? "∑‚§ƒ" : "≈Í§≤§Î");
 #endif
         }
         m_shot.n = m_shot.i; /* make current shot be the last */
@@ -478,7 +478,7 @@ register struct obj *obj;
         pline("%s hit%s the %s.", Doname2(obj), (obj->quan == 1L) ? "s" : "",
               surface(u.ux, u.uy));
 #else
-        pline("%sÇÕ%sÇ…ñΩíÜÇµÇΩÅD", Doname2(obj),
+        pline("%s§œ%s§ÀÃø√Ê§∑§ø°•", Doname2(obj),
               surface(u.ux,u.uy));
 #endif
 
@@ -595,7 +595,7 @@ int x, y;
 /*JP
         You_feel("the spirits holding you back.");
 */
-        You_feel("Ç†Ç»ÇΩÇïﬂÇ‹Ç¶ÇƒÇ¢ÇΩç∞Ç™ñﬂÇ¡ÇΩãCÇ™ÇµÇΩÅD");
+        You_feel("§¢§ §ø§Ú ·§ﬁ§®§∆§§§ø∫≤§¨Ã·§√§øµ§§¨§∑§ø°•");
         return FALSE;
     } else if (!in_out_region(x, y)) {
         return FALSE;
@@ -610,22 +610,22 @@ int x, y;
 /*JP
             pline("Ouch!");
 */
-            pline("Ç¢ÇƒÇ¡ÅI");
+            pline("§§§∆§√°™");
             if (IS_TREE(levl[x][y].typ))
 /*JP
                 s = "bumping into a tree";
 */
-                s = "ñÿÇ…Ç‘ÇøÇ†ÇΩÇ¡Çƒ";
+                s = "Ã⁄§À§÷§¡§¢§ø§√§∆";
             else if (IS_ROCK(levl[x][y].typ))
 /*JP
                 s = "bumping into a wall";
 */
-                s = "ï«Ç…Ç‘ÇøÇ†ÇΩÇ¡Çƒ";
+                s = " …§À§÷§¡§¢§ø§√§∆";
             else
 /*JP
                 s = "bumping into a door";
 */
-                s = "î‡Ç…Ç‘ÇøÇ†ÇΩÇ¡Çƒ";
+                s = "»‚§À§÷§¡§¢§ø§√§∆";
             dmg = rnd(2 + *range);
             losehp(Maybe_Half_Phys(dmg), s, KILLED_BY);
             wake_nearto(x,y, 10);
@@ -635,13 +635,13 @@ int x, y;
 /*JP
             You("crash into some iron bars.  Ouch!");
 */
-            You("ìSÇÃñ_Ç…Ç‘ÇøÇ†ÇΩÇ¡ÇΩÅDÇ¢ÇƒÇ¡ÅI");
+            You("≈¥§ŒÀ¿§À§÷§¡§¢§ø§√§ø°•§§§∆§√°™");
             dmg = rnd(2 + *range);
 #if 0 /*JP*/
             losehp(Maybe_Half_Phys(dmg), "crashing into iron bars",
                    KILLED_BY);
 #else
-            losehp(Maybe_Half_Phys(dmg), "ìSÇÃñ_Ç…Ç‘ÇøÇ†ÇΩÇ¡Çƒ",
+            losehp(Maybe_Half_Phys(dmg), "≈¥§ŒÀ¿§À§÷§¡§¢§ø§√§∆",
                    KILLED_BY);
 #endif
             wake_nearto(x,y, 20);
@@ -651,12 +651,12 @@ int x, y;
 /*JP
             You("bump into a %s.  Ouch!", xname(obj));
 */
-            You("%sÇ…Ç‘ÇøÇ†ÇΩÇ¡ÇΩÅDÇ¢ÇƒÇ¡ÅI", xname(obj));
+            You("%s§À§÷§¡§¢§ø§√§ø°•§§§∆§√°™", xname(obj));
             dmg = rnd(2 + *range);
 /*JP
             losehp(Maybe_Half_Phys(dmg), "bumping into a boulder", KILLED_BY);
 */
-            losehp(Maybe_Half_Phys(dmg), "ä‚Ç…Ç‘ÇøÇ†ÇΩÇ¡Çƒ", KILLED_BY);
+            losehp(Maybe_Half_Phys(dmg), "¥‰§À§÷§¡§¢§ø§√§∆", KILLED_BY);
             wake_nearto(x,y, 10);
             return FALSE;
         }
@@ -665,13 +665,13 @@ int x, y;
 /*JP
             You("smack into something!");
 */
-            You("âΩÇ©Ç…Ç‘ÇøÇ†ÇΩÇ¡ÇΩÅI");
+            You("≤ø§´§À§÷§¡§¢§ø§√§ø°™");
             dmg = rnd(2 + *range);
 #if 0 /*JP*/
             losehp(Maybe_Half_Phys(dmg), "touching the edge of the universe",
                    KILLED_BY);
 #else
-            losehp(Maybe_Half_Phys(dmg), "ê¢äEÇÃâ ÇƒÇ…êGÇÍÇƒ",
+            losehp(Maybe_Half_Phys(dmg), "¿§≥¶§Œ≤Ã§∆§Àø®§Ï§∆",
                    KILLED_BY);
 #endif
             wake_nearto(x,y, 10);
@@ -687,15 +687,15 @@ int x, y;
                 You("%sget forcefully wedged into a crevice.",
                     too_much ? "and all your belongings " : "");
 #else
-                You("%sÇÕÇﬁÇËÇ‚ÇËÇ∑Ç´ä‘Ç…âüÇµçûÇﬂÇÁÇÍÇΩÅD",
-                    too_much ? "Ç∆ëSïîÇÃâ◊ï®" : "");
+                You("%s§œ§‡§Í§‰§Í§π§≠¥÷§À≤°§∑π˛§·§È§Ï§ø°•",
+                    too_much ? "§»¡¥…Ù§Œ≤Ÿ ™" : "");
 #endif
                 dmg = rnd(2 + *range);
 #if 0 /*JP*/
                 losehp(Maybe_Half_Phys(dmg), "wedging into a narrow crevice",
                        KILLED_BY);
 #else
-                losehp(Maybe_Half_Phys(dmg), "ã∑Ç¢Ç∑Ç´ä‘Ç…âüÇµçûÇﬂÇÁÇÍÇƒ",
+                losehp(Maybe_Half_Phys(dmg), "∂π§§§π§≠¥÷§À≤°§∑π˛§·§È§Ï§∆",
                        KILLED_BY);
 #endif
                 wake_nearto(x,y, 10);
@@ -708,7 +708,7 @@ int x, y;
 /*JP
         You("bump into %s.", a_monnam(mon));
 */
-        You("%sÇ…Ç‘ÇøÇ†ÇΩÇ¡ÇΩÅD", a_monnam(mon));
+        You("%s§À§÷§¡§¢§ø§√§ø°•", a_monnam(mon));
         wakeup(mon);
         wake_nearto(x,y, 10);
         return FALSE;
@@ -720,7 +720,7 @@ int x, y;
 /*JP
             You("come to an abrupt halt!");
 */
-            You("Ç∆Ç¬Ç∫ÇÒí‚é~ÇµÇΩÅI");
+            You("§»§ƒ§º§Ûƒ‰ªﬂ§∑§ø°™");
             return FALSE;
         }
     }
@@ -761,7 +761,7 @@ int x, y;
                 You("pass right over %s.",
                     an(defsyms[trap_to_defsym(ttmp->ttyp)].explanation));
 #else
-                You("%sÇÃê^è„Çí âﬂÇµÇΩÅD",
+                You("%s§ŒøøæÂ§ÚƒÃ≤·§∑§ø°•",
                     defsyms[trap_to_defsym(ttmp->ttyp)].explanation);
 #endif
         }
@@ -821,7 +821,7 @@ boolean verbose;
 /*JP
         You_feel("a tug from the iron ball.");
 */
-        You_feel("ìSãÖÇ…Ç–Ç¡ÇœÇÁÇÍÇƒÇ¢ÇÈÇÊÇ§Ç»ãCÇ™ÇµÇΩÅD");
+        You_feel("≈¥µÂ§À§“§√§—§È§Ï§∆§§§Î§Ë§¶§ µ§§¨§∑§ø°•");
         nomul(0);
         return;
     } else if (u.utrap) {
@@ -836,15 +836,15 @@ boolean verbose;
                             : u.utraptype == TT_BURIEDBALL ? "buried ball"
                                                            : "trap");
 #else
-        You("%sÇ…êòÇ¶Ç¬ÇØÇÁÇÍÇƒÇ¢ÇÈÅD",
+        You("%s§Àø¯§®§ƒ§±§È§Ï§∆§§§Î°•",
             u.utraptype == TT_WEB
-                ? "Ç≠Ç‡ÇÃëÉ"
+                ? "§Ø§‚§Œ¡„"
                 : u.utraptype == TT_LAVA
-                      ? "ónä‚"
+                      ? "Õœ¥‰"
                       : u.utraptype == TT_INFLOOR
                             ? surface(u.ux,u.uy)
-                            : u.utraptype == TT_BURIEDBALL ? "ñÑÇ‹Ç¡ÇƒÇ¢ÇÈãÖ"
-                                                           : "„©");
+                            : u.utraptype == TT_BURIEDBALL ? "À‰§ﬁ§√§∆§§§ÎµÂ"
+                                                           : "Ê´");
 #endif
         nomul(0);
         return;
@@ -864,7 +864,7 @@ boolean verbose;
 /*JP
         You("%s in the opposite direction.", range > 1 ? "hurtle" : "float");
 */
-        You("ãtï˚å¸Ç…îÚÇŒÇ≥ÇÍÇΩÅD");
+        You("µ’ ˝∏˛§À»Ù§–§µ§Ï§ø°•");
     /* if we're in the midst of shooting multiple projectiles, stop */
     endmultishot(TRUE);
     sokoban_guilt();
@@ -961,14 +961,14 @@ boolean hitsroof;
 #if 0 /*JP*/
         action = "flies up into"; /* into "the sky" or "the water above" */
 #else
-        action = "ÇÃíÜÇîÚÇÒÇæ"; /* into "the sky" or "the water above" */
+        action = "§Œ√Ê§Ú»Ù§Û§¿"; /* into "the sky" or "the water above" */
 #endif
     } else if (hitsroof) {
         if (breaktest(obj)) {
 /*JP
             pline("%s hits the %s.", Doname2(obj), ceiling(u.ux, u.uy));
 */
-            pline("%sÇÕ%sÇ…ñΩíÜÇµÇΩÅD", Doname2(obj), ceiling(u.ux, u.uy));
+            pline("%s§œ%s§ÀÃø√Ê§∑§ø°•", Doname2(obj), ceiling(u.ux, u.uy));
             breakmsg(obj, !Blind);
             breakobj(obj, u.ux, u.uy, TRUE, TRUE);
             return FALSE;
@@ -976,18 +976,18 @@ boolean hitsroof;
 /*JP
         action = "hits";
 */
-        action = "Ç…ñΩíÜÇµÇΩ";
+        action = "§ÀÃø√Ê§∑§ø";
     } else {
 /*JP
         action = "almost hits";
 */
-        action = "Ç…Ç‡Ç§è≠ÇµÇ≈ñΩíÜÇ∑ÇÈÇ∆Ç±ÇÎÇæÇ¡ÇΩ";
+        action = "§À§‚§¶æØ§∑§«Ãø√Ê§π§Î§»§≥§Ì§¿§√§ø";
     }
 #if 0 /*JP*/
     pline("%s %s the %s, then falls back on top of your %s.", Doname2(obj),
           action, ceiling(u.ux, u.uy), body_part(HEAD));
 #else
-    pline("%sÇÕ%s%sÅCÇªÇµÇƒ%sÇÃè„Ç…óéÇøÇƒÇ´ÇΩÅD", Doname2(obj),
+    pline("%s§œ%s%s°§§Ω§∑§∆%s§ŒæÂ§ÀÕÓ§¡§∆§≠§ø°•", Doname2(obj),
           ceiling(u.ux, u.uy), action, body_part(HEAD));
 #endif
 
@@ -1024,13 +1024,13 @@ boolean hitsroof;
 /*JP
             pline("You've got it all over your %s!", body_part(FACE));
 */
-            pline("ÇªÇÍÇÕ%sÇÇ◊Ç¡Ç∆ÇËÇ∆ï¢Ç¡ÇΩÅI", body_part(FACE));
+            pline("§Ω§Ï§œ%s§Ú§Ÿ§√§»§Í§» §§√§ø°™", body_part(FACE));
             if (blindinc) {
                 if (otyp == BLINDING_VENOM && !Blind)
 /*JP
                     pline("It blinds you!");
 */
-                    pline("ñ⁄Ç™å©Ç¶Ç»Ç≠Ç»Ç¡ÇΩÅI");
+                    pline("Ã‹§¨∏´§®§ §Ø§ §√§ø°™");
                 u.ucreamed += blindinc;
                 make_blinded(Blinded + (long) blindinc, FALSE);
                 if (!Blind)
@@ -1074,7 +1074,7 @@ boolean hitsroof;
 /*JP
                     pline("Fortunately, you are wearing a hard helmet.");
 */
-                    pline("çKâ^Ç…Ç‡ÅCÇ†Ç»ÇΩÇÕå≈Ç¢äïÇêgÇ…Ç¬ÇØÇƒÇ¢ÇΩÅD");
+                    pline("π¨±ø§À§‚°§§¢§ §ø§œ∏«§§≥ı§Úø»§À§ƒ§±§∆§§§ø°•");
                 /* helmet definitely protects you when it blocks petrification
                  */
             } else if (!petrifier) {
@@ -1082,7 +1082,7 @@ boolean hitsroof;
 /*JP
                     Your("%s does not protect you.", helm_simple_name(uarmh));
 */
-                    Your("%sÇ≈ÇÕñhÇ¨Ç´ÇÍÇ»Ç©Ç¡ÇΩÅD", helm_simple_name(uarmh));
+                    Your("%s§«§œÀ…§Æ§≠§Ï§ §´§√§ø°•", helm_simple_name(uarmh));
             }
         } else if (petrifier && !Stone_resistance
                    && !(poly_when_stoned(youmonst.data)
@@ -1092,12 +1092,12 @@ boolean hitsroof;
 #if 0 /*JP*/
             Strcpy(killer.name, "elementary physics"); /* "what goes up..." */
 #else
-            Strcpy(killer.name, "èâìôï®óùÇ…ÇÊÇË"); /* "what goes up..." */
+            Strcpy(killer.name, "ΩÈ≈˘ ™Õ˝§À§Ë§Í"); /* "what goes up..." */
 #endif
 /*JP
             You("turn to stone.");
 */
-            You("êŒÇ…Ç»Ç¡ÇΩÅD");
+            You("¿–§À§ §√§ø°•");
             if (obj)
                 dropy(obj); /* bypass most of hitfloor() */
             thrownobj = 0;  /* now either gone or on floor */
@@ -1109,7 +1109,7 @@ boolean hitsroof;
 #if 0 /*JP*/
         losehp(Maybe_Half_Phys(dmg), "falling object", KILLED_BY_AN);
 #else
-        losehp(Maybe_Half_Phys(dmg), "óéâ∫ï®Ç≈", KILLED_BY_AN);
+        losehp(Maybe_Half_Phys(dmg), "ÕÓ≤º ™§«", KILLED_BY_AN);
 #endif
     }
     return TRUE;
@@ -1168,7 +1168,7 @@ boolean
 /*JP
             pline("%s!", Tobjnam(obj, "misfire"));
 */
-            pline("%sÇÕÇÕÇ∏ÇÍÇΩÅI", xname(obj));
+            pline("%s§œ§œ§∫§Ï§ø°™", xname(obj));
         else {
             /* only slip if it's greased or meant to be thrown */
             if (obj->greased || throwing_weapon(obj))
@@ -1177,7 +1177,7 @@ boolean
 /*JP
                 pline("%s as you throw it!", Tobjnam(obj, "slip"));
 */
-                pline("%sÇìäÇ∞ÇÊÇ§Ç∆ÇµÇΩÇ™ÅCÇ∏ÇËóéÇøÇƒÇµÇ‹Ç¡ÇΩÅI", xname(obj));
+                pline("%s§Ú≈Í§≤§Ë§¶§»§∑§ø§¨°§§∫§ÍÕÓ§¡§∆§∑§ﬁ§√§ø°™", xname(obj));
             else
                 slipok = FALSE;
         }
@@ -1199,7 +1199,7 @@ boolean
 /*JP
         You("have so little stamina, %s drops from your grasp.",
 */
-        You("à¨óÕÇ™Ç»Ç≠Ç»Ç¡ÇƒÇ¢ÇΩÇÃÇ≈ÅC%sÇà¨ÇËÇªÇ±ÇÀÇƒóéÇ∆ÇµÇΩÅD",
+        You("∞ÆŒœ§¨§ §Ø§ §√§∆§§§ø§Œ§«°§%s§Ú∞Æ§Í§Ω§≥§Õ§∆ÕÓ§»§∑§ø°•",
             the(xname(obj)));
         exercise(A_CON, FALSE);
         u.dx = u.dy = 0;
@@ -1220,7 +1220,7 @@ boolean
             pline("%s the %s and returns to your hand!", Tobjnam(obj, "hit"),
                   ceiling(u.ux, u.uy));
 #else
-            pline("%sÇÕ%sÇ…ñΩíÜÇµÇ†Ç»ÇΩÇÃéËÇ…ñﬂÇ¡ÇƒÇ´ÇΩÅI", xname(obj),
+            pline("%s§œ%s§ÀÃø√Ê§∑§¢§ §ø§ŒºÍ§ÀÃ·§√§∆§≠§ø°™", xname(obj),
                   ceiling(u.ux,u.uy));
 #endif
             obj = addinv(obj);
@@ -1362,7 +1362,7 @@ boolean
 /*JP
                 pline("%s to your hand!", Tobjnam(obj, "return"));
 */
-                pline("%sÇÕÇ†Ç»ÇΩÇÃéËÇ…ñﬂÇ¡ÇƒÇ´ÇΩÅI", xname(obj));
+                pline("%s§œ§¢§ §ø§ŒºÍ§ÀÃ·§√§∆§≠§ø°™", xname(obj));
                 obj = addinv(obj);
                 (void) encumber_msg();
                 setuwep(obj);
@@ -1379,11 +1379,11 @@ boolean
                           Levitation ? "beneath" : "at",
                           makeplural(body_part(FOOT)));
 #else
-                    pline("%sÇÕ%sÇ†Ç»ÇΩÇÃ%sÇÃ%sÇ…óéÇøÇΩÅD",
+                    pline("%s§œ%s§¢§ §ø§Œ%s§Œ%s§ÀÕÓ§¡§ø°•",
                           xname(obj),
-                          Blind ? "" : "ñﬂÇ¡ÇƒÇ´ÇƒÅC",
+                          Blind ? "" : "Ã·§√§∆§≠§∆°§",
                           body_part(FOOT),
-                          Levitation ? "â∫" : "ÇªÇŒ");
+                          Levitation ? "≤º" : "§Ω§–");
 #endif
                 } else {
                     dmg += rnd(3);
@@ -1393,9 +1393,9 @@ boolean
                           Tobjnam(obj, Blind ? "hit" : "fly"),
                           body_part(ARM));
 #else
-                    pline("%sÇÕ%sÇ†Ç»ÇΩÇÃ%sÇ…ñΩíÜÇµÇΩÅI",
+                    pline("%s§œ%s§¢§ §ø§Œ%s§ÀÃø√Ê§∑§ø°™",
                           xname(obj),
-                          Blind ? "" : "ñﬂÇ¡ÇƒÇ´ÇƒÅC",
+                          Blind ? "" : "Ã·§√§∆§≠§∆°§",
                           body_part(ARM));
 #endif
                     (void) artifact_hit((struct monst *) 0, &youmonst, obj,
@@ -1406,7 +1406,7 @@ boolean
 #else
                     {
                         char jbuf[BUFSZ];
-                        Sprintf(jbuf, "%sÇ≈", xname(obj));
+                        Sprintf(jbuf, "%s§«", xname(obj));
                         losehp(Maybe_Half_Phys(dmg), jbuf, KILLED_BY);
                     }
 #endif
@@ -1434,7 +1434,7 @@ boolean
 /*JP
         if (flooreffects(obj, bhitpos.x, bhitpos.y, "fall")) {
 */
-        if (flooreffects(obj,bhitpos.x, bhitpos.y, "óéÇøÇÈ")) {
+        if (flooreffects(obj,bhitpos.x, bhitpos.y, "ÕÓ§¡§Î")) {
             thrownobj = (struct obj *) 0;
             return;
         }
@@ -1444,7 +1444,7 @@ boolean
 /*JP
                 pline("%s snatches up %s.", Monnam(mon), the(xname(obj)));
 */
-                pline("%sÇÕ%sÇíDÇ¢Ç∆Ç¡ÇΩÅD", Monnam(mon), xname(obj));
+                pline("%s§œ%s§Ú√•§§§»§√§ø°•", Monnam(mon), xname(obj));
             if (*u.ushops || obj->unpaid)
                 check_shop_obj(obj, bhitpos.x, bhitpos.y, FALSE);
             (void) mpickobj(mon, obj); /* may merge and free obj */
@@ -1541,7 +1541,7 @@ boolean maybe_wakeup;
 /*JP
         pline("%s %s.", The(missile), otense(obj, "miss"));
 */
-        pline("%sÇÕÇÕÇ∏ÇÍÇΩÅD", missile);
+        pline("%s§œ§œ§∫§Ï§ø°•", missile);
     else
         miss(missile, mon);
     if (maybe_wakeup && !rn2(3))
@@ -1637,13 +1637,13 @@ register struct obj *obj; /* thrownobj or kickedobj or uwep */
 /*JP
             pline("%s catches and drops %s.", Monnam(mon), the(xname(obj)));
 */
-            pline("%sÇÕ%sÇÇ≠ÇÌÇ¶ÇƒíuÇ¢ÇΩÅD", Monnam(mon), xname(obj));
+            pline("%s§œ%s§Ú§Ø§Ô§®§∆√÷§§§ø°•", Monnam(mon), xname(obj));
             return 0;
         } else {
 /*JP
             pline("%s catches %s.", Monnam(mon), the(xname(obj)));
 */
-            pline("%sÇÕ%sÇÇ≠ÇÌÇ¶ÇΩÅD", Monnam(mon), xname(obj));
+            pline("%s§œ%s§Ú§Ø§Ô§®§ø°•", Monnam(mon), xname(obj));
             return gem_accept(mon, obj);
         }
     }
@@ -1660,7 +1660,7 @@ register struct obj *obj; /* thrownobj or kickedobj or uwep */
 /*JP
             pline("%s catches %s.", Monnam(mon), the(xname(obj)));
 */
-            pline("%sÇÕ%sÇíÕÇÒÇæÅD", Monnam(mon), xname(obj));
+            pline("%s§œ%s§Úƒœ§Û§¿°•", Monnam(mon), xname(obj));
             if (mon->mpeaceful) {
                 boolean next2u = monnear(mon, u.ux, u.uy);
 
@@ -1669,7 +1669,7 @@ register struct obj *obj; /* thrownobj or kickedobj or uwep */
                 pline("%s %s %s back to you.", Monnam(mon),
                       (next2u ? "hands" : "tosses"), the(xname(obj)));
 #else
-                pline("%sÇÕ%sÇÇ†Ç»ÇΩÇ…ï‘ÇµÇΩÅD", Monnam(mon),
+                pline("%s§œ%s§Ú§¢§ §ø§À ÷§∑§ø°•", Monnam(mon),
                       xname(obj));
 #endif
                 if (!next2u)
@@ -1833,9 +1833,9 @@ register struct obj *obj; /* thrownobj or kickedobj or uwep */
               s_suffix(mon_nam(mon)),
               is_animal(u.ustuck->data) ? "entrails" : "currents");
 #else
-        pline("%sÇÕ%sÇÃ%sÇ÷è¡Ç¶ÇΩÅD", xname(obj),
+        pline("%s§œ%s§Œ%s§ÿæ√§®§ø°•", xname(obj),
               mon_nam(mon),
-              is_animal(u.ustuck->data) ? "ì‡ëüÇÃíÜ" : "ó¨ÇÍ");
+              is_animal(u.ustuck->data) ? "∆‚¬°§Œ√Ê" : "ŒÆ§Ï");
 #endif
     } else {
         tmiss(obj, mon, TRUE);
@@ -1856,27 +1856,27 @@ register struct obj *obj;
 /*JP
     static NEARDATA const char nogood[] = " is not interested in your junk.";
 */
-    static NEARDATA const char nogood[] = "Ç†Ç»ÇΩÇÃÉKÉâÉNÉ^Ç…ãªñ°Çé¶Ç≥Ç»Ç¢ÅD";
+    static NEARDATA const char nogood[] = "§¢§ §ø§Œ•¨•È•Ø•ø§À∂ΩÃ£§Úº®§µ§ §§°•";
 /*JP
     static NEARDATA const char acceptgift[] = " accepts your gift.";
 */
-    static NEARDATA const char acceptgift[] = "Ç†Ç»ÇΩÇÃë°ÇËï®ÇéÛÇØÇ∆Ç¡ÇΩÅD";
+    static NEARDATA const char acceptgift[] = "§¢§ §ø§Œ¬£§Í ™§Úºı§±§»§√§ø°•";
 /*JP
     static NEARDATA const char maybeluck[] = " hesitatingly";
 */
-    static NEARDATA const char maybeluck[] = "ÇΩÇﬂÇÁÇ¢Ç»Ç™ÇÁ";
+    static NEARDATA const char maybeluck[] = "§ø§·§È§§§ §¨§È";
 /*JP
     static NEARDATA const char noluck[] = " graciously";
 */
-    static NEARDATA const char noluck[] = "íöèdÇ…";
+    static NEARDATA const char noluck[] = "√˙Ω≈§À";
 /*JP
     static NEARDATA const char addluck[] = " gratefully";
 */
-    static NEARDATA const char addluck[] = "äÏÇÒÇ≈";
+    static NEARDATA const char addluck[] = "¥Ó§Û§«";
 
     Strcpy(buf, Monnam(mon));
 #if 1 /*JP*/
-    Strcat(buf, "ÇÕ");
+    Strcat(buf, "§œ");
 #endif
     mon->mpeaceful = 1;
     mon->mavenge = 0;
@@ -2050,7 +2050,7 @@ boolean from_invent;
 /*JP
                         You("smell a peculiar odor...");
 */
-                        You("ñÚÇ¡Ç€Ç¢ìıÇ¢Ç™ÇµÇΩÅDÅDÅD");
+                        You("ÃÙ§√§›§§∆˜§§§¨§∑§ø°•°•°•");
                     } else {
 #if 0 /*JP*/
                         const char *eyes = body_part(EYE);
@@ -2059,7 +2059,7 @@ boolean from_invent;
                             eyes = makeplural(eyes);
                         Your("%s %s.", eyes, vtense(eyes, "water"));
 #else
-                        You("ó‹%sÇ…Ç»Ç¡ÇΩÅD", body_part(EYE));
+                        You("Œﬁ%s§À§ §√§ø°•", body_part(EYE));
 #endif
                     }
                 }
@@ -2153,9 +2153,9 @@ boolean in_view;
 #if 0 /*JP*/
     to_pieces = "";
 #else
-    /* "shatter" Å® "Ç±Ç»Ç≤Ç»Ç…Ç»Ç¡ÇΩ"
-       "shatter into a thousand pieces" Å® "Ç≠ÇæÇØÇƒÇŒÇÁÇŒÇÁÇ…Ç»Ç¡ÇΩ" */
-    to_pieces = "Ç±Ç»Ç≤Ç»";
+    /* "shatter" ¢™ "§≥§ §¥§ §À§ §√§ø"
+       "shatter into a thousand pieces" ¢™ "§Ø§¿§±§∆§–§È§–§È§À§ §√§ø" */
+    to_pieces = "§≥§ §¥§ ";
 #endif
     switch (obj->oclass == POTION_CLASS ? POT_WATER : obj->otyp) {
     default: /* glass or crystal wand */
@@ -2169,20 +2169,20 @@ boolean in_view;
 /*JP
         to_pieces = " into a thousand pieces";
 */
-        to_pieces = "Ç≠ÇæÇØÇƒÇŒÇÁÇŒÇÁ";
+        to_pieces = "§Ø§¿§±§∆§–§È§–§È";
     /*FALLTHRU*/
     case POT_WATER: /* really, all potions */
         if (!in_view)
 /*JP
             You_hear("%s shatter!", something);
 */
-            You_hear("%sÇ™âÛÇÍÇÈâπÇï∑Ç¢ÇΩÅI", something);
+            You_hear("%s§¨≤ı§Ï§Î≤ª§Ú π§§§ø°™", something);
         else
 #if 0 /*JP*/
             pline("%s shatter%s%s!", Doname2(obj),
                   (obj->quan == 1L) ? "s" : "", to_pieces);
 #else
-            pline("%sÇÕ%sÇ…Ç»Ç¡ÇΩÅI", Doname2(obj), to_pieces);
+            pline("%s§œ%s§À§ §√§ø°™", Doname2(obj), to_pieces);
 #endif
         break;
     case EGG:
@@ -2190,21 +2190,21 @@ boolean in_view;
 /*JP
         pline("Splat!");
 */
-        pline("ÉrÉ`ÉÉÅI");
+        pline("•”•¡•„°™");
         break;
     case CREAM_PIE:
         if (in_view)
 /*JP
             pline("What a mess!");
 */
-            pline("Ç±ÇËÇ·Ç–Ç«Ç¢ÅI");
+            pline("§≥§Í§„§“§…§§°™");
         break;
     case ACID_VENOM:
     case BLINDING_VENOM:
 /*JP
         pline("Splash!");
 */
-        pline("ÉrÉ`ÉÉÅI");
+        pline("•”•¡•„°™");
         break;
     }
 }
@@ -2220,7 +2220,7 @@ struct obj *obj;
 /*JP
         You("cannot throw gold at yourself.");
 */
-        pline("é©ï™Ç…ã‡â›ÇìäÇ∞ÇÈÇ±Ç∆ÇÕÇ≈Ç´Ç»Ç¢ÅD");
+        pline("º´ ¨§À∂‚≤ﬂ§Ú≈Í§≤§Î§≥§»§œ§«§≠§ §§°•");
         return 0;
     }
     freeinv(obj);
@@ -2230,8 +2230,8 @@ struct obj *obj;
                                         : "%s into %s.",
               "The money disappears", mon_nam(u.ustuck));
 #else
-        pline(is_animal(u.ustuck->data) ? "ã‡â›ÇÕ%sÇÃï†ÇÃíÜÇ÷è¡Ç¶ÇƒÇ¢Ç¡ÇΩÅD"
-                                        : "ã‡â›ÇÕ%sÇÃíÜÇ÷è¡Ç¶ÇƒÇ¢Ç¡ÇΩÅD",
+        pline(is_animal(u.ustuck->data) ? "∂‚≤ﬂ§œ%s§Œ ¢§Œ√Ê§ÿæ√§®§∆§§§√§ø°•"
+                                        : "∂‚≤ﬂ§œ%s§Œ√Ê§ÿæ√§®§∆§§§√§ø°•",
               mon_nam(u.ustuck));
 #endif
         add_to_minv(u.ustuck, obj);
@@ -2245,7 +2245,7 @@ struct obj *obj;
             pline_The("gold hits the %s, then falls back on top of your %s.",
                       ceiling(u.ux, u.uy), body_part(HEAD));
 #else
-            pline("ã‡â›ÇÕ%sÇ…ñΩíÜÇµÅCÇ†Ç»ÇΩÇÃ%sÇÃê^è„Ç…óéÇøÇƒÇ´ÇΩÅD",
+            pline("∂‚≤ﬂ§œ%s§ÀÃø√Ê§∑°§§¢§ §ø§Œ%s§ŒøøæÂ§ÀÕÓ§¡§∆§≠§ø°•",
                   ceiling(u.ux,u.uy), body_part(HEAD));
 #endif
             /* some self damage? */
@@ -2253,7 +2253,7 @@ struct obj *obj;
 /*JP
                 pline("Fortunately, you are wearing %s!",
 */
-                pline("çKâ^Ç»Ç±Ç∆Ç…ÅCÇ†Ç»ÇΩÇÕ%sÇêgÇ…Ç¬ÇØÇƒÇ¢ÇÈÅI",
+                pline("π¨±ø§ §≥§»§À°§§¢§ §ø§œ%s§Úø»§À§ƒ§±§∆§§§Î°™",
                       an(helm_simple_name(uarmh)));
         }
         bhitpos.x = u.ux;
@@ -2287,13 +2287,13 @@ struct obj *obj;
 /*JP
     if (flooreffects(obj, bhitpos.x, bhitpos.y, "fall"))
 */
-    if (flooreffects(obj, bhitpos.x, bhitpos.y, "óéÇøÇÈ"))
+    if (flooreffects(obj, bhitpos.x, bhitpos.y, "ÕÓ§¡§Î"))
         return 1;
     if (u.dz > 0)
 /*JP
         pline_The("gold hits the %s.", surface(bhitpos.x, bhitpos.y));
 */
-        pline("ã‡â›ÇÕ%sÇ…ñΩíÜÇµÇΩÅD", surface(bhitpos.x, bhitpos.y));
+        pline("∂‚≤ﬂ§œ%s§ÀÃø√Ê§∑§ø°•", surface(bhitpos.x, bhitpos.y));
     place_object(obj, bhitpos.x, bhitpos.y);
     if (*u.ushops)
         sellobj(obj, bhitpos.x, bhitpos.y);

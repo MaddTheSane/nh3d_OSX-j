@@ -425,6 +425,15 @@ struct trans_verb {
 };
 #endif
 
+#if 1 /*JP*/
+struct trans_verb {
+    const char *en;
+    const char *what;
+    const char *particle;
+    const char *jp;
+};
+#endif
+
 #undef E
 
 #endif /* DECL_H */

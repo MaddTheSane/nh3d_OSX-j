@@ -260,8 +260,8 @@ coord *startp; /* starting position (read only) */
 static NEARDATA const char *mail_text[] = { "Gangway!", "Look out!",
                                             "Pardon me!" };
 #else
-static NEARDATA const char *mail_text[] = { "偳偄偨偳偄偨両", "婥傪偮偗傠両",
-                                            "偠傖傑偡傞傛両" };
+static NEARDATA const char *mail_text[] = { "どいたどいた—", "丹をつけろ—",
+                                            "じゃまするよ—" };
 #endif
 #define md_exclamations() (mail_text[rn2(3)])
 
@@ -327,7 +327,7 @@ register int tx, ty; /* destination of mail daemon */
 /*JP
             verbalize("Excuse me.");
 */
-            verbalize("偪傚偭偲偟偮傟偄丏");
+            verbalize("ちょっとしつれいˉ");
 
         place_monster(md, fx, fy); /* put md down */
         newsym(fx, fy);            /* see it */
@@ -355,7 +355,7 @@ register int tx, ty; /* destination of mail daemon */
 /*JP
         verbalize("This place's too crowded.  I'm outta here.");
 */
-        verbalize("偙偙偼崿傒偡偓丏偙偙偱懸偭偰傞傛丏");
+        verbalize("ここは寒みすぎˉここで略ってるよˉ");
 
         if ((mon->mx != fx) || (mon->my != fy)) /* put mon back */
             place_worm_seg(mon, fx, fy);
@@ -398,7 +398,7 @@ struct mail_info *info;
 #if 0 /*JP*/
     verbalize("%s, %s!  %s.", Hello(md), plname, info->display_txt);
 #else
-    verbalize("%s両%s丏", Hello(md), info->display_txt);
+    verbalize("%s—%sˉ", Hello(md), info->display_txt);
 #endif
 
     if (info->message_typ) {
@@ -413,13 +413,13 @@ struct mail_info *info;
 /*JP
             verbalize("Catch!");
 */
-            verbalize("傎傜傛両");
+            verbalize("ほらよ—");
         display_nhwindow(WIN_MESSAGE, FALSE);
 #if 0 /*JP*/
         obj = hold_another_object(obj, "Oops!", (const char *) 0,
                                   (const char *) 0);
 #else
-        obj = hold_another_object(obj, "偍偭偲両", (const char *) 0,
+        obj = hold_another_object(obj, "おっと—", (const char *) 0,
                                   (const char *) 0);
 #endif
     }
@@ -434,7 +434,7 @@ give_up:
 /*JP
         pline("Hark!  \"%s.\"", info->display_txt);
 */
-        pline("乽%s丏乿偲尵偆偙偲偩両", info->display_txt);
+        pline("≈%sˉ∽と咐うことだ—", info->display_txt);
 }
 
 #if !defined(UNIX) && !defined(VMS)
@@ -455,7 +455,7 @@ ckmailstatus()
 /*JP
                                             "I have some mail for you", 0,
 */
-                                            "儊乕儖傪帩偭偰偒偨傛", 0,
+                                            "メ〖ルを积ってきたよ", 0,
                                             0 };
         newmail(&deliver);
         mustgetmail = -1;
@@ -472,7 +472,7 @@ struct obj *otmp;
 /*JP
         "Please disregard previous letter.", "Welcome to NetHack.",
 */
-        "慜偺儊乕儖偼朰傟偰偔偩偝偄丏", "NetHack傊傛偆偙偦両",
+        "涟のメ〖ルは撕れてくださいˉ", "NetHackへようこそ—",
 #ifdef AMIGA
         "Only Amiga makes it possible.", "CATS have all the answers.",
 #endif
@@ -497,12 +497,12 @@ struct obj *otmp;
 /*JP
         pline("Unfortunately you cannot see what it says.");
 */
-        pline("巆擮側偑傜壗偲彂偄偰偁傞偺偐尒傞偙偲偑偱偒側偄丏");
+        pline("荒前ながら部と今いてあるのか斧ることができないˉ");
     } else
 /*JP
         pline("It reads:  \"%s\"", junk[rn2(SIZE(junk))]);
 */
-        pline("偦傟傪撉傫偩丗\"%s\"", junk[rn2(SIZE(junk))]);
+        pline("それを粕んだ¨\"%s\"", junk[rn2(SIZE(junk))]);
 }
 
 #endif /* !UNIX && !VMS */
@@ -534,13 +534,13 @@ ckmailstatus()
 /*JP
                 MSG_MAIL, "I have some mail for you",
 */
-                MSG_MAIL, "儊僀儖傪帩偭偰偒偨傛",
+                MSG_MAIL, "メイルを积ってきたよ",
 #else
                 /* suppress creation and delivery of scroll of mail */
 /*JP
                 MSG_OTHER, "You have some mail in the outside world",
 */
-                MSG_OTHER, "奜偺悽奅偐傜偺儊乕儖偩",
+                MSG_OTHER, "嘲の坤肠からのメ〖ルだ",
 #endif
                 0, 0
             };

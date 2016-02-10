@@ -130,32 +130,32 @@ const struct symdef def_warnsyms[WARNCOUNT] = {
 /*JP
     { '0', "unknown creature causing you worry",    C(CLR_WHITE) },
 */
-    { '0', "‚ ‚È‚½‚ª‹C‚É‚µ‚Ä‚¢‚é“ä‚Ì‰ö•¨", C(CLR_WHITE)},
+    { '0', "¤¢¤Ê¤¿¤¬µ¤¤Ë¤·¤Æ¤¤¤ëÆæ¤Î²øÊª", C(CLR_WHITE)},
     /* pink warning   */
 /*JP
     { '1', "unknown creature causing you concern",  C(CLR_RED) },
 */
-    { '1', "‚ ‚È‚½‚ªS”z‚µ‚Ä‚¢‚é“ä‚Ì‰ö•¨", C(CLR_RED)},
+    { '1', "¤¢¤Ê¤¿¤¬¿´ÇÛ¤·¤Æ¤¤¤ëÆæ¤Î²øÊª", C(CLR_RED)},
     /* red warning    */
 /*JP
     { '2', "unknown creature causing you anxiety",  C(CLR_RED) },
 */
-    { '2', "‚ ‚È‚½‚ªŒœ”O‚µ‚Ä‚¢‚é“ä‚Ì‰ö•¨", C(CLR_RED)},
+    { '2', "¤¢¤Ê¤¿¤¬·üÇ°¤·¤Æ¤¤¤ëÆæ¤Î²øÊª", C(CLR_RED)},
     /* ruby warning   */
 /*JP
     { '3', "unknown creature causing you disquiet", C(CLR_RED) },
 */
-    { '3', "‚ ‚È‚½‚ª‹C‚ğ‚à‚ñ‚Å‚¢‚é“ä‚Ì‰ö•¨", C(CLR_RED)},
+    { '3', "¤¢¤Ê¤¿¤¬µ¤¤ò¤â¤ó¤Ç¤¤¤ëÆæ¤Î²øÊª", C(CLR_RED)},
     /* purple warning */
 /*JP
     { '4', "unknown creature causing you alarm",    C(CLR_MAGENTA) },
 */
-    { '4', "‚ ‚È‚½‚ª‹°‚ê‚Ä‚¢‚é“ä‚Ì‰ö•¨", C(CLR_MAGENTA)},
+    { '4', "¤¢¤Ê¤¿¤¬¶²¤ì¤Æ¤¤¤ëÆæ¤Î²øÊª", C(CLR_MAGENTA)},
     /* black warning  */
 /*JP
     { '5', "unknown creature causing you dread",    C(CLR_BRIGHT_MAGENTA) },
 */
-    { '5', "‚ ‚È‚½‚ª”ñí‚É‹°‚ê‚Ä‚¢‚é“ä‚Ì‰ö•¨", C(CLR_BRIGHT_MAGENTA)},
+    { '5', "¤¢¤Ê¤¿¤¬Èó¾ï¤Ë¶²¤ì¤Æ¤¤¤ëÆæ¤Î²øÊª", C(CLR_BRIGHT_MAGENTA)},
 };
 
 /*

@@ -98,7 +98,7 @@ boolean quietly;
 /*JP
                     pline("... into a pile of dust.");
 */
-                    pline("DDD‚»‚µ‚Ä‚¿‚è‚ÌR‚É‚È‚Á‚½D");
+                    pline("¡¥¡¥¡¥¤½¤·¤Æ¤Á¤ê¤Î»³¤Ë¤Ê¤Ã¤¿¡¥");
                 break; /* mtmp is null */
             }
         } else if (!rn2(3)) {
@@ -110,7 +110,7 @@ boolean quietly;
 /*JP
                     There("seems to be nothing available for a familiar.");
 */
-                    pline("‰º–l‚ÍŒ»‚ê‚È‚©‚Á‚½D");
+                    pline("²¼ËÍ¤Ï¸½¤ì¤Ê¤«¤Ã¤¿¡¥");
                 break;
             }
         }
@@ -121,7 +121,7 @@ boolean quietly;
 /*JP
                 pline_The("figurine writhes and then shatters into pieces!");
 */
-                pline("lŒ`‚Í‚à‚ª‚«C‚­‚¾‚¯U‚Á‚½I");
+                pline("¿Í·Á¤Ï¤â¤¬¤­¡¤¤¯¤À¤±»¶¤Ã¤¿¡ª");
             break;
         }
     } while (!mtmp && --trycnt > 0);
@@ -146,7 +146,7 @@ boolean quietly;
 /*JP
                     You("get a bad feeling about this.");
 */
-                    You("Œ™‚È—\Š´‚ª‚µ‚½D");
+                    You("·ù¤ÊÍ½´¶¤¬¤·¤¿¡¥");
                 mtmp->mpeaceful = 0;
                 set_malign(mtmp);
             }
@@ -193,25 +193,25 @@ makedog()
 #if 0 /*JP*/
             petname = "Slasher"; /* The Warrior */
 #else
-            petname = "ƒXƒ‰ƒbƒVƒƒ[";
+            petname = "¥¹¥é¥Ã¥·¥ã¡¼";
 #endif
         if (Role_if(PM_SAMURAI))
 #if 0 /*JP*/
             petname = "Hachi"; /* Shibuya Station */
 #else
-            petname = "ƒnƒ`Œö";
+            petname = "¥Ï¥Á¸ø";
 #endif
         if (Role_if(PM_BARBARIAN))
 #if 0 /*JP*/
             petname = "Idefix"; /* Obelix */
 #else
-            petname = "ƒCƒfƒtƒBƒNƒX";
+            petname = "¥¤¥Ç¥Õ¥£¥¯¥¹";
 #endif
         if (Role_if(PM_RANGER))
 #if 0 /*JP*/
             petname = "Sirius"; /* Orion's dog */
 #else
-            petname = "ƒVƒŠƒEƒX";
+            petname = "¥·¥ê¥¦¥¹";
 #endif
     }
 
@@ -653,8 +653,8 @@ boolean pets_only; /* true for ascension or final escape */
                     pline("%s is still %s.", Monnam(mtmp),
                           mtmp->meating ? "eating" : "trapped");
 #else
-                    pline("%s‚Í‚Ü‚¾%sD", Monnam(mtmp),
-                          mtmp->meating ? "H‚×‚Ä‚¢‚é" : "ã©‚É‚©‚©‚Á‚½‚Ü‚Ü‚¾");
+                    pline("%s¤Ï¤Ş¤À%s¡¥", Monnam(mtmp),
+                          mtmp->meating ? "¿©¤Ù¤Æ¤¤¤ë" : "æ«¤Ë¤«¤«¤Ã¤¿¤Ş¤Ş¤À");
 #endif
                 stay_behind = TRUE;
             } else if (mon_has_amulet(mtmp)) {
@@ -662,7 +662,7 @@ boolean pets_only; /* true for ascension or final escape */
 /*JP
                     pline("%s seems very disoriented for a moment.",
 */
-                    pline("%s‚Íˆêu•ûŒüŠ´Šo‚ğ¸‚Á‚½‚æ‚¤‚¾D",
+                    pline("%s¤Ï°ì½ÖÊı¸ş´¶³Ğ¤ò¼º¤Ã¤¿¤è¤¦¤À¡¥",
                           Monnam(mtmp));
                 stay_behind = TRUE;
             }
@@ -674,10 +674,10 @@ boolean pets_only; /* true for ascension or final escape */
                               ? (mtmp->female ? "Her" : "His")
                               : "Its");
 #else
-                    pline("%s‚ÉŒ‹‚Î‚ê‚½•R‚Í“Ë‘R‚ä‚é‚ñ‚¾D",
+                    pline("%s¤Ë·ë¤Ğ¤ì¤¿É³¤ÏÆÍÁ³¤æ¤ë¤ó¤À¡¥",
                           humanoid(mtmp->data)
-                              ? (mtmp->female ? "”Ş—" : "”Ş")
-                              : "‚»‚Ì¶•¨");
+                              ? (mtmp->female ? "Èà½÷" : "Èà")
+                              : "¤½¤ÎÀ¸Êª");
 #endif
                     m_unleash(mtmp, FALSE);
                 }
@@ -724,7 +724,7 @@ boolean pets_only; /* true for ascension or final escape */
 /*JP
             pline("%s leash goes slack.", s_suffix(Monnam(mtmp)));
 */
-            pline("%s‚ÉŒ‹‚Î‚ê‚½•R‚Í‚½‚é‚ñ‚¾D", Monnam(mtmp));
+            pline("%s¤Ë·ë¤Ğ¤ì¤¿É³¤Ï¤¿¤ë¤ó¤À¡¥", Monnam(mtmp));
             m_unleash(mtmp, FALSE);
         }
     }
@@ -960,15 +960,15 @@ register struct obj *obj;
                 pline("%s catches %s%s", Monnam(mtmp), the(xname(obj)),
                       !big_corpse ? "." : ", or vice versa!");
 #else
-                pline("%s‚Í%s‚ğ‚Â‚©‚Ü‚¦‚½%s",
+                pline("%s¤Ï%s¤ò¤Ä¤«¤Ş¤¨¤¿%s",
                       Monnam(mtmp), xname(obj),
-                      !big_corpse ? "D" : "C‚ÆŒ¾‚¤‚æ‚è‚»‚Ì‹t‚©I");
+                      !big_corpse ? "¡¥" : "¡¤¤È¸À¤¦¤è¤ê¤½¤ÎµÕ¤«¡ª");
 #endif
             } else if (cansee(mtmp->mx, mtmp->my))
 /*JP
                 pline("%s.", Tobjnam(obj, "stop"));
 */
-                pline("%s‚Í~‚Ü‚Á‚½D", xname(obj));
+                pline("%s¤Ï»ß¤Ş¤Ã¤¿¡¥", xname(obj));
             /* dog_eat expects a floor object */
             place_object(obj, mtmp->mx, mtmp->my);
             (void) dog_eat(mtmp, obj, mtmp->mx, mtmp->my, FALSE);
@@ -1053,16 +1053,16 @@ boolean was_dead;
                           mtmp->mpeaceful ? "seems unable" : "refuses",
                           body_part(EYE));
 #else
-                    pline("%s‚Í‚ ‚È‚½‚Ì%s%sD", Monnam(mtmp),
+                    pline("%s¤Ï¤¢¤Ê¤¿¤Î%s%s¡¥", Monnam(mtmp),
                           body_part(EYE),
-                          mtmp->mpeaceful ? "‚ğŒ©‚é‚±‚Æ‚ª‚Å‚«‚È‚¢‚æ‚¤‚¾" :
-                          "‚©‚ç–Ú‚ğ‚»‚ç‚µ‚½");
+                          mtmp->mpeaceful ? "¤ò¸«¤ë¤³¤È¤¬¤Ç¤­¤Ê¤¤¤è¤¦¤À" :
+                          "¤«¤éÌÜ¤ò¤½¤é¤·¤¿");
 #endif
                 else
 /*JP
                     pline("%s avoids your gaze.", Monnam(mtmp));
 */
-                    pline("%s‚Í‚ ‚È‚½‚Ì‚É‚ç‚İ‚ğ‰ñ”ğ‚µ‚½D", Monnam(mtmp));
+                    pline("%s¤Ï¤¢¤Ê¤¿¤Î¤Ë¤é¤ß¤ò²óÈò¤·¤¿¡¥", Monnam(mtmp));
             }
         }
     } else {

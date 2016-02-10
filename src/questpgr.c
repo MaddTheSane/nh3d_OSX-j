@@ -305,13 +305,13 @@ char c;
 /*JP
         str = (flags.female) ? "sister" : "brother";
 */
-        str = (flags.female) ? "–…" : "’í";
+        str = (flags.female) ? "Ëå" : "Äï";
         break;
     case 'S':
 /*JP
         str = (flags.female) ? "daughter" : "son";
 */
-        str = (flags.female) ? "–º" : "‘§q";
+        str = (flags.female) ? "Ì¼" : "Â©»Ò";
         break;
     case 'l':
         str = ldrname();
@@ -359,25 +359,25 @@ char c;
 /*JP
         str = "chaotic";
 */
-        str = "¬“×";
+        str = "º®ÆÙ";
         break;
     case 'N':
 /*JP
         str = "neutral";
 */
-        str = "’†—§";
+        str = "ÃæÎ©";
         break;
     case 'L':
 /*JP
         str = "lawful";
 */
-        str = "’˜";
+        str = "Ãá½ø";
         break;
     case 'x':
 /*JP
         str = Blind ? "sense" : "see";
 */
-        str = Blind ? "Š´‚¶" : "Œ©";
+        str = Blind ? "´¶¤¸" : "¸«";
         break;
     case 'Z':
         str = dungeons[0].dname;

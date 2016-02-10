@@ -27,8 +27,8 @@ STATIC_OVL NEARDATA const char *breathwep[] = {
     "lightning", "poison gas", "acid", "strange breath #8",
     "strange breath #9"
 #else
-    "”j•Ğ", "‰Š", "—â‹C", "‡–°ƒKƒX", "•ª‰ğ‚Ì‘§",
-    "ˆîÈ", "“Å‚Ì‘§", "_", "strange breath #8",
+    "ÇËÊÒ", "±ê", "Îäµ¤", "¿çÌ²¥¬¥¹", "Ê¬²ò¤ÎÂ©",
+    "°ğºÊ", "ÆÇ¤ÎÂ©", "»À", "strange breath #8",
     "strange breath #9"
 #endif
 };
@@ -66,7 +66,7 @@ const char *name; /* if null, then format `obj' */
 #endif
     }
 #if 1 /*JP*/
-    strcat(knmbuf, "‚É“–‚½‚Á‚Ä");
+    strcat(knmbuf, "¤ËÅö¤¿¤Ã¤Æ");
 #endif
     onm = (obj && obj_is_pname(obj)) ? the(name) : (obj && obj->quan > 1L)
                                                        ? name
@@ -78,44 +78,44 @@ const char *name; /* if null, then format `obj' */
 /*JP
             pline("It misses.");
 */
-	    pline("‚»‚ê‚Í‚Í‚¸‚ê‚½D");
+	    pline("¤½¤ì¤Ï¤Ï¤º¤ì¤¿¡¥");
         else
 /*JP
             You("are almost hit by %s.", onm);
 */
-	    pline("‚à‚¤­‚µ‚Å%s‚É–½’†‚·‚é‚Æ‚±‚ë‚¾‚Á‚½I",onm);
+	    pline("¤â¤¦¾¯¤·¤Ç%s¤ËÌ¿Ãæ¤¹¤ë¤È¤³¤í¤À¤Ã¤¿¡ª",onm);
         return 0;
     } else {
         if (Blind || !flags.verbose)
 /*JP
             You("are hit%s", exclam(dam));
 */
-	    pline("‰½‚©‚ª‚ ‚È‚½‚É–½’†‚µ‚½I");
+	    pline("²¿¤«¤¬¤¢¤Ê¤¿¤ËÌ¿Ãæ¤·¤¿¡ª");
         else
 /*JP
             You("are hit by %s%s", onm, exclam(dam));
 */
-	    pline("%s‚ª‚ ‚È‚½‚É–½’†‚µ‚½I", onm);
+	    pline("%s¤¬¤¢¤Ê¤¿¤ËÌ¿Ãæ¤·¤¿¡ª", onm);
 
         if (obj && objects[obj->otyp].oc_material == SILVER && Hate_silver) {
             /* extra damage already applied by dmgval() */
 /*JP
             pline_The("silver sears your flesh!");
 */
-	    pline("‚ ‚È‚½‚Ì‘Ì‚Í‹â‚ÅÄ‚©‚ê‚½I");
+	    pline("¤¢¤Ê¤¿¤ÎÂÎ¤Ï¶ä¤Ç¾Æ¤«¤ì¤¿¡ª");
             exercise(A_CON, FALSE);
         }
         if (is_acid && Acid_resistance)
 /*JP
             pline("It doesn't seem to hurt you.");
 */
-	    pline("‚ ‚È‚½‚Í‚Â‚©‚È‚©‚Á‚½D");
+	    pline("¤¢¤Ê¤¿¤Ï½ı¤Ä¤«¤Ê¤«¤Ã¤¿¡¥");
         else {
             if (is_acid)
 /*JP
                 pline("It burns!");
 */
-		pline("_‚ÅÄ‚©‚ê‚½I");
+		pline("»À¤Ç¾Æ¤«¤ì¤¿¡ª");
             losehp(dam, knm, kprefix); /* acid damage */
             exercise(A_STR, FALSE);
         }
@@ -159,7 +159,7 @@ int x, y;
                               "fall")) { /* don't double-dip on damage */
 #else
 	    if (!flooreffects(obj, x, y,
-			      "—‚¿‚é")) { /* don't double-dip on damage */
+			      "Íî¤Á¤ë")) { /* don't double-dip on damage */
 #endif
                 place_object(obj, x, y);
                 if (!mtmp && x == u.ux && y == u.uy)
@@ -203,7 +203,7 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
 /*JP
                 pline("It is missed.");
 */
-		pline("‰½‚©‚ª‚©‚·‚ß‚½D");
+		pline("²¿¤«¤¬¤«¤¹¤á¤¿¡¥");
         }
         if (!range) { /* Last position; object drops */
             (void) drop_throw(otmp, 0, mtmp->mx, mtmp->my);
@@ -230,7 +230,7 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
 /*JP
             pline("%s is hit%s", Monnam(mtmp), exclam(damage));
 */
-	    pline("%s‚É–½’†‚µ‚½%s", Monnam(mtmp), exclam(damage));
+	    pline("%s¤ËÌ¿Ãæ¤·¤¿%s", Monnam(mtmp), exclam(damage));
 
         if (otmp->opoisoned && is_poisonable(otmp)) {
             if (resists_poison(mtmp)) {
@@ -238,7 +238,7 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
 /*JP
                     pline_The("poison doesn't seem to affect %s.",
 */
-		    pline("%s‚Í“Å‚Ì‰e‹¿‚ğó‚¯‚È‚¢‚æ‚¤‚¾D",
+		    pline("%s¤ÏÆÇ¤Î±Æ¶Á¤ò¼õ¤±¤Ê¤¤¤è¤¦¤À¡¥",
                               mon_nam(mtmp));
             } else {
                 if (rn2(30)) {
@@ -248,7 +248,7 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
 /*JP
                         pline_The("poison was deadly...");
 */
-			pline("“Å‚Í’v€—Ê‚¾‚Á‚½DDD");
+			pline("ÆÇ¤ÏÃ×»àÎÌ¤À¤Ã¤¿¡¥¡¥¡¥");
                     damage = mtmp->mhp;
                 }
             }
@@ -259,12 +259,12 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
 /*JP
                 pline_The("silver sears %s flesh!", s_suffix(mon_nam(mtmp)));
 */
-	        pline("%s‚Ì‘Ì‚Í‹â‚ÅÄ‚©‚ê‚½I", s_suffix(mon_nam(mtmp)));
+	        pline("%s¤ÎÂÎ¤Ï¶ä¤Ç¾Æ¤«¤ì¤¿¡ª", s_suffix(mon_nam(mtmp)));
             else if (verbose)
 /*JP
                 pline("Its flesh is seared!");
 */
-		pline("‰½Ò‚©‚Ì‘Ì‚ÍÄ‚©‚ê‚½I");
+		pline("²¿¼Ô¤«¤ÎÂÎ¤Ï¾Æ¤«¤ì¤¿¡ª");
         }
         if (otmp->otyp == ACID_VENOM && cansee(mtmp->mx, mtmp->my)) {
             if (resists_acid(mtmp)) {
@@ -272,19 +272,19 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
 /*JP
                     pline("%s is unaffected.", Monnam(mtmp));
 */
-		    pline("%s‚Í‰e‹¿‚ğó‚¯‚È‚¢D", Monnam(mtmp));
+		    pline("%s¤Ï±Æ¶Á¤ò¼õ¤±¤Ê¤¤¡¥", Monnam(mtmp));
                 damage = 0;
             } else {
                 if (vis)
 /*JP
                     pline_The("acid burns %s!", mon_nam(mtmp));
 */
-		    pline("%s‚Í_‚ÅÄ‚©‚ê‚½I", mon_nam(mtmp));
+		    pline("%s¤Ï»À¤Ç¾Æ¤«¤ì¤¿¡ª", mon_nam(mtmp));
                 else if (verbose)
 /*JP
                     pline("It is burned!");
 */
-		    pline("‰½‚©‚ÍÄ‚©‚ê‚½I");
+		    pline("²¿¤«¤Ï¾Æ¤«¤ì¤¿¡ª");
             }
         }
         mtmp->mhp -= damage;
@@ -297,11 +297,11 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
                           ? "destroyed"
                           : "killed");
 #else
-		pline("%s‚Í%sI", Monnam(mtmp),
+		pline("%s¤Ï%s¡ª", Monnam(mtmp),
                       (nonliving(mtmp->data) || is_vampshifter(mtmp)
                        || !canspotmon(mtmp))
-		          ? "“|‚³‚ê‚½"
-		          : "€‚ñ‚¾");
+		          ? "Åİ¤µ¤ì¤¿"
+		          : "»à¤ó¤À");
 #endif
             /* don't blame hero for unknown rolling boulder trap */
             if (!context.mon_moving
@@ -319,7 +319,7 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
 /*JP
                 pline("%s is blinded by %s.", Monnam(mtmp), the(xname(otmp)));
 */
-		pline("%s‚Í%s‚É‚æ‚Á‚Ä–Ú‚ªŒ©‚¦‚È‚­‚È‚Á‚½D", Monnam(mtmp), the(xname(otmp)));
+		pline("%s¤Ï%s¤Ë¤è¤Ã¤ÆÌÜ¤¬¸«¤¨¤Ê¤¯¤Ê¤Ã¤¿¡¥", Monnam(mtmp), the(xname(otmp)));
             mtmp->mcansee = 0;
             tmp = (int) mtmp->mblinded + rnd(25) + 20;
             if (tmp > 127)
@@ -383,13 +383,13 @@ struct obj *obj;         /* missile (or stack providing it) */
 /*JP
                 pline("%s misfires!", Monnam(mon));
 */
-		pline("%s‚Í‚Í‚¸‚µ‚½I", Monnam(mon));
+		pline("%s¤Ï¤Ï¤º¤·¤¿¡ª", Monnam(mon));
             else
 #if 0 /*JP*/
                 pline("%s as %s throws it!", Tobjnam(singleobj, "slip"),
                       mon_nam(mon));
 #else
-		pline("%s‚ª“Š‚°‚æ‚¤‚Æ‚µ‚½‚Æ‚½‚ñ%s‚ªŠŠ‚Á‚½I",
+		pline("%s¤¬Åê¤²¤è¤¦¤È¤·¤¿¤È¤¿¤ó%s¤¬³ê¤Ã¤¿¡ª",
 			  mon_nam(mon), xname(singleobj));
 #endif
         }
@@ -438,11 +438,11 @@ struct obj *obj;         /* missile (or stack providing it) */
 /*JP
                     You("catch the %s.", xname(singleobj));
 */
-		    You("%s‚ğ‚Â‚©‚Ü‚¦‚½D", xname(singleobj));
+		    You("%s¤ò¤Ä¤«¤Ş¤¨¤¿¡¥", xname(singleobj));
 /*JP
                     You("are not interested in %s junk.",
 */
-		    You("%s‚ÌƒKƒ‰ƒNƒ^‚É‹»–¡‚Í‚È‚¢D",
+		    You("%s¤Î¥¬¥é¥¯¥¿¤Ë¶½Ì£¤Ï¤Ê¤¤¡¥",
                         s_suffix(mon_nam(mon)));
                     makeknown(singleobj->otyp);
                     dropy(singleobj);
@@ -451,7 +451,7 @@ struct obj *obj;         /* missile (or stack providing it) */
 /*JP
                      "accept %s gift in the spirit in which it was intended.",
 */
-		     "‚±‚ê‚ª—~‚µ‚©‚Á‚½‚ñ‚¾‚Æv‚¢‚È‚ª‚ç%s‚Ì‘¡‚è•¨‚ğó‚¯‚Æ‚Á‚½D",
+		     "¤³¤ì¤¬Íß¤·¤«¤Ã¤¿¤ó¤À¤È»×¤¤¤Ê¤¬¤é%s¤ÎÂ£¤êÊª¤ò¼õ¤±¤È¤Ã¤¿¡¥",
                         s_suffix(mon_nam(mon)));
 #if 0 /*JP*/
                     (void) hold_another_object(
@@ -459,8 +459,8 @@ struct obj *obj;         /* missile (or stack providing it) */
                         xname(singleobj), "You catch:");
 #else
                     (void) hold_another_object(
-			singleobj, "‚ ‚È‚½‚Í%s‚ğ‚Â‚©‚Ü‚¦‚½‚ªC—‚µ‚½D",
-			xname(singleobj), "‚ğ‚Â‚©‚Ü‚¦‚½D");
+			singleobj, "¤¢¤Ê¤¿¤Ï%s¤ò¤Ä¤«¤Ş¤¨¤¿¤¬¡¤Íî¤·¤¿¡¥",
+			xname(singleobj), "¤ò¤Ä¤«¤Ş¤¨¤¿¡¥");
 #endif
                 }
                 break;
@@ -527,13 +527,13 @@ struct obj *obj;         /* missile (or stack providing it) */
 /*JP
                         pline("Yecch!  You've been creamed.");
 */
-			pline("ƒEƒF[DƒNƒŠ[ƒ€‚ğ‚©‚Ô‚Á‚½D");
+			pline("¥¦¥§¡¼¡¥¥¯¥ê¡¼¥à¤ò¤«¤Ö¤Ã¤¿¡¥");
                     else
 #if 0 /*JP*/
                         pline("There's %s sticky all over your %s.",
                               something, body_part(FACE));
 #else
-			pline("‚ ‚È‚½‚Í%s‚É‚×‚Æ‚Â‚­‚à‚Ì‚ğŠ´‚¶‚½D",
+			pline("¤¢¤Ê¤¿¤Ï%s¤Ë¤Ù¤È¤Ä¤¯¤â¤Î¤ò´¶¤¸¤¿¡¥",
 			      body_part(FACE));
 #endif
                 } else if (singleobj->otyp == BLINDING_VENOM) {
@@ -549,9 +549,9 @@ struct obj *obj;         /* missile (or stack providing it) */
                         Your("%s %s.", eyes, vtense(eyes, "sting"));
 #else
 		    if(!Blind)
-			pline("“Å‚Å–Ú‚ªŒ©‚¦‚È‚­‚È‚Á‚½D");
+			pline("ÆÇ¤ÇÌÜ¤¬¸«¤¨¤Ê¤¯¤Ê¤Ã¤¿¡¥");
 		    else
-			Your("%s‚Í‚¿‚­‚¿‚­‚µ‚½D", body_part(EYE));
+			Your("%s¤Ï¤Á¤¯¤Á¤¯¤·¤¿¡¥", body_part(EYE));
 #endif
                 }
             }
@@ -668,7 +668,7 @@ struct monst *mtmp;
             pline("%s thrusts %s.", Monnam(mtmp),
                   obj_is_pname(otmp) ? the(onm) : an(onm));
 #else
-	    pline("%s‚Í%s‚ğ“Ë‚«h‚µ‚½D", Monnam(mtmp), onm);
+	    pline("%s¤Ï%s¤òÆÍ¤­»É¤·¤¿¡¥", Monnam(mtmp), onm);
 #endif
         }
 
@@ -766,7 +766,7 @@ struct monst *mtmp;
 /*JP
             Sprintf(onmbuf, "%d %s", multishot, xname(otmp));
 */
-	    Sprintf(onmbuf, "%d%s‚Ì%s", multishot, numeral(otmp), xname(otmp));
+	    Sprintf(onmbuf, "%d%s¤Î%s", multishot, numeral(otmp), xname(otmp));
             onm = onmbuf;
         } else {
             /* "an arrow" */
@@ -777,7 +777,7 @@ struct monst *mtmp;
 /*JP
         pline("%s %s %s!", Monnam(mtmp), m_shot.s ? "shoots" : "throws", onm);
 */
-	pline("%s‚Í%s‚ğ%s!", Monnam(mtmp), onm, m_shot.s ? "Œ‚‚Á‚½" : "“Š‚°‚½");
+	pline("%s¤Ï%s¤ò%s!", Monnam(mtmp), onm, m_shot.s ? "·â¤Ã¤¿" : "Åê¤²¤¿");
         m_shot.o = otmp->otyp;
     } else {
         m_shot.o = STRANGE_OBJECT; /* don't give multishot feedback */
@@ -817,7 +817,7 @@ struct attack *mattk;
 /*JP
             pline("A dry rattle comes from %s throat.",
 */
-	    pline("%s‚ÌA‚ªƒKƒ‰ƒKƒ‰‚Æ–Â‚Á‚½D",
+	    pline("%s¤Î¹¢¤¬¥¬¥é¥¬¥é¤ÈÌÄ¤Ã¤¿¡¥",
                   s_suffix(mon_nam(mtmp)));
         return 0;
     }
@@ -840,7 +840,7 @@ struct attack *mattk;
 /*JP
                 pline("%s spits venom!", Monnam(mtmp));
 */
-		pline("%s‚Í“Å‚ğ“f‚¢‚½I", Monnam(mtmp));
+		pline("%s¤ÏÆÇ¤òÅÇ¤¤¤¿¡ª", Monnam(mtmp));
             m_throw(mtmp, mtmp->mx, mtmp->my, sgn(tbx), sgn(tby),
                     distmin(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy), otmp);
             nomul(0);
@@ -869,12 +869,12 @@ struct attack *mattk;
 /*JP
                     pline("%s coughs.", Monnam(mtmp));
 */
-		    pline("%s‚Í‚¹‚«‚ğ‚µ‚½D", Monnam(mtmp));
+		    pline("%s¤Ï¤»¤­¤ò¤·¤¿¡¥", Monnam(mtmp));
                 else
 /*JP
                     You_hear("a cough.");
 */
-		    You_hear("‚¹‚«‚Ì‰¹‚ğ•·‚¢‚½D");
+		    You_hear("¤»¤­¤Î²»¤òÊ¹¤¤¤¿¡¥");
             }
             return 0;
         }
@@ -885,7 +885,7 @@ struct attack *mattk;
                     pline("%s breathes %s!", Monnam(mtmp),
                           breathwep[typ - 1]);
 #else
-		    pline("%s‚Í%s‚ğ“f‚¢‚½I", Monnam(mtmp),
+		    pline("%s¤Ï%s¤òÅÇ¤¤¤¿¡ª", Monnam(mtmp),
 			  breathwep[typ - 1]);
 #endif
                 buzz((int) (-20 - (typ - 1)), (int) mattk->damn, mtmp->mx,
@@ -1041,19 +1041,19 @@ int whodidit;   /* 1==hero, 0=other, -1==just check whether it'll pass thru */
 /*JP
             pline("Whang!");
 */
-	    pline("‚®‚í[‚ñI");
+	    pline("¤°¤ï¡¼¤ó¡ª");
         else if (otmp->oclass == COIN_CLASS
                  || objects[obj_type].oc_material == GOLD
                  || objects[obj_type].oc_material == SILVER)
 /*JP
             pline("Clink!");
 */
-	    pline("ƒ`ƒƒƒŠƒ“I");
+	    pline("¥Á¥ã¥ê¥ó¡ª");
         else
 /*JP
             pline("Clonk!");
 */
-	    pline("ƒSƒcƒ“I");
+	    pline("¥´¥Ä¥ó¡ª");
     }
 
     return hits;

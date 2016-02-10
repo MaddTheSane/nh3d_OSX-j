@@ -199,7 +199,7 @@ const char *drainer; /* cause of death, if drain should be fatal */
 /*JP
         pline("%s level %d.", Goodbye(), u.ulevel--);
 */
-        pline("‚³‚æ‚¤‚È‚çƒŒƒxƒ‹%dD", u.ulevel--);
+        pline("¤µ¤è¤¦¤Ê¤é¥ì¥Ù¥ë%d¡¥", u.ulevel--);
         /* remove intrinsic abilities */
         adjabil(u.ulevel + 1, u.ulevel);
         reset_rndmonst(NON_PM); /* new monster selection */
@@ -270,7 +270,7 @@ boolean incr; /* true iff via incremental experience growth */
 /*JP
         You_feel("more experienced.");
 */
-        You("‚æ‚èŒoŒ±‚ğ‚Â‚ñ‚¾‚æ‚¤‚È‹C‚ª‚µ‚½D");
+        You("¤è¤ê·Ğ¸³¤ò¤Ä¤ó¤À¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
 
     /* increase hit points (when polymorphed, do monster form first
        in order to retain normal human/whatever increase for later) */
@@ -304,7 +304,7 @@ boolean incr; /* true iff via incremental experience growth */
 /*JP
         pline("Welcome to experience level %d.", u.ulevel);
 */
-        pline("ƒŒƒxƒ‹%d‚É‚æ‚¤‚±‚»D", u.ulevel);
+        pline("¥ì¥Ù¥ë%d¤Ë¤è¤¦¤³¤½¡¥", u.ulevel);
         adjabil(u.ulevel - 1, u.ulevel); /* give new intrinsics */
         reset_rndmonst(NON_PM);          /* new monster selection */
     }

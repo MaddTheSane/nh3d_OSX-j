@@ -913,6 +913,9 @@ E boolean FDECL(obj_here, (struct obj *, int, int));
 E boolean NDECL(wearing_armor);
 E boolean FDECL(is_worn, (struct obj *));
 E struct obj *FDECL(g_at, (int, int));
+#if 1 /*JP*/
+E struct trans_verb *FDECL(trans_verb, (const char *));
+#endif
 E struct obj *FDECL(getobj, (const char *, const char *));
 E int FDECL(ggetobj, (const char *, int (*)(OBJ_P), int,
                       BOOLEAN_P, unsigned *));
@@ -1390,6 +1393,9 @@ E int FDECL(big_to_little, (int));
 E const char *FDECL(locomotion, (const struct permonst *, const char *));
 E const char *FDECL(stagger, (const struct permonst *, const char *));
 E const char *FDECL(on_fire, (struct permonst *, struct attack *));
+#if 1 /*JP*/
+E const char *FDECL(jumpedthrough, (const struct permonst *,const char *));
+#endif
 E const struct permonst *FDECL(raceptr, (struct monst *));
 E boolean FDECL(olfaction, (struct permonst *));
 #if 1 /*JP*/
@@ -2811,6 +2817,21 @@ E const char *FDECL(jpast, (const char *));
 E const char *FDECL(jpolite, (const char *));
 E const char *FDECL(jconj_adj, (const char *));
 E int FDECL(jrubout, (char *, int, int, int));
+
+/* ### jtrns.c ### */
+
+E  void NDECL(init_jtrns);
+E  int NDECL(dotogglelang);
+E  int NDECL(query_lang_mode);
+E  void FDECL(set_trns_mode, (int));
+E  const char *FDECL(jtrns_mon_gen, (const char *, int));
+E  const char *FDECL(jtrns_mon, (const char *));
+E  const char *FDECL(jtrns_obj, (const int, const char *));
+E  const char *FDECL(etrns_mon, (const char *));
+E  const char *FDECL(etrns_obj, (const int, const char *));
+E  char FDECL(objclass_to_sym, (const int));
+
+/*E  void FDECL(zen2han, (char *));*/
 
 #endif
 

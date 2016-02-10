@@ -33,12 +33,12 @@ struct monst *mtmp;
 /*JP
             pline("KABOOM!!  You see a door explode.");
 */
-            pline("‚¿‚ã‚Ç[‚ñIƒhƒA‚ª”š”­‚·‚é‚Ì‚ğŒ©‚½D");
+            pline("¤Á¤å¤É¡¼¤ó¡ª¥É¥¢¤¬ÇúÈ¯¤¹¤ë¤Î¤ò¸«¤¿¡¥");
         else if (!Deaf)
 /*JP
             You_hear("a distant explosion.");
 */
-            You_hear("‰“•û‚Å”š”­‚·‚é‰¹‚ğ•·‚¢‚½D");
+            You_hear("±óÊı¤ÇÇúÈ¯¤¹¤ë²»¤òÊ¹¤¤¤¿¡¥");
     }
     wake_nearto(mtmp->mx, mtmp->my, 7 * 7);
     mtmp->mstun = 1;
@@ -73,12 +73,12 @@ const char *shout;
 /*JP
         pline("%s yells:", Amonnam(mon));
 */
-        pline("%s‚Í‹©‚ñ‚¾F", Amonnam(mon));
+        pline("%s¤Ï¶«¤ó¤À¡§", Amonnam(mon));
     else
 /*JP
         You_hear("someone yell:");
 */
-        pline("‰½Ò‚©‚Í‹©‚ñ‚¾F");
+        pline("²¿¼Ô¤«¤Ï¶«¤ó¤À¡§");
     verbalize1(shout);
 }
 
@@ -97,13 +97,13 @@ register struct monst *mtmp;
 /*JP
                     mon_yells(mtmp, "Halt, thief!  You're under arrest!");
 */
-                    verbalize("‘Ò‚ÄI‚Ê‚·‚Á‚ÆI‚¨‚Ü‚¦‚ğ‘ß•ß‚·‚éI");
+                    verbalize("ÂÔ¤Æ¡ª¤Ì¤¹¤Ã¤È¡ª¤ª¤Ş¤¨¤òÂáÊá¤¹¤ë¡ª");
                     (void) angry_guards(!!Deaf);
                 } else {
 /*JP
                     mon_yells(mtmp, "Hey, stop picking that lock!");
 */
-                    verbalize("‚¨‚¢CŒ®‚ğŸè‚ÉŠJ‚¯‚é‚ñ‚¶‚á‚È‚¢I");
+                    verbalize("¤ª¤¤¡¤¸°¤ò¾¡¼ê¤Ë³«¤±¤ë¤ó¤¸¤ã¤Ê¤¤¡ª");
                     levl[x][y].looted |= D_WARNED;
                 }
                 stop_occupation();
@@ -253,7 +253,7 @@ struct monst *mon;
 /*JP
             You("get released!");
 */
-            You("‰ğ•ú‚³‚ê‚½I");
+            You("²òÊü¤µ¤ì¤¿¡ª");
         }
     }
 }
@@ -296,12 +296,12 @@ boolean fleemsg;
 /*JP
                 pline("%s seems to flinch.", Adjmonnam(mtmp, "immobile"));
 */
-                pline("%s‚Í‚µ‚è‚²‚İ‚µ‚Ä‚¢‚é‚æ‚¤‚¾D", Monnam(mtmp));
+                pline("%s¤Ï¤·¤ê¤´¤ß¤·¤Æ¤¤¤ë¤è¤¦¤À¡¥", Monnam(mtmp));
             else
 /*JP
                 pline("%s turns to flee.", Monnam(mtmp));
 */
-                pline("%s‚Í‚¨‚Ñ‚¦‚Ä“¦‚°o‚µ‚½I", Monnam(mtmp));
+                pline("%s¤Ï¤ª¤Ó¤¨¤ÆÆ¨¤²½Ğ¤·¤¿¡ª", Monnam(mtmp));
         }
         mtmp->mflee = 1;
     }
@@ -472,8 +472,8 @@ register struct monst *mtmp;
             pline("%s whispers at thin air.",
                   cansee(mtmp->mux, mtmp->muy) ? Monnam(mtmp) : "It");
 #else
-            pline("%s‚ª‚³‚³‚â‚¢‚½D",
-                  cansee(mtmp->mux, mtmp->muy) ? Monnam(mtmp) : "‰½‚©");
+            pline("%s¤¬¤µ¤µ¤ä¤¤¤¿¡¥",
+                  cansee(mtmp->mux, mtmp->muy) ? Monnam(mtmp) : "²¿¤«");
 #endif
 
             if (is_demon(youmonst.data)) {
@@ -486,7 +486,7 @@ register struct monst *mtmp;
 /*JP
                 pline("%s gets angry!", Amonnam(mtmp));
 */
-                pline("%s‚Í“{‚Á‚½I", Amonnam(mtmp));
+                pline("%s¤ÏÅÜ¤Ã¤¿¡ª", Amonnam(mtmp));
                 mtmp->mpeaceful = 0;
                 set_malign(mtmp);
                 /* since no way is an image going to pay it off */
@@ -506,24 +506,24 @@ register struct monst *mtmp;
 /*JP
             pline("%s concentrates.", Monnam(mtmp));
 */
-            pline("%s‚Í¸_‚ğW’†‚µ‚Ä‚¢‚éD", Monnam(mtmp));
+            pline("%s¤ÏÀº¿À¤ò½¸Ãæ¤·¤Æ¤¤¤ë¡¥", Monnam(mtmp));
         if (distu(mtmp->mx, mtmp->my) > BOLT_LIM * BOLT_LIM) {
 /*JP
             You("sense a faint wave of psychic energy.");
 */
-            You("ƒTƒCƒRƒGƒlƒ‹ƒM[‚Ì”g“®‚ğŠ´‚¶‚½D");
+            You("¥µ¥¤¥³¥¨¥Í¥ë¥®¡¼¤ÎÇÈÆ°¤ò´¶¤¸¤¿¡¥");
             goto toofar;
         }
 /*JP
         pline("A wave of psychic energy pours over you!");
 */
-        pline("‚ ‚È‚½‚ÍƒTƒCƒRƒGƒlƒ‹ƒM[‚Ì”g“®‚ğ—‚Ñ‚½I");
+        pline("¤¢¤Ê¤¿¤Ï¥µ¥¤¥³¥¨¥Í¥ë¥®¡¼¤ÎÇÈÆ°¤òÍá¤Ó¤¿¡ª");
         if (mtmp->mpeaceful
             && (!Conflict || resist(mtmp, RING_CLASS, 0, 0))) {
 /*JP
             pline("It feels quite soothing.");
 */
-            pline("S‚ª‚È‚²‚ñ‚¾D");
+            pline("¿´¤¬¤Ê¤´¤ó¤À¡¥");
         } else if (!u.uinvulnerable) {
             register boolean m_sen = sensemon(mtmp);
 
@@ -534,9 +534,9 @@ register struct monst *mtmp;
                       m_sen ? "telepathy" : Blind_telepat ? "latent telepathy"
                                                           : "mind");
 #else
-                pline("‚»‚ê‚Í‚ ‚È‚½‚Ì%s‚ğ’¼Œ‚‚µ‚½I",
-                      m_sen ? "ƒeƒŒƒpƒV[”\—Í" : Blind_telepat ? "öİ”\—Í"
-                                                               : "¸_");
+                pline("¤½¤ì¤Ï¤¢¤Ê¤¿¤Î%s¤òÄ¾·â¤·¤¿¡ª",
+                      m_sen ? "¥Æ¥ì¥Ñ¥·¡¼Ç½ÎÏ" : Blind_telepat ? "ÀøºßÇ½ÎÏ"
+                                                               : "Àº¿À");
 #endif
                 dmg = rnd(15);
                 if (Half_spell_damage)
@@ -544,7 +544,7 @@ register struct monst *mtmp;
 /*JP
                 losehp(dmg, "psychic blast", KILLED_BY_AN);
 */
-                losehp(dmg, "ƒTƒCƒRUŒ‚‚Å", KILLED_BY_AN);
+                losehp(dmg, "¥µ¥¤¥³¹¶·â¤Ç", KILLED_BY_AN);
             }
         }
         for (m2 = fmon; m2; m2 = nmon) {
@@ -563,7 +563,7 @@ register struct monst *mtmp;
 /*JP
                     pline("It locks on to %s.", mon_nam(m2));
 */
-                    pline("%s‚ğ’¼Œ‚‚µ‚½D", mon_nam(m2));
+                    pline("%s¤òÄ¾·â¤·¤¿¡¥", mon_nam(m2));
                 m2->mhp -= rnd(15);
                 if (m2->mhp <= 0)
                     monkilled(m2, "", AD_DRIN);
@@ -709,7 +709,7 @@ register struct monst *mtmp;
 /*JP
         pline("%s cannot escape from you!", Monnam(mtmp));
 */
-        pline("%s‚Í‚ ‚È‚½‚©‚ç“¦‚°‚ç‚ê‚È‚¢I", Monnam(mtmp));
+        pline("%s¤Ï¤¢¤Ê¤¿¤«¤éÆ¨¤²¤é¤ì¤Ê¤¤¡ª", Monnam(mtmp));
         return TRUE;
     }
     return FALSE;
@@ -883,7 +883,7 @@ register int after;
 /*JP
             verbalize("I'm late!");
 */
-            verbalize("’x‚­‚È‚Á‚Ä‚·‚Ü‚È‚¢I");
+            verbalize("ÃÙ¤¯¤Ê¤Ã¤Æ¤¹¤Ş¤Ê¤¤¡ª");
         mongone(mtmp);
         return 2;
     }
@@ -1297,11 +1297,11 @@ postmov:
                                   ? "flows"
                                   : "oozes");
 #else
-                        pline("%s‚Í”à‚Ì‰º‚©‚ç%sD", Monnam(mtmp),
+                        pline("%s¤ÏÈâ¤Î²¼¤«¤é%s¡¥", Monnam(mtmp),
                               (ptr == &mons[PM_FOG_CLOUD]
                                || ptr == &mons[PM_YELLOW_LIGHT])
-                                  ? "—¬‚ê‚Å‚½"
-                                  : "‚É‚¶‚İ‚Å‚½");
+                                  ? "Î®¤ì¤Ç¤¿"
+                                  : "¤Ë¤¸¤ß¤Ç¤¿");
 #endif
                 } else if (here->doormask & D_LOCKED && can_unlock) {
                     if (btrapped) {
@@ -1316,18 +1316,18 @@ postmov:
 /*JP
                                 pline("%s unlocks and opens a door.",
 */
-                                pline("%s‚ÍŒ®‚ğ‚Í‚¸‚µ‚Ä”à‚ğŠJ‚¯‚½D",
+                                pline("%s¤Ï¸°¤ò¤Ï¤º¤·¤ÆÈâ¤ò³«¤±¤¿¡¥",
                                       Monnam(mtmp));
                             else if (canseeit)
 /*JP
                                 You_see("a door unlock and open.");
 */
-                                You("”à‚ÌŒ®‚ª‚Í‚¸‚êCŠJ‚­‚Ì‚ğŒ©‚½D");
+                                You("Èâ¤Î¸°¤¬¤Ï¤º¤ì¡¤³«¤¯¤Î¤ò¸«¤¿¡¥");
                             else if (!Deaf)
 /*JP
                                 You_hear("a door unlock and open.");
 */
-                                You_hear("”à‚ÌŒ®‚ª‚Í‚¸‚êCŠJ‚­‰¹‚ğ•·‚¢‚½D");
+                                You_hear("Èâ¤Î¸°¤¬¤Ï¤º¤ì¡¤³«¤¯²»¤òÊ¹¤¤¤¿¡¥");
                         }
                         here->doormask = D_ISOPEN;
                         /* newsym(mtmp->mx, mtmp->my); */
@@ -1346,17 +1346,17 @@ postmov:
 /*JP
                                 pline("%s opens a door.", Monnam(mtmp));
 */
-                                pline("%s‚Í”à‚ğŠJ‚¯‚½D", Monnam(mtmp));
+                                pline("%s¤ÏÈâ¤ò³«¤±¤¿¡¥", Monnam(mtmp));
                             else if (canseeit)
 /*JP
                                 You_see("a door open.");
 */
-                                You("”à‚ªŠJ‚­‚Ì‚ğŒ©‚½D");
+                                You("Èâ¤¬³«¤¯¤Î¤ò¸«¤¿¡¥");
                             else if (!Deaf)
 /*JP
                                 You_hear("a door open.");
 */
-                                You_hear("”à‚ªŠJ‚­‰¹‚ğ•·‚¢‚½D");
+                                You_hear("Èâ¤¬³«¤¯²»¤òÊ¹¤¤¤¿¡¥");
                         }
                         here->doormask = D_ISOPEN;
                         /* newsym(mtmp->mx, mtmp->my); */  /* done below */
@@ -1376,18 +1376,18 @@ postmov:
 /*JP
                                 pline("%s smashes down a door.",
 */
-                                pline("%s‚Í”à‚ğ”j‰ó‚µ‚½D",
+                                pline("%s¤ÏÈâ¤òÇË²õ¤·¤¿¡¥",
                                       Monnam(mtmp));
                             else if (canseeit)
 /*JP
                                 You_see("a door crash open.");
 */
-                                You("”à‚ª”j‰ó‚³‚ê‚é‚Ì‚ğŒ©‚½D");
+                                You("Èâ¤¬ÇË²õ¤µ¤ì¤ë¤Î¤ò¸«¤¿¡¥");
                             else if (!Deaf)
 /*JP
                                 You_hear("a door crash open.");
 */
-                                You_hear("”à‚ª”j‰ó‚³‚ê‚é‰¹‚ğ•·‚¢‚½D");
+                                You_hear("Èâ¤¬ÇË²õ¤µ¤ì¤ë²»¤òÊ¹¤¤¤¿¡¥");
                         }
                         if (here->doormask & D_LOCKED && !rn2(2))
                             here->doormask = D_NODOOR;
@@ -1407,7 +1407,7 @@ postmov:
 /*JP
                         pline("%s eats through the iron bars.", Monnam(mtmp));
 */
-                        pline("%s‚Í“S‚Ì–_‚ğH‚×‚Ä’Ê‚è”²‚¯‚½D", Monnam(mtmp));
+                        pline("%s¤ÏÅ´¤ÎËÀ¤ò¿©¤Ù¤ÆÄÌ¤êÈ´¤±¤¿¡¥", Monnam(mtmp));
                     dissolve_bars(mtmp->mx, mtmp->my);
                     return 3;
                 } else if (flags.verbose && canseemon(mtmp))
@@ -1417,8 +1417,8 @@ postmov:
                           makeplural(locomotion(ptr, "pass")),
                           passes_walls(ptr) ? "through" : "between");
 #else
-                    Norep("%s‚Í“S‚Ì–_%s‚ğ‚·‚è”²‚¯‚½D", Monnam(mtmp),
-                          passes_walls(ptr) ? "" : "‚ÌŠÔ");
+                    Norep("%s¤ÏÅ´¤ÎËÀ%s¤ò¤¹¤êÈ´¤±¤¿¡¥", Monnam(mtmp),
+                          passes_walls(ptr) ? "" : "¤Î´Ö");
 #endif
             }
 

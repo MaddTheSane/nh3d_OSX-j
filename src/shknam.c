@@ -210,7 +210,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "general store",
 */
-    { "G‰İ‰®",
+    { "»¨²ß²°",
       RANDOM_CLASS,
       42,
       D_SHOP,
@@ -224,7 +224,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "used armor dealership",
 */
-    { "’†ŒÃŠZ¤‰ï",
+    { "Ãæ¸Å³»¾¦²ñ",
       ARMOR_CLASS,
       14,
       D_SHOP,
@@ -238,7 +238,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "second-hand bookstore",
 */
-    { "ŒÃ‘“X",
+    { "¸Å½ñÅ¹",
       SCROLL_CLASS,
       10,
       D_SHOP,
@@ -252,7 +252,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "liquor emporium",
 */
-    {"‚¨ğ‚Ì•S‰İ“X",
+    {"¤ª¼ò¤ÎÉ´²ßÅ¹",
       POTION_CLASS,
       10,
       D_SHOP,
@@ -266,7 +266,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "antique weapons outlet",
 */
-    { "ŒÃ•Šíê–å¬”„“X",
+    { "¸ÅÉğ´ïÀìÌç¾®ÇäÅ¹",
       WEAPON_CLASS,
       5,
       D_SHOP,
@@ -280,7 +280,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "delicatessen",
 */
-    { "H•i“X",
+    { "¿©ÉÊÅ¹",
       FOOD_CLASS,
       5,
       D_SHOP,
@@ -294,7 +294,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "jewelers",
 */
-    { "•óÎ“X",
+    { "ÊõÀĞÅ¹",
       RING_CLASS,
       3,
       D_SHOP,
@@ -308,7 +308,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "quality apparel and accessories",
 */
-    { "‚¨ƒVƒƒƒŒ‚È—m•i“X",
+    { "¤ª¥·¥ã¥ì¤ÊÍÎÉÊÅ¹",
       WAND_CLASS,
       3,
       D_SHOP,
@@ -320,7 +320,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "hardware store",
 */
-    { "“¹‹ï‰®",
+    { "Æ»¶ñ²°",
       TOOL_CLASS,
       3,
       D_SHOP,
@@ -334,7 +334,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "rare books",
 */
-    { "Œ¶‚Ì–{‰®",
+    { "¸¸¤ÎËÜ²°",
       SPBOOK_CLASS,
       3,
       D_SHOP,
@@ -348,7 +348,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "health food store",
 */
-    { "Œ’NH•i‚Ì“X",
+    { "·ò¹¯¿©ÉÊ¤ÎÅ¹",
       FOOD_CLASS,
       2,
       D_SHOP,
@@ -366,7 +366,7 @@ const struct shclass shtypes[] = {
 /*JP
     { "lighting store",
 */
-    { "Æ–¾“X",
+    { "¾ÈÌÀÅ¹",
       TOOL_CLASS,
       0,
       D_SHOP,
@@ -768,7 +768,7 @@ register struct mkroom *sroom;
 /*JP
         Sprintf(buf, "Closed for inventory");
 */
-        Sprintf(buf, "’I‰µ‚µ‚Ì‚½‚ß•Â“X");
+        Sprintf(buf, "Ãª²·¤·¤Î¤¿¤áÊÄÅ¹");
         make_engr_at(m, n, buf, 0L, DUST);
     }
 

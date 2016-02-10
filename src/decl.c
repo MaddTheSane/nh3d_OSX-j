@@ -218,8 +218,8 @@ NEARDATA struct c_color_names c_color_names = {
 };
 #else
 NEARDATA struct c_color_names c_color_names = {
-    "НХВв",   "рцр▀РFВ╠", "ЛрРFВ╠", "РЕРFВ╠", "Р╘Вв", "Ч╬РFВ╠",
-    "ЛтРFВ╠", "Р┬Вв",     "ОЗРFВ╠", "ФТВв",   "ЮЄРFВ╠"
+    "╣їдд",   "ршрс┐зд╬", "╢т┐зд╬", "┐х┐зд╬", "└╓дд", "╬╨┐зд╬",
+    "╢ф┐зд╬", "└─дд",     "╗ч┐зд╬", "╟Єдд",   "▄Ї┐зд╬"
 };
 #endif
 
@@ -244,22 +244,22 @@ const char *c_obj_colors[] = {
     "bright cyan",    /* CLR_BRIGHT_CYAN */
     "white",          /* CLR_WHITE */
 #else
-    "НХВв",           /* CLR_BLACK */
-    "Р╘Вв",           /* CLR_RED */
-    "Ч╬РFВ╠",         /* CLR_GREEN */
-    "ТГРFВ╠",         /* CLR_BROWN */
-    "Р┬Вв",           /* CLR_BLUE */
-    "Г}Г[ГУГ^РFВ╠",   /* CLR_MAGENTA */
-    "ГVГAГУРFВ╠",     /* CLR_CYAN */
-    "КDРFВ╠",         /* CLR_GRAY */
-    "УзЦ╛В╚",         /* no_color */
-    "ЮЄРFВ╠",         /* CLR_ORANGE */
-    "Ц╛ВщВвЧ╬РFВ╠",   /* CLR_BRIGHT_GREEN */
-    "ЙйРFВ╠",         /* CLR_YELLOW */
-    "Ц╛ВщВвР┬РFВ╠",   /* CLR_BRIGHT_BLUE */
-    "Ц╛ВщВвГ}Г[ГУГ^РFВ╠", /* CLR_BRIGHT_MAGENTA */
-    "Ц╛ВщВвГVГAГУРFВ╠", /* CLR_BRIGHT_CYAN */
-    "ФТВв",           /* CLR_WHITE */
+    "╣їдд",           /* CLR_BLACK */
+    "└╓дд",           /* CLR_RED */
+    "╬╨┐зд╬",         /* CLR_GREEN */
+    "├у┐зд╬",         /* CLR_BROWN */
+    "└─дд",           /* CLR_BLUE */
+    "е▐е╝еєе┐┐зд╬",   /* CLR_MAGENTA */
+    "е╖евеє┐зд╬",     /* CLR_CYAN */
+    "│е┐зд╬",         /* CLR_GRAY */
+    "╞й╠└д╩",         /* no_color */
+    "▄Ї┐зд╬",         /* CLR_ORANGE */
+    "╠└дыдд╬╨┐зд╬",   /* CLR_BRIGHT_GREEN */
+    "▓л┐зд╬",         /* CLR_YELLOW */
+    "╠└дыдд└─┐зд╬",   /* CLR_BRIGHT_BLUE */
+    "╠└дыдде▐е╝еєе┐┐зд╬", /* CLR_BRIGHT_MAGENTA */
+    "╠└дыдде╖евеє┐зд╬", /* CLR_BRIGHT_CYAN */
+    "╟Єдд",           /* CLR_WHITE */
 #endif
 };
 
@@ -275,16 +275,16 @@ struct c_common_strings c_common_strings = { "Nothing happens.",
                                              "vision quickly clears.",
                                              { "the", "your" } };
 #else
-struct c_common_strings c_common_strings = { "Й╜ВрЛNВлВ╚ВйВ┴В╜БD",
-                                             "ВвВвЙ┴М╕В╔В╡ВыБI",
-                                             "%sБHВ╗ВшВсВ╬ВйВ░В─ВвВщБD",
-                                             "ИъПuРkВжВ╜БD",
-                                             "Й╜Вй",
-                                             "Й╜Вй",
-                                             "В▄В╜УоВпВщВцВдВ╔В╚В┴В╜БD",
-                                             "ВжБH",
-                                             "ОЛКEВкВ═В┴ВлВшВ╡В╜БD",
-                                             { "", "ВаВ╚В╜В╠" } };
+struct c_common_strings c_common_strings = { "▓┐дт╡пднд╩длд├д┐бе",
+                                             "дддд▓├╕║д╦д╖дэбк",
+                                             "%sбйд╜дъдуд╨длд▓д╞дддыбе",
+                                             "░ь╜╓┐╠дид┐бе",
+                                             "▓┐дл",
+                                             "▓┐дл",
+                                             "д▐д┐╞░д▒дыдшджд╦д╩д├д┐бе",
+                                             "дибй",
+                                             "╗ы│ждмд╧д├дндъд╖д┐бе",
+                                             { "", "двд╩д┐д╬" } };
 #endif
 
 /* NOTE: the order of these words exactly corresponds to the
@@ -297,12 +297,12 @@ const char *materialnm[] = { "mysterious", "liquid",  "wax",        "organic",
                              "platinum",   "mithril", "plastic",    "glass",
                              "gemstone",   "stone" };
 #else
-const char *materialnm[] = { "Р_Фщ", "ЙtПє", "ШX",   "ЧLЛ@",
-                             "Уў",   "ОЖ",   "Хz",   "Кv",
-                             "Ц╪",   "НЬ",   "Ч│Фч", "УS",
-                             "ЛрСо", "У║",   "ФТЛт", "Лр",
-                             "ГvГЙГ`Гi", "Г~ГXГКГЛ", "ГvГЙГXГ`ГbГN", "ГKГЙГX",
-                             "ХєР╬", "Р╬" };
+const char *materialnm[] = { "┐└╚ы", "▒╒╛ї", "╧╣",   "═н╡б",
+                             "╞∙",   "╗ц",   "╔█",   "│╫",
+                             "╠┌",   "╣№",   "╬╡╚щ", "┼┤",
+                             "╢т┬░", "╞╝",   "╟Є╢ф", "╢т",
+                             "е╫еще┴е╩", "е▀е╣еъеы", "е╫еще╣е┴е├еп", "емеще╣",
+                             "╩ї└╨", "└╨" };
 #endif
 
 /* Vision */

@@ -32,12 +32,12 @@ take_gold()
 /*JP
         You_feel("a strange sensation.");
 */
-        You("Šï–­‚ÈŠ´Šo‚ğŠo‚¦‚½D");
+        You("´ñÌ¯¤Ê´¶³Ğ¤ò³Ğ¤¨¤¿¡¥");
     } else {
 /*JP
         You("notice you have no money!");
 */
-        You("‚¨‹à‚ğ‚Á‚Ä‚È‚¢‚±‚Æ‚É‹C‚ª‚Â‚¢‚½I");
+        You("¤ª¶â¤ò»ı¤Ã¤Æ¤Ê¤¤¤³¤È¤Ëµ¤¤¬¤Ä¤¤¤¿¡ª");
         context.botl = 1;
     }
 }
@@ -49,7 +49,7 @@ dosit()
 /*JP
     static const char sit_message[] = "sit on the %s.";
 */
-    static const char sit_message[] = "%s‚ÉÀ‚Á‚½D";
+    static const char sit_message[] = "%s¤ËºÂ¤Ã¤¿¡¥";
     register struct trap *trap = t_at(u.ux, u.uy);
     register int typ = levl[u.ux][u.uy].typ;
 
@@ -57,7 +57,7 @@ dosit()
 /*JP
         You("are already sitting on %s.", mon_nam(u.usteed));
 */
-        You("‚à‚¤%s‚ÉÀ‚Á‚Ä‚¢‚éD", mon_nam(u.usteed));
+        You("¤â¤¦%s¤ËºÂ¤Ã¤Æ¤¤¤ë¡¥", mon_nam(u.usteed));
         return 0;
     }
     if (u.uundetected && is_hider(youmonst.data) && u.umonnum != PM_TRAPPER)
@@ -68,17 +68,17 @@ dosit()
 /*JP
             There("are no seats in here!");
 */
-            pline("‚±‚±‚É‚ÍˆÖq‚ª‚È‚¢I");
+            pline("¤³¤³¤Ë¤Ï°Ø»Ò¤¬¤Ê¤¤¡ª");
         else if (Levitation)
 /*JP
             You("tumble in place.");
 */
-            You("‚»‚Ìê‚Å’ˆ•Ô‚è‚µ‚½D");
+            You("¤½¤Î¾ì¤ÇÃèÊÖ¤ê¤·¤¿¡¥");
         else
 /*JP
             You("are sitting on air.");
 */
-            You("‹ó’†‚ÉÀ‚Á‚½D");
+            You("¶õÃæ¤ËºÂ¤Ã¤¿¡¥");
         return 0;
     } else if (u.ustuck && !sticks(youmonst.data)) {
         /* holding monster is next to hero rather than beneath, but
@@ -87,12 +87,12 @@ dosit()
 /*JP
             pline("%s won't offer %s lap.", Monnam(u.ustuck), mhis(u.ustuck));
 */
-            pline("%s‚Í‚Ğ‚´‚ğo‚³‚È‚©‚Á‚½D", Monnam(u.ustuck));
+            pline("%s¤Ï¤Ò¤¶¤ò½Ğ¤µ¤Ê¤«¤Ã¤¿¡¥", Monnam(u.ustuck));
         else
 /*JP
             pline("%s has no lap.", Monnam(u.ustuck));
 */
-            pline("%s‚É‚Í‚Ğ‚´‚ª‚È‚¢D", Monnam(u.ustuck));
+            pline("%s¤Ë¤Ï¤Ò¤¶¤¬¤Ê¤¤¡¥", Monnam(u.ustuck));
         return 0;
     } else if (is_pool(u.ux, u.uy) && !Underwater) { /* water walking */
         goto in_water;
@@ -110,20 +110,20 @@ dosit()
                 (obj->quan + money_cnt(invent) < u.ulevel * 1000) ? "meager "
                                                                   : "");
 #else
-            You("%s‚¨•ó‚Ì‚Ü‚í‚è‚Å‚Æ‚®‚ë‚ğŠª‚¢‚½D",
-                (obj->quan + money_cnt(invent) < u.ulevel * 1000) ? "‚í‚¸‚©‚È"
+            You("%s¤ªÊõ¤Î¤Ş¤ï¤ê¤Ç¤È¤°¤í¤ò´¬¤¤¤¿¡¥",
+                (obj->quan + money_cnt(invent) < u.ulevel * 1000) ? "¤ï¤º¤«¤Ê"
                                                                   : "");
 #endif
         } else {
 /*JP
             You("sit on %s.", the(xname(obj)));
 */
-            You("%s‚ÉÀ‚Á‚½D", the(xname(obj)));
+            You("%s¤ËºÂ¤Ã¤¿¡¥", the(xname(obj)));
             if (!(Is_box(obj) || objects[obj->otyp].oc_material == CLOTH))
 /*JP
                 pline("It's not very comfortable...");
 */
-                pline("‚ ‚Ü‚èÀ‚è‚²‚±‚¿‚ª‚æ‚­‚È‚¢DDD");
+                pline("¤¢¤Ş¤êºÂ¤ê¤´¤³¤Á¤¬¤è¤¯¤Ê¤¤¡¥¡¥¡¥");
         }
     } else if (trap != 0 || (u.utrap && (u.utraptype >= TT_LAVA))) {
         if (u.utrap) {
@@ -132,7 +132,7 @@ dosit()
 /*JP
                 You_cant("sit down with your %s in the bear trap.",
 */
-                pline("%s‚ªŒF‚Ìã©‚É‚Í‚³‚Ü‚Á‚Ä‚¢‚é‚Ì‚ÅÀ‚ê‚È‚¢D",
+                pline("%s¤¬·§¤Îæ«¤Ë¤Ï¤µ¤Ş¤Ã¤Æ¤¤¤ë¤Î¤ÇºÂ¤ì¤Ê¤¤¡¥",
                          body_part(FOOT));
                 u.utrap++;
             } else if (u.utraptype == TT_PIT) {
@@ -140,52 +140,52 @@ dosit()
 /*JP
                     You("sit down on a spike.  Ouch!");
 */
-                    You("ƒgƒQ‚Ìã‚ÉÀ‚Á‚½D‚¢‚Ä‚ÁI");
+                    You("¥È¥²¤Î¾å¤ËºÂ¤Ã¤¿¡¥¤¤¤Æ¤Ã¡ª");
                     losehp(Half_physical_damage ? rn2(2) : 1,
 /*JP
                            "sitting on an iron spike", KILLED_BY);
 */
-                           "“S‚ÌƒgƒQ‚Ìã‚ÉÀ‚Á‚Ä", KILLED_BY);
+                           "Å´¤Î¥È¥²¤Î¾å¤ËºÂ¤Ã¤Æ", KILLED_BY);
                     exercise(A_STR, FALSE);
                 } else
 /*JP
                     You("sit down in the pit.");
 */
-                    You("—‚µŒŠ‚Ì’†‚ÅÀ‚Á‚½D");
+                    You("Íî¤··ê¤ÎÃæ¤ÇºÂ¤Ã¤¿¡¥");
                 u.utrap += rn2(5);
             } else if (u.utraptype == TT_WEB) {
 /*JP
                 You("sit in the spider web and get entangled further!");
 */
-                You("‚­‚à‚Ì‘ƒ‚Ì’†‚ÅÀ‚Á‚½‚çC‚Ü‚·‚Ü‚·—‚Ü‚Á‚½I");
+                You("¤¯¤â¤ÎÁã¤ÎÃæ¤ÇºÂ¤Ã¤¿¤é¡¤¤Ş¤¹¤Ş¤¹Íí¤Ş¤Ã¤¿¡ª");
                 u.utrap += rn1(10, 5);
             } else if (u.utraptype == TT_LAVA) {
                 /* Must have fire resistance or they'd be dead already */
 /*JP
                 You("sit in the lava!");
 */
-                You("—nŠâ‚Ì’†‚ÉÀ‚Á‚½I");
+                You("ÍÏ´ä¤ÎÃæ¤ËºÂ¤Ã¤¿¡ª");
                 if (Slimed)
                     burn_away_slime();
                 u.utrap += rnd(4);
 /*JP
                 losehp(d(2, 10), "sitting in lava",
 */
-                losehp(d(2, 10), "—nŠâ‚Ì’†‚ÉÀ‚Á‚Ä",
+                losehp(d(2, 10), "ÍÏ´ä¤ÎÃæ¤ËºÂ¤Ã¤Æ",
                        KILLED_BY); /* lava damage */
             } else if (u.utraptype == TT_INFLOOR
                        || u.utraptype == TT_BURIEDBALL) {
 /*JP
                 You_cant("maneuver to sit!");
 */
-                You("À‚é‚æ‚¤‚È“®ì‚ª‚Å‚«‚È‚¢I");
+                You("ºÂ¤ë¤è¤¦¤ÊÆ°ºî¤¬¤Ç¤­¤Ê¤¤¡ª");
                 u.utrap++;
             }
         } else {
 /*JP
             You("sit down.");
 */
-            You("À‚Á‚½D");
+            You("ºÂ¤Ã¤¿¡¥");
             dotrap(trap, 0);
         }
     } else if (Underwater || Is_waterlevel(&u.uz)) {
@@ -193,34 +193,34 @@ dosit()
 /*JP
             There("are no cushions floating nearby.");
 */
-            pline("‹ß‚­‚É•‚‚¢‚Ä‚¢‚éƒNƒbƒVƒ‡ƒ“‚Í‚È‚¢D");
+            pline("¶á¤¯¤ËÉâ¤¤¤Æ¤¤¤ë¥¯¥Ã¥·¥ç¥ó¤Ï¤Ê¤¤¡¥");
         else
 /*JP
             You("sit down on the muddy bottom.");
 */
-            You("‚Ç‚ë‚Ç‚ë‚µ‚½’ê‚ÉÀ‚Á‚½D");
+            You("¤É¤í¤É¤í¤·¤¿Äì¤ËºÂ¤Ã¤¿¡¥");
     } else if (is_pool(u.ux, u.uy)) {
     in_water:
 /*JP
         You("sit in the water.");
 */
-        You("…‚Ì’†‚ÅÀ‚Á‚½D");
+        You("¿å¤ÎÃæ¤ÇºÂ¤Ã¤¿¡¥");
         if (!rn2(10) && uarm)
 /*JP
             (void) water_damage(uarm, "armor", TRUE);
 */
-            (void) water_damage(uarm, "ŠZ", TRUE);
+            (void) water_damage(uarm, "³»", TRUE);
         if (!rn2(10) && uarmf && uarmf->otyp != WATER_WALKING_BOOTS)
 /*JP
             (void) water_damage(uarm, "armor", TRUE);
 */
-            (void) water_damage(uarm, "ŠZ", TRUE);
+            (void) water_damage(uarm, "³»", TRUE);
     } else if (IS_SINK(typ)) {
         You(sit_message, defsyms[S_sink].explanation);
 /*JP
         Your("%s gets wet.", humanoid(youmonst.data) ? "rump" : "underside");
 */
-        Your("%s‚Í”G‚ê‚½D", humanoid(youmonst.data) ? "K" : "‰º•”");
+        Your("%s¤ÏÇ¨¤ì¤¿¡¥", humanoid(youmonst.data) ? "¿¬" : "²¼Éô");
     } else if (IS_ALTAR(typ)) {
         You(sit_message, defsyms[S_altar].explanation);
         altar_wrath(u.ux, u.uy);
@@ -230,47 +230,47 @@ dosit()
 /*JP
         You(sit_message, "stairs");
 */
-        You(sit_message, "ŠK’i");
+        You(sit_message, "³¬ÃÊ");
     } else if (typ == LADDER) {
 /*JP
         You(sit_message, "ladder");
 */
-        You(sit_message, "‚Í‚µ‚²");
+        You(sit_message, "¤Ï¤·¤´");
     } else if (is_lava(u.ux, u.uy)) {
         /* must be WWalking */
 /*JP
         You(sit_message, "lava");
 */
-        You(sit_message, "—nŠâ");
+        You(sit_message, "ÍÏ´ä");
         burn_away_slime();
         if (likes_lava(youmonst.data)) {
 /*JP
             pline_The("lava feels warm.");
 */
-            pline("—nŠâ‚Í’g‚©‚¢D");
+            pline("ÍÏ´ä¤ÏÃÈ¤«¤¤¡¥");
             return 1;
         }
 /*JP
         pline_The("lava burns you!");
 */
-        You("—nŠâ‚Å”R‚¦‚½I");
+        You("ÍÏ´ä¤ÇÇ³¤¨¤¿¡ª");
         losehp(d((Fire_resistance ? 2 : 10), 10), /* lava damage */
 /*JP
                "sitting on lava", KILLED_BY);
 */
-               "—nŠâ‚ÉÀ‚Á‚Ä", KILLED_BY);
+               "ÍÏ´ä¤ËºÂ¤Ã¤Æ", KILLED_BY);
     } else if (is_ice(u.ux, u.uy)) {
         You(sit_message, defsyms[S_ice].explanation);
         if (!Cold_resistance)
 /*JP
             pline_The("ice feels cold.");
 */
-            pline("•X‚Í—â‚½‚­Š´‚¶‚½D");
+            pline("É¹¤ÏÎä¤¿¤¯´¶¤¸¤¿¡¥");
     } else if (typ == DRAWBRIDGE_DOWN) {
 /*JP
         You(sit_message, "drawbridge");
 */
-        You(sit_message, "’µ‚Ë‹´");
+        You(sit_message, "Ä·¤Í¶¶");
     } else if (IS_THRONE(typ)) {
         You(sit_message, defsyms[S_throne].explanation);
         if (rnd(6) > 4) {
@@ -280,7 +280,7 @@ dosit()
 /*JP
                 losehp(rnd(10), "cursed throne", KILLED_BY_AN);
 */
-                losehp(rnd(10), "ô‚í‚ê‚½‹ÊÀ‚Å", KILLED_BY_AN);
+                losehp(rnd(10), "¼ö¤ï¤ì¤¿¶ÌºÂ¤Ç", KILLED_BY_AN);
                 break;
             case 2:
                 (void) adjattrib(rn2(A_MAX), 1, FALSE);
@@ -290,13 +290,13 @@ dosit()
                 pline("A%s electric shock shoots through your body!",
                       (Shock_resistance) ? "n" : " massive");
 #else
-                pline("%s“d‹C‚ª‚ ‚È‚½‚Ì‘Ì‚ğ‘–‚è”²‚¯‚½I",
-                      (Shock_resistance) ? "" : "Œƒ‚µ‚¢");
+                pline("%sÅÅµ¤¤¬¤¢¤Ê¤¿¤ÎÂÎ¤òÁö¤êÈ´¤±¤¿¡ª",
+                      (Shock_resistance) ? "" : "·ã¤·¤¤");
 #endif
 /*JP
                 losehp(Shock_resistance ? rnd(6) : rnd(30), "electric chair",
 */
-                losehp(Shock_resistance ? rnd(6) : rnd(30), "“d‹CˆÖq‚Å",
+                losehp(Shock_resistance ? rnd(6) : rnd(30), "ÅÅµ¤°Ø»Ò¤Ç",
                        KILLED_BY_AN);
                 exercise(A_CON, FALSE);
                 break;
@@ -304,7 +304,7 @@ dosit()
 /*JP
                 You_feel("much, much better!");
 */
-                You_feel("‚Æ‚Ä‚àC‚Æ‚Ä‚àŒ³‹C‚É‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½I");
+                You_feel("¤È¤Æ¤â¡¤¤È¤Æ¤â¸µµ¤¤Ë¤Ê¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡ª");
                 if (Upolyd) {
                     if (u.mh >= (u.mhmax - 5))
                         u.mhmax += 4;
@@ -326,7 +326,7 @@ dosit()
 /*JP
                     You_feel("your luck is changing.");
 */
-                    pline("‰^‚ªŒü‚¢‚Ä‚«‚½‹C‚ª‚·‚éD");
+                    pline("±¿¤¬¸ş¤¤¤Æ¤­¤¿µ¤¤¬¤¹¤ë¡¥");
                     change_luck(1);
                 } else
                     makewish();
@@ -339,13 +339,13 @@ dosit()
 /*JP
                 pline("A voice echoes:");
 */
-                pline("º‚ª‹¿‚¢‚½:");
+                pline("À¼¤¬¶Á¤¤¤¿:");
 #if 0 /*JP*/
                 verbalize("Thy audience hath been summoned, %s!",
                           flags.female ? "Dame" : "Sire");
 #else
-                verbalize("%s‚æI“ğ‚Ì’®O¢Š«‚³‚ê‚µD",
-                          flags.female ? "—" : "’j");
+                verbalize("%s¤è¡ªÆò¤ÎÄ°½°¾¤´­¤µ¤ì¤·¡¥",
+                          flags.female ? "½÷" : "ÃË");
 #endif
                 while (cnt--)
                     (void) makemon(courtmon(), u.ux, u.uy, NO_MM_FLAGS);
@@ -356,13 +356,13 @@ dosit()
 /*JP
                 pline("A voice echoes:");
 */
-                pline("º‚ª‹¿‚¢‚½:");
+                pline("À¼¤¬¶Á¤¤¤¿:");
 #if 0 /*JP*/
                 verbalize("By thine Imperious order, %s...",
                           flags.female ? "Dame" : "Sire");
 #else
-                verbalize("%s‚æI“ğ‚Ì˜ü–•·‚«‚¢‚ê‚æ‚¤‚¼D",
-                          flags.female ? "—" : "’j");
+                verbalize("%s¤è¡ªÆò¤ÎĞşËıÊ¹¤­¤¤¤ì¤è¤¦¤¾¡¥",
+                          flags.female ? "½÷" : "ÃË");
 #endif
                 do_genocide(5); /* REALLY|ONTHRONE, see do_genocide() */
                 break;
@@ -371,12 +371,12 @@ dosit()
 /*JP
                 pline("A voice echoes:");
 */
-                pline("º‚ª‹¿‚¢‚½:");
+                pline("À¼¤¬¶Á¤¤¤¿:");
                 verbalize(
 /*JP
                  "A curse upon thee for sitting upon this most holy throne!");
 */
-                 "¹‚È‚é‹ÊÀ‚ÉÀ‚è‚µ“ğ‚Éô‚¢‚ ‚êI");
+                 "À»¤Ê¤ë¶ÌºÂ¤ËºÂ¤ê¤·Æò¤Ë¼ö¤¤¤¢¤ì¡ª");
                 if (Luck > 0) {
                     make_blinded(Blinded + rn1(100, 250), TRUE);
                 } else
@@ -388,21 +388,21 @@ dosit()
 /*JP
                         pline("A terrible drone fills your head!");
 */
-                        pline("‹°‚µ‚¢ƒuƒ“ƒuƒ“‚Æ‚¢‚¤‰¹‚ª“ª‚É‹¿‚¢‚½I");
+                        pline("¶²¤·¤¤¥Ö¥ó¥Ö¥ó¤È¤¤¤¦²»¤¬Æ¬¤Ë¶Á¤¤¤¿¡ª");
                         make_confused((HConfusion & TIMEOUT) + (long) rnd(30),
                                       FALSE);
                     } else {
 /*JP
                         pline("An image forms in your mind.");
 */
-                        pline("‚ ‚éƒCƒ[ƒW‚ª“ª‚É•‚‚ñ‚¾D");
+                        pline("¤¢¤ë¥¤¥á¡¼¥¸¤¬Æ¬¤ËÉâ¤ó¤À¡¥");
                         do_mapping();
                     }
                 } else {
 /*JP
                     Your("vision becomes clear.");
 */
-                    Your("‹ŠE‚Íá‚¦“n‚Á‚½D");
+                    Your("»ë³¦¤Ïºã¤¨ÅÏ¤Ã¤¿¡¥");
                     HSee_invisible |= FROMOUTSIDE;
                     newsym(u.ux, u.uy);
                 }
@@ -412,13 +412,13 @@ dosit()
 /*JP
                     You_feel("threatened.");
 */
-                    You("‹º”—‚³‚ê‚Ä‚¢‚é‚æ‚¤‚È‹C‚ª‚µ‚½D");
+                    You("¶¼Ç÷¤µ¤ì¤Æ¤¤¤ë¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
                     aggravate();
                 } else {
 /*JP
                     You_feel("a wrenching sensation.");
 */
-                    You("‚Ë‚¶‚ç‚ê‚½‚æ‚¤‚ÈŠ´Šo‚ğŠ´‚¶‚½D");
+                    You("¤Í¤¸¤é¤ì¤¿¤è¤¦¤Ê´¶³Ğ¤ò´¶¤¸¤¿¡¥");
                     tele(); /* teleport him */
                 }
                 break;
@@ -426,7 +426,7 @@ dosit()
 /*JP
                 You("are granted an insight!");
 */
-                You("“´@—Í‚ğ“¾‚½I");
+                You("Æ¶»¡ÎÏ¤òÆÀ¤¿¡ª");
                 if (invent) {
                     /* rn2(5) agrees w/seffects() */
                     identify_pack(rn2(5), FALSE);
@@ -436,7 +436,7 @@ dosit()
 /*JP
                 Your("mind turns into a pretzel!");
 */
-                Your("S‚ÍƒNƒlƒNƒl‚É‚È‚Á‚½I");
+                Your("¿´¤Ï¥¯¥Í¥¯¥Í¤Ë¤Ê¤Ã¤¿¡ª");
                 make_confused((HConfusion & TIMEOUT) + (long) rn1(7, 16),
                               FALSE);
                 break;
@@ -449,12 +449,12 @@ dosit()
 /*JP
                 You_feel("very comfortable here.");
 */
-                You("‚±‚±‚Í‚Æ‚Ä‚à—‚¿’…‚­D");
+                You("¤³¤³¤Ï¤È¤Æ¤âÍî¤ÁÃå¤¯¡¥");
             else
 /*JP
                 You_feel("somehow out of place...");
 */
-                You("‰½‚©êˆá‚¢‚Ì‹C‚ª‚µ‚½DDD");
+                You("²¿¤«¾ì°ã¤¤¤Îµ¤¤¬¤·¤¿¡¥¡¥¡¥");
         }
 
         if (!rn2(3) && IS_THRONE(levl[u.ux][u.uy].typ)) {
@@ -463,7 +463,7 @@ dosit()
 /*JP
             pline_The("throne vanishes in a puff of logic.");
 */
-            pline("‹ÊÀ‚Í‚Ó‚Á‚ÆÁ‚¦‚½D");
+            pline("¶ÌºÂ¤Ï¤Õ¤Ã¤È¾Ã¤¨¤¿¡¥");
             newsym(u.ux, u.uy);
         }
     } else if (lays_eggs(youmonst.data)) {
@@ -476,9 +476,9 @@ dosit()
                       ? "You may think you are a platypus, but a male still"
                       : "Males");
 #else
-            pline("%s—Y‚Í—‘‚ğY‚ß‚È‚¢I",
+            pline("%sÍº¤ÏÍñ¤ò»º¤á¤Ê¤¤¡ª",
                   Hallucination
-                      ? "‚ ‚È‚½‚Í©•ª‚ªƒJƒ‚ƒmƒnƒV‚¾‚Æv‚Á‚Ä‚¢‚é‚©‚à‚µ‚ê‚È‚¢‚ªC‚â‚Á‚Ï‚è"
+                      ? "¤¢¤Ê¤¿¤Ï¼«Ê¬¤¬¥«¥â¥Î¥Ï¥·¤À¤È»×¤Ã¤Æ¤¤¤ë¤«¤â¤·¤ì¤Ê¤¤¤¬¡¤¤ä¤Ã¤Ñ¤ê"
                       : "");
 #endif
             return 0;
@@ -486,7 +486,7 @@ dosit()
 /*JP
             You("don't have enough energy to lay an egg.");
 */
-            You("—‘‚ğY‚Ş‚¾‚¯‚ÌƒGƒlƒ‹ƒM[‚ª‚È‚¢D");
+            You("Íñ¤ò»º¤à¤À¤±¤Î¥¨¥Í¥ë¥®¡¼¤¬¤Ê¤¤¡¥");
             return 0;
         }
 
@@ -500,7 +500,7 @@ dosit()
 /*JP
         You("lay an egg.");
 */
-        You("—‘‚ğY‚ñ‚¾D");
+        You("Íñ¤ò»º¤ó¤À¡¥");
         dropy(uegg);
         stackobj(uegg);
         morehungry((int) objects[EGG].oc_nutrition);
@@ -508,7 +508,7 @@ dosit()
 /*JP
         pline("Having fun sitting on the %s?", surface(u.ux, u.uy));
 */
-        pline("%s‚ÉÀ‚Á‚ÄŠy‚µ‚¢‚©‚¢H", surface(u.ux,u.uy));
+        pline("%s¤ËºÂ¤Ã¤Æ³Ú¤·¤¤¤«¤¤¡©", surface(u.ux,u.uy));
     }
     return 1;
 }
@@ -523,13 +523,13 @@ rndcurse()
 /*JP
     static const char mal_aura[] = "feel a malignant aura surround %s.";
 */
-    static const char mal_aura[] = "×ˆ«‚ÈƒI[ƒ‰‚ğ%s‚Ì‰ñ‚è‚ÉŠ´‚¶‚½D";
+    static const char mal_aura[] = "¼Ù°­¤Ê¥ª¡¼¥é¤ò%s¤Î²ó¤ê¤Ë´¶¤¸¤¿¡¥";
 
     if (uwep && (uwep->oartifact == ART_MAGICBANE) && rn2(20)) {
 /*JP
         You(mal_aura, "the magic-absorbing blade");
 */
-        You(mal_aura, "–‚—Í‚ğ‹z‚¢‚Æ‚é“");
+        You(mal_aura, "ËâÎÏ¤òµÛ¤¤¤È¤ëÅá");
         return;
     }
 
@@ -538,7 +538,7 @@ rndcurse()
 /*JP
         You(mal_aura, "you");
 */
-        You(mal_aura, "‚ ‚È‚½");
+        You(mal_aura, "¤¢¤Ê¤¿");
     }
 
     for (otmp = invent; otmp; otmp = otmp->nobj) {
@@ -568,7 +568,7 @@ rndcurse()
 /*JP
                 pline("%s!", Tobjnam(otmp, "resist"));
 */
-                pline("%s‚Í‰e‹¿‚ğó‚¯‚È‚¢I", xname(otmp));
+                pline("%s¤Ï±Æ¶Á¤ò¼õ¤±¤Ê¤¤¡ª", xname(otmp));
                 continue;
             }
 
@@ -592,8 +592,8 @@ rndcurse()
             pline("%s %s.", Yobjnam2(otmp, "glow"),
                   hcolor(otmp->cursed ? NH_BLACK : (const char *) "brown"));
 #else
-            pline("%s‚Í%s‹P‚¢‚½D", xname(otmp),
-                  jconj_adj(hcolor(otmp->cursed ? NH_BLACK : (const char *)"’ƒF‚Ì")));
+            pline("%s¤Ï%sµ±¤¤¤¿¡¥", xname(otmp),
+                  jconj_adj(hcolor(otmp->cursed ? NH_BLACK : (const char *)"Ãã¿§¤Î")));
 #endif
             otmp->bknown = TRUE;
         }
@@ -611,7 +611,7 @@ attrcurse()
 /*JP
             You_feel("warmer.");
 */
-            You("’g‚©‚³‚ğŠ´‚¶‚½D");
+            You("ÃÈ¤«¤µ¤ò´¶¤¸¤¿¡¥");
             break;
         }
     case 2:
@@ -620,7 +620,7 @@ attrcurse()
 /*JP
             You_feel("less jumpy.");
 */
-            You("‚¿‚å‚Á‚Æ—‚¿‚Â‚¢‚½D");
+            You("¤Á¤ç¤Ã¤ÈÍî¤Á¤Ä¤¤¤¿¡¥");
             break;
         }
     case 3:
@@ -629,7 +629,7 @@ attrcurse()
 /*JP
             You_feel("a little sick!");
 */
-            You("­‚µ‹C•ª‚ªˆ«‚­‚È‚Á‚½I");
+            You("¾¯¤·µ¤Ê¬¤¬°­¤¯¤Ê¤Ã¤¿¡ª");
             break;
         }
     case 4:
@@ -640,7 +640,7 @@ attrcurse()
 /*JP
             Your("senses fail!");
 */
-            Your("ŒÜŠ´‚Í–ƒáƒ‚µ‚½I");
+            Your("¸Ş´¶¤ÏËãáã¤·¤¿¡ª");
             break;
         }
     case 5:
@@ -649,7 +649,7 @@ attrcurse()
 /*JP
             You_feel("cooler.");
 */
-            You("—Á‚µ‚³‚ğŠ´‚¶‚½D");
+            You("ÎÃ¤·¤µ¤ò´¶¤¸¤¿¡¥");
             break;
         }
     case 6:
@@ -658,7 +658,7 @@ attrcurse()
 /*JP
             You_feel("paranoid.");
 */
-            You("–Ï‘z‚ğ•ø‚¢‚½D");
+            You("ÌÑÁÛ¤òÊú¤¤¤¿¡¥");
             break;
         }
     case 7:
@@ -669,9 +669,9 @@ attrcurse()
                                      : "thought you saw something");
 #else
             if(Hallucination)
-                You("‚¾‚êŠI‚İ‚çC‚ê‚Ä‚¢‚éD");
+                You("¤À¤ì³ª¤ß¤é¡¤¤ì¤Æ¤¤¤ë¡¥");
             else
-                You("’N‚©‚ÉŒ©‚ç‚ê‚Ä‚¢‚é‚æ‚¤‚È‹C‚ª‚µ‚½I");
+                You("Ã¯¤«¤Ë¸«¤é¤ì¤Æ¤¤¤ë¤è¤¦¤Êµ¤¤¬¤·¤¿¡ª");
 #endif
             break;
         }
@@ -681,7 +681,7 @@ attrcurse()
 /*JP
             You_feel("slower.");
 */
-            You("’x‚­‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½D");
+            You("ÃÙ¤¯¤Ê¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
             break;
         }
     case 9:
@@ -690,7 +690,7 @@ attrcurse()
 /*JP
             You_feel("clumsy.");
 */
-            You("•sŠí—p‚É‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½D");
+            You("ÉÔ´ïÍÑ¤Ë¤Ê¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
             break;
         }
     case 10:
@@ -700,7 +700,7 @@ attrcurse()
 /*JP
             You_feel("vulnerable.");
 */
-            You("–³–h”õ‚É‚È‚Á‚½‹C‚ª‚µ‚½D");
+            You("ÌµËÉÈ÷¤Ë¤Ê¤Ã¤¿µ¤¤¬¤·¤¿¡¥");
             break;
         }
     case 11:
@@ -709,7 +709,7 @@ attrcurse()
 /*JP
             You_feel("less attractive.");
 */
-            You("–£—Í‚ª¸‚¹‚½‚æ‚¤‚È‹C‚ª‚µ‚½D");
+            You("Ì¥ÎÏ¤¬¼º¤»¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
             break;
         }
     default:

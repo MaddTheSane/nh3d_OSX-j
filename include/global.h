@@ -16,6 +16,7 @@
  */
 
 #define RECORD "record"         /* file containing list of topscorers */
+#if 0 /*JP*/
 #define HELP "help"             /* file containing command descriptions */
 #define SHELP "hh"              /* abbreviated form of the same */
 #define DEBUGHELP "wizhelp"     /* file containing debug mode cmds */
@@ -32,6 +33,20 @@
 #define ENGRAVEFILE "engrave"   /* random engravings on the floor */
 #define BOGUSMONFILE "bogusmon" /* hallucinatory monsters */
 #define TRIBUTEFILE "tribute"   /* 3.6 tribute to Terry Pratchett */
+#else
+#define DATAFILE      "data"	/* file giving the meaning of symbols used */
+#define LICENSE       "license" /* file with license information */
+#define OPTIONS_USED  "options" /* compile-time options, for #version */
+#define HELP		"jhelp"	  /* a file containing command descriptions */
+#define RUMORFILE	"jrumors"	/* Japanese version */
+#define ORACLEFILE	"joracles"	/* Japanese version */
+#define SHELP		"jhh"		/* Japanese version */
+#define DEBUGHELP	"jwizhelp"	/* Japanese version */
+#define CMDHELPFILE	"jcmdhelp"	/* file telling what commands do */
+#define HISTORY		"jhistory"	/* a file giving nethack's history */
+#define OPTIONFILE	"jopthelp"	/* a file explaining runtime options */
+#endif
+
 #define LEV_EXT ".lev"          /* extension for special level files */
 
 /* Assorted definitions that may depend on selections in config.h. */
@@ -200,6 +215,10 @@ typedef uchar nhsym;
 #endif
 #endif
 
+#if defined(MSDOS) || defined(CYGWIN32)
+# define SJIS_FILESYSTEM	/* filename encoding is sjis */ 
+#endif
+
 #ifdef VMS
 /* vms_exit() (sys/vms/vmsmisc.c) expects the non-VMS EXIT_xxx values below.
  * these definitions allow all systems to be treated uniformly, provided
@@ -221,8 +240,8 @@ typedef uchar nhsym;
 #define EXIT_FAILURE 1
 #endif
 
-#if defined(X11_GRAPHICS) || defined(QT_GRAPHICS) || defined(GNOME_GRAPHICS) \
-    || defined(WIN32)
+/*NetHack3D*/
+#if defined(X11_GRAPHICS) || defined(QT_GRAPHICS) || defined(GNOME_GRAPHICS) || defined(MSWIN_GRAPHICS) || defined(NH3D_GRAPHICS)
 #ifndef USE_TILES
 #define USE_TILES /* glyph2tile[] will be available */
 #endif

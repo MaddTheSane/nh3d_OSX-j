@@ -484,7 +484,7 @@ static NEARDATA const char *trap_engravings[TRAPNUM] = {
 /*JP
     "Vlad was here", "ad aerarium", "ad aerarium", (char *) 0, (char *) 0,
 */
-    "ƒ”ƒ‰ƒh‚Í‚±‚±‚É‚¢‚é", "ad aerarium", "ad aerarium", (char *) 0, (char *) 0,
+    "¥ô¥é¥É¤Ï¤³¤³¤Ë¤¤¤ë", "ad aerarium", "ad aerarium", (char *) 0, (char *) 0,
     (char *) 0,      (char *) 0,    (char *) 0,    (char *) 0, (char *) 0,
 };
 
@@ -1507,7 +1507,7 @@ struct mkroom *croom;
 /*JP
     make_grave(m.x, m.y, dobell ? "Saved by the bell!" : (char *) 0);
 */
-    make_grave(m.x, m.y, dobell ? "ƒxƒ‹‚É‹~‚í‚ê‚½I" : (char *) 0);
+    make_grave(m.x, m.y, dobell ? "¥Ù¥ë¤Ëµß¤ï¤ì¤¿¡ª" : (char *) 0);
 
     /* Possibly fill it with objects */
     if (!rn2(3))
@@ -1551,11 +1551,11 @@ mkinvokearea()
 /*JP
     pline_The("floor shakes violently under you!");
 */
-    pline("‚ ‚È‚½‚Ì‰º‚Ì°‚ª“Ë‘R—h‚ê‚½I");
+    pline("¤¢¤Ê¤¿¤Î²¼¤Î¾²¤¬ÆÍÁ³ÍÉ¤ì¤¿¡ª");
 /*JP
     pline_The("walls around you begin to bend and crumble!");
 */
-    pline("‚»‚µ‚Ä‚Ü‚í‚è‚Ì•Ç‚ª‚Ë‚¶‚êCÓ‚¯‚½I");
+    pline("¤½¤·¤Æ¤Ş¤ï¤ê¤ÎÊÉ¤¬¤Í¤¸¤ì¡¤ºÕ¤±¤¿¡ª");
     display_nhwindow(WIN_MESSAGE, TRUE);
 
     /* any trap hero is stuck in will be going away now */
@@ -1593,7 +1593,7 @@ mkinvokearea()
 /*JP
     You("are standing at the top of a stairwell leading down!");
 */
-    You("‰º‚É‘±‚­‚«”²‚¯ŠK’i‚Ìã‚É—§‚Á‚Ä‚¢‚éI");
+    You("²¼¤ËÂ³¤¯¿á¤­È´¤±³¬ÃÊ¤Î¾å¤ËÎ©¤Ã¤Æ¤¤¤ë¡ª");
     mkstairs(u.ux, u.uy, 0, (struct mkroom *) 0); /* down */
     newsym(u.ux, u.uy);
     vision_full_recalc = 1; /* everything changed */
@@ -1698,7 +1698,7 @@ xchar x, y;
 /*JP
     br = dungeon_branch("Fort Ludios");
 */
-    br = dungeon_branch("ƒ[ƒfƒBƒIƒXÔ");
+    br = dungeon_branch("¥í¡¼¥Ç¥£¥ª¥¹ºÖ");
     if (on_level(&knox_level, &br->end1)) {
         source = &br->end2;
     } else {
@@ -1716,7 +1716,7 @@ xchar x, y;
 #if 0 /*JP*/
           && !at_dgn_entrance("The Quest")    /* but not Quest's entry */
 #else
-          && !at_dgn_entrance("ƒNƒGƒXƒg")     /* but not Quest's entry */
+          && !at_dgn_entrance("¥¯¥¨¥¹¥È")     /* but not Quest's entry */
 #endif
           && (u_depth = depth(&u.uz)) > 10    /* beneath 10 */
           && u_depth < depth(&medusa_level))) /* and above Medusa */

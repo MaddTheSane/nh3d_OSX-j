@@ -106,7 +106,7 @@ int expltype;
 /*JP
             str = "magical blast";
 */
-            str = "ñÇñ@ÇÃïó";
+            str = "À‚À°§Œ…˜";
             adtyp = AD_MAGM;
             break;
         case 1:
@@ -114,8 +114,8 @@ int expltype;
             str = (olet == BURNING_OIL) ? "burning oil"
                      : (olet == SCROLL_CLASS) ? "tower of flame" : "fireball";
 #else
-            str = (olet == BURNING_OIL) ? "îRÇ¶ÇƒÇ¢ÇÈñ˚"
-                     : (olet == SCROLL_CLASS) ? "âŒíå" : "âŒÇÃã ";
+            str = (olet == BURNING_OIL) ? "«≥§®§∆§§§ÎÃ˝"
+                     : (olet == SCROLL_CLASS) ? "≤–√Ï" : "≤–§Œ∂Ã";
 #endif
             /* fire damage, not physical damage */
             adtyp = AD_FIRE;
@@ -124,7 +124,7 @@ int expltype;
 /*JP
             str = "ball of cold";
 */
-            str = "ïXÇÃã ";
+            str = "…π§Œ∂Ã";
             adtyp = AD_COLD;
             break;
         case 4:
@@ -132,8 +132,8 @@ int expltype;
             str = (olet == WAND_CLASS) ? "death field"
                                        : "disintegration field";
 #else
-            str = (olet == WAND_CLASS) ? "éÄÇÃïó"
-                                       : "ï™âÇÃïó";
+            str = (olet == WAND_CLASS) ? "ª‡§Œ…˜"
+                                       : " ¨≤Ú§Œ…˜";
 #endif
             adtyp = AD_DISN;
             break;
@@ -141,21 +141,21 @@ int expltype;
 /*JP
             str = "ball of lightning";
 */
-            str = "óãã ";
+            str = "ÕÎ∂Ã";
             adtyp = AD_ELEC;
             break;
         case 6:
 /*JP
             str = "poison gas cloud";
 */
-            str = "ì≈ÇÃâ_";
+            str = "∆«§Œ±¿";
             adtyp = AD_DRST;
             break;
         case 7:
 /*JP
             str = "splash of acid";
 */
-            str = "é_ÇÃÇµÇ‘Ç´";
+            str = "ª¿§Œ§∑§÷§≠";
             adtyp = AD_ACID;
             break;
         default:
@@ -311,14 +311,14 @@ int expltype;
 /*JP
             str = "explosion";
 */
-            str = "îöî≠";
+            str = "«˙»Ø";
             generic = TRUE;
         }
         if (!Deaf && olet != SCROLL_CLASS)
 /*JP
             You_hear("a blast.");
 */
-            You_hear("îöî≠âπÇï∑Ç¢ÇΩÅD");
+            You_hear("«˙»Ø≤ª§Ú π§§§ø°•");
     }
 
     if (dam)
@@ -361,110 +361,110 @@ int expltype;
 /*JP
                             adj = "heartburn";
 */
-                            adj = "îRÇ¶ÇΩ";
+                            adj = "«≥§®§ø";
                             break;
                         case AD_COLD:
 /*JP
                             adj = "chilly";
 */
-                            adj = "ìÄÇÁÇ≥ÇÍÇΩ";
+                            adj = "≈‡§È§µ§Ï§ø";
                             break;
                         case AD_DISN:
                             if (olet == WAND_CLASS)
 /*JP
                                 adj = "irradiated by pure energy";
 */
-                                adj = "èÚâªÇÃóÕÇóÅÇ—ÇΩ";
+                                adj = "æÙ≤Ω§ŒŒœ§ÚÕ·§”§ø";
                             else
 /*JP
                                 adj = "perforated";
 */
-                                adj = "åäÇÇ†ÇØÇÁÇÍÇΩ";
+                                adj = "∑Í§Ú§¢§±§È§Ï§ø";
                             break;
                         case AD_ELEC:
 /*JP
                             adj = "shocked";
 */
-                            adj = "ìdåÇÇÇ≠ÇÁÇ¡ÇΩ";
+                            adj = "≈≈∑‚§Ú§Ø§È§√§ø";
                             break;
                         case AD_DRST:
 /*JP
                             adj = "poisoned";
 */
-                            adj = "ì≈ÇÇ≠ÇÁÇ¡ÇΩ";
+                            adj = "∆«§Ú§Ø§È§√§ø";
                             break;
                         case AD_ACID:
 /*JP
                             adj = "an upset stomach";
 */
-                            adj = "é_ÇÇ≠ÇÁÇ¡ÇΩ";
+                            adj = "ª¿§Ú§Ø§È§√§ø";
                             break;
                         default:
 /*JP
                             adj = "fried";
 */
-                            adj = "ÉpÉäÉpÉäÇ…Ç»Ç¡ÇΩ";
+                            adj = "•—•Í•—•Í§À§ §√§ø";
                             break;
                         }
 /*JP
                         pline("%s gets %s!", Monnam(u.ustuck), adj);
 */
-                        pline("%sÇÕ%sÅI", Monnam(u.ustuck), adj);
+                        pline("%s§œ%s°™", Monnam(u.ustuck), adj);
                     } else {
                         switch (adtyp) {
                         case AD_FIRE:
 /*JP
                             adj = "toasted";
 */
-                            adj = "è≈Ç∞ÇΩ";
+                            adj = "æ«§≤§ø";
                             break;
                         case AD_COLD:
 /*JP
                             adj = "chilly";
 */
-                            adj = "ìÄÇ¡ÇΩ";
+                            adj = "≈‡§√§ø";
                             break;
                         case AD_DISN:
                             if (olet == WAND_CLASS)
 /*JP
                                 adj = "overwhelmed by pure energy";
 */
-                            adj = "èÚâªÇÃóÕÇóÅÇ—ÇΩ";
+                            adj = "æÙ≤Ω§ŒŒœ§ÚÕ·§”§ø";
                             else
 /*JP
                                 adj = "perforated";
 */
-                            adj = "åäÇÇ†ÇØÇÁÇÍÇΩ";
+                            adj = "∑Í§Ú§¢§±§È§Ï§ø";
                             break;
                         case AD_ELEC:
 /*JP
                             adj = "shocked";
 */
-                            adj = "ìdåÇÇÇ≠ÇÁÇ¡ÇΩ";
+                            adj = "≈≈∑‚§Ú§Ø§È§√§ø";
                             break;
                         case AD_DRST:
 /*JP
                             adj = "intoxicated";
 */
-                            adj = "ì≈ÇÇ≠ÇÁÇ¡ÇΩ";
+                            adj = "∆«§Ú§Ø§È§√§ø";
                             break;
                         case AD_ACID:
 /*JP
                             adj = "burned";
 */
-                            adj = "é_ÇÇ≠ÇÁÇ¡ÇΩ";
+                            adj = "ª¿§Ú§Ø§È§√§ø";
                             break;
                         default:
 /*JP
                             adj = "fried";
 */
-                            adj = "ÉpÉäÉpÉäÇ…Ç»Ç¡ÇΩ";
+                            adj = "•—•Í•—•Í§À§ §√§ø";
                             break;
                         }
 /*JP
                         pline("%s gets slightly %s!", Monnam(u.ustuck), adj);
 */
-                        pline("%sÇÕè≠ÇµÇæÇØ%sÅI", Monnam(u.ustuck), adj);
+                        pline("%s§œæØ§∑§¿§±%s°™", Monnam(u.ustuck), adj);
                     }
                 } else if (cansee(i + x - 1, j + y - 1)) {
                     if (mtmp->m_ap_type)
@@ -472,7 +472,7 @@ int expltype;
 /*JP
                     pline("%s is caught in the %s!", Monnam(mtmp), str);
 */
-                    pline("%sÇÕ%sÇ…Ç¬Ç¬Ç‹ÇÍÇΩÅI", Monnam(mtmp), str);
+                    pline("%s§œ%s§À§ƒ§ƒ§ﬁ§Ï§ø°™", Monnam(mtmp), str);
                 }
 
                 idamres += destroy_mitem(mtmp, SCROLL_CLASS, (int) adtyp);
@@ -498,7 +498,7 @@ int expltype;
 /*JP
                             pline("%s resists the %s!", Monnam(mtmp), str);
 */
-                            pline("%sÇÕ%sÇ…íÔçRÇµÇΩÅI", Monnam(mtmp), str);
+                            pline("%s§œ%s§ÀƒÒπ≥§∑§ø°™", Monnam(mtmp), str);
                         mdam = (dam + 1) / 2;
                     }
                     if (mtmp == u.ustuck)
@@ -536,7 +536,7 @@ int expltype;
 /*JP
             You("are caught in the %s!", str);
 */
-            You("%sÇ…Ç¬Ç¬Ç‹ÇÍÇΩÅI", str);
+            You("%s§À§ƒ§ƒ§ﬁ§Ï§ø°™", str);
             iflags.last_msg = PLNMSG_CAUGHT_IN_EXPLOSION;
         }
         /* do property damage first, in case we end up leaving bones */
@@ -547,7 +547,7 @@ int expltype;
 /*JP
             You("are unharmed!");
 */
-            You("èùÇ¬Ç©Ç»Ç¢ÅI");
+            You("Ω˝§ƒ§´§ §§°™");
         } else if (adtyp == AD_PHYS || physical_dmg)
             damu = Maybe_Half_Phys(damu);
         if (adtyp == AD_FIRE)
@@ -579,7 +579,7 @@ int expltype;
                         Strcpy(killer.name, str);
                     killer.format = KILLED_BY_AN;
 #if 1 /*JP*/
-                    Strcat(killer.name, "Ç≈");
+                    Strcat(killer.name, "§«");
 #endif
                 } else if (type >= 0 && olet != SCROLL_CLASS) {
 #if 0 /*JP*/
@@ -588,11 +588,11 @@ int expltype;
                             uhis(), str);
 #else
                     killer.format = KILLED_BY;
-                    Sprintf(killer.name, "é©ï™é©êgÇÃ%sÇ…Ç¬Ç¬Ç‹ÇÍÇƒ",
+                    Sprintf(killer.name, "º´ ¨º´ø»§Œ%s§À§ƒ§ƒ§ﬁ§Ï§∆",
                             str);
 #endif
                 } else {
-#if 0 /*JP*//* an ÇÇ¬ÇØÇÈÇ©Ç«Ç§Ç©ÇÕä÷åWÇ»Ç¢ */
+#if 0 /*JP*//* an §Ú§ƒ§±§Î§´§…§¶§´§œ¥ÿ∑∏§ §§ */
                     killer.format = (!strcmpi(str, "tower of flame")
                                      || !strcmpi(str, "fireball"))
                                         ? KILLED_BY_AN
@@ -601,7 +601,7 @@ int expltype;
 #else
                     killer.format = KILLED_BY;
                     Strcpy(killer.name, str);
-                    Strcat(killer.name, "Ç≈");
+                    Strcat(killer.name, "§«");
 #endif
                 }
                 if (iflags.last_msg == PLNMSG_CAUGHT_IN_EXPLOSION
@@ -629,11 +629,11 @@ int expltype;
                        FALSE);
 #else
         pay_for_damage(adtyp == AD_FIRE
-                           ? "îRÇ‚Ç∑"
+                           ? "«≥§‰§π"
                            : adtyp == AD_COLD
-                                 ? "ï≤ÅXÇ…Ç∑ÇÈ"
-                                 : adtyp == AD_DISN ? "ï≤ç”Ç∑ÇÈ"
-                                                    : "îjâÛÇ∑ÇÈ",
+                                 ? " ¥°π§À§π§Î"
+                                 : adtyp == AD_DISN ? " ¥∫’§π§Î"
+                                                    : "«À≤ı§π§Î",
                        FALSE);
 #endif
     }
@@ -709,7 +709,7 @@ struct obj *obj; /* only scatter this obj        */
 /*JP
                 pline("%s apart.", Tobjnam(otmp, "break"));
 */
-                pline("%sÇÕàÍïîï™Ç™ç”ÇØÇΩÅD",xname(otmp));
+                pline("%s§œ∞Ï…Ù ¨§¨∫’§±§ø°•",xname(otmp));
                 fracture_rock(otmp);
                 place_object(otmp, sx, sy);
                 if ((otmp = sobj_at(BOULDER, sx, sy)) != 0) {
@@ -725,7 +725,7 @@ struct obj *obj; /* only scatter this obj        */
 /*JP
                 pline("%s.", Tobjnam(otmp, "crumble"));
 */
-                pline("%sÇÕÇ±Ç»Ç≤Ç»Ç…Ç»Ç¡ÇΩÅD",xname(otmp));
+                pline("%s§œ§≥§ §¥§ §À§ §√§ø°•",xname(otmp));
                 (void) break_statue(otmp);
 #ifndef FIX_BUG_C340_2
                 place_object(otmp, sx, sy); /* put fragments on floor */

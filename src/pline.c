@@ -162,7 +162,7 @@ VA_DECL(const char *, line)
 /*JP
     vpline(YouMessage(tmp, "You ", line), VA_ARGS);
 */
-    vpline(YouMessage(tmp, "‚ ‚È‚½‚Í", line), VA_ARGS);
+    vpline(YouMessage(tmp, "¤¢¤Ê¤¿¤Ï", line), VA_ARGS);
     VA_END();
 }
 
@@ -176,7 +176,7 @@ VA_DECL(const char *, line)
 /*JP
     vpline(YouMessage(tmp, "Your ", line), VA_ARGS);
 */
-    vpline(YouMessage(tmp, "‚ ‚È‚½‚Ì", line), VA_ARGS);
+    vpline(YouMessage(tmp, "¤¢¤Ê¤¿¤Î", line), VA_ARGS);
     VA_END();
 }
 
@@ -191,12 +191,12 @@ VA_DECL(const char *, line)
 /*JP
         YouPrefix(tmp, "You dream that you feel ", line);
 */
-        YouPrefix(tmp, "‚ ‚È‚½‚Í–²‚Ì’†‚Å", line);
+        YouPrefix(tmp, "¤¢¤Ê¤¿¤ÏÌ´¤ÎÃæ¤Ç", line);
     else
 /*JP
         YouPrefix(tmp, "You feel ", line);
 */
-        YouPrefix(tmp, "‚ ‚È‚½‚Í", line);
+        YouPrefix(tmp, "¤¢¤Ê¤¿¤Ï", line);
     vpline(strcat(tmp, line), VA_ARGS);
     VA_END();
 }
@@ -211,7 +211,7 @@ VA_DECL(const char *, line)
 /*JP
     vpline(YouMessage(tmp, "You can't ", line), VA_ARGS);
 */
-    vpline(YouMessage(tmp, "‚ ‚È‚½‚Í", line), VA_ARGS);
+    vpline(YouMessage(tmp, "¤¢¤Ê¤¿¤Ï", line), VA_ARGS);
     VA_END();
 }
 
@@ -267,19 +267,19 @@ VA_DECL(const char *, line)
     vpline(strcat(tmp, line), VA_ARGS);
 #else
     if (Underwater)
-        adj = "‚©‚·‚©‚É";
+        adj = "¤«¤¹¤«¤Ë";
     else if (Unaware)
-        adj = "–²‚Ì’†‚Å";
+        adj = "Ì´¤ÎÃæ¤Ç";
     else
         adj = "";
-    tmp = You_buf(strlen(adj) + strlen(line) + sizeof("‚ ‚È‚½‚Í   "));
+    tmp = You_buf(strlen(adj) + strlen(line) + sizeof("¤¢¤Ê¤¿¤Ï   "));
 
-    p = (char *)strstr(line, "•·‚±") ;
+    p = (char *)strstr(line, "Ê¹¤³") ;
     if (p == NULL)
-        Strcpy(tmp, "‚ ‚È‚½‚Í");
+        Strcpy(tmp, "¤¢¤Ê¤¿¤Ï");
     else
         Strcpy(tmp, "");
-    if (p != NULL || (p = (char *)strstr(line, "•·‚¢")) != NULL){
+    if (p != NULL || (p = (char *)strstr(line, "Ê¹¤¤")) != NULL){
 	strncat(tmp, line, (p - line));
 	strcat(tmp, adj);
 	strcat(tmp, p);
@@ -303,8 +303,8 @@ VA_DECL(const char *, line)
 /*JP
         YouPrefix(tmp, "You dream that you see ", line);
 */
-        YouPrefix(tmp, "‚ ‚È‚½‚Í–²‚Ì’†‚Å", line);
-#if 0 /*JP*//*‚±‚±‚ÍŒÄ‚Ño‚µŒ³‚Åˆ—‚·‚é?*/
+        YouPrefix(tmp, "¤¢¤Ê¤¿¤ÏÌ´¤ÎÃæ¤Ç", line);
+#if 0 /*JP*//*¤³¤³¤Ï¸Æ¤Ó½Ğ¤·¸µ¤Ç½èÍı¤¹¤ë?*/
     else if (Blind) /* caller should have caught this... */
         YouPrefix(tmp, "You sense ", line);
 #endif
@@ -312,7 +312,7 @@ VA_DECL(const char *, line)
 /*JP
         YouPrefix(tmp, "You see ", line);
 */
-        YouPrefix(tmp, "‚ ‚È‚½‚Í", line);
+        YouPrefix(tmp, "¤¢¤Ê¤¿¤Ï", line);
     vpline(strcat(tmp, line), VA_ARGS);
     VA_END();
 }
@@ -335,10 +335,10 @@ VA_DECL(const char *, line)
     Strcat(tmp, line);
     Strcat(tmp, "\"");
 #else
-    tmp = You_buf((int) strlen(line) + sizeof "uv");
-    Strcpy(tmp, "u");
+    tmp = You_buf((int) strlen(line) + sizeof "¡Ö¡×");
+    Strcpy(tmp, "¡Ö");
     Strcat(tmp, line);
-    Strcat(tmp, "v");
+    Strcat(tmp, "¡×");
 #endif
     vpline(tmp, VA_ARGS);
     VA_END();
@@ -415,7 +415,7 @@ VA_DECL(const char *, s)
 /*JP
     pline("Program in disorder - perhaps you'd better #quit.");
 */
-    pline("ƒvƒƒOƒ‰ƒ€‚ÉáŠQ”­¶ - #quit‚µ‚½‚Ù‚¤‚ª‚æ‚³‚»‚¤‚¾D");
+    pline("¥×¥í¥°¥é¥à¤Ë¾ã³²È¯À¸ - #quit¤·¤¿¤Û¤¦¤¬¤è¤µ¤½¤¦¤À¡¥");
     program_state.in_impossible = 0;
     VA_END();
 }
@@ -429,27 +429,27 @@ aligntyp alignment;
 /*JP
         return "chaotic";
 */
-	return "¬“×";
+	return "º®ÆÙ";
     case A_NEUTRAL:
 /*JP
         return "neutral";
 */
-	return "’†—§";
+	return "ÃæÎ©";
     case A_LAWFUL:
 /*JP
         return "lawful";
 */
-	return "’˜";
+	return "Ãá½ø";
     case A_NONE:
 /*JP
         return "unaligned";
 */
-	return "–³S";
+	return "Ìµ¿´";
     }
 /*JP
     return "unknown";
 */
-    return "•s–¾";
+    return "ÉÔÌÀ";
 }
 
 void
@@ -464,7 +464,7 @@ register struct monst *mtmp;
 /*JP
         Strcat(info, ", tame");
 */
-	Strcat(info, ", ”‚¢‚È‚ç‚³‚ê‚Ä‚¢‚é");
+	Strcat(info, ", »ô¤¤¤Ê¤é¤µ¤ì¤Æ¤¤¤ë");
         if (wizard) {
             Sprintf(eos(info), " (%d", mtmp->mtame);
             if (!mtmp->isminion)
@@ -476,7 +476,7 @@ register struct monst *mtmp;
 /*JP
         Strcat(info, ", peaceful");
 */
-        Strcat(info, ", —FD“I");
+        Strcat(info, ", Í§¹¥Åª");
     if (mtmp->cham >= LOW_PM && mtmp->data != &mons[mtmp->cham])
         /* don't reveal the innate form (chameleon, vampire, &c),
            just expose the fact that this current form isn't it */
@@ -489,7 +489,7 @@ register struct monst *mtmp;
 /*JP
         Strcat(info, ", eating");
 */
-        Strcat(info, ", H–’†");
+        Strcat(info, ", ¿©»öÃæ");
     /* a stethoscope exposes mimic before getting here so this
        won't be relevant for it, but wand of probing doesn't */
     if (mtmp->m_ap_type)
@@ -507,27 +507,27 @@ register struct monst *mtmp;
 /*JP
         Strcat(info, ", cancelled");
 */
-        Strcat(info, ", –³—Í");
+        Strcat(info, ", ÌµÎÏ");
     if (mtmp->mconf)
 /*JP
         Strcat(info, ", confused");
 */
-        Strcat(info, ", ¬—ó‘Ô");
+        Strcat(info, ", º®Íğ¾õÂÖ");
     if (mtmp->mblinded || !mtmp->mcansee)
 /*JP
         Strcat(info, ", blind");
 */
-        Strcat(info, ", –Ó–Ú");
+        Strcat(info, ", ÌÕÌÜ");
     if (mtmp->mstun)
 /*JP
         Strcat(info, ", stunned");
 */
-        Strcat(info, ", ‚­‚ç‚­‚çó‘Ô");
+        Strcat(info, ", ¤¯¤é¤¯¤é¾õÂÖ");
     if (mtmp->msleeping)
 /*JP
         Strcat(info, ", asleep");
 */
-        Strcat(info, ", ‡–°ó‘Ô");
+        Strcat(info, ", ¿çÌ²¾õÂÖ");
 #if 0 /* unfortunately mfrozen covers temporary sleep and being busy \
          (donning armor, for instance) as well as paralysis */
 	else if (mtmp->mfrozen)	  Strcat(info, ", paralyzed");
@@ -536,44 +536,44 @@ register struct monst *mtmp;
 /*JP
         Strcat(info, ", can't move");
 */
-        Strcat(info, ", “®‚¯‚È‚¢");
+        Strcat(info, ", Æ°¤±¤Ê¤¤");
 #endif
     /* [arbitrary reason why it isn't moving] */
     else if (mtmp->mstrategy & STRAT_WAITMASK)
 /*JP
         Strcat(info, ", meditating");
 */
-        Strcat(info, ", –»‘z’†");
+        Strcat(info, ", Ì½ÁÛÃæ");
     if (mtmp->mflee)
 /*JP
         Strcat(info, ", scared");
 */
-        Strcat(info, ", ‹¯‚¦‚Ä‚¢‚é");
+        Strcat(info, ", ¶±¤¨¤Æ¤¤¤ë");
     if (mtmp->mtrapped)
 /*JP
         Strcat(info, ", trapped");
 */
-        Strcat(info, ", ã©‚É‚©‚©‚Á‚Ä‚¢‚é");
+        Strcat(info, ", æ«¤Ë¤«¤«¤Ã¤Æ¤¤¤ë");
     if (mtmp->mspeed)
 #if 0 /*JP:T*/
         Strcat(info, mtmp->mspeed == MFAST ? ", fast" : mtmp->mspeed == MSLOW
                                                             ? ", slow"
                                                             : ", ???? speed");
 #else
-        Strcat(info, mtmp->mspeed == MFAST ? ", ‘f‘‚¢" : mtmp->mspeed == MSLOW
-	                                                    ? ", ’x‚¢"
-	                                                    : ", ‘¬“x•s–¾");
+        Strcat(info, mtmp->mspeed == MFAST ? ", ÁÇÁá¤¤" : mtmp->mspeed == MSLOW
+	                                                    ? ", ÃÙ¤¤"
+	                                                    : ", Â®ÅÙÉÔÌÀ");
 #endif
     if (mtmp->mundetected)
 /*JP
         Strcat(info, ", concealed");
 */
-        Strcat(info, ", ‰B‚ê‚Ä‚¢‚é");
+        Strcat(info, ", ±£¤ì¤Æ¤¤¤ë");
     if (mtmp->minvis)
 /*JP
         Strcat(info, ", invisible");
 */
-        Strcat(info, ", •s‰Â‹");
+        Strcat(info, ", ÉÔ²Ä»ë");
     if (mtmp == u.ustuck)
 #if 0 /*JP:T*/
         Strcat(info, sticks(youmonst.data)
@@ -587,20 +587,20 @@ register struct monst *mtmp;
                                                    : ", engulfing you");
 #else
       Strcat(info,  sticks(youmonst.data)
-	                 ? ", ‚ ‚È‚½‚ª’Í‚Ü‚¦‚Ä‚¢‚é"
-	                 : !u.uswallow ? ", ’Í‚Ü‚¦‚Ä‚¢‚é"
+	                 ? ", ¤¢¤Ê¤¿¤¬ÄÏ¤Ş¤¨¤Æ¤¤¤ë"
+	                 : !u.uswallow ? ", ÄÏ¤Ş¤¨¤Æ¤¤¤ë"
                                        : attacktype_fordmg(u.ustuck->data,
                                                            AT_ENGL, AD_DGST)
-                                             ? ", Á‰»‚µ‚Ä‚¢‚é"
+                                             ? ", ¾Ã²½¤·¤Æ¤¤¤ë"
 	                                     : is_animal(u.ustuck->data)
-		                                   ? ", ˆù‚İ‚ñ‚Å‚¢‚é"
-		                                   : ", Šª‚«‚ñ‚Å‚¢‚é");
+		                                   ? ", °û¤ß¹ş¤ó¤Ç¤¤¤ë"
+		                                   : ", ´¬¤­¹ş¤ó¤Ç¤¤¤ë");
 #endif
     if (mtmp == u.usteed)
 /*JP
         Strcat(info, ", carrying you");
 */
-        Strcat(info, ", ‚ ‚È‚½‚ğæ‚¹‚Ä‚¢‚é");
+        Strcat(info, ", ¤¢¤Ê¤¿¤ò¾è¤»¤Æ¤¤¤ë");
 
     /* avoid "Status of the invisible newt ..., invisible" */
     /* and unlike a normal mon_nam, use "saddled" even if it has a name */
@@ -610,7 +610,7 @@ register struct monst *mtmp;
 /*JP
     pline("Status of %s (%s):  Level %d  HP %d(%d)  AC %d%s.", monnambuf,
 */
-    pline("%s‚Ìó‘Ô (%s)F Level %d  HP %d(%d)  AC %d%s", monnambuf,
+    pline("%s¤Î¾õÂÖ (%s)¡§ Level %d  HP %d(%d)  AC %d%s", monnambuf,
           align_str(alignment), mtmp->m_lev, mtmp->mhp, mtmp->mhpmax,
           find_mac(mtmp), info);
 }
@@ -634,41 +634,41 @@ ustatusline()
 #else
         Strcat(info, ", ");
         if (u.usick_type & SICK_VOMITABLE)
-            Strcat(info, "H’†“Å");
+            Strcat(info, "¿©ÃæÆÇ");
         if (u.usick_type & SICK_NONVOMITABLE) {
             if (u.usick_type & SICK_VOMITABLE)
-                Strcat(info, "‚Æ");
-            Strcat(info, "•a‹C");
+                Strcat(info, "¤È");
+            Strcat(info, "ÉÂµ¤");
         }
-        Strcat(info, "‚Å€‚É‚Â‚Â‚ ‚é");
+        Strcat(info, "¤Ç»à¤Ë¤Ä¤Ä¤¢¤ë");
 #endif
     }
     if (Stoned)
 /*JP
         Strcat(info, ", solidifying");
 */
-        Strcat(info, ", Î‰»‚µ‚Â‚Â‚ ‚é");
+        Strcat(info, ", ÀĞ²½¤·¤Ä¤Ä¤¢¤ë");
     if (Slimed)
 /*JP
         Strcat(info, ", becoming slimy");
 */
-        Strcat(info, ", ƒXƒ‰ƒCƒ€‚É‚È‚è‚Â‚Â‚ ‚é");
+        Strcat(info, ", ¥¹¥é¥¤¥à¤Ë¤Ê¤ê¤Ä¤Ä¤¢¤ë");
     if (Strangled)
 /*JP
         Strcat(info, ", being strangled");
 */
-        Strcat(info, ", ñ‚ği‚ß‚ç‚ê‚Ä‚¢‚é");
+        Strcat(info, ", ¼ó¤ò¹Ê¤á¤é¤ì¤Æ¤¤¤ë");
     if (Vomiting)
 #if 0 /*JP*/
         Strcat(info, ", nauseated"); /* !"nauseous" */
 #else
-        Strcat(info, ", “f‚«‹C‚ª‚·‚é");
+        Strcat(info, ", ÅÇ¤­µ¤¤¬¤¹¤ë");
 #endif
     if (Confusion)
 /*JP
         Strcat(info, ", confused");
 */
-        Strcat(info, ", ¬—ó‘Ô");
+        Strcat(info, ", º®Íğ¾õÂÖ");
     if (Blind) {
 #if 0 /*JP*/
         Strcat(info, ", blind");
@@ -681,19 +681,19 @@ ustatusline()
 #else
         Strcat(info, ", ");
         if (u.ucreamed) {
-	    Strcat(info, "‚Ë‚Î‚Ë‚Î‚×‚Æ‚Â‚­‚à‚Ì‚Å");
+	    Strcat(info, "¤Í¤Ğ¤Í¤Ğ¤Ù¤È¤Ä¤¯¤â¤Î¤Ç");
 	    if ((long)u.ucreamed < Blinded || Blindfolded
 		|| !haseyes(youmonst.data))
-	      Strcat(info, "•¢‚í‚ê‚Ä");
+	      Strcat(info, "Ê¤¤ï¤ì¤Æ");
 	}
-	Strcat(info, "–Ó–Úó‘Ô");
+	Strcat(info, "ÌÕÌÜ¾õÂÖ");
 #endif
     }
     if (Stunned)
 /*JP
         Strcat(info, ", stunned");
 */
-        Strcat(info, ", ‚­‚ç‚­‚çó‘Ô");
+        Strcat(info, ", ¤¯¤é¤¯¤é¾õÂÖ");
     if (!u.usteed && Wounded_legs) {
         const char *what = body_part(LEG);
         if ((Wounded_legs & BOTH_SIDES) == BOTH_SIDES)
@@ -701,33 +701,33 @@ ustatusline()
 /*JP
         Sprintf(eos(info), ", injured %s", what);
 */
-	Sprintf(eos(info), ", %s‚É‚¯‚ª‚ğ‚µ‚Ä‚¢‚é", what);
+	Sprintf(eos(info), ", %s¤Ë¤±¤¬¤ò¤·¤Æ¤¤¤ë", what);
     }
     if (Glib)
 /*JP
         Sprintf(eos(info), ", slippery %s", makeplural(body_part(HAND)));
 */
-        Sprintf(eos(info), ", %s‚ª‚Ê‚é‚Ê‚é", makeplural(body_part(HAND)));
+        Sprintf(eos(info), ", %s¤¬¤Ì¤ë¤Ì¤ë", makeplural(body_part(HAND)));
     if (u.utrap)
 /*JP
         Strcat(info, ", trapped");
 */
-        Strcat(info, ", ã©‚É‚©‚©‚Á‚Ä‚¢‚é");
+        Strcat(info, ", æ«¤Ë¤«¤«¤Ã¤Æ¤¤¤ë");
     if (Fast)
 /*JP
         Strcat(info, Very_fast ? ", very fast" : ", fast");
 */
-        Strcat(info, Very_fast ? ", ‚Æ‚Ä‚à‘f‘‚¢" : ", ‘f‘‚¢");
+        Strcat(info, Very_fast ? ", ¤È¤Æ¤âÁÇÁá¤¤" : ", ÁÇÁá¤¤");
     if (u.uundetected)
 /*JP
         Strcat(info, ", concealed");
 */
-        Strcat(info, ", ‰B‚ê‚Ä‚¢‚é");
+        Strcat(info, ", ±£¤ì¤Æ¤¤¤ë");
     if (Invis)
 /*JP
         Strcat(info, ", invisible");
 */
-        Strcat(info, ", •s‰Â‹");
+        Strcat(info, ", ÉÔ²Ä»ë");
     if (u.ustuck) {
 #if 0 /*JP*/
         if (sticks(youmonst.data))
@@ -739,52 +739,52 @@ ustatusline()
 	Strcat(info, ", ");
 	Strcat(info, mon_nam(u.ustuck));
 	if (sticks(youmonst.data))
-	    Strcat(info, "‚ğ’Í‚Ü‚¦‚Ä‚¢‚é");
+	    Strcat(info, "¤òÄÏ¤Ş¤¨¤Æ¤¤¤ë");
 	else
-	    Strcat(info, "‚É’Í‚Ü‚¦‚ç‚ê‚Ä‚¢‚é");
+	    Strcat(info, "¤ËÄÏ¤Ş¤¨¤é¤ì¤Æ¤¤¤ë");
 #endif
     }
 
 /*JP
     pline("Status of %s (%s%s):  Level %d  HP %d(%d)  AC %d%s.", plname,
 */
-    pline("%s‚Ìó‘Ô (%s %s)F Level %d  HP %d(%d)  AC %d%s", plname,
+    pline("%s¤Î¾õÂÖ (%s %s)¡§ Level %d  HP %d(%d)  AC %d%s", plname,
           (u.ualign.record >= 20)
 /*JP
               ? "piously "
 */
-	      ? "Œhåi" 
+	      ? "·ÉéÊ" 
               : (u.ualign.record > 13)
 /*JP
                     ? "devoutly "
 */
-		    ? "MS[‚¢" 
+		    ? "¿®¿´¿¼¤¤" 
                     : (u.ualign.record > 8)
 /*JP
                           ? "fervently "
 */
-		          ? "”M—ó" 
+		          ? "Ç®Îõ" 
                           : (u.ualign.record > 3)
 /*JP
                                 ? "stridently "
 */
-			        ? "º‚Ì‚©‚ñ‚‚¢" 
+			        ? "À¼¤Î¤«¤ó¹â¤¤" 
                                 : (u.ualign.record == 3)
                                       ? ""
                                       : (u.ualign.record >= 1)
 /*JP
                                             ? "haltingly "
 */
-					    ? "—L–¼–³À" 
+					    ? "Í­Ì¾Ìµ¼Â" 
                                             : (u.ualign.record == 0)
 /*JP
                                                   ? "nominally "
 */
-					          ? "–À˜f" 
+					          ? "ÌÂÏÇ" 
 /*JP
                                                   : "insufficiently ",
 */
-						  : "•s“K“–",
+						  : "ÉÔÅ¬Åö",
           align_str(u.ualign.type),
           Upolyd ? mons[u.umonnum].mlevel : u.ulevel, Upolyd ? u.mh : u.uhp,
           Upolyd ? u.mhmax : u.uhpmax, u.uac, info);
@@ -799,10 +799,10 @@ self_invis_message()
           See_invisible ? "can see right through yourself"
                         : "can't see yourself");
 #else
-    pline("%s‚ ‚È‚½‚Í%sD",
-	  Hallucination ? "ƒ[ƒII" : "‚°I“Ë‘R",
-	  See_invisible ? "©•ª©g‚ª‚¿‚á‚ñ‚ÆŒ©‚¦‚È‚­‚È‚Á‚½"
-	                : "©•ª©g‚ªŒ©‚¦‚È‚­‚È‚Á‚½");
+    pline("%s¤¢¤Ê¤¿¤Ï%s¡¥",
+	  Hallucination ? "¥ï¡¼¥ª¡ª" : "¤²¡ªÆÍÁ³",
+	  See_invisible ? "¼«Ê¬¼«¿È¤¬¤Á¤ã¤ó¤È¸«¤¨¤Ê¤¯¤Ê¤Ã¤¿"
+	                : "¼«Ê¬¼«¿È¤¬¸«¤¨¤Ê¤¯¤Ê¤Ã¤¿");
 #endif
 }
 

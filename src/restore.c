@@ -143,7 +143,7 @@ boolean quietly;
 /*JP
                 pline("Finishing off %s...", xname(otmp));
 */
-                pline("%s‚ðŽg‚¢I‚¦‚½DDD", xname(otmp));
+                pline("%s¤ò»È¤¤½ª¤¨¤¿¡¥¡¥¡¥", xname(otmp));
             useup(otmp);
         }
     }
@@ -539,7 +539,7 @@ unsigned int *stuckid, *steedid;
 /*JP
         pline("Saved game was not yours.");
 */
-        pline("ƒZ[ƒu‚³‚ê‚½ƒQ[ƒ€‚Í‚ ‚È‚½‚Ì‚à‚Ì‚Å‚Í‚È‚¢D");
+        pline("¥»¡¼¥Ö¤µ¤ì¤¿¥²¡¼¥à¤Ï¤¢¤Ê¤¿¤Î¤â¤Î¤Ç¤Ï¤Ê¤¤¡¥");
         if (!wizard)
             return FALSE;
     }
@@ -595,7 +595,7 @@ unsigned int *stuckid, *steedid;
 #if 0 /*JP*/
         You("were not healthy enough to survive restoration.");
 #else
-        You("ÄŠJ‚Å‚«‚é‚Ù‚ÇŒ’N‚Å‚Í‚È‚©‚Á‚½D");
+        You("ºÆ³«¤Ç¤­¤ë¤Û¤É·ò¹¯¤Ç¤Ï¤Ê¤«¤Ã¤¿¡¥");
 #endif
         /* wiz1_level.dlevel is used by mklev.c to see if lots of stuff is
          * uninitialized, so we only have to set it and not the other stuff.
@@ -738,7 +738,7 @@ xchar ltmp;
 /*JP
         pline("Not enough space on `%s' to restore your game.", levels);
 */
-        pline("ƒQ[ƒ€‚ðÄŠJ‚·‚é‚½‚ß‚Ì'%s'‚Ì‚½‚ß‚ÌƒXƒy[ƒX‚ª‚È‚¢D", levels);
+        pline("¥²¡¼¥à¤òºÆ³«¤¹¤ë¤¿¤á¤Î'%s'¤Î¤¿¤á¤Î¥¹¥Ú¡¼¥¹¤¬¤Ê¤¤¡¥", levels);
 
         /* Remove levels and bones that may have been created.
          */
@@ -766,7 +766,7 @@ xchar ltmp;
 /*JP
         pline("Be seeing you...");
 */
-        pline("‚Ü‚½‰ï‚¢‚Ü‚µ‚å‚¤DDD");
+        pline("¤Þ¤¿²ñ¤¤¤Þ¤·¤ç¤¦¡¥¡¥¡¥");
         terminate(EXIT_SUCCESS);
     }
 #endif /* MFLOPPY */
@@ -831,9 +831,9 @@ register int fd;
         flags.debug ? " while in debug mode"
                     : flags.explore ? " while in explore mode" : "");
 #else
-    You("%s%s‚Ì’n‰º%dŠK‚É–ß‚Á‚Ä‚«‚½D",
-        flags.debug ? "ƒEƒBƒU[ƒhƒ‚[ƒh’†‚Ì"
-                    : flags.explore ? "’TŒŸƒ‚[ƒh’†‚Ì" : "",
+    You("%s%s¤ÎÃÏ²¼%d³¬¤ËÌá¤Ã¤Æ¤­¤¿¡¥",
+        flags.debug ? "¥¦¥£¥¶¡¼¥É¥â¡¼¥ÉÃæ¤Î"
+                    : flags.explore ? "Ãµ¸¡¥â¡¼¥ÉÃæ¤Î" : "",
         dungeons[u.uz.dnum].dname, depth(&u.uz));
 #endif
     curs(WIN_MAP, 1, 1);
@@ -992,15 +992,15 @@ char *reason;
 /*JP
     pline("Strange, this map is not as I remember it.");
 */
-    pline("–­‚¾C‚±‚Ì’n}‚ÍŽ„‚ªŠo‚¦‚Ä‚¢‚½‚à‚Ì‚Æˆá‚¤D");
+    pline("Ì¯¤À¡¤¤³¤ÎÃÏ¿Þ¤Ï»ä¤¬³Ð¤¨¤Æ¤¤¤¿¤â¤Î¤È°ã¤¦¡¥");
 /*JP
     pline("Somebody is trying some trickery here...");
 */
-    pline("‚¾‚ê‚©‚ª‚±‚±‚Å‚¢‚©‚³‚Ü‚ð‚µ‚æ‚¤‚Æ‚µ‚½‚æ‚¤‚¾DDD");
+    pline("¤À¤ì¤«¤¬¤³¤³¤Ç¤¤¤«¤µ¤Þ¤ò¤·¤è¤¦¤È¤·¤¿¤è¤¦¤À¡¥¡¥¡¥");
 /*JP
     pline("This game is void.");
 */
-    pline("‚±‚ÌƒQ[ƒ€‚Í–³Œø‚Æ‚È‚éD");
+    pline("¤³¤Î¥²¡¼¥à¤ÏÌµ¸ú¤È¤Ê¤ë¡¥");
     Strcpy(killer.name, reason ? reason : "");
     done(TRICKED);
 }

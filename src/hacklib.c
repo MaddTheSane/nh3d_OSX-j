@@ -107,7 +107,7 @@ char *s;
     register char *p;
 
     for (p = s; *p; p++)
-#if 1 /*JP*//*娍帤偼彫暥帤壔偟側偄*/
+#if 1 /*JP*//*戳机は井矢机步しない*/
         if (is_kanji(*(unsigned char *)p)) p++; else
 #endif
         if ('A' <= *p && *p <= 'Z')
@@ -123,7 +123,7 @@ char *s;
     register char *p;
 
     for (p = s; *p; p++)
-#if 1 /*JP*//*娍帤偼戝暥帤壔偟側偄*/
+#if 1 /*JP*//*戳机は络矢机步しない*/
         if (is_kanji(*(unsigned char *)p)) p++; else
 #endif
         if ('a' <= *p && *p <= 'z')
@@ -271,7 +271,7 @@ const char *s;
     Static char buf[BUFSZ];
 
     Strcpy(buf, s);
-#if 0 /*JP*//*擔杮岅偱偼強桳奿偺s傪晅偗側偄*/
+#if 0 /*JP*//*泣塑胳では疥铜呈のsを烧けない*/
     if (!strcmpi(buf, "it")) /* it -> its */
         Strcat(buf, "s");
     else if (!strcmpi(buf, "you")) /* you -> your */

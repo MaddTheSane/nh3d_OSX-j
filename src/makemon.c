@@ -1735,9 +1735,9 @@ struct monst *mtmp, *victim;
                       an(ptr->mname), mhe(mtmp),
                       nonliving(ptr) ? "expires" : "dies");
 #else
-                pline("%sÇ™ê¨í∑ÇµÇƒ%sÇ…Ç»ÇÈÇ∆%sÇµÇ‹Ç¡ÇΩÅI", mon_nam(mtmp),
+                pline("%s§¨¿Æƒπ§∑§∆%s§À§ §Î§»%s§∑§ﬁ§√§ø°™", mon_nam(mtmp),
                       ptr->mname,
-                      nonliving(ptr) ? "è¡Ç¶Çƒ" : "éÄÇÒÇ≈");
+                      nonliving(ptr) ? "æ√§®§∆" : "ª‡§Û§«");
 #endif
             set_mon_data(mtmp, ptr, -1); /* keep mvitals[] accurate */
             mondied(mtmp);
@@ -1748,9 +1748,9 @@ struct monst *mtmp, *victim;
                   humanoid(ptr) ? "becomes" : "grows up into",
                   an(ptr->mname));
 #else
-            pline("%sÇÕ%sÇ…%sÅD", Monnam(mtmp),
+            pline("%s§œ%s§À%s°•", Monnam(mtmp),
                   ptr->mname,
-                  humanoid(ptr) ? "Ç»Ç¡ÇΩ" : "ê¨í∑ÇµÇΩ");
+                  humanoid(ptr) ? "§ §√§ø" : "¿Æƒπ§∑§ø");
 #endif
         }
         set_mon_data(mtmp, ptr, 1);    /* preserve intrinsics */

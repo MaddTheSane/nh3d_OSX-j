@@ -137,14 +137,14 @@ struct obj *bp;
 /*JP
         You_feel("a wrenching sensation.");
 */
-        You("‚Ë‚¶‚ç‚ê‚½‚æ‚¤‚ÈŠ´Šo‚ğŠ´‚¶‚½D");
+        You("¤Í¤¸¤é¤ì¤¿¤è¤¦¤Ê´¶³Ğ¤ò´¶¤¸¤¿¡¥");
         tele(); /* teleport him */
         break;
     case 1:
 /*JP
         You_feel("threatened.");
 */
-        You("‚¨‚Ç‚³‚ê‚Ä‚¢‚é‚æ‚¤‚È‹C‚ª‚µ‚½D");
+        You("¤ª¤É¤µ¤ì¤Æ¤¤¤ë¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
         aggravate();
         break;
     case 2:
@@ -157,14 +157,14 @@ struct obj *bp;
 /*JP
         pline("These runes were just too much to comprehend.");
 */
-        pline("‚±‚Ìƒ‹[ƒ“•¶š‚ğ—‰ğ‚·‚é‚Ì‚Í¢“ï‚¾D");
+        pline("¤³¤Î¥ë¡¼¥óÊ¸»ú¤òÍı²ò¤¹¤ë¤Î¤Ïº¤Æñ¤À¡¥");
         make_confused(HConfusion + rn1(7, 16), FALSE);
         break;
     case 5:
 /*JP
         pline_The("book was coated with contact poison!");
 */
-        pline("‚±‚Ì–{‚ÍÚGŒ^‚Ì“Å‚Å•¢‚í‚ê‚Ä‚¢‚éI");
+        pline("¤³¤ÎËÜ¤ÏÀÜ¿¨·¿¤ÎÆÇ¤ÇÊ¤¤ï¤ì¤Æ¤¤¤ë¡ª");
         if (uarmg) {
             erode_obj(uarmg, "gloves", ERODE_CORRODE, EF_GREASE | EF_VERBOSE);
             break;
@@ -176,7 +176,7 @@ struct obj *bp;
         losehp(rnd(Poison_resistance ? 6 : 10), "contact-poisoned spellbook",
                KILLED_BY_AN);
 #else
-        losehp(rnd(Poison_resistance ? 6 : 10), "ÚG“Å‚Ì–‚–@‘‚Å",
+        losehp(rnd(Poison_resistance ? 6 : 10), "ÀÜ¿¨ÆÇ¤ÎËâË¡½ñ¤Ç",
                KILLED_BY_AN);
 #endif
         bp->in_use = TRUE;
@@ -187,18 +187,18 @@ struct obj *bp;
 /*JP
             pline_The("book %s, but you are unharmed!", explodes);
 */
-            pline("–{‚Í‹­—Í‚ÈƒGƒlƒ‹ƒM[‚ğ•úo‚µ‚½C‚µ‚©‚µ‚ ‚È‚½‚Í‚Â‚©‚È‚¢I");
+            pline("ËÜ¤Ï¶¯ÎÏ¤Ê¥¨¥Í¥ë¥®¡¼¤òÊü½Ğ¤·¤¿¡¤¤·¤«¤·¤¢¤Ê¤¿¤Ï½ı¤Ä¤«¤Ê¤¤¡ª");
         } else {
 /*JP
             pline("As you read the book, it %s in your %s!", explodes,
 */
-            pline("–{‚Í‹­—Í‚ÈƒGƒlƒ‹ƒM[‚ğ‚ ‚È‚½‚Ì%s‚É•úo‚µ‚½I",
+            pline("ËÜ¤Ï¶¯ÎÏ¤Ê¥¨¥Í¥ë¥®¡¼¤ò¤¢¤Ê¤¿¤Î%s¤ËÊü½Ğ¤·¤¿¡ª",
                   body_part(FACE));
             dmg = 2 * rnd(10) + 5;
 /*JP
             losehp(Maybe_Half_Phys(dmg), "exploding rune", KILLED_BY_AN);
 */
-            losehp(Maybe_Half_Phys(dmg), "‹­—Í‚Èƒ‹[ƒ“•¶š‚ÌƒGƒlƒ‹ƒM[‚Å", KILLED_BY_AN);
+            losehp(Maybe_Half_Phys(dmg), "¶¯ÎÏ¤Ê¥ë¡¼¥óÊ¸»ú¤Î¥¨¥Í¥ë¥®¡¼¤Ç", KILLED_BY_AN);
         }
         return TRUE;
     default:
@@ -221,12 +221,12 @@ struct obj *spellbook;
 /*JP
          "Being confused you have difficulties in controlling your actions.");
 */
-         "¬—‚µ‚Ä‚¢‚é‚Ì‚ÅC‚»‚¤‚¢‚¤‚±‚Æ‚ğ‚·‚é‚Ì‚Í“ï‚µ‚¢D");
+         "º®Íğ¤·¤Æ¤¤¤ë¤Î¤Ç¡¤¤½¤¦¤¤¤¦¤³¤È¤ò¤¹¤ë¤Î¤ÏÆñ¤·¤¤¡¥");
         display_nhwindow(WIN_MESSAGE, FALSE);
 /*JP
         You("accidentally tear the spellbook to pieces.");
 */
-        You("‚¤‚Á‚©‚èC–‚–@‘‚ğˆø‚«‚³‚¢‚Ä‚µ‚Ü‚Á‚½D");
+        You("¤¦¤Ã¤«¤ê¡¤ËâË¡½ñ¤ò°ú¤­¤µ¤¤¤Æ¤·¤Ş¤Ã¤¿¡¥");
         if (!objects[spellbook->otyp].oc_name_known
             && !objects[spellbook->otyp].oc_uname)
             docall(spellbook);
@@ -237,8 +237,8 @@ struct obj *spellbook;
         You("find yourself reading the %s line over and over again.",
             spellbook == context.spbook.book ? "next" : "first");
 #else
-        You("%s‚Ìs‚ğ‰½“x‚àŒJ‚è•Ô‚µ‚Ä“Ç‚ñ‚Å‚¢‚½‚±‚Æ‚É‹C•t‚¢‚½D",
-            spellbook == context.spbook.book ? "Ÿ" : "Å‰");
+        You("%s¤Î¹Ô¤ò²¿ÅÙ¤â·«¤êÊÖ¤·¤ÆÆÉ¤ó¤Ç¤¤¤¿¤³¤È¤Ëµ¤ÉÕ¤¤¤¿¡¥",
+            spellbook == context.spbook.book ? "¼¡" : "ºÇ½é");
 #endif
     }
     return gone;
@@ -255,7 +255,7 @@ struct obj *book2;
 /*JP
     You("turn the pages of the Book of the Dead...");
 */
-    You("€Ò‚Ì‘‚Ìƒy[ƒW‚ğ‚ß‚­‚Á‚½DDD");
+    You("»à¼Ô¤Î½ñ¤Î¥Ú¡¼¥¸¤ò¤á¤¯¤Ã¤¿¡¥¡¥¡¥");
     makeknown(SPE_BOOK_OF_THE_DEAD);
     /* KMH -- Need ->known to avoid "_a_ Book of the Dead" */
     book2->known = 1;
@@ -268,7 +268,7 @@ struct obj *book2;
 /*JP
             pline_The("runes appear scrambled.  You can't read them!");
 */
-            pline("ƒ‹[ƒ“•¶š‚Í‚²‚¿‚á‚Ü‚º‚É‚È‚Á‚Ä‚¨‚èC“Ç‚Ş‚±‚Æ‚ª‚Å‚«‚È‚©‚Á‚½I");
+            pline("¥ë¡¼¥óÊ¸»ú¤Ï¤´¤Á¤ã¤Ş¤¼¤Ë¤Ê¤Ã¤Æ¤ª¤ê¡¤ÆÉ¤à¤³¤È¤¬¤Ç¤­¤Ê¤«¤Ã¤¿¡ª");
             return;
         }
 
@@ -276,17 +276,17 @@ struct obj *book2;
 /*JP
             pline("A chill runs down your %s.", body_part(SPINE));
 */
-            Your("%s‚ÉŠ¦‚¯‚ª‘–‚Á‚½D", body_part(SPINE));
+            Your("%s¤Ë´¨¤±¤¬Áö¤Ã¤¿¡¥", body_part(SPINE));
             if (!u.uhave.bell)
 /*JP
                 You_hear("a faint chime...");
 */
-                You_hear("‚©‚·‚©‚Èƒxƒ‹‚Ì‰¹‚ğ•·‚¢‚½DDD");
+                You_hear("¤«¤¹¤«¤Ê¥Ù¥ë¤Î²»¤òÊ¹¤¤¤¿¡¥¡¥¡¥");
             if (!u.uhave.menorah)
 /*JP
                 pline("Vlad's doppelganger is amused.");
 */
-                pline("ƒ”ƒ‰ƒh‚Ì¶—ì‚ÍÎ‚Á‚½D");
+                pline("¥ô¥é¥É¤ÎÀ¸Îî¤Ï¾Ğ¤Ã¤¿¡¥");
             return;
         }
 
@@ -311,11 +311,11 @@ struct obj *book2;
 /*JP
             pline_The("invocation fails!");
 */
-            pline("“Áê”\—Í‚Í”­Šö‚³‚ê‚È‚©‚Á‚½I");
+            pline("ÆÃ¼ìÇ½ÎÏ¤ÏÈ¯´ø¤µ¤ì¤Ê¤«¤Ã¤¿¡ª");
 /*JP
             pline("At least one of your artifacts is cursed...");
 */
-            pline("­‚È‚­‚Æ‚à¹Ší‚Ì‚Ğ‚Æ‚Â‚ªô‚í‚ê‚Ä‚¢‚éDDD");
+            pline("¾¯¤Ê¤¯¤È¤âÀ»´ï¤Î¤Ò¤È¤Ä¤¬¼ö¤ï¤ì¤Æ¤¤¤ë¡¥¡¥¡¥");
         } else if (arti1_primed && arti2_primed) {
             unsigned soon =
                 (unsigned) d(2, 6); /* time til next intervene() */
@@ -332,7 +332,7 @@ struct obj *book2;
 /*JP
             You("have a feeling that %s is amiss...", something);
 */
-            You("‰½‚©‚ªŠÔˆá‚Á‚Ä‚¢‚é‚æ‚¤‚È‹C‚ª‚µ‚½DDD");
+            You("²¿¤«¤¬´Ö°ã¤Ã¤Æ¤¤¤ë¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥¡¥¡¥");
             goto raise_dead;
         }
         return;
@@ -345,7 +345,7 @@ struct obj *book2;
 /*JP
         You("raised the dead!");
 */
-        You("€Ò‚ğ‘h‚ç‚¹‚½I");
+        You("»à¼Ô¤òÁÉ¤é¤»¤¿¡ª");
         /* first maybe place a dangerous adversary */
         if (!rn2(3) && ((mtmp = makemon(&mons[PM_MASTER_LICH], u.ux, u.uy,
                                         NO_MINVENT)) != 0
@@ -386,19 +386,19 @@ struct obj *book2;
 /*JP
             Your("ancestors are annoyed with you!");
 */
-            Your("æ‘c‚Í‚ ‚È‚½‚ªŒ™‚¢‚È‚æ‚¤‚¾I");
+            Your("ÀèÁÄ¤Ï¤¢¤Ê¤¿¤¬·ù¤¤¤Ê¤è¤¦¤À¡ª");
             break;
         case 1:
 /*JP
             pline_The("headstones in the cemetery begin to move!");
 */
-            pline("•æ’n‚Ì•æÎ‚ª“®‚«‚Í‚¶‚ß‚½I");
+            pline("ÊèÃÏ¤ÎÊèÀĞ¤¬Æ°¤­¤Ï¤¸¤á¤¿¡ª");
             break;
         default:
 /*JP
             pline("Oh my!  Your name appears in the book!");
 */
-            pline("‚È‚ñ‚Ä‚±‚Á‚½‚¢I‚ ‚È‚½‚Ì–¼‘O‚ª–{‚É‘‚¢‚Ä‚ ‚éI");
+            pline("¤Ê¤ó¤Æ¤³¤Ã¤¿¤¤¡ª¤¢¤Ê¤¿¤ÎÌ¾Á°¤¬ËÜ¤Ë½ñ¤¤¤Æ¤¢¤ë¡ª");
         }
     }
     return;
@@ -460,7 +460,7 @@ learn(VOID_ARGS)
 /*JP
             pline("This spellbook is too faint to be read any more.");
 */
-            pline("‚±‚Ì–‚–@‘‚Ì•¶š‚Í”–‚·‚¬‚Ä‚±‚êˆÈã“Ç‚ß‚È‚¢D");
+            pline("¤³¤ÎËâË¡½ñ¤ÎÊ¸»ú¤ÏÇö¤¹¤®¤Æ¤³¤ì°Ê¾åÆÉ¤á¤Ê¤¤¡¥");
             book->otyp = booktype = SPE_BLANK_PAPER;
             /* reset spestudied as if polymorph had taken place */
             book->spestudied = rn2(book->spestudied);
@@ -468,15 +468,15 @@ learn(VOID_ARGS)
 /*JP
             You("know %s quite well already.", splname);
 */
-            You("‚·‚Å‚É%s‚ğn’m‚µ‚Ä‚¢‚éD", splname);
+            You("¤¹¤Ç¤Ë%s¤ò½ÏÃÎ¤·¤Æ¤¤¤ë¡¥", splname);
             costly = FALSE;
         } else { /* spellknow(i) <= KEEN/10 */
 #if 0 /*JP*/
             Your("knowledge of %s is %s.", splname,
                  spellknow(i) ? "keener" : "restored");
 #else
-            Your("%s‚É‘Î‚·‚é’m¯‚Í%s‚³‚ê‚½D", splname,
-                 spellknow(i) ? "‚³‚ç‚ÉŒ¤‚¬‚·‚Ü" : "•œŒ³");
+            Your("%s¤ËÂĞ¤¹¤ëÃÎ¼±¤Ï%s¤µ¤ì¤¿¡¥", splname,
+                 spellknow(i) ? "¤µ¤é¤Ë¸¦¤®¤¹¤Ş" : "Éü¸µ");
 #endif
             incrnknow(i, 1);
             book->spestudied++;
@@ -494,7 +494,7 @@ learn(VOID_ARGS)
 /*JP
             pline("This spellbook is too faint to read even once.");
 */
-            pline("‚±‚Ì–‚–@‘‚Ì•¶š‚Í”–‚·‚¬‚Ä‚±‚êˆÈã“Ç‚ß‚È‚¢D");
+            pline("¤³¤ÎËâË¡½ñ¤ÎÊ¸»ú¤ÏÇö¤¹¤®¤Æ¤³¤ì°Ê¾åÆÉ¤á¤Ê¤¤¡¥");
             book->otyp = booktype = SPE_BLANK_PAPER;
             /* reset spestudied as if polymorph had taken place */
             book->spestudied = rn2(book->spestudied);
@@ -506,7 +506,7 @@ learn(VOID_ARGS)
 /*JP
             You(i > 0 ? "add %s to your repertoire." : "learn %s.", splname);
 */
-            You(i > 0 ? "%s‚ğƒŒƒp[ƒgƒŠ[‚É‰Á‚¦‚½D" : "%s‚ğK“¾‚µ‚½D", splname);
+            You(i > 0 ? "%s¤ò¥ì¥Ñ¡¼¥È¥ê¡¼¤Ë²Ã¤¨¤¿¡¥" : "%s¤ò½¬ÆÀ¤·¤¿¡¥", splname);
         }
         makeknown((int) booktype);
     }
@@ -564,8 +564,8 @@ register struct obj *spellbook;
         You("continue your efforts to %s.",
             (booktype == SPE_NOVEL) ? "read the novel" : "memorize the spell");
 #else
-        You("%s‚ğÄŠJ‚µ‚½D",
-            (booktype == SPE_NOVEL) ? "“Ç‘" : "–‚–@‚ÌŠwK");
+        You("%s¤òºÆ³«¤·¤¿¡¥",
+            (booktype == SPE_NOVEL) ? "ÆÉ½ñ" : "ËâË¡¤Î³Ø½¬");
 #endif
     } else {
         /* KMH -- Simplified this code */
@@ -573,7 +573,7 @@ register struct obj *spellbook;
 /*JP
             pline("This spellbook is all blank.");
 */
-            pline("‚±‚Ì–‚–@‘‚Í^‚Á”’‚¾D");
+            pline("¤³¤ÎËâË¡½ñ¤Ï¿¿¤ÃÇò¤À¡¥");
             makeknown(booktype);
             return 1;
         }
@@ -640,8 +640,8 @@ register struct obj *spellbook;
                      "This spellbook is %sdifficult to comprehend. Continue?",
                             (read_ability < 12 ? "very " : ""));
 #else
-                     "‚±‚Ì–‚–@‘‚ğ—‰ğ‚·‚é‚Ì‚Í%s¢“ï‚¾D‘±‚¯‚Ü‚·‚©H",
-                            (read_ability < 12 ? "‚Æ‚Ä‚à" : ""));
+                     "¤³¤ÎËâË¡½ñ¤òÍı²ò¤¹¤ë¤Î¤Ï%sº¤Æñ¤À¡¥Â³¤±¤Ş¤¹¤«¡©",
+                            (read_ability < 12 ? "¤È¤Æ¤â" : ""));
 #endif
                     if (yn(qbuf) != 'y') {
                         spellbook->in_use = FALSE;
@@ -667,7 +667,7 @@ register struct obj *spellbook;
 /*JP
                     pline_The("spellbook crumbles to dust!");
 */
-                    pline("–‚–@‘‚Ío‚Æ‚È‚Á‚½I");
+                    pline("ËâË¡½ñ¤Ï¿Ğ¤È¤Ê¤Ã¤¿¡ª");
                 if (!objects[spellbook->otyp].oc_name_known
                     && !objects[spellbook->otyp].oc_uname)
                     docall(spellbook);
@@ -691,8 +691,8 @@ register struct obj *spellbook;
         You("begin to %s the runes.",
             spellbook->otyp == SPE_BOOK_OF_THE_DEAD ? "recite" : "memorize");
 #else
-        You("ƒ‹[ƒ“•¶š‚ğ%s‚µ‚Í‚¶‚ß‚½D",
-            spellbook->otyp == SPE_BOOK_OF_THE_DEAD ? "ˆÃ¥" : "‹L‰¯");
+        You("¥ë¡¼¥óÊ¸»ú¤ò%s¤·¤Ï¤¸¤á¤¿¡¥",
+            spellbook->otyp == SPE_BOOK_OF_THE_DEAD ? "°Å¾§" : "µ­²±");
 #endif
     }
 
@@ -702,7 +702,7 @@ register struct obj *spellbook;
 /*JP
     set_occupation(learn, "studying", 0);
 */
-        set_occupation(learn, "Šw‚Ô", 0);
+        set_occupation(learn, "³Ø¤Ö", 0);
     return 1;
 }
 
@@ -769,7 +769,7 @@ rejectcasting()
 /*JP
         Your("arms are not free to cast!");
 */
-        pline("–‚–@‚ğ¥‚¦‚æ‚¤‚É‚à˜r‚Ì©—R‚ªŒø‚©‚È‚¢I");
+        pline("ËâË¡¤ò¾§¤¨¤è¤¦¤Ë¤âÏÓ¤Î¼«Í³¤¬¸ú¤«¤Ê¤¤¡ª");
         return TRUE;
     }
     return FALSE;
@@ -790,7 +790,7 @@ int *spell_no;
 /*JP
         You("don't know any spells right now.");
 */
-        You("¡‚Ì‚Æ‚±‚ë‰½‚Ì–‚–@‚à’m‚ç‚È‚¢D");
+        You("º£¤Î¤È¤³¤í²¿¤ÎËâË¡¤âÃÎ¤é¤Ê¤¤¡¥");
         return FALSE;
     }
     if (rejectcasting())
@@ -816,7 +816,7 @@ int *spell_no;
 /*JP
             Sprintf(qbuf, "Cast which spell? [%s *?]", lets);
 */
-            Sprintf(qbuf, "‚Ç‚Ì–‚–@‚ğ¥‚¦‚éH[%s ?]", lets);
+            Sprintf(qbuf, "¤É¤ÎËâË¡¤ò¾§¤¨¤ë¡©[%s ?]", lets);
             ilet = yn_function(qbuf, (char *) 0, '\0');
             if (ilet == '*' || ilet == '?')
                 break; /* use menu mode */
@@ -828,7 +828,7 @@ int *spell_no;
 /*JP
                 You("don't know that spell.");
 */
-                You("‚»‚ñ‚È–‚–@‚Í’m‚ç‚È‚¢D");
+                You("¤½¤ó¤ÊËâË¡¤ÏÃÎ¤é¤Ê¤¤¡¥");
                 continue; /* ask again */
             }
             *spell_no = idx;
@@ -838,7 +838,7 @@ int *spell_no;
 /*JP
     return dospellmenu("Choose which spell to cast", SPELLMENU_CAST,
 */
-    return dospellmenu("‚Ç‚Ì–‚–@‚ğ¥‚¦‚éH", SPELLMENU_CAST,
+    return dospellmenu("¤É¤ÎËâË¡¤ò¾§¤¨¤ë¡©", SPELLMENU_CAST,
                        spell_no);
 }
 
@@ -862,37 +862,37 @@ int skill;
 /*JP
         return "attack";
 */
-        return "UŒ‚";
+        return "¹¶·â";
     case P_HEALING_SPELL:
 /*JP
         return "healing";
 */
-        return "¡–ü";
+        return "¼£Ìş";
     case P_DIVINATION_SPELL:
 /*JP
         return "divination";
 */
-        return "—\’m";
+        return "Í½ÃÎ";
     case P_ENCHANTMENT_SPELL:
 /*JP
         return "enchantment";
 */
-        return "•â•";
+        return "Êä½õ";
     case P_CLERIC_SPELL:
 /*JP
         return "clerical";
 */
-        return "‘m—µ";
+        return "ÁÎÎ·";
     case P_ESCAPE_SPELL:
 /*JP
         return "escape";
 */
-        return "’Eo";
+        return "Ã¦½Ğ";
     case P_MATTER_SPELL:
 /*JP
         return "matter";
 */
-        return "•¨¿";
+        return "Êª¼Á";
     default:
         impossible("Unknown spell skill, %d;", skill);
         return "";
@@ -954,7 +954,7 @@ cast_protection()
 /*JP
                 pline_The("%s haze around you becomes more dense.", hgolden);
 */
-                pline("‚ ‚È‚½‚Ì‚Ü‚í‚è‚Ì%s‰à‚ª”Z‚­‚È‚Á‚½D", hgolden);
+                pline("¤¢¤Ê¤¿¤Î¤Ş¤ï¤ê¤Î%s²â¤¬Ç»¤¯¤Ê¤Ã¤¿¡¥", hgolden);
             } else {
                 rmtyp = levl[u.ux][u.uy].typ;
                 atmosphere = u.uswallow
@@ -962,50 +962,50 @@ cast_protection()
 /*JP
                                    ? "mist"
 */
-                                   ? "–¶"
+                                   ? "Ì¸"
                                    : is_whirly(u.ustuck->data)
 /*JP
                                       ? "maelstrom"
 */
-                                      ? "‰Q"
+                                      ? "±²"
                                       : is_animal(u.ustuck->data)
 /*JP
                                          ? "maw"
 */
-                                         ? "ˆİ"
+                                         ? "°ß"
 /*JP
                                          : "ooze")
 */
-                                         : "‚Ë‚Î‚Ë‚Î")
+                                         : "¤Í¤Ğ¤Í¤Ğ")
                                 : (u.uinwater
 /*JP
                                    ? "water"
 */
-                                   ? "…"
+                                   ? "¿å"
                                    : (rmtyp == CLOUD)
 /*JP
                                       ? "cloud"
 */
-                                      ? "‰_"
+                                      ? "±À"
                                       : IS_TREE(rmtyp)
 /*JP
                                          ? "vegitation"
 */
-                                         ? "–Ø"
+                                         ? "ÌÚ"
                                          : IS_STWALL(rmtyp)
 /*JP
                                             ? "stone"
 */
-                                            ? "Î"
+                                            ? "ÀĞ"
 /*JP
                                             : "air");
 */
-                                            : "‹ó‹C");
+                                            : "¶õµ¤");
 #if 0 /*JP*/
                 pline_The("%s around you begins to shimmer with %s haze.",
                           atmosphere, an(hgolden));
 #else
-                pline("‚ ‚È‚½‚Ì‚Ü‚í‚è‚Ì%s‚ª%s–¶‚ÅƒLƒ‰ƒLƒ‰‚ÆŒõ‚è‚Í‚¶‚ß‚½D",
+                pline("¤¢¤Ê¤¿¤Î¤Ş¤ï¤ê¤Î%s¤¬%sÌ¸¤Ç¥­¥é¥­¥é¤È¸÷¤ê¤Ï¤¸¤á¤¿¡¥",
                           atmosphere, hgolden);
 #endif
             }
@@ -1020,7 +1020,7 @@ cast_protection()
 /*JP
         Your("skin feels warm for a moment.");
 */
-        Your("”§‚Íˆêuƒ|ƒJƒ|ƒJ‚µ‚½D");
+        Your("È©¤Ï°ì½Ö¥İ¥«¥İ¥«¤·¤¿¡¥");
     }
 }
 
@@ -1098,33 +1098,33 @@ boolean atme;
 /*JP
         Your("knowledge of this spell is twisted.");
 */
-        Your("‚±‚Ì–‚–@‚ÉŠÖ‚·‚é’m¯‚Í‚æ‚¶‚ê‚½D");
+        Your("¤³¤ÎËâË¡¤Ë´Ø¤¹¤ëÃÎ¼±¤Ï¤è¤¸¤ì¤¿¡¥");
 /*JP
         pline("It invokes nightmarish images in your mind...");
 */
-        pline("‚»‚ê‚Íˆ«–²‚ğS‚É•‚‚Î‚¹‚½DDD");
+        pline("¤½¤ì¤Ï°­Ì´¤ò¿´¤ËÉâ¤Ğ¤»¤¿¡¥¡¥¡¥");
         spell_backfire(spell);
         return 1;
     } else if (spellknow(spell) <= KEEN / 200) { /* 100 turns left */
 /*JP
         You("strain to recall the spell.");
 */
-        You("–‚–@‚ğv‚¢‚¾‚·‚Ì‚É‹ê˜J‚µ‚½D");
+        You("ËâË¡¤ò»×¤¤¤À¤¹¤Î¤Ë¶ìÏ«¤·¤¿¡¥");
     } else if (spellknow(spell) <= KEEN / 40) { /* 500 turns left */
 /*JP
         You("have difficulty remembering the spell.");
 */
-        You("ô•¶‚ğv‚¢o‚·‚Ì‚ª“ï‚µ‚­‚È‚Á‚Ä‚«‚½D");
+        You("¼öÊ¸¤ò»×¤¤½Ğ¤¹¤Î¤¬Æñ¤·¤¯¤Ê¤Ã¤Æ¤­¤¿¡¥");
     } else if (spellknow(spell) <= KEEN / 20) { /* 1000 turns left */
 /*JP
         Your("knowledge of this spell is growing faint.");
 */
-        Your("‚±‚Ì–‚–@‚ÉŠÖ‚·‚é’m¯‚ª‚¨‚Ú‚ë‚°‚É‚È‚Á‚Ä‚«‚½D");
+        Your("¤³¤ÎËâË¡¤Ë´Ø¤¹¤ëÃÎ¼±¤¬¤ª¤Ü¤í¤²¤Ë¤Ê¤Ã¤Æ¤­¤¿¡¥");
     } else if (spellknow(spell) <= KEEN / 10) { /* 2000 turns left */
 /*JP
         Your("recall of this spell is gradually fading.");
 */
-        Your("‚±‚Ì–‚–@‚ÉŠÖ‚·‚é’m¯‚ª™X‚É”–‚ê‚Ä‚«‚½D");
+        Your("¤³¤ÎËâË¡¤Ë´Ø¤¹¤ëÃÎ¼±¤¬½ù¡¹¤ËÇö¤ì¤Æ¤­¤¿¡¥");
     }
     energy = (spellev(spell) * 5); /* 5 <= energy <= 35 */
 
@@ -1132,19 +1132,19 @@ boolean atme;
 /*JP
         You("are too hungry to cast that spell.");
 */
-        pline("• ‚ªŒ¸‚è‚·‚¬‚Ä–‚–@‚ğ¥‚¦‚ç‚ê‚È‚¢D");
+        pline("Ê¢¤¬¸º¤ê¤¹¤®¤ÆËâË¡¤ò¾§¤¨¤é¤ì¤Ê¤¤¡¥");
         return 0;
     } else if (ACURR(A_STR) < 4 && spellid(spell) != SPE_RESTORE_ABILITY) {
 /*JP
         You("lack the strength to cast spells.");
 */
-        pline("‹­‚³‚ª­‚È‚·‚¬‚Ä–‚–@‚ğ¥‚¦‚ç‚ê‚È‚¢D");
+        pline("¶¯¤µ¤¬¾¯¤Ê¤¹¤®¤ÆËâË¡¤ò¾§¤¨¤é¤ì¤Ê¤¤¡¥");
         return 0;
     } else if (check_capacity(
 /*JP
                 "Your concentration falters while carrying so much stuff.")) {
 */
-                "‚½‚­‚³‚ñ‚à‚Ì‚ğ‚¿‚·‚¬‚ÄW’†‚Å‚«‚È‚¢D")){
+                "¤¿¤¯¤µ¤ó¤â¤Î¤ò»ı¤Á¤¹¤®¤Æ½¸Ãæ¤Ç¤­¤Ê¤¤¡¥")){
         return 1;
     }
 
@@ -1152,14 +1152,14 @@ boolean atme;
 /*JP
         You_feel("the amulet draining your energy away.");
 */
-        pline("–‚œ‚¯‚ª‚ ‚È‚½‚ÌƒGƒlƒ‹ƒM[‚ğ‹z‚¢‚Æ‚Á‚Ä‚¢‚é‚æ‚¤‚È‹C‚ª‚µ‚½D");
+        pline("Ëâ½ü¤±¤¬¤¢¤Ê¤¿¤Î¥¨¥Í¥ë¥®¡¼¤òµÛ¤¤¤È¤Ã¤Æ¤¤¤ë¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
         energy += rnd(2 * energy);
     }
     if (energy > u.uen) {
 /*JP
         You("don't have enough energy to cast that spell.");
 */
-        pline("–‚–@‚ğ¥‚¦‚é‚¾‚¯‚Ì\•ª‚ÈƒGƒlƒ‹ƒM[‚ª‚È‚¢D");
+        pline("ËâË¡¤ò¾§¤¨¤ë¤À¤±¤Î½½Ê¬¤Ê¥¨¥Í¥ë¥®¡¼¤¬¤Ê¤¤¡¥");
         return 0;
     } else {
         if (spellid(spell) != SPE_DETECT_FOOD) {
@@ -1217,7 +1217,7 @@ boolean atme;
 /*JP
         You("fail to cast the spell correctly.");
 */
-        You("–‚–@‚ğ³‚µ‚­¥‚¦‚é‚±‚Æ‚ª‚Å‚«‚È‚©‚Á‚½D");
+        You("ËâË¡¤òÀµ¤·¤¯¾§¤¨¤ë¤³¤È¤¬¤Ç¤­¤Ê¤«¤Ã¤¿¡¥");
         u.uen -= energy / 2;
         context.botl = 1;
         return 1;
@@ -1259,7 +1259,7 @@ boolean atme;
                             Sprintf(buf, "zapped %sself with a spell",
                                     uhim());
 #else
-                            Strcpy(buf, "©•ª©g‚Ì–‚–@‚ğ—‚Ñ‚Ä");
+                            Strcpy(buf, "¼«Ê¬¼«¿È¤ÎËâË¡¤òÍá¤Ó¤Æ");
 #endif
                             losehp(damage, buf, NO_KILLER_PREFIX);
                         }
@@ -1321,7 +1321,7 @@ boolean atme;
 /*JP
                 pline_The("magical energy is released!");
 */
-                pline("–‚–@‚ÌƒGƒlƒ‹ƒM[‚ª‰ğ•ú‚³‚ê‚½I");
+                pline("ËâË¡¤Î¥¨¥Í¥ë¥®¡¼¤¬²òÊü¤µ¤ì¤¿¡ª");
             }
             if (!u.dx && !u.dy && !u.dz) {
                 if ((damage = zapyourself(pseudo, TRUE)) != 0) {
@@ -1330,7 +1330,7 @@ boolean atme;
 /*JP
                     Sprintf(buf, "zapped %sself with a spell", uhim());
 */
-                    Strcpy(buf, "©•ª©g‚Ì–‚–@‚ğ—‚Ñ‚Ä");
+                    Strcpy(buf, "¼«Ê¬¼«¿È¤ÎËâË¡¤òÍá¤Ó¤Æ");
                     if (physical_damage)
                         damage = Maybe_Half_Phys(damage);
                     losehp(damage, buf, NO_KILLER_PREFIX);
@@ -1380,12 +1380,12 @@ boolean atme;
 /*JP
             You("are no longer ill.");
 */
-            Your("•a‹C‚Í’¼‚Á‚½D");
+            Your("ÉÂµ¤¤ÏÄ¾¤Ã¤¿¡¥");
         if (Slimed)
 /*JP
             make_slimed(0L, "The slime disappears!");
 */
-            make_slimed(0L, "ƒXƒ‰ƒCƒ€‚ÍÁ‚¦‚½I");
+            make_slimed(0L, "¥¹¥é¥¤¥à¤Ï¾Ã¤¨¤¿¡ª");
         healup(0, 0, TRUE, FALSE);
         break;
     case SPE_CREATE_FAMILIAR:
@@ -1399,7 +1399,7 @@ boolean atme;
 /*JP
             You("sense a pointy hat on top of your %s.", body_part(HEAD));
 */
-            You("‚Æ‚ª‚Á‚½–Xq‚ğ%s‚Ìã‚É”­Œ©‚µ‚½D", body_part(HEAD));
+            You("¤È¤¬¤Ã¤¿Ë¹»Ò¤ò%s¤Î¾å¤ËÈ¯¸«¤·¤¿¡¥", body_part(HEAD));
         break;
     case SPE_PROTECTION:
         cast_protection();
@@ -1432,39 +1432,39 @@ throwspell()
 /*JP
         pline("You're joking! In this weather?");
 */
-        pline("…’†‚Å‰½‚ğ‚µ‚æ‚¤‚Á‚Ä‚¢‚¤‚ñ‚¾‚¢H");
+        pline("¿åÃæ¤Ç²¿¤ò¤·¤è¤¦¤Ã¤Æ¤¤¤¦¤ó¤À¤¤¡©");
         return 0;
     } else if (Is_waterlevel(&u.uz)) {
 /*JP
         You("had better wait for the sun to come out.");
 */
-        You("‘¾—z‚ªŒ»‚ê‚é‚Ü‚Å‘Ò‚Á‚½‚Ù‚¤‚ª‚æ‚¢‚¾‚ë‚¤D");
+        You("ÂÀÍÛ¤¬¸½¤ì¤ë¤Ş¤ÇÂÔ¤Ã¤¿¤Û¤¦¤¬¤è¤¤¤À¤í¤¦¡¥");
         return 0;
     }
 
 /*JP
     pline("Where do you want to cast the spell?");
 */
-    pline("‚Ç‚±‚ÉŒü‚©‚Á‚Ä–‚–@‚ğ¥‚¦‚éH");
+    pline("¤É¤³¤Ë¸ş¤«¤Ã¤ÆËâË¡¤ò¾§¤¨¤ë¡©");
     cc.x = u.ux;
     cc.y = u.uy;
 /*JP
     if (getpos(&cc, TRUE, "the desired position") < 0)
 */
-    if (getpos(&cc, TRUE, "–]‚İ‚ÌêŠ") < 0)
+    if (getpos(&cc, TRUE, "Ë¾¤ß¤Î¾ì½ê") < 0)
         return 0; /* user pressed ESC */
     /* The number of moves from hero to where the spell drops.*/
     if (distmin(u.ux, u.uy, cc.x, cc.y) > 10) {
 /*JP
         pline_The("spell dissipates over the distance!");
 */
-        pline("‰“‚·‚¬‚éI");
+        pline("±ó¤¹¤®¤ë¡ª");
         return 0;
     } else if (u.uswallow) {
 /*JP
         pline_The("spell is cut short!");
 */
-        pline("‚¾‚ß‚¾I‹ß‚·‚¬‚éI");
+        pline("¤À¤á¤À¡ª¶á¤¹¤®¤ë¡ª");
         exercise(A_WIS, FALSE); /* What were you THINKING! */
         u.dx = 0;
         u.dy = 0;
@@ -1475,7 +1475,7 @@ throwspell()
 /*JP
         Your("mind fails to lock onto that location!");
 */
-        You("‚»‚±‚ÉŒü‚©‚Á‚ÄW’†‚µ‚½‚ª¸”s‚µ‚½I");
+        You("¤½¤³¤Ë¸ş¤«¤Ã¤Æ½¸Ãæ¤·¤¿¤¬¼ºÇÔ¤·¤¿¡ª");
         return 0;
     }
 
@@ -1753,12 +1753,12 @@ dovspell()
 /*JP
         You("don't know any spells right now.");
 */
-        You("–‚–@‚ğ’m‚ç‚È‚¢D");
+        You("ËâË¡¤òÃÎ¤é¤Ê¤¤¡¥");
     } else {
 /*JP
         while (dospellmenu("Currently known spells",
 */
-        while (dospellmenu("Œ»İ’m‚Á‚Ä‚¢‚é–‚–@ˆê——",
+        while (dospellmenu("¸½ºßÃÎ¤Ã¤Æ¤¤¤ëËâË¡°ìÍ÷",
                            SPELLMENU_VIEW, &splnum)) {
             if (splnum == SPELLMENU_SORT) {
                 if (spellsortmenu())
@@ -1767,7 +1767,7 @@ dovspell()
 /*JP
                 Sprintf(qbuf, "Reordering spells; swap '%c' with",
 */
-                Sprintf(qbuf, "'%c'‚Æ•À‚Ñ•Ï‚¦‚é–‚–@‚ÍH",
+                Sprintf(qbuf, "'%c'¤ÈÊÂ¤ÓÊÑ¤¨¤ëËâË¡¤Ï¡©",
                         spellet(splnum));
                 if (!dospellmenu(qbuf, splnum, &othnum))
                     break;
@@ -1815,14 +1815,14 @@ int *spell_no;
         Sprintf(buf, "%-20s     Level %-12s Fail Retention", "    Name",
                 "Category");
 #else
-        Sprintf(buf, "%-20s     Level  %-12s ¬Œ÷—¦", "    Name", "•ª—Ş");
+        Sprintf(buf, "%-20s     Level  %-12s À®¸ùÎ¨", "    Name", "Ê¬Îà");
 #endif
         fmt = "%-20s  %2d   %-12s %3d%% %9s";
     } else {
 /*JP
         Sprintf(buf, "Name\tLevel\tCategory\tFail\tRetention");
 */
-        Sprintf(buf, "–¼‘O\tƒŒƒxƒ‹\t•ª—Ş\t¬Œ÷—¦");
+        Sprintf(buf, "Ì¾Á°\t¥ì¥Ù¥ë\tÊ¬Îà\tÀ®¸ùÎ¨");
         fmt = "%s\t%-d\t%s\t%-d%%\t%s";
     }
     add_menu(tmpwin, NO_GLYPH, &any, 0, 0, iflags.menu_headings, buf,

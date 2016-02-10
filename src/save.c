@@ -82,7 +82,7 @@ dosave()
 /*JP
     if (yn("Really save?") == 'n') {
 */
-    if(yn("–{“–‚É•Û‘¶‚·‚éH") == 'n') {
+    if(yn("ËÜÅö¤ËÊÝÂ¸¤¹¤ë¡©") == 'n') {
         clear_nhwindow(WIN_MESSAGE);
         if (multi > 0)
             nomul(0);
@@ -91,7 +91,7 @@ dosave()
 /*JP
         pline("Saving...");
 */
-        pline("•Û‘¶’†DDD");
+        pline("ÊÝÂ¸Ãæ¡¥¡¥¡¥");
 #if defined(UNIX) || defined(VMS) || defined(__EMX__)
         program_state.done_hup = 0;
 #endif
@@ -102,7 +102,7 @@ dosave()
 /*JP
             exit_nhwindows("Be seeing you...");
 */
-            exit_nhwindows("‚Ü‚½‰ï‚¢‚Ü‚µ‚å‚¤DDD");
+            exit_nhwindows("¤Þ¤¿²ñ¤¤¤Þ¤·¤ç¤¦¡¥¡¥¡¥");
             terminate(EXIT_SUCCESS);
         } else
             (void) doredraw();
@@ -155,11 +155,11 @@ dosave0()
 /*JP
             There("seems to be an old save file.");
 */
-            pline("‘O‚ÉƒZ[ƒu‚µ‚½ƒtƒ@ƒCƒ‹‚ª‚ ‚è‚Ü‚·D");
+            pline("Á°¤Ë¥»¡¼¥Ö¤·¤¿¥Õ¥¡¥¤¥ë¤¬¤¢¤ê¤Þ¤¹¡¥");
 /*JP
             if (yn("Overwrite the old file?") == 'n') {
 */
-            if (yn("ŒÃ‚¢ƒtƒ@ƒCƒ‹‚Éã‘‚«‚µ‚Ü‚·‚©H") == 'n') {
+            if (yn("¸Å¤¤¥Õ¥¡¥¤¥ë¤Ë¾å½ñ¤­¤·¤Þ¤¹¤«¡©") == 'n') {
                 nh_compress(fq_save);
                 return 0;
             }

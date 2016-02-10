@@ -51,13 +51,13 @@ STATIC_DCL boolean FDECL(blocked_boulder, (int, int));
 /*JP
 static const char *Moloch = "Moloch";
 */
-static const char *Moloch = "ƒ‚[ƒƒbƒN";
+static const char *Moloch = "¥â¡¼¥í¥Ã¥¯";
 
 static const char *godvoices[] = {
 /*JP
     "booms out", "thunders", "rings out", "booms",
 */
-    "‹¿‚«‚í‚½‚Á‚½", "—‹‚Ì‚æ‚¤‚É‹¿‚¢‚½", "‚Æ‚Ç‚ë‚¢‚½", "‹¿‚¢‚½",
+    "¶Á¤­¤ï¤¿¤Ã¤¿", "Íë¤Î¤è¤¦¤Ë¶Á¤¤¤¿", "¤È¤É¤í¤¤¤¿", "¶Á¤¤¤¿",
 };
 
 /* values calculated when prayer starts, and used when completed */
@@ -332,8 +332,8 @@ int trouble;
     static NEARDATA const char leftglow[] = "Your left ring softly glows",
                                rightglow[] = "Your right ring softly glows";
 #else
-    static NEARDATA const char leftglow[] = "¶‚Ìw—Ö",
-                               rightglow[] = "‰E‚Ìw—Ö";
+    static NEARDATA const char leftglow[] = "º¸¤Î»ØÎØ",
+                               rightglow[] = "±¦¤Î»ØÎØ";
 #endif
 
     switch (trouble) {
@@ -341,26 +341,26 @@ int trouble;
 /*JP
         make_stoned(0L, "You feel more limber.", 0, (char *) 0);
 */
-        make_stoned(0L, "“î‚ç‚©‚­‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½D", 0, (char *) 0);
+        make_stoned(0L, "Æğ¤é¤«¤¯¤Ê¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥", 0, (char *) 0);
         break;
     case TROUBLE_SLIMED:
 /*JP
         make_slimed(0L, "The slime disappears.");
 */
-        make_slimed(0L, "‚Ç‚ë‚Ç‚ëŠ´‚ÍÁ‚¦‚½D");
+        make_slimed(0L, "¤É¤í¤É¤í´¶¤Ï¾Ã¤¨¤¿¡¥");
         break;
     case TROUBLE_STRANGLED:
         if (uamul && uamul->otyp == AMULET_OF_STRANGULATION) {
 /*JP
             Your("amulet vanishes!");
 */
-            Your("–‚œ‚¯‚ÍÁ‚¦‚³‚Á‚½I");
+            Your("Ëâ½ü¤±¤Ï¾Ã¤¨¤µ¤Ã¤¿¡ª");
             useup(uamul);
         }
 /*JP
         You("can breathe again.");
 */
-        You("‚Ü‚½ŒÄ‹z‚Å‚«‚é‚æ‚¤‚É‚È‚Á‚½D");
+        You("¤Ş¤¿¸ÆµÛ¤Ç¤­¤ë¤è¤¦¤Ë¤Ê¤Ã¤¿¡¥");
         Strangled = 0;
         context.botl = 1;
         break;
@@ -368,7 +368,7 @@ int trouble;
 /*JP
         You("are back on solid ground.");
 */
-        You("ŒÅ‚¢’n–Ê‚É–ß‚Á‚½D");
+        You("¸Ç¤¤ÃÏÌÌ¤ËÌá¤Ã¤¿¡¥");
         /* teleport should always succeed, but if not,
          * just untrap them.
          */
@@ -382,7 +382,7 @@ int trouble;
 /*JP
         Your("%s feels content.", body_part(STOMACH));
 */
-        Your("H—~‚Í–‚½‚³‚ê‚½D");
+        Your("¿©Íß¤ÏËş¤¿¤µ¤ì¤¿¡¥");
         init_uhunger();
         context.botl = 1;
         break;
@@ -390,7 +390,7 @@ int trouble;
 /*JP
         You_feel("better.");
 */
-        You("‹C•ª‚ª—Ç‚­‚È‚Á‚½D");
+        You("µ¤Ê¬¤¬ÎÉ¤¯¤Ê¤Ã¤¿¡¥");
         make_sick(0L, (char *) 0, FALSE, SICK_ALL);
         break;
     case TROUBLE_REGION:
@@ -404,7 +404,7 @@ int trouble;
 /*JP
         You_feel("much better.");
 */
-        You("‚Æ‚Ä‚à‹C•ª‚ª—Ç‚­‚È‚Á‚½D");
+        You("¤È¤Æ¤âµ¤Ê¬¤¬ÎÉ¤¯¤Ê¤Ã¤¿¡¥");
         if (Upolyd) {
             u.mhmax += rnd(5);
             if (u.mhmax <= 5)
@@ -424,8 +424,8 @@ int trouble;
         You_feel("%sstronger.",
                  (AMAX(A_STR) - ABASE(A_STR) > 6) ? "much " : "");
 #else
-        You_feel("%s‹­‚­‚È‚Á‚½‚æ‚¤‚¾D",
-                 (AMAX(A_STR) - ABASE(A_STR) > 6) ? "‚Æ‚Ä‚à" : "");
+        You_feel("%s¶¯¤¯¤Ê¤Ã¤¿¤è¤¦¤À¡¥",
+                 (AMAX(A_STR) - ABASE(A_STR) > 6) ? "¤È¤Æ¤â" : "");
 #endif
         ABASE(A_STR) = AMAX(A_STR);
         context.botl = 1;
@@ -446,7 +446,7 @@ int trouble;
 /*JP
         Your("surroundings change.");
 */
-        Your("ŠÂ‹«‚ª•Ï‰»‚µ‚½D");
+        Your("´Ä¶­¤¬ÊÑ²½¤·¤¿¡¥");
         /* no control, but works on no-teleport levels */
         (void) safe_teleds(FALSE);
         break;
@@ -471,7 +471,7 @@ int trouble;
 /*JP
                 Your("shape becomes uncertain.");
 */
-                Your("‘ÌŒ^‚Í•s–¾Šm‚É‚È‚Á‚½D");
+                Your("ÂÎ·¿¤ÏÉÔÌÀ³Î¤Ë¤Ê¤Ã¤¿¡¥");
                 rehumanize(); /* "You return to {normal} form." */
             } else if ((otmp = unchanger()) != 0 && otmp->cursed) {
                 /* otmp is an amulet of unchanging */
@@ -493,7 +493,7 @@ int trouble;
 /*JP
         Your("chain disappears.");
 */
-        Your("½‚ÍÁ‚¦‚½D");
+        Your("º¿¤Ï¾Ã¤¨¤¿¡¥");
         if (u.utrap && u.utraptype == TT_BURIEDBALL)
             buried_ball_to_freedom();
         else
@@ -524,7 +524,7 @@ int trouble;
                   what ? what : (const char *) Yobjnam2(otmp, "softly glow"),
                   hcolor(NH_AMBER));
 #else
-            Your("%s‚Í%s‚â‚í‚ç‚©‚­‹P‚¢‚½D",
+            Your("%s¤Ï%s¤ä¤ï¤é¤«¤¯µ±¤¤¤¿¡¥",
                  what ? what : (const char *)xname(otmp),
                  jconj_adj(hcolor(NH_AMBER)));
 #endif
@@ -540,12 +540,12 @@ int trouble;
 /*JP
             pline("There's a tiger in your tank.");
 */
-            pline("‚ ‚È‚½‚Ìƒ^ƒ“ƒN‚Ì’†‚Éƒgƒ‰‚ª‚¢‚éD");
+            pline("¤¢¤Ê¤¿¤Î¥¿¥ó¥¯¤ÎÃæ¤Ë¥È¥é¤¬¤¤¤ë¡¥");
         else
 /*JP
             You_feel("in good health again.");
 */
-            You("‚Ü‚½Œ’N‚É‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½D");
+            You("¤Ş¤¿·ò¹¯¤Ë¤Ê¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
         for (i = 0; i < A_MAX; i++) {
             if (ABASE(i) < AMAX(i)) {
                 ABASE(i) = AMAX(i);
@@ -562,7 +562,7 @@ int trouble;
             eyes = makeplural(eyes);
         Your("%s %s better.", eyes, vtense(eyes, "feel"));
 #else
-        pline("%s‚ª‰ñ•œ‚µ‚½‚æ‚¤‚È‹C‚ª‚µ‚½D", body_part(EYE));
+        pline("%s¤¬²óÉü¤·¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥", body_part(EYE));
 #endif
         u.ucreamed = 0;
         make_blinded(0L, FALSE);
@@ -581,7 +581,7 @@ int trouble;
 /*JP
         pline("Looks like you are back in Kansas.");
 */
-        pline("Œ©‚ÄIƒJƒ“ƒUƒX‚É–ß‚Á‚Ä‚«‚½‚ñ‚¾‚íD");
+        pline("¸«¤Æ¡ª¥«¥ó¥¶¥¹¤ËÌá¤Ã¤Æ¤­¤¿¤ó¤À¤ï¡¥");
         (void) make_hallucinated(0L, FALSE, 0L);
         break;
     case TROUBLE_SADDLE:
@@ -590,7 +590,7 @@ int trouble;
 /*JP
             pline("%s %s.", Yobjnam2(otmp, "softly glow"), hcolor(NH_AMBER));
 */
-            pline("%s‚Í%s‚â‚í‚ç‚©‚­‹P‚¢‚½D", y_monnam(u.usteed), hcolor(NH_AMBER));
+            pline("%s¤Ï%s¤ä¤ï¤é¤«¤¯µ±¤¤¤¿¡¥", y_monnam(u.usteed), hcolor(NH_AMBER));
             otmp->bknown = TRUE;
         }
         uncurse(otmp);
@@ -615,16 +615,16 @@ aligntyp resp_god;
 /*JP
           "Suddenly a bolt of lightning comes down at you from the heavens!");
 */
-          "“Ë‘R‹ó‚©‚çˆîÈ‚ª—‚¿‚Ä‚«‚½I");
+          "ÆÍÁ³¶õ¤«¤é°ğºÊ¤¬Íî¤Á¤Æ¤­¤¿¡ª");
 /*JP
         pline("It strikes %s!", mon_nam(u.ustuck));
 */
-        pline("ˆîÈ‚Í%s‚É–½’†‚µ‚½I", mon_nam(u.ustuck));
+        pline("°ğºÊ¤Ï%s¤ËÌ¿Ãæ¤·¤¿¡ª", mon_nam(u.ustuck));
         if (!resists_elec(u.ustuck)) {
 /*JP
             pline("%s fries to a crisp!", Monnam(u.ustuck));
 */
-            pline("%s‚ÍƒpƒŠƒpƒŠ‚É‚È‚Á‚½I", Monnam(u.ustuck));
+            pline("%s¤Ï¥Ñ¥ê¥Ñ¥ê¤Ë¤Ê¤Ã¤¿¡ª", Monnam(u.ustuck));
             /* Yup, you get experience.  It takes guts to successfully
              * pull off this trick on your god, anyway.
              */
@@ -633,30 +633,30 @@ aligntyp resp_god;
 /*JP
             pline("%s seems unaffected.", Monnam(u.ustuck));
 */
-            pline("%s‚Í‰e‹¿‚ğó‚¯‚È‚¢‚æ‚¤‚¾D", Monnam(u.ustuck));
+            pline("%s¤Ï±Æ¶Á¤ò¼õ¤±¤Ê¤¤¤è¤¦¤À¡¥", Monnam(u.ustuck));
     } else {
 /*JP
         pline("Suddenly, a bolt of lightning strikes you!");
 */
-        pline("“Ë‘RCˆîÈ‚ª‚ ‚È‚½‚É–½’†‚µ‚½I");
+        pline("ÆÍÁ³¡¤°ğºÊ¤¬¤¢¤Ê¤¿¤ËÌ¿Ãæ¤·¤¿¡ª");
         if (Reflecting) {
             shieldeff(u.ux, u.uy);
             if (Blind)
 /*JP
                 pline("For some reason you're unaffected.");
 */
-                pline("‚È‚º‚©‚ ‚È‚½‚Í‰e‹¿‚ğó‚¯‚È‚¢D");
+                pline("¤Ê¤¼¤«¤¢¤Ê¤¿¤Ï±Æ¶Á¤ò¼õ¤±¤Ê¤¤¡¥");
             else
 /*JP
                 (void) ureflects("%s reflects from your %s.", "It");
 */
-                (void) ureflects("%s‚Í%s‚É‚æ‚Á‚Ä”½Ë‚³‚ê‚½D", "‰½‚©");
+                (void) ureflects("%s¤Ï%s¤Ë¤è¤Ã¤ÆÈ¿¼Í¤µ¤ì¤¿¡¥", "²¿¤«");
         } else if (Shock_resistance) {
             shieldeff(u.ux, u.uy);
 /*JP
             pline("It seems not to affect you.");
 */
-            pline("ˆîÈ‚Í‰e‹¿‚ğ—^‚¦‚È‚¢‚æ‚¤‚¾D");
+            pline("°ğºÊ¤Ï±Æ¶Á¤òÍ¿¤¨¤Ê¤¤¤è¤¦¤À¡¥");
         } else
             fry_by_god(resp_god, FALSE);
     }
@@ -664,29 +664,29 @@ aligntyp resp_god;
 /*JP
     pline("%s is not deterred...", align_gname(resp_god));
 */
-    pline("%s‚Í‚ ‚«‚ç‚ß‚È‚©‚Á‚½DDD", align_gname(resp_god));
+    pline("%s¤Ï¤¢¤­¤é¤á¤Ê¤«¤Ã¤¿¡¥¡¥¡¥", align_gname(resp_god));
     if (u.uswallow) {
 /*JP
         pline("A wide-angle disintegration beam aimed at you hits %s!",
 */
-        pline("‚ ‚È‚½‚ğ‘_‚Á‚½LŠp•²ÓŒõü‚ª%s‚É–½’†‚µ‚½I",
+        pline("¤¢¤Ê¤¿¤òÁÀ¤Ã¤¿¹­³ÑÊ´ºÕ¸÷Àş¤¬%s¤ËÌ¿Ãæ¤·¤¿¡ª",
               mon_nam(u.ustuck));
         if (!resists_disint(u.ustuck)) {
 /*JP
             pline("%s disintegrates into a pile of dust!", Monnam(u.ustuck));
 */
-            pline("%s‚Í‚¿‚è‚ÌR‚É‚È‚Á‚½I", Monnam(u.ustuck));
+            pline("%s¤Ï¤Á¤ê¤Î»³¤Ë¤Ê¤Ã¤¿¡ª", Monnam(u.ustuck));
             xkilled(u.ustuck, 2); /* no corpse */
         } else
 /*JP
             pline("%s seems unaffected.", Monnam(u.ustuck));
 */
-            pline("%s‚Í‰e‹¿‚ğó‚¯‚È‚¢‚æ‚¤‚¾D", Monnam(u.ustuck));
+            pline("%s¤Ï±Æ¶Á¤ò¼õ¤±¤Ê¤¤¤è¤¦¤À¡¥", Monnam(u.ustuck));
     } else {
 /*JP
         pline("A wide-angle disintegration beam hits you!");
 */
-        pline("LŠp•²ÓŒõü‚ª‚ ‚È‚½‚É–½’†‚µ‚½I");
+        pline("¹­³ÑÊ´ºÕ¸÷Àş¤¬¤¢¤Ê¤¿¤ËÌ¿Ãæ¤·¤¿¡ª");
 
         /* disintegrate shield and body armor before disintegrating
          * the impudent mortal, like black dragon breath -3.
@@ -708,25 +708,25 @@ aligntyp resp_god;
 /*JP
             You("bask in its %s glow for a minute...", NH_BLACK);
 */
-            You("‚µ‚Î‚ç‚­C‚»‚Ì%s‹P‚«‚Å’g‚Ü‚Á‚½DDD", NH_BLACK);
+            You("¤·¤Ğ¤é¤¯¡¤¤½¤Î%sµ±¤­¤ÇÃÈ¤Ş¤Ã¤¿¡¥¡¥¡¥", NH_BLACK);
 /*JP
             godvoice(resp_god, "I believe it not!");
 */
-            godvoice(resp_god, "M‚¶‚ç‚ê‚ÊI");
+            godvoice(resp_god, "¿®¤¸¤é¤ì¤Ì¡ª");
         }
         if (Is_astralevel(&u.uz) || Is_sanctum(&u.uz)) {
             /* one more try for high altars */
 /*JP
             verbalize("Thou cannot escape my wrath, mortal!");
 */
-            verbalize("’è–½‚ÌÒ‚æC“ğ‰ä‚ª“{‚è‚©‚ç“¦‚ª‚ê‚é‚±‚Æ‚È‚ç‚ñI");
+            verbalize("ÄêÌ¿¤Î¼Ô¤è¡¤Æò²æ¤¬ÅÜ¤ê¤«¤éÆ¨¤¬¤ì¤ë¤³¤È¤Ê¤é¤ó¡ª");
             summon_minion(resp_god, FALSE);
             summon_minion(resp_god, FALSE);
             summon_minion(resp_god, FALSE);
 /*JP
             verbalize("Destroy %s, my servants!", uhim());
 */
-            verbalize("%s‚ğE‚¹C‚í‚ª‰º–l‚æI", uhim());
+            verbalize("%s¤ò»¦¤»¡¤¤ï¤¬²¼ËÍ¤è¡ª", uhim());
         }
     }
 }
@@ -740,14 +740,14 @@ boolean via_disintegration;
     You("%s!", !via_disintegration ? "fry to a crisp"
                                    : "disintegrate into a pile of dust");
 #else
-    You("%sI", !via_disintegration ? "ƒpƒŠƒpƒŠ‚É‚È‚Á‚½"
-                                    : "‚¿‚è‚ÌR‚É‚È‚Á‚½");
+    You("%s¡ª", !via_disintegration ? "¥Ñ¥ê¥Ñ¥ê¤Ë¤Ê¤Ã¤¿"
+                                    : "¤Á¤ê¤Î»³¤Ë¤Ê¤Ã¤¿");
 #endif
     killer.format = KILLED_BY;
 /*JP
     Sprintf(killer.name, "the wrath of %s", align_gname(resp_god));
 */
-    Sprintf(killer.name, "%s‚Ì“{‚è‚ÉG‚ê", align_gname(resp_god));
+    Sprintf(killer.name, "%s¤ÎÅÜ¤ê¤Ë¿¨¤ì", align_gname(resp_god));
     done(DIED);
 }
 
@@ -781,8 +781,8 @@ aligntyp resp_god;
         You_feel("that %s is %s.", align_gname(resp_god),
                  Hallucination ? "bummed" : "displeased");
 #else
-        You("%s‚ª%s‚¢‚é‚æ‚¤‚È‹C‚ª‚µ‚½D", align_gname(resp_god),
-            Hallucination ? "‚Ë‚¾‚Á‚Ä" : "—§• ‚µ‚Ä");
+        You("%s¤¬%s¤¤¤ë¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥", align_gname(resp_god),
+            Hallucination ? "¤Í¤À¤Ã¤Æ" : "Î©Ê¢¤·¤Æ");
 #endif
         break;
     case 2:
@@ -795,16 +795,16 @@ aligntyp resp_god;
                   : "art arrogant",
               youmonst.data->mlet == S_HUMAN ? "mortal" : "creature");
 #else
-        pline("u“ğ%sC%s‚æDv",
+        pline("¡ÖÆò%s¡¤%s¤è¡¥¡×",
               (ugod_is_angry() && resp_god == u.ualign.type)
-              ? "‚»‚Ì“¹‚©‚ç“¥‚İo‚Ä‚¨‚é"
-              : "˜ü–‚È‚è",
-              youmonst.data->mlet == S_HUMAN ? "’è–½‚Ì‚à‚Ì" : "¶•¨");
+              ? "¤½¤ÎÆ»¤«¤éÆ§¤ß½Ğ¤Æ¤ª¤ë"
+              : "ĞşËı¤Ê¤ê",
+              youmonst.data->mlet == S_HUMAN ? "ÄêÌ¿¤Î¤â¤Î" : "À¸Êª");
 #endif
 /*JP
         verbalize("Thou must relearn thy lessons!");
 */
-        verbalize("“ğ‚¢‚Üˆê“xŠw‚Ô‚×‚µI");
+        verbalize("Æò¤¤¤Ş°ìÅÙ³Ø¤Ö¤Ù¤·¡ª");
         (void) adjattrib(A_WIS, -1, FALSE);
         losexp((char *) 0);
         break;
@@ -821,7 +821,7 @@ aligntyp resp_god;
 /*JP
             pline("%s glow surrounds you.", An(hcolor(NH_BLACK)));
 */
-            pline("%sŒõ‚ª‚ ‚È‚½‚ğæ‚èŠª‚¢‚½D", An(hcolor(NH_BLACK)));
+            pline("%s¸÷¤¬¤¢¤Ê¤¿¤ò¼è¤ê´¬¤¤¤¿¡¥", An(hcolor(NH_BLACK)));
         rndcurse();
         break;
     case 7:
@@ -833,17 +833,17 @@ aligntyp resp_god;
                       ? "scorn"
                       : "call upon");
 #else
-        verbalize("“ğC‰ä%sH",
+        verbalize("Æò¡¤²æ%s¡©",
                   (on_altar() && (a_align(u.ux,u.uy) != resp_god))
-                  ? "‚ğ‚³‚°‚·‚İ‚µ‚©H"
-                  : "‚É‹F‚è‚ğ‹‚ß‚µ‚©H");
+                  ? "¤ò¤µ¤²¤¹¤ß¤·¤«¡©"
+                  : "¤Ëµ§¤ê¤òµá¤á¤·¤«¡©");
 #endif
 #if 0 /*JP*/
         pline("\"Then die, %s!\"",
               youmonst.data->mlet == S_HUMAN ? "mortal" : "creature");
 #else
-        pline("u€‚ËC%s‚æIv",
-              youmonst.data->mlet == S_HUMAN ? "’è–½‚Ì‚à‚Ì" : "¶•¨");
+        pline("¡Ö»à¤Í¡¤%s¤è¡ª¡×",
+              youmonst.data->mlet == S_HUMAN ? "ÄêÌ¿¤Î¤â¤Î" : "À¸Êª");
 #endif
         summon_minion(resp_god, FALSE);
         break;
@@ -870,7 +870,7 @@ const char *str;
         pline("%s %s into %s %s.", str, vtense(str, "drop"),
               s_suffix(mon_nam(u.ustuck)), mbodypart(u.ustuck, STOMACH));
 #else
-        pline("%s‚ª%s‚Ì%s‚É—‚¿‚½D", str,
+        pline("%s¤¬%s¤Î%s¤ËÍî¤Á¤¿¡¥", str,
               mon_nam(u.ustuck), mbodypart(u.ustuck, STOMACH));
 #endif
     } else {
@@ -879,9 +879,9 @@ const char *str;
               Blind ? "lands" : vtense(str, "appear"),
               Levitation ? "beneath" : "at", makeplural(body_part(FOOT)));
 #else
-        pline("%s‚ª‚ ‚È‚½‚Ì%s‚É%sI", str,
-              Levitation ? "‰º•û" : "‘«Œ³",
-              Blind ? "’…’n‚µ‚½" : "Œ»‚í‚ê‚½");
+        pline("%s¤¬¤¢¤Ê¤¿¤Î%s¤Ë%s¡ª", str,
+              Levitation ? "²¼Êı" : "Â­¸µ",
+              Blind ? "ÃåÃÏ¤·¤¿" : "¸½¤ï¤ì¤¿");
 #endif
     }
 }
@@ -911,7 +911,7 @@ gcrownu()
 /*JP
         verbalize("I crown thee...  The Hand of Elbereth!");
 */
-        verbalize("“ğ‚ÉDDDƒGƒ‹ƒxƒŒƒX‚ÌŒäè‚Ì‰h—_‚ğ‚³‚¸‚¯‚æ‚¤I");
+        verbalize("Æò¤Ë¡¥¡¥¡¥¥¨¥ë¥Ù¥ì¥¹¤Î¸æ¼ê¤Î±ÉÍÀ¤ò¤µ¤º¤±¤è¤¦¡ª");
         break;
     case A_NEUTRAL:
         u.uevent.uhand_of_elbereth = 2;
@@ -921,7 +921,7 @@ gcrownu()
 /*JP
         verbalize("Thou shalt be my Envoy of Balance!");
 */
-        verbalize("“ğC‰ä‚ª’²˜a‚ÌgÒ‚È‚èI");
+        verbalize("Æò¡¤²æ¤¬Ä´ÏÂ¤Î»È¼Ô¤Ê¤ê¡ª");
         break;
     case A_CHAOTIC:
         u.uevent.uhand_of_elbereth = 3;
@@ -932,9 +932,9 @@ gcrownu()
         verbalize("Thou art chosen to %s for My Glory!",
                   already_exists && !in_hand ? "take lives" : "steal souls");
 #else
-        verbalize("“ğC‰ä‚ª‰hŒõ‚Ì‚½‚ß%sÒ‚Æ‚µ‚Ä‘I‚Î‚ê‚ñI",
+        verbalize("Æò¡¤²æ¤¬±É¸÷¤Î¤¿¤á%s¼Ô¤È¤·¤ÆÁª¤Ğ¤ì¤ó¡ª",
                   already_exists && !in_hand ?
-                              "¶‚«‚È‚ª‚ç‚¦‚ñ" : "°‚ğ’D‚¢‚µ‚½‚ß‚é");
+                              "À¸¤­¤Ê¤¬¤é¤¨¤ó" : "º²¤òÃ¥¤¤¤·¤¿¤á¤ë");
 #endif
         break;
     }
@@ -954,7 +954,7 @@ gcrownu()
 /*JP
         at_your_feet("A spellbook");
 */
-        at_your_feet("–‚–@‘");
+        at_your_feet("ËâË¡½ñ");
         dropy(obj);
         u.ugifts++;
         /* when getting a new book for known spell, enhance
@@ -981,7 +981,7 @@ gcrownu()
 /*JP
                 Your("sword shines brightly for a moment.");
 */
-                Your("Œ•‚Í‚µ‚Î‚ç‚­‚ÌŠÔ–¾‚é‚­‹P‚¢‚½D");
+                Your("·õ¤Ï¤·¤Ğ¤é¤¯¤Î´ÖÌÀ¤ë¤¯µ±¤¤¤¿¡¥");
             obj = oname(obj, artiname(ART_EXCALIBUR));
             if (obj && obj->oartifact == ART_EXCALIBUR)
                 u.ugifts++;
@@ -998,7 +998,7 @@ gcrownu()
 /*JP
             Your("%s goes snicker-snack!", xname(obj));
 */
-            Your("%s‚ÍƒTƒNƒTƒN‚É‚È‚Á‚½I", xname(obj));
+            Your("%s¤Ï¥µ¥¯¥µ¥¯¤Ë¤Ê¤Ã¤¿¡ª", xname(obj));
             obj->dknown = TRUE;
         } else if (!already_exists) {
             obj = mksobj(LONG_SWORD, FALSE, FALSE);
@@ -1007,7 +1007,7 @@ gcrownu()
 /*JP
             at_your_feet("A sword");
 */
-            at_your_feet("Œ•");
+            at_your_feet("·õ");
             dropy(obj);
             u.ugifts++;
         }
@@ -1022,14 +1022,14 @@ gcrownu()
 /*JP
         Sprintf(swordbuf, "%s sword", hcolor(NH_BLACK));
 */
-        Sprintf(swordbuf, "%sŒ•", hcolor(NH_BLACK));
+        Sprintf(swordbuf, "%s·õ", hcolor(NH_BLACK));
         if (class_gift != STRANGE_OBJECT) {
             ; /* already got bonus above */
         } else if (obj && in_hand) {
 /*JP
             Your("%s hums ominously!", swordbuf);
 */
-            Your("%s‚Í‹C–¡‚Ìˆ«‚¢‰¹‚ğ—§‚Ä‚½I", swordbuf);
+            Your("%s¤Ïµ¤Ì£¤Î°­¤¤²»¤òÎ©¤Æ¤¿¡ª", swordbuf);
             obj->dknown = TRUE;
         } else if (!already_exists) {
             obj = mksobj(RUNESWORD, FALSE, FALSE);
@@ -1065,7 +1065,7 @@ gcrownu()
 /*JP
         You_feel("unworthy.");
 */
-        You("‰¿’l‚ª‚È‚¢‚Æv‚Á‚½D");
+        You("²ÁÃÍ¤¬¤Ê¤¤¤È»×¤Ã¤¿¡¥");
     }
     update_inventory();
 
@@ -1091,12 +1091,12 @@ aligntyp g_align;
                        ? Hallucination ? "ticklish" : "pleased"
                        : Hallucination ? "full" : "satisfied");
 #else
-        pline("%s‚ª%s‚æ‚¤‚È‹C‚ª‚µ‚½D", align_gname(g_align),
+        pline("%s¤¬%s¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥", align_gname(g_align),
               (u.ualign.record >= DEVOUT)
-                  ? Hallucination ? "‚­‚»‹@Œ™‚¢‚¢" : "‚²‹@Œ™—í‚µ‚¢"
+                  ? Hallucination ? "¤¯¤½µ¡·ù¤¤¤¤" : "¤´µ¡·ùÎï¤·¤¤"
                   : (u.ualign.record >= STRIDENT)
-                        ? Hallucination ? "‚­‚·‚®‚Á‚½‚ª‚Á‚Ä‚¢‚é" : "ã‹@Œ™‚Å‚ ‚é"
-                        : Hallucination ? "• ‚¢‚Á‚Ï‚¢‚Å‚ ‚é" : "–‘«‚µ‚Ä‚¢‚é");
+                        ? Hallucination ? "¤¯¤¹¤°¤Ã¤¿¤¬¤Ã¤Æ¤¤¤ë" : "¾åµ¡·ù¤Ç¤¢¤ë"
+                        : Hallucination ? "Ê¢¤¤¤Ã¤Ñ¤¤¤Ç¤¢¤ë" : "ËşÂ­¤·¤Æ¤¤¤ë");
 #endif
 
     /* not your deity */
@@ -1190,7 +1190,7 @@ aligntyp g_align;
                     Sprintf(repair_buf, " and %s now as good as new",
                             otense(uwep, "are"));
 #else
-                    Sprintf(repair_buf, "‚³‚ç‚ÉV•i“¯—l‚É‚È‚Á‚½D");
+                    Sprintf(repair_buf, "¤µ¤é¤Ë¿·ÉÊÆ±ÍÍ¤Ë¤Ê¤Ã¤¿¡¥");
 #endif
 
                 if (uwep->cursed) {
@@ -1199,7 +1199,7 @@ aligntyp g_align;
                         pline("%s %s%s.", Yobjnam2(uwep, "softly glow"),
                               hcolor(NH_AMBER), repair_buf);
 #else
-                        Your("%s‚Í%s‚â‚í‚ç‚©‚­‹P‚¢‚½D%s", xname(uwep), 
+                        Your("%s¤Ï%s¤ä¤ï¤é¤«¤¯µ±¤¤¤¿¡¥%s", xname(uwep), 
                              jconj_adj(hcolor(NH_AMBER)), repair_buf);
 #endif
                         iflags.last_msg = PLNMSG_OBJ_GLOWS;
@@ -1208,7 +1208,7 @@ aligntyp g_align;
                         You_feel("the power of %s over %s.", u_gname(),
                                  yname(uwep));
 #else
-                        pline("%s‚Ì—Í‚ª%s‚É’‚ª‚ê‚Ä‚¢‚é‚Ì‚ğŠ´‚¶‚½D", u_gname(),
+                        pline("%s¤ÎÎÏ¤¬%s¤ËÃí¤¬¤ì¤Æ¤¤¤ë¤Î¤ò´¶¤¸¤¿¡¥", u_gname(),
                               xname(uwep));
 #endif
                     uncurse(uwep);
@@ -1221,7 +1221,7 @@ aligntyp g_align;
                               Yobjnam2(uwep, "softly glow"),
                               an(hcolor(NH_LIGHT_BLUE)), repair_buf);
 #else
-                        Your("%s‚Í%s‚â‚í‚ç‚©‚ÈƒI[ƒ‰‚É‚Â‚Â‚Ü‚ê‚½D%s",
+                        Your("%s¤Ï%s¤ä¤ï¤é¤«¤Ê¥ª¡¼¥é¤Ë¤Ä¤Ä¤Ş¤ì¤¿¡¥%s",
                              xname(uwep), 
                              an(hcolor(NH_LIGHT_BLUE)), repair_buf);
 #endif
@@ -1231,7 +1231,7 @@ aligntyp g_align;
                         You_feel("the blessing of %s over %s.", u_gname(),
                                  yname(uwep));
 #else
-                        pline("%s‚Ìj•Ÿ‚ª%s‚É’‚ª‚ê‚Ä‚¢‚é‚Ì‚ğŠ´‚¶‚½D", u_gname(),
+                        pline("%s¤Î½ËÊ¡¤¬%s¤ËÃí¤¬¤ì¤Æ¤¤¤ë¤Î¤ò´¶¤¸¤¿¡¥", u_gname(),
                               xname(uwep));
 #endif
                     bless(uwep);
@@ -1250,8 +1250,8 @@ aligntyp g_align;
                         pline("%s as good as new!",
                               Yobjnam2(uwep, Blind ? "feel" : "look"));
 #else
-                        Your("%s‚ÍV•i“¯—l‚É‚È‚Á‚½%sI",
-                             xname(uwep), Blind ? "‚æ‚¤‚È‹C‚ª‚·‚é" : "");
+                        Your("%s¤Ï¿·ÉÊÆ±ÍÍ¤Ë¤Ê¤Ã¤¿%s¡ª",
+                             xname(uwep), Blind ? "¤è¤¦¤Êµ¤¤¬¤¹¤ë" : "");
 #endif
                 }
                 update_inventory();
@@ -1270,26 +1270,26 @@ aligntyp g_align;
                                                ? "mortal"
                                                : "creature");
 #else
-                    verbalize("%s‚æC•·‚¯I", youmonst.data->mlet == S_HUMAN
-                                                  ? "’è–½‚ÌÒ"
-                                                  : "¶•¨");
+                    verbalize("%s¤è¡¤Ê¹¤±¡ª", youmonst.data->mlet == S_HUMAN
+                                                  ? "ÄêÌ¿¤Î¼Ô"
+                                                  : "À¸Êª");
 #endif
                     verbalize(
 /*JP
                        "To enter the castle, thou must play the right tune!");
 */
-                        "“ğé‚É“ü‚ç‚ñ‚Æ—~‚·‚é‚È‚ç‚ÎC³‚µ‚«’²‚×‚ğ‘t‚Å‚é‚×‚µI");
+                        "Æò¾ë¤ËÆş¤é¤ó¤ÈÍß¤¹¤ë¤Ê¤é¤Ğ¡¤Àµ¤·¤­Ä´¤Ù¤òÁÕ¤Ç¤ë¤Ù¤·¡ª");
                     u.uevent.uheard_tune++;
                     break;
                 } else if (u.uevent.uheard_tune < 2) {
 /*JP
                     You_hear("a divine music...");
 */
-                    You_hear("_‚Ì‰¹Šy‚ğ•·‚¢‚½DDD");
+                    You_hear("¿À¤Î²»³Ú¤òÊ¹¤¤¤¿¡¥¡¥¡¥");
 /*JP
                     pline("It sounds like:  \"%s\".", tune);
 */
-                    pline("‚»‚ê‚ÍŸ‚Ì‚æ‚¤‚É•·‚±‚¦‚½:  u%sv", tune);
+                    pline("¤½¤ì¤Ï¼¡¤Î¤è¤¦¤ËÊ¹¤³¤¨¤¿:  ¡Ö%s¡×", tune);
                     u.uevent.uheard_tune++;
                     break;
                 }
@@ -1300,7 +1300,7 @@ aligntyp g_align;
 /*JP
                 You("are surrounded by %s glow.", an(hcolor(NH_GOLDEN)));
 */
-                You("%s‹P‚«‚É‚Â‚Â‚Ü‚ê‚½D", hcolor(NH_GOLDEN));
+                You("%sµ±¤­¤Ë¤Ä¤Ä¤Ş¤ì¤¿¡¥", hcolor(NH_GOLDEN));
             /* if any levels have been lost (and not yet regained),
                treat this effect like blessed full healing */
             if (u.ulevel < u.ulevelmax) {
@@ -1330,12 +1330,12 @@ aligntyp g_align;
 /*JP
                 You_feel("the power of %s.", u_gname());
 */
-                You("%s‚Ì—Í‚ğŠ´‚¶‚½D", u_gname());
+                You("%s¤ÎÎÏ¤ò´¶¤¸¤¿¡¥", u_gname());
             else
 /*JP
                 You("are surrounded by %s aura.", an(hcolor(NH_LIGHT_BLUE)));
 */
-                You("%sƒI[ƒ‰‚É‚Â‚Â‚Ü‚ê‚½D", an(hcolor(NH_LIGHT_BLUE)));
+                You("%s¥ª¡¼¥é¤Ë¤Ä¤Ä¤Ş¤ì¤¿¡¥", an(hcolor(NH_LIGHT_BLUE)));
             for (otmp = invent; otmp; otmp = otmp->nobj) {
                 if (otmp->cursed) {
                     if (!Blind) {
@@ -1343,7 +1343,7 @@ aligntyp g_align;
                         pline("%s %s.", Yobjnam2(otmp, "softly glow"),
                               hcolor(NH_AMBER));
 #else
-                        Your("%s‚Í%s‚â‚í‚ç‚©‚­‹P‚¢‚½D", xname(otmp),
+                        Your("%s¤Ï%s¤ä¤ï¤é¤«¤¯µ±¤¤¤¿¡¥", xname(otmp),
                              jconj_adj(hcolor(NH_AMBER)));
 #endif
                         iflags.last_msg = PLNMSG_OBJ_GLOWS;
@@ -1362,19 +1362,19 @@ aligntyp g_align;
 /*JP
                 "\"and thus I grant thee the gift of %s!\"";
 */
-                "u‚³‚ç‚É“ğ‚É%s‚ğ‚³‚¸‚¯‚æ‚¤Iv";
+                "¡Ö¤µ¤é¤ËÆò¤Ë%s¤ò¤µ¤º¤±¤è¤¦¡ª¡×";
 
             godvoice(u.ualign.type,
 /*JP
                      "Thou hast pleased me with thy progress,");
 */
-                     "“ğ‚Ì¬’·‚Í”ñí‚É–]‚Ü‚µ‚¢C");
+                     "Æò¤ÎÀ®Ä¹¤ÏÈó¾ï¤ËË¾¤Ş¤·¤¤¡¤");
             if (!(HTelepat & INTRINSIC)) {
                 HTelepat |= FROMOUTSIDE;
 /*JP
                 pline(msg, "Telepathy");
 */
-                pline(msg, "ƒeƒŒƒpƒV[");
+                pline(msg, "¥Æ¥ì¥Ñ¥·¡¼");
                 if (Blind)
                     see_monsters();
             } else if (!(HFast & INTRINSIC)) {
@@ -1382,13 +1382,13 @@ aligntyp g_align;
 /*JP
                 pline(msg, "Speed");
 */
-                pline(msg, "‘¬‚³");
+                pline(msg, "Â®¤µ");
             } else if (!(HStealth & INTRINSIC)) {
                 HStealth |= FROMOUTSIDE;
 /*JP
                 pline(msg, "Stealth");
 */
-                pline(msg, "”E‚Ì—Í");
+                pline(msg, "Ç¦¤ÎÎÏ");
             } else {
                 if (!(HProtection & INTRINSIC)) {
                     HProtection |= FROMOUTSIDE;
@@ -1399,12 +1399,12 @@ aligntyp g_align;
 /*JP
                 pline(msg, "my protection");
 */
-                pline(msg, "‰ä‚ªŒì‚è");
+                pline(msg, "²æ¤¬¸î¤ê");
             }
 /*JP
             verbalize("Use it wisely in my name!");
 */
-            verbalize("‰ä‚ª–¼‚É‰—‚¢‚Ä—LŒø‚Ég‚¤‚ª‚æ‚¢I");
+            verbalize("²æ¤¬Ì¾¤Ë±÷¤¤¤ÆÍ­¸ú¤Ë»È¤¦¤¬¤è¤¤¡ª");
             break;
         }
         case 7:
@@ -1440,7 +1440,7 @@ aligntyp g_align;
 /*JP
             at_your_feet("A spellbook");
 */
-            at_your_feet("–‚–@‘");
+            at_your_feet("ËâË¡½ñ");
             place_object(otmp, u.ux, u.uy);
             newsym(u.ux, u.uy);
             break;
@@ -1490,8 +1490,8 @@ boolean bless_water;
               ((other || changed > 1L) ? "s" : ""), (changed > 1L ? "" : "s"),
               (bless_water ? hcolor(NH_LIGHT_BLUE) : hcolor(NH_BLACK)));
 #else
-        pline("%sÕ’d‚Ì–ò‚Íˆêu%s‹P‚¢‚½D",
-              (other && changed > 1L) ? "‚¢‚­‚Â‚©‚Ì"
+        pline("%sº×ÃÅ¤ÎÌô¤Ï°ì½Ö%sµ±¤¤¤¿¡¥",
+              (other && changed > 1L) ? "¤¤¤¯¤Ä¤«¤Î"
                                       : "",
               jconj_adj(bless_water ? hcolor(NH_LIGHT_BLUE) : hcolor(NH_BLACK)));
 #endif
@@ -1516,10 +1516,10 @@ const char *words;
               godvoices[rn2(SIZE(godvoices))], quot, words, quot);
 #else
     if (words)
-        pline("%s‚Ìº‚ª%s: u%sv", align_gname(g_align),
+        pline("%s¤ÎÀ¼¤¬%s: ¡Ö%s¡×", align_gname(g_align),
               godvoices[rn2(SIZE(godvoices))], words);
     else
-        pline("%s‚Ìº‚ª%sF", align_gname(g_align),
+        pline("%s¤ÎÀ¼¤¬%s¡§", align_gname(g_align),
               godvoices[rn2(SIZE(godvoices))]);
 #endif
 }
@@ -1531,7 +1531,7 @@ aligntyp g_align;
 /*JP
     godvoice(g_align, "Thou hast angered me.");
 */
-    godvoice(g_align, "“ğC‰ä‚ğ“{‚ç‚µ‚ß‚½‚èD");
+    godvoice(g_align, "Æò¡¤²æ¤òÅÜ¤é¤·¤á¤¿¤ê¡¥");
 }
 
 /* The g_align god is upset with you. */
@@ -1556,34 +1556,34 @@ register struct obj *otmp;
 /*JP
             Your("sacrifice sprouts wings and a propeller and roars away!");
 */
-            Your("Œ£ã•¨‚Í‰H‚ğ‚Í‚â‚µCƒvƒƒyƒ‰‚ª‚Ü‚í‚èC”ò‚ñ‚Å‚Á‚½I");
+            Your("¸¥¾åÊª¤Ï±©¤ò¤Ï¤ä¤·¡¤¥×¥í¥Ú¥é¤¬¤Ş¤ï¤ê¡¤Èô¤ó¤Ç¤Ã¤¿¡ª");
             break;
         case 1:
 /*JP
             Your("sacrifice puffs up, swelling bigger and bigger, and pops!");
 */
-            Your("Œ£ã•¨‚Í•¬‰Œ‚ğ‚ ‚°C‚Ç‚ñ‚Ç‚ñ–c‚êC‚»‚µ‚Ä‚Í‚¶‚¯‚½I");
+            Your("¸¥¾åÊª¤ÏÊ®±ì¤ò¤¢¤²¡¤¤É¤ó¤É¤óËÄ¤ì¡¤¤½¤·¤Æ¤Ï¤¸¤±¤¿¡ª");
             break;
         case 2:
             Your(
 /*JP
      "sacrifice collapses into a cloud of dancing particles and fades away!");
 */
-     "Œ£ã•¨‚Í×‚©‚­Ó‚¯C—x‚èo‚µC‚Ç‚±‚©‚És‚Á‚Ä‚µ‚Ü‚Á‚½I");
+     "¸¥¾åÊª¤ÏºÙ¤«¤¯ºÕ¤±¡¤ÍÙ¤ê½Ğ¤·¡¤¤É¤³¤«¤Ë¹Ô¤Ã¤Æ¤·¤Ş¤Ã¤¿¡ª");
             break;
         }
     else if (Blind && u.ualign.type == A_LAWFUL)
 /*JP
         Your("sacrifice disappears!");
 */
-        Your("Œ£ã•¨‚ÍÁ‚¦‚½I");
+        Your("¸¥¾åÊª¤Ï¾Ã¤¨¤¿¡ª");
     else
 #if 0 /*JP*/
         Your("sacrifice is consumed in a %s!",
              u.ualign.type == A_LAWFUL ? "flash of light" : "burst of flame");
 #else
-        Your("Œ£ã•¨‚Í%sÁ‚¦‚³‚Á‚½I",
-             u.ualign.type == A_LAWFUL ? "‚Ü‚Î‚ä‚¢Œõ‚ğ•ú‚¿" : "‰Š‚ğã‚°");
+        Your("¸¥¾åÊª¤Ï%s¾Ã¤¨¤µ¤Ã¤¿¡ª",
+             u.ualign.type == A_LAWFUL ? "¤Ş¤Ğ¤æ¤¤¸÷¤òÊü¤Á" : "±ê¤ò¾å¤²");
 #endif
     if (carried(otmp))
         useup(otmp);
@@ -1599,7 +1599,7 @@ dosacrifice()
 /*JP
         "A cloud of %s smoke surrounds you...";
 */
-        "%s‰Œ‚ª‚ ‚È‚½‚ğæ‚èˆÍ‚ñ‚¾DDD";
+        "%s±ì¤¬¤¢¤Ê¤¿¤ò¼è¤ê°Ï¤ó¤À¡¥¡¥¡¥";
     register struct obj *otmp;
     int value = 0, pm;
     boolean highaltar;
@@ -1609,7 +1609,7 @@ dosacrifice()
 /*JP
         You("are not standing on an altar.");
 */
-        You("Õ’d‚Ìã‚É—§‚Á‚Ä‚¢‚È‚¢D");
+        You("º×ÃÅ¤Î¾å¤ËÎ©¤Ã¤Æ¤¤¤Ê¤¤¡¥");
         return 0;
     }
     highaltar = ((Is_astralevel(&u.uz) || Is_sanctum(&u.uz))
@@ -1655,13 +1655,13 @@ dosacrifice()
 /*JP
                 You("find the idea very satisfying.");
 */
-                You("‚»‚Ìl‚¦‚Í‘f°‚µ‚¢‚Æv‚Á‚½D");
+                You("¤½¤Î¹Í¤¨¤ÏÁÇÀ²¤·¤¤¤È»×¤Ã¤¿¡¥");
                 exercise(A_WIS, TRUE);
             } else if (u.ualign.type != A_CHAOTIC) {
 /*JP
                 pline("You'll regret this infamous offense!");
 */
-                pline("“ğC‚±‚Ì•J‚Ìs‚È‚¢‚ğŒã‰÷‚·‚é‚×‚µI");
+                pline("Æò¡¤¤³¤ÎÉî¿«¤Î¹Ô¤Ê¤¤¤ò¸å²ù¤¹¤ë¤Ù¤·¡ª");
                 exercise(A_WIS, FALSE);
             }
 
@@ -1673,7 +1673,7 @@ dosacrifice()
 /*JP
                 pline_The("altar is stained with %s blood.", urace.adj);
 */
-                pline("Õ’d‚Í%s‚ÌŒŒ‚Å‰˜‚ê‚Ä‚¢‚éD", urace.adj);
+                pline("º×ÃÅ¤Ï%s¤Î·ì¤Ç±ø¤ì¤Æ¤¤¤ë¡¥", urace.adj);
                 levl[u.ux][u.uy].altarmask = AM_CHAOTIC;
                 angry_priest();
             } else {
@@ -1687,7 +1687,7 @@ dosacrifice()
 /*JP
                     "The blood floods the altar, which vanishes in %s cloud!",
 */
-                    "ŒŒ‚ªÕ’d‚©‚ç‚ ‚Ó‚êCÕ’d‚Í%s‰_‚Æ‚È‚èÁ‚¦‚½I",
+                    "·ì¤¬º×ÃÅ¤«¤é¤¢¤Õ¤ì¡¤º×ÃÅ¤Ï%s±À¤È¤Ê¤ê¾Ã¤¨¤¿¡ª",
                           an(hcolor(NH_BLACK)));
                     levl[u.ux][u.uy].typ = ROOM;
                     levl[u.ux][u.uy].altarmask = 0;
@@ -1696,18 +1696,18 @@ dosacrifice()
 /*JP
                     demonless_msg = "cloud dissipates";
 */
-                    demonless_msg = "‰_‚ÍÁ‚¦‚½D";
+                    demonless_msg = "±À¤Ï¾Ã¤¨¤¿¡¥";
                 } else {
                     /* either you're chaotic or altar is Moloch's or both */
 /*JP
                     pline_The("blood covers the altar!");
 */
-                    pline("ŒŒ‚ªÕ’d‚ğ•¢‚Á‚½I");
+                    pline("·ì¤¬º×ÃÅ¤òÊ¤¤Ã¤¿¡ª");
                     change_luck(altaralign == A_NONE ? -2 : 2);
 /*JP
                     demonless_msg = "blood coagulates";
 */
-                    demonless_msg = "ŒŒ‚ª‚±‚Ñ‚è‚Â‚¢‚½";
+                    demonless_msg = "·ì¤¬¤³¤Ó¤ê¤Ä¤¤¤¿";
                 }
                 if ((pm = dlord(altaralign)) != NON_PM
                     && (dmon = makemon(&mons[pm], u.ux, u.uy, NO_MM_FLAGS))
@@ -1718,23 +1718,23 @@ dosacrifice()
 /*JP
                     if (!strcmpi(dbuf, "it"))
 */
-                    if (!strcmpi(dbuf, "‰½Ò‚©"))
+                    if (!strcmpi(dbuf, "²¿¼Ô¤«"))
 /*JP
                         Strcpy(dbuf, "something dreadful");
 */
-                        Strcpy(dbuf, "‰½‚©‹°‚ë‚µ‚¢‚à‚Ì");
+                        Strcpy(dbuf, "²¿¤«¶²¤í¤·¤¤¤â¤Î");
                     else
                         dmon->mstrategy &= ~STRAT_APPEARMSG;
 /*JP
                     You("have summoned %s!", dbuf);
 */
-                    You("%s‚ğ¢Š«‚µ‚½I", dbuf);
+                    You("%s¤ò¾¤´­¤·¤¿¡ª", dbuf);
                     if (sgn(u.ualign.type) == sgn(dmon->data->maligntyp))
                         dmon->mpeaceful = TRUE;
 /*JP
                     You("are terrified, and unable to move.");
 */
-                    You("‹°•|‚Å“®‚¯‚È‚­‚È‚Á‚½D");
+                    You("¶²Éİ¤ÇÆ°¤±¤Ê¤¯¤Ê¤Ã¤¿¡¥");
                     nomul(-3);
                     multi_reason = "being terrified of a demon";
                     nomovemsg = 0;
@@ -1742,7 +1742,7 @@ dosacrifice()
 /*JP
                     pline_The("%s.", demonless_msg);
 */
-                    pline("%sD", demonless_msg);
+                    pline("%s¡¥", demonless_msg);
             }
 
             if (u.ualign.type != A_CHAOTIC) {
@@ -1767,7 +1767,7 @@ dosacrifice()
 /*JP
             pline("So this is how you repay loyalty?");
 */
-            pline("‚»‚ê‚Å‚±‚ê‚ª‚ ‚È‚½‚Ì’‰‹`‚É•ñ‚¢‚é‚à‚Ì‚©H");
+            pline("¤½¤ì¤Ç¤³¤ì¤¬¤¢¤Ê¤¿¤ÎÃéµÁ¤ËÊó¤¤¤ë¤â¤Î¤«¡©");
             adjalign(-3);
             value = -1;
             HAggravate_monster |= FROMOUTSIDE;
@@ -1785,9 +1785,9 @@ dosacrifice()
                       (unicalign == A_CHAOTIC) ? "chaos"
                          : unicalign ? "law" : "balance");
 #else
-                pline("‚»‚Ì‚æ‚¤‚Ès“®‚Íw%sx‚É”½‚·‚éI",
-                      (unicalign == A_CHAOTIC) ? "¬“×"
-                         : unicalign ? "’˜" : "’²˜a");
+                pline("¤½¤Î¤è¤¦¤Ê¹ÔÆ°¤Ï¡Ø%s¡Ù¤ËÈ¿¤¹¤ë¡ª",
+                      (unicalign == A_CHAOTIC) ? "º®ÆÙ"
+                         : unicalign ? "Ãá½ø" : "Ä´ÏÂ");
 #endif
                 (void) adjattrib(A_WIS, -1, TRUE);
                 value = -5;
@@ -1799,12 +1799,12 @@ dosacrifice()
 /*JP
                     You_feel("appropriately %s.", align_str(u.ualign.type));
 */
-                    You("%s‚É‚Ó‚³‚í‚µ‚¢‚ÆŠ´‚¶‚½D", align_str(u.ualign.type));
+                    You("%s¤Ë¤Õ¤µ¤ï¤·¤¤¤È´¶¤¸¤¿¡¥", align_str(u.ualign.type));
                 else
 /*JP
                     You_feel("you are thoroughly on the right path.");
 */
-                    You("Š®‘S‚É³‚µ‚¢“¹‚ğ•à‚ñ‚Å‚¢‚é‚Ì‚ğŠ´‚¶‚½D");
+                    You("´°Á´¤ËÀµ¤·¤¤Æ»¤òÊâ¤ó¤Ç¤¤¤ë¤Î¤ò´¶¤¸¤¿¡¥");
                 adjalign(5);
                 value += 3;
             } else if (unicalign == u.ualign.type) {
@@ -1842,14 +1842,14 @@ dosacrifice()
                                /* else headed towards celestial disgrace */
                                : "ashamed");
 #else
-                You_feel("%sD",
+                You_feel("%s¡¥",
                          Hallucination
-                            ? "ŒÌ‹½‚ª—ö‚µ‚­‚È‚Á‚½"
+                            ? "¸Î¶¿¤¬Îø¤·¤¯¤Ê¤Ã¤¿"
                             /* if on track, give a big hint */
                             : (altaralign == u.ualign.type)
-                               ? "’nã‚É‹A‚è‚½‚¢‹C‚É‹ì‚è—§‚Ä‚ç‚ê‚½"
+                               ? "ÃÏ¾å¤Ëµ¢¤ê¤¿¤¤µ¤»ı¤Ë¶î¤êÎ©¤Æ¤é¤ì¤¿"
                                /* else headed towards celestial disgrace */
-                               : "’p‚¸‚©‚µ‚¢v‚¢‚ª‚µ‚½");
+                               : "ÃÑ¤º¤«¤·¤¤»×¤¤¤¬¤·¤¿");
 #endif
             return 1;
         } else {
@@ -1864,7 +1864,7 @@ dosacrifice()
 /*JP
             You("offer the Amulet of Yendor to %s...", a_gname());
 */
-            You("ƒCƒFƒ“ƒ_[‚Ì–‚œ‚¯‚ğ%s‚ÉŒ£ã‚µ‚½DDD",a_gname());
+            You("¥¤¥§¥ó¥À¡¼¤ÎËâ½ü¤±¤ò%s¤Ë¸¥¾å¤·¤¿¡¥¡¥¡¥",a_gname());
             if (altaralign == A_NONE) {
                 /* Moloch's high altar */
                 if (u.ualign.record > -99)
@@ -1890,17 +1890,17 @@ dosacrifice()
                 pline("%s accepts your gift, and gains dominion over %s...",
                       a_gname(), u_gname());
 #else
-                pline("%s‚Í‚ ‚È‚½‚Ì‘—‚è•¨‚ğó‚¯‚Æ‚èC%s‚ÌŒ —Í‚ğ“¾‚½DDD",
+                pline("%s¤Ï¤¢¤Ê¤¿¤ÎÁ÷¤êÊª¤ò¼õ¤±¤È¤ê¡¤%s¤Î¸¢ÎÏ¤òÆÀ¤¿¡¥¡¥¡¥",
                       a_gname(), u_gname());
 #endif
 /*JP
                 pline("%s is enraged...", u_gname());
 */
-                pline("%s‚ÍŒƒ“{‚µ‚½DDD", u_gname());
+                pline("%s¤Ï·ãÅÜ¤·¤¿¡¥¡¥¡¥", u_gname());
 /*JP
                 pline("Fortunately, %s permits you to live...", a_gname());
 */
-                pline("K‰^‚É‚àC%s‚Í‚ ‚È‚½‚Ì‘¶İ‚ğ‹–‚µ‚Ä‚¢‚éDDD",a_gname());
+                pline("¹¬±¿¤Ë¤â¡¤%s¤Ï¤¢¤Ê¤¿¤ÎÂ¸ºß¤òµö¤·¤Æ¤¤¤ë¡¥¡¥¡¥",a_gname());
                 pline(cloud_of_smoke, hcolor(NH_ORANGE));
                 done(ESCAPED);
             } else { /* super big win */
@@ -1910,23 +1910,23 @@ dosacrifice()
 /*JP
                "An invisible choir sings, and you are bathed in radiance...");
 */
-                "‚Ç‚±‚©‚ç‚Æ‚à‚È‚­¹‰Ì‘à‚Ì‰Ì‚ª•·‚±‚¦C‚ ‚È‚½‚ÍŒõ‚É•ï‚Ü‚ê‚½DDD");
+                "¤É¤³¤«¤é¤È¤â¤Ê¤¯À»²ÎÂâ¤Î²Î¤¬Ê¹¤³¤¨¡¤¤¢¤Ê¤¿¤Ï¸÷¤ËÊñ¤Ş¤ì¤¿¡¥¡¥¡¥");
 /*JP
                 godvoice(altaralign, "Congratulations, mortal!");
 */
-                godvoice(altaralign, "‚æ‚­‚â‚Á‚½I’è–½‚ÌÒ‚æI");
+                godvoice(altaralign, "¤è¤¯¤ä¤Ã¤¿¡ªÄêÌ¿¤Î¼Ô¤è¡ª");
                 display_nhwindow(WIN_MESSAGE, FALSE);
                 verbalize(
 /*JP
           "In return for thy service, I grant thee the gift of Immortality!");
 */
-          "“ğ‚ÌˆÌ‹Æ‚É‘Î‚µC•s€‚Ì‘Ì‚ğ•ù‚°‚æ‚¤‚¼I");
+          "Æò¤Î°Î¶È¤ËÂĞ¤·¡¤ÉÔ»à¤ÎÂÎ¤òÊû¤²¤è¤¦¤¾¡ª");
 #if 0 /*JP*/
                 You("ascend to the status of Demigod%s...",
                     flags.female ? "dess" : "");
 #else
-                You("¸“V‚µC%s_‚Æ‚È‚Á‚½DDD",
-                    flags.female ? "—" : "");
+                You("¾ºÅ·¤·¡¤%s¿À¤È¤Ê¤Ã¤¿¡¥¡¥¡¥",
+                    flags.female ? "½÷" : "");
 #endif
                 done(ASCENDED);
             }
@@ -1939,14 +1939,14 @@ dosacrifice()
 /*JP
         You_hear("a nearby thunderclap.");
 */
-        You("‹ß‚­‚É—‹‚ª—‚¿‚½‰¹‚ğ•·‚¢‚½D");
+        You("¶á¤¯¤ËÍë¤¬Íî¤Á¤¿²»¤òÊ¹¤¤¤¿¡¥");
         if (!otmp->known) {
 #if 0 /*JP*/
             You("realize you have made a %s.",
                 Hallucination ? "boo-boo" : "mistake");
 #else
-            You("%s‚±‚Æ‚É‹C‚ª‚Â‚¢‚½D",
-                Hallucination ? "uƒnƒYƒŒv‚¾‚Á‚½" : "ŠÔˆá‚¢‚ğ”Æ‚µ‚½");
+            You("%s¤³¤È¤Ëµ¤¤¬¤Ä¤¤¤¿¡¥",
+                Hallucination ? "¡Ö¥Ï¥º¥ì¡×¤À¤Ã¤¿" : "´Ö°ã¤¤¤òÈÈ¤·¤¿");
 #endif
             otmp->known = TRUE;
             change_luck(-1);
@@ -1957,7 +1957,7 @@ dosacrifice()
 #if 0 /*JP*/
                 pline("Oh, no."); /* didn't hear thunderclap */
 #else
-                pline("‚È‚ñ‚Ä‚±‚Á‚½D"); /* didn't hear thunderclap */
+                pline("¤Ê¤ó¤Æ¤³¤Ã¤¿¡¥"); /* didn't hear thunderclap */
 #endif
             change_luck(-3);
             adjalign(-1);
@@ -1980,16 +1980,16 @@ dosacrifice()
 /*JP
         You_feel("the air around you grow charged...");
 */
-        You("‰ñ‚è‚Ì‹ó‹C‚ÉƒGƒlƒ‹ƒM[‚ª–‚¿‚Ä‚¢‚­‚æ‚¤‚È‹C‚ª‚µ‚½DDD");
+        You("²ó¤ê¤Î¶õµ¤¤Ë¥¨¥Í¥ë¥®¡¼¤¬Ëş¤Á¤Æ¤¤¤¯¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥¡¥¡¥");
 /*JP
         pline("Suddenly, you realize that %s has noticed you...", a_gname());
 */
-        pline("“Ë‘RC%s‚ª‚ ‚È‚½‚ğ‚¶‚Á‚ÆŒ©‚Ä‚¢‚é‚Ì‚É‹C‚ª‚Â‚¢‚½DDD",a_gname());
+        pline("ÆÍÁ³¡¤%s¤¬¤¢¤Ê¤¿¤ò¤¸¤Ã¤È¸«¤Æ¤¤¤ë¤Î¤Ëµ¤¤¬¤Ä¤¤¤¿¡¥¡¥¡¥",a_gname());
         godvoice(altaralign,
 /*JP
                  "So, mortal!  You dare desecrate my High Temple!");
 */
-                 "’è–½‚ÌÒ‚æI‚¨‚Ü‚¦‚Í‰ä‚ª_¹‚È‚é›‰@‚ğ‰˜‚·‚Ì‚©I");
+                 "ÄêÌ¿¤Î¼Ô¤è¡ª¤ª¤Ş¤¨¤Ï²æ¤¬¿ÀÀ»¤Ê¤ë»û±¡¤ò±ø¤¹¤Î¤«¡ª");
         /* Throw everything we have at the player */
         god_zaps_you(altaralign);
     } else if (value
@@ -2010,13 +2010,13 @@ dosacrifice()
 /*JP
                     You("have a strong feeling that %s is angry...",
 */
-                    You("%s‚ª“{‚Á‚Ä‚¢‚é‚Ì‚ğŠmM‚µ‚½DDD",
+                    You("%s¤¬ÅÜ¤Ã¤Æ¤¤¤ë¤Î¤ò³Î¿®¤·¤¿¡¥¡¥¡¥",
                         u_gname());
                     consume_offering(otmp);
 /*JP
                     pline("%s accepts your allegiance.", a_gname());
 */
-                    pline("%s‚Í‚ ‚È‚½‚Ì‘®«‚ğó‚¯‚¢‚ê‚½D", a_gname());
+                    pline("%s¤Ï¤¢¤Ê¤¿¤ÎÂ°À­¤ò¼õ¤±¤¤¤ì¤¿¡¥", a_gname());
 
                     uchangealign(altaralign, 0);
                     /* Beware, Conversion is costly */
@@ -2028,11 +2028,11 @@ dosacrifice()
 /*JP
                     pline("%s rejects your sacrifice!", a_gname());
 */
-                    pline("%s‚Í‚ ‚È‚½‚ÌŒ£ã•¨‚ğó‚¯‚¢‚ê‚È‚¢I", a_gname());
+                    pline("%s¤Ï¤¢¤Ê¤¿¤Î¸¥¾åÊª¤ò¼õ¤±¤¤¤ì¤Ê¤¤¡ª", a_gname());
 /*JP
                     godvoice(altaralign, "Suffer, infidel!");
 */
-                    godvoice(altaralign, "ˆÙ’[Ò‚æI¸‚¹‚ëII");
+                    godvoice(altaralign, "°ÛÃ¼¼Ô¤è¡ª¼º¤»¤í¡ª¡ª");
                     change_luck(-5);
                     (void) adjattrib(A_WIS, -2, TRUE);
                     if (!Inhell)
@@ -2045,7 +2045,7 @@ dosacrifice()
                 You("sense a conflict between %s and %s.", u_gname(),
                     a_gname());
 #else
-                You("%s‚Æ%sŠÔ‚Ì‘ˆ‚¢‚ğŠ´‚¶‚½D", u_gname(),
+                You("%s¤È%s´Ö¤ÎÁè¤¤¤ò´¶¤¸¤¿¡¥", u_gname(),
                     a_gname());
 #endif
                 if (rn2(8 + u.ulevel) > 5) {
@@ -2053,7 +2053,7 @@ dosacrifice()
 /*JP
                     You_feel("the power of %s increase.", u_gname());
 */
-                    You("%s‚Ì—Í‚ª‘‘å‚µ‚½‚æ‚¤‚È‹C‚ª‚µ‚½D", u_gname());
+                    You("%s¤ÎÎÏ¤¬ÁıÂç¤·¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥", u_gname());
                     exercise(A_WIS, TRUE);
                     change_luck(1);
                     /* Yes, this is supposed to be &=, not |= */
@@ -2071,12 +2071,12 @@ dosacrifice()
                                                ? NH_BLACK
                                                : (const char *) "gray"));
 #else
-                        pline("Õ’d‚Í%s‹P‚¢‚½D",
+                        pline("º×ÃÅ¤Ï%sµ±¤¤¤¿¡¥",
                               jconj_adj(hcolor((u.ualign.type == A_LAWFUL)
                                             ? NH_WHITE
                                             : u.ualign.type
                                                ? NH_BLACK
-                                               : (const char *)"ŠDF‚Ì")));
+                                               : (const char *)"³¥¿§¤Î")));
 #endif
 
                     if (rnl(u.ulevel) > 6 && u.ualign.record > 0
@@ -2090,7 +2090,7 @@ dosacrifice()
 /*JP
                     pline("Unluckily, you feel the power of %s decrease.",
 */
-                    pline("•sK‚É‚àC%s‚Ì—Í‚ªŒ¸­‚µ‚½‚Ì‚ğŠ´‚¶‚½D",
+                    pline("ÉÔ¹¬¤Ë¤â¡¤%s¤ÎÎÏ¤¬¸º¾¯¤·¤¿¤Î¤ò´¶¤¸¤¿¡¥",
                           u_gname());
                     change_luck(-1);
                     exercise(A_WIS, FALSE);
@@ -2115,8 +2115,8 @@ dosacrifice()
                     pline("%s seems %s.", u_gname(),
                           Hallucination ? "groovy" : "slightly mollified");
 #else
-                    pline("%s‚Í%s‚ÉŒ©‚¦‚éD", u_gname(),
-                          Hallucination ? "‘f“G" : "‚¿‚å‚Á‚Æ˜a‚ç‚¢‚¾‚æ‚¤");
+                    pline("%s¤Ï%s¤Ë¸«¤¨¤ë¡¥", u_gname(),
+                          Hallucination ? "ÁÇÅ¨" : "¤Á¤ç¤Ã¤ÈÏÂ¤é¤¤¤À¤è¤¦");
 #endif
 
                     if ((int) u.uluck < 0)
@@ -2127,9 +2127,9 @@ dosacrifice()
                           Hallucination ? "cosmic (not a new fact)"
                                         : "mollified");
 #else
-                    pline("%s‚Í%s‚ÉŒ©‚¦‚éD", u_gname(),
-                          Hallucination ? "“øF(V–À‚Å‚Í‚È‚¢)"
-                                        : "Œy•Ì‚µ‚½‚æ‚¤");
+                    pline("%s¤Ï%s¤Ë¸«¤¨¤ë¡¥", u_gname(),
+                          Hallucination ? "Æú¿§(¿·»ö¼Â¤Ç¤Ï¤Ê¤¤)"
+                                        : "·ÚÊÎ¤·¤¿¤è¤¦");
 #endif
 
                     if ((int) u.uluck < 0)
@@ -2140,12 +2140,12 @@ dosacrifice()
 /*JP
                     pline_The("gods seem tall.");
 */
-                    pline("_‚Í‚¨‚‚­‚Æ‚Ü‚Á‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¦‚éD");
+                    pline("¿À¤Ï¤ª¹â¤¯¤È¤Ş¤Ã¤Æ¤¤¤ë¤è¤¦¤Ë¸«¤¨¤ë¡¥");
                 else
 /*JP
                     You("have a feeling of inadequacy.");
 */
-                    You("‚Ü‚¾‚Ü‚¾‚¾‚ÆŠ´‚¶‚½D");
+                    You("¤Ş¤À¤Ş¤À¤À¤È´¶¤¸¤¿¡¥");
             }
         } else if (ugod_is_angry()) {
             if (value > MAXVALUE)
@@ -2156,7 +2156,7 @@ dosacrifice()
 /*JP
             You_feel("partially absolved.");
 */
-            You("­‚µ‚¾‚¯‚ä‚é‚µ‚Ä‚à‚ç‚¦‚½‚æ‚¤‚È‹C‚ª‚µ‚½D");
+            You("¾¯¤·¤À¤±¤æ¤ë¤·¤Æ¤â¤é¤¨¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
         } else if (u.ublesscnt > 0) {
             u.ublesscnt -= ((value * (u.ualign.type == A_CHAOTIC ? 500 : 300))
                             / MAXVALUE);
@@ -2168,12 +2168,12 @@ dosacrifice()
 /*JP
                         You("realize that the gods are not like you and I.");
 */
-                        You("_‚Æƒc[ƒJ[‚Ì’‡‚Å‚Í‚È‚¢‚±‚Æ‚ğŒå‚Á‚½D");
+                        You("¿À¤È¥Ä¡¼¥«¡¼¤ÎÃç¤Ç¤Ï¤Ê¤¤¤³¤È¤ò¸ç¤Ã¤¿¡¥");
                     else
 /*JP
                         You("have a hopeful feeling.");
 */
-                        pline("Šó–]‚ªŒ©‚¦‚Ä‚«‚½‚æ‚¤‚È‹C‚ª‚µ‚½D");
+                        pline("´õË¾¤¬¸«¤¨¤Æ¤­¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
                     if ((int) u.uluck < 0)
                         change_luck(1);
                 } else {
@@ -2181,12 +2181,12 @@ dosacrifice()
 /*JP
                         pline("Overall, there is a smell of fried onions.");
 */
-                        pline("‚½‚Ü‚Ë‚¬‚ğ—g‚°‚½“õ‚¢‚ª‚µ‚½D");
+                        pline("¤¿¤Ş¤Í¤®¤òÍÈ¤²¤¿Æ÷¤¤¤¬¤·¤¿¡¥");
                     else
 /*JP
                         You("have a feeling of reconciliation.");
 */
-                        You("‹–‚³‚ê‚½‹C‚ª‚µ‚½D");
+                        You("µö¤µ¤ì¤¿µ¤¤¬¤·¤¿¡¥");
                     if ((int) u.uluck < 0)
                         u.uluck = 0;
                 }
@@ -2209,12 +2209,12 @@ dosacrifice()
 /*JP
                     at_your_feet("An object");
 */
-                    at_your_feet("‰½‚©");
+                    at_your_feet("²¿¤«");
                     dropy(otmp);
 /*JP
                     godvoice(u.ualign.type, "Use my gift wisely!");
 */
-                    godvoice(u.ualign.type, "‰ä‚ª—^‚¦‚µ‚à‚ÌŒ«‚­g‚¤‚×‚µI");
+                    godvoice(u.ualign.type, "²æ¤¬Í¿¤¨¤·¤â¤Î¸­¤¯»È¤¦¤Ù¤·¡ª");
                     u.ugifts++;
                     u.ublesscnt = rnz(300 + (50 * nartifacts));
                     exercise(A_WIS, TRUE);
@@ -2237,7 +2237,7 @@ dosacrifice()
                     You("think %s brushed your %s.", something,
                         body_part(FOOT));
 #else
-                    pline("%s‚ª‚ ‚È‚½‚Ì%s‚ğ‚­‚·‚®‚Á‚½‚æ‚¤‚¾D", something,
+                    pline("%s¤¬¤¢¤Ê¤¿¤Î%s¤ò¤¯¤¹¤°¤Ã¤¿¤è¤¦¤À¡¥", something,
                           body_part(FOOT));
 #endif
                 else
@@ -2248,8 +2248,8 @@ dosacrifice()
                         makeplural(body_part(FOOT)));
 #else
                     You(Hallucination
-                    ? "‘«Œ³‚Éƒyƒ“ƒyƒ“‘‚ğ‚İ‚Â‚¯‚½D–À‹{‚É‚µ‚Ä‚Í’¿‚µ‚¢D"
-                            : "l—t‚ÌƒNƒ[ƒo[‚ğ‘«Œ³‚ÉŒ©‚Â‚¯‚½D");
+                    ? "Â­¸µ¤Ë¥Ú¥ó¥Ú¥óÁğ¤ò¤ß¤Ä¤±¤¿¡¥ÌÂµÜ¤Ë¤·¤Æ¤ÏÄÁ¤·¤¤¡¥"
+                            : "»ÍÍÕ¤Î¥¯¥í¡¼¥Ğ¡¼¤òÂ­¸µ¤Ë¸«¤Ä¤±¤¿¡¥");
 #endif
             }
         }
@@ -2273,8 +2273,8 @@ boolean praying; /* false means no messages should be given */
             pline_The("very idea of praying to a %s god is repugnant to you.",
                       p_aligntyp ? "lawful" : "neutral");
 #else
-            pline("%s‚Ì_‚É‹F‚è‚ğ‚³‚³‚°‚é‚Ì‚Íí¯‚É”w‚­D",
-                p_aligntyp ? "’˜" : "’†—§");
+            pline("%s¤Î¿À¤Ëµ§¤ê¤ò¤µ¤µ¤²¤ë¤Î¤Ï¾ï¼±¤ËÇØ¤¯¡¥",
+                p_aligntyp ? "Ãá½ø" : "ÃæÎ©");
 #endif
         return FALSE;
     }
@@ -2283,7 +2283,7 @@ boolean praying; /* false means no messages should be given */
 /*JP
         You("begin praying to %s.", align_gname(p_aligntyp));
 */
-        You("%s‚É‹F‚è‚ğ•ù‚°‚½D", align_gname(p_aligntyp));
+        You("%s¤Ëµ§¤ê¤òÊû¤²¤¿¡¥", align_gname(p_aligntyp));
 
     if (u.ualign.type && u.ualign.type == -p_aligntyp)
         alignment = -u.ualign.record; /* Opposite alignment altar */
@@ -2323,7 +2323,7 @@ dopray()
 /*JP
     if (ParanoidPray && yn("Are you sure you want to pray?") != 'y')
 */
-    if (ParanoidPray && yn("‹F‚è‚Ü‚·‚©H") != 'y')
+    if (ParanoidPray && yn("µ§¤ê¤Ş¤¹¤«¡©") != 'y')
         return 0;
 
     u.uconduct.gnostic++;
@@ -2336,7 +2336,7 @@ dopray()
 /*JP
         if (yn("Force the gods to be pleased?") == 'y') {
 */
-        if (yn("–³—–î—_‚É”÷Î‚ñ‚Å‚à‚ç‚¢‚Ü‚·‚©H") == 'y') {
+        if (yn("ÌµÍıÌğÍı¿À¤ËÈù¾Ğ¤ó¤Ç¤â¤é¤¤¤Ş¤¹¤«¡©") == 'y') {
             u.ublesscnt = 0;
             if (u.uluck < 0)
                 u.uluck = 0;
@@ -2352,7 +2352,7 @@ dopray()
 /*JP
     nomovemsg = "You finish your prayer.";
 */
-    nomovemsg = "‹F‚èI‚¦‚½D";
+    nomovemsg = "µ§¤ê½ª¤¨¤¿¡¥";
     afternmv = prayer_done;
 
     if (p_type == 3 && !Inhell) {
@@ -2361,7 +2361,7 @@ dopray()
 /*JP
             You("are surrounded by a shimmering light.");
 */
-            You("‚©‚·‚©‚ÈŒõ‚É‚Â‚Â‚Ü‚ê‚½D");
+            You("¤«¤¹¤«¤Ê¸÷¤Ë¤Ä¤Ä¤Ş¤ì¤¿¡¥");
         u.uinvulnerable = TRUE;
     }
 
@@ -2383,20 +2383,20 @@ prayer_done() /* M. Stephenson (1.0.3b) */
 #else
         godvoice(alignment,
                  (alignment == A_LAWFUL)
-                    ? "”Ú—ò‚È¶•¨‚æC“ğC‰ä‚É‹F‚è‚ğ‹‚ß‚½‚©H"
-                    : "“®‚­‚ÈI€‚É‚¼‚±‚È‚¢‚Ì¶•¨‚æI");
+                    ? "ÈÜÎô¤ÊÀ¸Êª¤è¡¤Æò¡¤²æ¤Ëµ§¤ê¤òµá¤á¤¿¤«¡©"
+                    : "Æ°¤¯¤Ê¡ª»à¤Ë¤¾¤³¤Ê¤¤¤ÎÀ¸Êª¤è¡ª");
 #endif
 /*JP
         You_feel("like you are falling apart.");
 */
-        You("ƒoƒ‰ƒoƒ‰‚É‚È‚Á‚½‚æ‚¤‚È‹C‚ª‚µ‚½D");
+        You("¥Ğ¥é¥Ğ¥é¤Ë¤Ê¤Ã¤¿¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥");
         /* KMH -- Gods have mastery over unchanging */
         rehumanize();
         /* no Half_physical_damage adjustment here */
 /*JP
         losehp(rnd(20), "residual undead turning effect", KILLED_BY_AN);
 */
-        losehp(rnd(20), "•s€‚Ì¶•¨‚ğ“y‚É•Ô‚·—Í‚Å", KILLED_BY_AN);
+        losehp(rnd(20), "ÉÔ»à¤ÎÀ¸Êª¤òÅÚ¤ËÊÖ¤¹ÎÏ¤Ç", KILLED_BY_AN);
         exercise(A_CON, FALSE);
         return 1;
     }
@@ -2404,7 +2404,7 @@ prayer_done() /* M. Stephenson (1.0.3b) */
 /*JP
         pline("Since you are in Gehennom, %s won't help you.",
 */
-        pline("ƒQƒwƒi‚É%s‚Ì—Í‚Í“Í‚©‚È‚¢D",
+        pline("¥²¥Ø¥Ê¤Ë%s¤ÎÎÏ¤ÏÆÏ¤«¤Ê¤¤¡¥",
               align_gname(alignment));
         /* haltingly aligned is least likely to anger */
         if (u.ualign.record <= 0 || rnl(u.ualign.record))
@@ -2466,7 +2466,7 @@ doturn()
 /*JP
         You("don't know how to turn undead!");
 */
-        You("•s€‚Ì¶‚«•¨‚ğ“y‚É–ß‚·•û–@‚ğ’m‚ç‚È‚¢I");
+        You("ÉÔ»à¤ÎÀ¸¤­Êª¤òÅÚ¤ËÌá¤¹ÊıË¡¤òÃÎ¤é¤Ê¤¤¡ª");
         return 0;
     }
     u.uconduct.gnostic++;
@@ -2477,7 +2477,7 @@ doturn()
 /*JP
         pline("For some reason, %s seems to ignore you.", u_gname());
 */
-        pline("‚È‚º‚©C%s‚Í‚ ‚È‚½‚ğ–³‹‚µ‚½‚æ‚¤‚¾D", u_gname());
+        pline("¤Ê¤¼¤«¡¤%s¤Ï¤¢¤Ê¤¿¤òÌµ»ë¤·¤¿¤è¤¦¤À¡¥", u_gname());
         aggravate();
         exercise(A_WIS, FALSE);
         return 0;
@@ -2486,14 +2486,14 @@ doturn()
 /*JP
         pline("Since you are in Gehennom, %s won't help you.", u_gname());
 */
-        pline("ƒQƒwƒi‚É%s‚Ì—Í‚Í“Í‚©‚È‚¢D", u_gname());
+        pline("¥²¥Ø¥Ê¤Ë%s¤ÎÎÏ¤ÏÆÏ¤«¤Ê¤¤¡¥", u_gname());
         aggravate();
         return 0;
     }
 /*JP
     pline("Calling upon %s, you chant an arcane formula.", u_gname());
 */
-    pline("%s‚É‹F‚è‚ğ‹‚ß‚é‚ÆC‚ ‚È‚½‚Í•s‰Âv‹c‚ÈŒ¾—t‚Ì¹‰Ì‚ğ•·‚¢‚½D", u_gname());
+    pline("%s¤Ëµ§¤ê¤òµá¤á¤ë¤È¡¤¤¢¤Ê¤¿¤ÏÉÔ²Ä»×µÄ¤Ê¸ÀÍÕ¤ÎÀ»²Î¤òÊ¹¤¤¤¿¡¥", u_gname());
     exercise(A_WIS, TRUE);
 
     /* note: does not perform unturn_dead() on victims' inventories */
@@ -2517,7 +2517,7 @@ doturn()
 /*JP
                     pline("Unfortunately, your voice falters.");
 */
-                    pline("c”O‚È‚ª‚çC‚ ‚È‚½‚Ìº‚Í‚Ç‚à‚Á‚Ä‚µ‚Ü‚Á‚½D");
+                    pline("»ÄÇ°¤Ê¤¬¤é¡¤¤¢¤Ê¤¿¤ÎÀ¼¤Ï¤É¤â¤Ã¤Æ¤·¤Ş¤Ã¤¿¡¥");
                 mtmp->mflee = 0;
                 mtmp->mfrozen = 0;
                 mtmp->mcanmove = 1;
@@ -2608,7 +2608,7 @@ aligntyp alignment;
 /*JP
         gnam = "someone";
 */
-        gnam = "’N‚©";
+        gnam = "Ã¯¤«";
         break;
     }
     if (*gnam == '_')
@@ -2679,7 +2679,7 @@ aligntyp alignment;
 #if 0 /*JP*/
         gnam = "your Friend the Computer"; /* Paranoia */
 #else
-        gnam = "eˆ¤‚È‚éƒRƒ“ƒsƒ…[ƒ^"; /* Paranoia */
+        gnam = "¿Æ°¦¤Ê¤ë¥³¥ó¥Ô¥å¡¼¥¿"; /* Paranoia */
 #endif
     }
     if (*gnam == '_')
@@ -2695,7 +2695,7 @@ aligntyp alignment;
 /*JP
     const char *gnam, *result = "god";
 */
-    const char *gnam, *result = "å_";
+    const char *gnam, *result = "¼ç¿À";
 
     switch (alignment) {
     case A_LAWFUL:
@@ -2715,7 +2715,7 @@ aligntyp alignment;
 /*JP
         result = "goddess";
 */
-        result = "—_";
+        result = "½÷¿À";
     return result;
 }
 
@@ -2729,17 +2729,17 @@ register int x, y;
 /*JP
         godvoice(altaralign, "How darest thou desecrate my altar!");
 */
-        godvoice(altaralign, "“ğC‰ä‚ªÕ’d‚ğ‰˜‚·‚©I");
+        godvoice(altaralign, "Æò¡¤²æ¤¬º×ÃÅ¤ò±ø¤¹¤«¡ª");
         (void) adjattrib(A_WIS, -1, FALSE);
     } else {
 /*JP
         pline("A voice (could it be %s?) whispers:", align_gname(altaralign));
 */
-        pline("‚³‚³‚â‚«º(‚½‚Ô‚ñ%sH)‚ª•·‚±‚¦‚é:", align_gname(altaralign));
+        pline("¤µ¤µ¤ä¤­À¼(¤¿¤Ö¤ó%s¡©)¤¬Ê¹¤³¤¨¤ë:", align_gname(altaralign));
 /*JP
         verbalize("Thou shalt pay, infidel!");
 */
-        verbalize("ˆÙ’[Ò‚æI•ñ‚¢‚ğó‚¯‚æI");
+        verbalize("°ÛÃ¼¼Ô¤è¡ªÊó¤¤¤ò¼õ¤±¤è¡ª");
         change_luck(-1);
     }
 }

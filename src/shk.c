@@ -35,7 +35,7 @@ STATIC_VAR NEARDATA long int followmsg; /* last time of follow message */
 /*JP
 STATIC_VAR const char and_its_contents[] = " and its contents";
 */
-STATIC_VAR const char and_its_contents[] = "’†g‚ğ‡‚í‚¹‚Ä";
+STATIC_VAR const char and_its_contents[] = "Ãæ¿È¤ò¹ç¤ï¤»¤Æ";
 STATIC_VAR const char the_contents_of[] = "the contents of ";
 
 STATIC_DCL void FDECL(append_honorific, (char *));
@@ -83,7 +83,7 @@ STATIC_DCL boolean FDECL(rob_shop, (struct monst *));
 STATIC_DCL void FDECL(deserted_shop, (char *));
 STATIC_DCL boolean FDECL(special_stock, (struct obj *, struct monst *,
                                          BOOLEAN_P));
-#if 0 /*JP*//*g‚í‚È‚¢*/
+#if 0 /*JP*//*»È¤ï¤Ê¤¤*/
 STATIC_DCL const char *FDECL(cad, (BOOLEAN_P));
 #endif
 
@@ -161,7 +161,7 @@ long amount;
 /*JP
         You("have no room for the money!");
 */
-        You("‚¨‹à‚ğ‚Â—]—T‚ª‚È‚¢I");
+        You("¤ª¶â¤ò»ı¤ÄÍ¾Íµ¤¬¤Ê¤¤¡ª");
         dropy(mongold);
     } else {
         addinv(mongold);
@@ -351,7 +351,7 @@ register boolean nearshop;
 /*JP
         pline("An alarm sounds!");
 */
-        pline("Œx•ñ‚ª–Â‚è‚Ğ‚Ñ‚¢‚½I");
+        pline("·ÙÊó¤¬ÌÄ¤ê¤Ò¤Ó¤¤¤¿¡ª");
 
     nokops = ((mvitals[PM_KEYSTONE_KOP].mvflags & G_GONE)
               && (mvitals[PM_KOP_SERGEANT].mvflags & G_GONE)
@@ -363,7 +363,7 @@ register boolean nearshop;
 /*JP
             pline("But no one seems to respond to it.");
 */
-            pline("‚µ‚©‚µ’N‚à‰“š‚µ‚È‚©‚Á‚½D");
+            pline("¤·¤«¤·Ã¯¤â±şÅú¤·¤Ê¤«¤Ã¤¿¡¥");
         return;
     }
 
@@ -379,7 +379,7 @@ register boolean nearshop;
 /*JP
                 pline_The("Keystone Kops appear!");
 */
-                pline("Œx”õˆõ‚ªŒ»‚í‚ê‚½I");
+                pline("·ÙÈ÷°÷¤¬¸½¤ï¤ì¤¿¡ª");
             mm.x = u.ux;
             mm.y = u.uy;
             makekops(&mm);
@@ -389,7 +389,7 @@ register boolean nearshop;
 /*JP
             pline_The("Keystone Kops are after you!");
 */
-            pline("Œx”õˆõ‚ª‚¢‚éI");
+            pline("·ÙÈ÷°÷¤¬¤¤¤ë¡ª");
         /* Create swarm near down staircase (hinders return to level) */
         mm.x = xdnstair;
         mm.y = ydnstair;
@@ -451,8 +451,8 @@ boolean newlev;
                                  : "%s!  Don't you leave without paying!",
                   plname);
 #else
-        verbalize(NOTANGRY(shkp) ? "%s‚³‚ñI‹A‚é‘O‚ÉC‚¨‹à‚ğ•¥‚Á‚Ä‚¢‚½‚¾‚¯‚Ü‚¹‚ñ‚©D"
-                                 : "%sI‹A‚é‘O‚ÉC‹à‚ğ•¥‚¦I",
+        verbalize(NOTANGRY(shkp) ? "%s¤µ¤ó¡ªµ¢¤ëÁ°¤Ë¡¤¤ª¶â¤òÊ§¤Ã¤Æ¤¤¤¿¤À¤±¤Ş¤»¤ó¤«¡¥"
+                                 : "%s¡ªµ¢¤ëÁ°¤Ë¡¤¶â¤òÊ§¤¨¡ª",
                       plname);
 #endif
         return;
@@ -501,7 +501,7 @@ struct monst *shkp;
 #if 0 /*JP*/
         Your("credit of %ld %s is used to cover your shopping bill.",
 #else
-        Your("—a‚¯‹à‚©‚ç%ld%s‚ªŠ¨’è‚Ìx•¥‚¢‚Ég‚í‚ê‚½D",
+        Your("ÍÂ¤±¶â¤«¤é%ld%s¤¬´ªÄê¤Î»ÙÊ§¤¤¤Ë»È¤ï¤ì¤¿¡¥",
 #endif
              eshkp->credit, currency(eshkp->credit));
         total = 0L; /* credit gets cleared by setpaid() */
@@ -509,7 +509,7 @@ struct monst *shkp;
 /*JP
         You("escaped the shop without paying!");
 */
-        You("‹à‚ğ•¥‚í‚¸‚É“X‚©‚ç“¦‚°‚½I");
+        You("¶â¤òÊ§¤ï¤º¤ËÅ¹¤«¤éÆ¨¤²¤¿¡ª");
         total -= eshkp->credit;
     }
     setpaid(shkp);
@@ -521,7 +521,7 @@ struct monst *shkp;
 /*JP
     You("stole %ld %s worth of merchandise.", total, currency(total));
 */
-    You("G‰İ‚ğ%ld%s•ª“‚ñ‚¾D", total, currency(total));
+    You("»¨²ß¤ò%ld%sÊ¬Åğ¤ó¤À¡¥", total, currency(total));
     if (!Role_if(PM_ROGUE)) /* stealing is unlawful */
         adjalign(-sgn(u.ualign.type));
 
@@ -558,9 +558,9 @@ deserted_shop(enterstring)
     pline("This shop %s %s.", (m < n) ? "seems to be" : "is",
           !n ? "deserted" : "untended");
 #else
-    pline("“X‚Í%s%sD",
-          !n ? "”pšĞ‚Æ‰»‚µ‚Ä‚¢‚é" : "•úŠü‚³‚ê‚Ä‚¢‚é",
-          (m < n) ? "‚æ‚¤‚¾" : "is");
+    pline("Å¹¤Ï%s%s¡¥",
+          !n ? "ÇÑÔÒ¤È²½¤·¤Æ¤¤¤ë" : "Êü´ş¤µ¤ì¤Æ¤¤¤ë",
+          (m < n) ? "¤è¤¦¤À" : "is");
 #endif
 }
 
@@ -616,11 +616,11 @@ char *enterstring;
 /*JP
         pline("%s senses your presence.", shkname(shkp));
 */
-        pline("%s‚Í‚ ‚È‚½‚Ì‘¶İ‚É‹C‚ª‚Â‚¢‚½D", shkname(shkp));
+        pline("%s¤Ï¤¢¤Ê¤¿¤ÎÂ¸ºß¤Ëµ¤¤¬¤Ä¤¤¤¿¡¥", shkname(shkp));
 /*JP
         verbalize("Invisible customers are not welcome!");
 */
-        verbalize("“§–¾‚È‚¨‹q‚³‚ñ‚Æ‚ÍŠ´S‚µ‚È‚¢‚ÈI");
+        verbalize("Æ©ÌÀ¤Ê¤ªµÒ¤µ¤ó¤È¤Ï´¶¿´¤·¤Ê¤¤¤Ê¡ª");
         return;
     }
 
@@ -631,14 +631,14 @@ char *enterstring;
         verbalize("So, %s, you dare return to %s %s?!", plname,
                   s_suffix(shkname(shkp)), shtypes[rt - SHOPBASE].name);
 #else
-        verbalize("%sI‚í‚´‚í‚´%s‚Ì%s‚É–ß‚Á‚Ä‚«‚½‚Ì‚©HI", plname,
+        verbalize("%s¡ª¤ï¤¶¤ï¤¶%s¤Î%s¤ËÌá¤Ã¤Æ¤­¤¿¤Î¤«¡©¡ª", plname,
                   s_suffix(shkname(shkp)), shtypes[rt - SHOPBASE].name);
 #endif
     } else if (eshkp->robbed) {
 /*JP
         pline("%s mutters imprecations against shoplifters.", shkname(shkp));
 */
-        pline("%s‚Í“D–_‚ğ‚Ì‚Ì‚µ‚Á‚½D", shkname(shkp));
+        pline("%s¤ÏÅ¥ËÀ¤ò¤Î¤Î¤·¤Ã¤¿¡¥", shkname(shkp));
     } else {
         verbalize("%s, %s!  Welcome%s to %s %s!", Hello(shkp), plname,
                   eshkp->visitct++ ? " again" : "", s_suffix(shkname(shkp)),
@@ -658,13 +658,13 @@ char *enterstring;
 /*JP
                 tool = "digging tool";
 */
-                tool = "Œ@‚é“¹‹ï";
+                tool = "·¡¤ëÆ»¶ñ";
                 cnt = 2; /* `more than 1' is all that matters */
             } else if (pick) {
 /*JP
                 tool = "pick-axe";
 */
-                tool = "‚Â‚é‚Í‚µ";
+                tool = "¤Ä¤ë¤Ï¤·";
                 /* hack: `pick' already points somewhere into inventory */
                 while ((pick = pick->nobj) != 0)
                     if (pick->otyp == PICK_AXE)
@@ -673,7 +673,7 @@ char *enterstring;
 /*JP
                 tool = "mattock";
 */
-                tool = "‚Â‚é‚Í‚µ";
+                tool = "¤Ä¤ë¤Ï¤·";
                 while ((mattock = mattock->nobj) != 0)
                     if (mattock->otyp == DWARVISH_MATTOCK)
                         ++cnt;
@@ -688,8 +688,8 @@ char *enterstring;
                       tool, plur(cnt));
 #else
             verbalize(NOTANGRY(shkp)
-                          ? "%s‚ğŠO‚É’u‚¢‚Ä‚«‚Ä‚¢‚½‚¾‚¯‚Ü‚¹‚ñ‚©H"
-                          : "%s‚ğŠO‚Ö’u‚¢‚Ä‚±‚¢I",
+                          ? "%s¤ò³°¤ËÃÖ¤¤¤Æ¤­¤Æ¤¤¤¿¤À¤±¤Ş¤»¤ó¤«¡©"
+                          : "%s¤ò³°¤ØÃÖ¤¤¤Æ¤³¤¤¡ª",
                       tool);
 #endif
             should_block = TRUE;
@@ -699,8 +699,8 @@ char *enterstring;
                                      : "Leave %s outside.",
                       y_monnam(u.usteed));
 #else
-            verbalize(NOTANGRY(shkp) ? "%s‚ğŠO‚É’u‚¢‚Ä‚«‚Ä‚¢‚½‚¾‚¯‚Ü‚¹‚ñ‚©H"
-                                     : "%s‚ğŠO‚Ö’u‚¢‚Ä‚±‚¢I",
+            verbalize(NOTANGRY(shkp) ? "%s¤ò³°¤ËÃÖ¤¤¤Æ¤­¤Æ¤¤¤¿¤À¤±¤Ş¤»¤ó¤«¡©"
+                                     : "%s¤ò³°¤ØÃÖ¤¤¤Æ¤³¤¤¡ª",
                       y_monnam(u.usteed));
 #endif
             should_block = TRUE;
@@ -735,7 +735,7 @@ struct obj *obj;
             verbalize("You sneaky %s!  Get out of here with that pick!",
                       cad(FALSE));
 #else
-            verbalize("‚Ğ‚«‚å‚¤Ò‚ßI‚Â‚é‚Í‚µ‚ğ‚Á‚ÄŠO‚Éo‚ëI");
+            verbalize("¤Ò¤­¤ç¤¦¼Ô¤á¡ª¤Ä¤ë¤Ï¤·¤ò»ı¤Ã¤Æ³°¤Ë½Ğ¤í¡ª");
 #endif
         pickmovetime = moves;
     }
@@ -809,7 +809,7 @@ shopper_financial_report()
 /*JP
         You("have no credit or debt in here.");
 */
-        You("—a‚¯‹à‚àØ‹à‚à‚È‚¢D");
+        You("ÍÂ¤±¶â¤â¼Ú¶â¤â¤Ê¤¤¡¥");
         this_shkp = 0; /* skip first pass */
     }
 
@@ -827,7 +827,7 @@ shopper_financial_report()
                     s_suffix(shkname(shkp)),
                     shtypes[eshkp->shoptype - SHOPBASE].name);
 #else
-                You("%ld%s‚Ì—a‚¯‹à‚ª%s‚Ì%s‚É‚ ‚éD", amt, currency(amt),
+                You("%ld%s¤ÎÍÂ¤±¶â¤¬%s¤Î%s¤Ë¤¢¤ë¡¥", amt, currency(amt),
                     shkname(shkp),
                     shtypes[eshkp->shoptype - SHOPBASE].name);
 #endif
@@ -835,17 +835,17 @@ shopper_financial_report()
 /*JP
                 You("have no credit in here.");
 */
-                You("—a‚¯‹à‚Í‚È‚¢D");
+                You("ÍÂ¤±¶â¤Ï¤Ê¤¤¡¥");
             if ((amt = shop_debt(eshkp)) != 0)
 /*JP
                 You("owe %s %ld %s.", shkname(shkp), amt, currency(amt));
 */
-                You("%s‚É%ld%s‚ÌØ‚è‚ª‚ ‚éD", shkname(shkp), amt, currency(amt));
+                You("%s¤Ë%ld%s¤Î¼Ú¤ê¤¬¤¢¤ë¡¥", shkname(shkp), amt, currency(amt));
             else if (shkp == this_shkp)
 /*JP
                 You("don't owe any money here.");
 */
-                pline("‚±‚Ì“X‚ÉØ‚è‚Í‚È‚¢D");
+                pline("¤³¤ÎÅ¹¤Ë¼Ú¤ê¤Ï¤Ê¤¤¡¥");
         }
 }
 
@@ -906,7 +906,7 @@ register boolean silent;
 /*JP
                     pline("onbill: paid obj on bill?");
 */
-                    pline("Š¨’èF•¥‚¤H");
+                    pline("´ªÄê¡§Ê§¤¦¡©");
                 return bp;
             } else
                 bp++;
@@ -915,7 +915,7 @@ register boolean silent;
 /*JP
         pline("onbill: unpaid obj not on bill?");
 */
-        pline("Š¨’èF•¥‚í‚È‚¢H");
+        pline("´ªÄê¡§Ê§¤ï¤Ê¤¤¡©");
     return (struct bill_x *) 0;
 }
 
@@ -1029,14 +1029,14 @@ register struct monst *shkp;
 /*JP
         pline_The("price is deducted from your credit.");
 */
-        pline("‘ã‹à‚Í—a‚¯‹à‚©‚ç·‚µˆø‚©‚ê‚½D");
+        pline("Âå¶â¤ÏÍÂ¤±¶â¤«¤éº¹¤·°ú¤«¤ì¤¿¡¥");
         ESHK(shkp)->credit -= tmp;
         tmp = 0L;
     } else {
 /*JP
         pline_The("price is partially covered by your credit.");
 */
-        pline("‘ã‹à‚Ìˆê•”‚Í‚ ‚È‚½‚Ì—a‚¯‹à‚Å•â‚í‚ê‚½D");
+        pline("Âå¶â¤Î°ìÉô¤Ï¤¢¤Ê¤¿¤ÎÍÂ¤±¶â¤ÇÊä¤ï¤ì¤¿¡¥");
         ESHK(shkp)->credit = 0L;
         tmp -= credit;
     }
@@ -1144,8 +1144,8 @@ boolean verbosely;
             pline("%s %s.", Monnam(shkp),
                   shkp->msleeping ? "wakes up" : "can move again");
 #else
-            pline("%s‚Í%sD", Monnam(shkp),
-                  shkp->msleeping ? "–Ú‚ªŠo‚ß‚½" : "‚Ó‚½‚½‚Ñ“®‚¯‚é‚æ‚¤‚É‚È‚Á‚½");
+            pline("%s¤Ï%s¡¥", Monnam(shkp),
+                  shkp->msleeping ? "ÌÜ¤¬³Ğ¤á¤¿" : "¤Õ¤¿¤¿¤ÓÆ°¤±¤ë¤è¤¦¤Ë¤Ê¤Ã¤¿");
 #endif
         shkp->msleeping = 0;
         shkp->mfrozen = 0;
@@ -1193,12 +1193,12 @@ register boolean silentkops;
 /*JP
             pline("Satisfied, %s suddenly disappears!", shk_nam);
 */
-            pline("%s‚Í–‘«‚·‚é‚ÆC“Ë‘RÁ‚¦‚½I", shk_nam);
+            pline("%s¤ÏËşÂ­¤¹¤ë¤È¡¤ÆÍÁ³¾Ã¤¨¤¿¡ª", shk_nam);
     } else if (wasmad)
 /*JP
         pline("%s calms down.", Monnam(shkp));
 */
-        pline("%s‚Í—’…‚¢‚½D", Monnam(shkp));
+        pline("%s¤ÏÍîÃå¤¤¤¿¡¥", Monnam(shkp));
 
     make_happy_shoppers(silentkops);
 }
@@ -1259,7 +1259,7 @@ register xchar ox, oy;
 /*JP
     pline("%s %s!", Monnam(shkp), !ANGRY(shkp) ? "gets angry" : "is furious");
 */
-    pline("%s‚Í%sI", Monnam(shkp), !ANGRY(shkp) ? "“{‚Á‚½" : "“{‚è‹¶‚Á‚½");
+    pline("%s¤Ï%s¡ª", Monnam(shkp), !ANGRY(shkp) ? "ÅÜ¤Ã¤¿" : "ÅÜ¤ê¶¸¤Ã¤¿");
     shkp->mx = sx, shkp->my = sy;
     hot_pursuit(shkp);
 }
@@ -1267,12 +1267,12 @@ register xchar ox, oy;
 /*JP
 STATIC_VAR const char no_money[] = "Moreover, you%s have no money.";
 */
-STATIC_VAR const char no_money[] = "‚µ‚©‚àC‚ ‚È‚½‚Í‚¨‹à‚ª‚È‚¢%sD";
+STATIC_VAR const char no_money[] = "¤·¤«¤â¡¤¤¢¤Ê¤¿¤Ï¤ª¶â¤¬¤Ê¤¤%s¡¥";
 STATIC_VAR const char not_enough_money[] =
 /*JP
     "Besides, you don't have enough to interest %s.";
 */
-    "‚µ‚©‚àC‚ ‚È‚½‚Í%s‚ª‹»–¡‚ğ‚Â‚Ù‚Ç‚¨‹à‚ğ‚Á‚Ä‚¢‚È‚¢I";
+    "¤·¤«¤â¡¤¤¢¤Ê¤¿¤Ï%s¤¬¶½Ì£¤ò»ı¤Ä¤Û¤É¤ª¶â¤ò»ı¤Ã¤Æ¤¤¤Ê¤¤¡ª";
 
 STATIC_OVL long
 cheapest_item(shkp) /* delivers the cheapest item on the list */
@@ -1327,7 +1327,7 @@ dopay()
 /*JP
         There("appears to be no shopkeeper here to receive your payment.");
 */
-        pline("x•¥‚¢‚ğó‚¯‚Æ‚é“Xå‚Í‚±‚±‚É‚Í‚¢‚È‚¢‚æ‚¤‚¾D");
+        pline("»ÙÊ§¤¤¤ò¼õ¤±¤È¤ëÅ¹¼ç¤Ï¤³¤³¤Ë¤Ï¤¤¤Ê¤¤¤è¤¦¤À¡¥");
         return 0;
     }
 
@@ -1335,7 +1335,7 @@ dopay()
 /*JP
         You_cant("see...");
 */
-        You("Œ©‚é‚±‚Æ‚ª‚Å‚«‚È‚¢DDD");
+        You("¸«¤ë¤³¤È¤¬¤Ç¤­¤Ê¤¤¡¥¡¥¡¥");
         return 0;
     }
 
@@ -1356,7 +1356,7 @@ dopay()
 /*JP
             pline("%s is not near enough to receive your payment.",
 */
-            pline("%s‚Í‰“‚­‚É‚¢‚é‚Ì‚Åx•¥‚¦‚È‚¢D",
+            pline("%s¤Ï±ó¤¯¤Ë¤¤¤ë¤Î¤Ç»ÙÊ§¤¨¤Ê¤¤¡¥",
                   Monnam(shkp));
             return 0;
         }
@@ -1368,13 +1368,13 @@ dopay()
 /*JP
         pline("Pay whom?");
 */
-        pline("’N‚É•¥‚¤H");
+        pline("Ã¯¤ËÊ§¤¦¡©");
         cc.x = u.ux;
         cc.y = u.uy;
 /*JP
         if (getpos(&cc, TRUE, "the creature you want to pay") < 0)
 */
-        if (getpos(&cc, TRUE, "x•¥‚¢‚½‚¢‘Šè") < 0)
+        if (getpos(&cc, TRUE, "»ÙÊ§¤¤¤¿¤¤Áê¼ê") < 0)
             return 0; /* player pressed ESC */
         cx = cc.x;
         cy = cc.y;
@@ -1382,14 +1382,14 @@ dopay()
 /*JP
             pline("Try again...");
 */
-            pline("‚à‚¤ˆê“xDDD");
+            pline("¤â¤¦°ìÅÙ¡¥¡¥¡¥");
             return 0;
         }
         if (u.ux == cx && u.uy == cy) {
 /*JP
             You("are generous to yourself.");
 */
-            pline("©•ª©g‚É‚È‚ñ‚Ä‹C‘O‚Ì‚¢‚¢‚±‚ÆI");
+            pline("¼«Ê¬¼«¿È¤Ë¤Ê¤ó¤Æµ¤Á°¤Î¤¤¤¤¤³¤È¡ª");
             return 0;
         }
         mtmp = m_at(cx, cy);
@@ -1397,21 +1397,21 @@ dopay()
 /*JP
             There("is no one there to receive your payment.");
 */
-            pline("x•¥‚¢‚ğó‚¯‚Æ‚ê‚é‘Šè‚Í‚¢‚È‚¢D");
+            pline("»ÙÊ§¤¤¤ò¼õ¤±¤È¤ì¤ëÁê¼ê¤Ï¤¤¤Ê¤¤¡¥");
             return 0;
         }
         if (!mtmp->isshk) {
 /*JP
             pline("%s is not interested in your payment.", Monnam(mtmp));
 */
-            pline("%s‚Íx•¥‚¢‚É‹»–¡‚ğ¦‚³‚È‚¢D", Monnam(mtmp));
+            pline("%s¤Ï»ÙÊ§¤¤¤Ë¶½Ì£¤ò¼¨¤µ¤Ê¤¤¡¥", Monnam(mtmp));
             return 0;
         }
         if (mtmp != resident && distu(mtmp->mx, mtmp->my) > 2) {
 /*JP
             pline("%s is too far to receive your payment.", Monnam(mtmp));
 */
-            pline("%s‚Íx•¥‚¢‚É‹»–¡‚ğ¦‚³‚È‚¢D", Monnam(mtmp));
+            pline("%s¤Ï»ÙÊ§¤¤¤Ë¶½Ì£¤ò¼¨¤µ¤Ê¤¤¡¥", Monnam(mtmp));
             return 0;
         }
         shkp = mtmp;
@@ -1434,8 +1434,8 @@ proceed:
         pline("%s %s.", Monnam(shkp),
               rn2(2) ? "seems to be napping" : "doesn't respond");
 #else
-                pline("%s‚Í%sD", Monnam(shkp),
-                      rn2(2) ? "‹–°‚è‚ğ‚µ‚Ä‚¢‚é‚æ‚¤‚¾" : "”½‰‚ª‚È‚¢");
+                pline("%s¤Ï%s¡¥", Monnam(shkp),
+                      rn2(2) ? "µïÌ²¤ê¤ò¤·¤Æ¤¤¤ë¤è¤¦¤À" : "È¿±ş¤¬¤Ê¤¤");
 #endif
         return 0;
     }
@@ -1446,24 +1446,24 @@ proceed:
 /*JP
             You("do not owe %s anything.", mon_nam(shkp));
 */
-            You("%s‚ÉØ‚è‚Í‚È‚¢D", mon_nam(shkp));
+            You("%s¤Ë¼Ú¤ê¤Ï¤Ê¤¤¡¥", mon_nam(shkp));
         else if (!umoney) {
 /*JP
             You("%shave no money.", stashed_gold ? "seem to " : "");
 */
-            You("‚¨‹à‚ª‚È‚¢%sD", stashed_gold ? "‚æ‚¤‚¾" : "");
+            You("¤ª¶â¤¬¤Ê¤¤%s¡¥", stashed_gold ? "¤è¤¦¤À" : "");
             if (stashed_gold)
 /*JP
                 pline("But you have some gold stashed away.");
 */
-                pline("‚µ‚©‚µC‚ ‚È‚½‚É‚Í‚¿‚å‚Á‚Á‚Æ‚µ‚½ƒwƒ\ƒNƒŠ‚ª‚ ‚éD");
+                pline("¤·¤«¤·¡¤¤¢¤Ê¤¿¤Ë¤Ï¤Á¤ç¤Ã¤Ã¤È¤·¤¿¥Ø¥½¥¯¥ê¤¬¤¢¤ë¡¥");
         } else {
             if (umoney > ltmp) {
 #if 0 /*JP*/
                 You("give %s the %ld gold piece%s %s asked for.",
                     shkname(shkp), ltmp, plur(ltmp), mhe(shkp));
 #else
-                You("%s‚É–]‚İ’Ê‚è%ld–‡‚Ì‹à‰İ‚ğ—^‚¦‚½D",
+                You("%s¤ËË¾¤ßÄÌ¤ê%ldËç¤Î¶â²ß¤òÍ¿¤¨¤¿¡¥",
                     shkname(shkp), ltmp);
 #endif
                 pay(ltmp, shkp);
@@ -1472,21 +1472,21 @@ proceed:
                 You("give %s all your%s gold.", shkname(shkp),
                     stashed_gold ? " openly kept" : "");
 #else
-                You("%s‚É%s‚¨‹à‘S•”‚ğ—^‚¦‚½D", shkname(shkp),
-                    stashed_gold ? "è‚¿‚Ì" : "");
+                You("%s¤Ë%s¤ª¶âÁ´Éô¤òÍ¿¤¨¤¿¡¥", shkname(shkp),
+                    stashed_gold ? "¼ê»ı¤Á¤Î" : "");
 #endif
                 pay(umoney, shkp);
                 if (stashed_gold)
 /*JP
                     pline("But you have hidden gold!");
 */
-                    pline("‚µ‚©‚µC‚ ‚È‚½‚Íƒwƒ\ƒNƒŠ‚ª‚ ‚éI");
+                    pline("¤·¤«¤·¡¤¤¢¤Ê¤¿¤Ï¥Ø¥½¥¯¥ê¤¬¤¢¤ë¡ª");
             }
             if ((umoney < ltmp / 2L) || (umoney < ltmp && stashed_gold))
 /*JP
                 pline("Unfortunately, %s doesn't look satisfied.", mhe(shkp));
 */
-                pline("c”O‚È‚ª‚çC%s‚Í–‘«‚µ‚Ä‚È‚¢‚æ‚¤‚¾D", mhe(shkp));
+                pline("»ÄÇ°¤Ê¤¬¤é¡¤%s¤ÏËşÂ­¤·¤Æ¤Ê¤¤¤è¤¦¤À¡¥", mhe(shkp));
             else
                 make_happy_shk(shkp, FALSE);
         }
@@ -1500,23 +1500,23 @@ proceed:
 /*JP
             You("do not owe %s anything.", shkname(shkp));
 */
-            You("%s‚ÉØ‚è‚Í‚È‚¢D", shkname(shkp));
+            You("%s¤Ë¼Ú¤ê¤Ï¤Ê¤¤¡¥", shkname(shkp));
             if (!umoney)
 /*JP
                 pline(no_money, stashed_gold ? " seem to" : "");
 */
-                pline(no_money, stashed_gold ? "‚æ‚¤‚¾" : "");
+                pline(no_money, stashed_gold ? "¤è¤¦¤À" : "");
         } else if (ltmp) {
 /*JP
             pline("%s is after blood, not money!", shkname(shkp));
 */
-            pline("%s‚ÍŒŒ‚Ü‚İ‚ê‚¾D‚¨‹à‚Ç‚±‚ë‚¶‚á‚È‚¢I", Monnam(shkp));
+            pline("%s¤Ï·ì¤Ş¤ß¤ì¤À¡¥¤ª¶â¤É¤³¤í¤¸¤ã¤Ê¤¤¡ª", Monnam(shkp));
             if (umoney < ltmp / 2L || (umoney < ltmp && stashed_gold)) {
                 if (!umoney)
 /*JP
                     pline(no_money, stashed_gold ? " seem to" : "");
 */
-                    pline(no_money, stashed_gold ? "‚æ‚¤‚¾" : "");
+                    pline(no_money, stashed_gold ? "¤è¤¦¤À" : "");
                 else
                     pline(not_enough_money, mhim(shkp));
                 return 1;
@@ -1524,14 +1524,14 @@ proceed:
 /*JP
             pline("But since %s shop has been robbed recently,", mhis(shkp));
 */
-            pline("‚µ‚©‚µC%s“X‚ÍÅ‹ß“‚İ‚É‚ ‚Á‚½‚Ì‚ÅC", mhis(shkp));
+            pline("¤·¤«¤·¡¤%sÅ¹¤ÏºÇ¶áÅğ¤ß¤Ë¤¢¤Ã¤¿¤Î¤Ç¡¤", mhis(shkp));
 #if 0 /*JP*/
             pline("you %scompensate %s for %s losses.",
                   (umoney < ltmp) ? "partially " : "", shkname(shkp),
                   mhis(shkp));
 #else
-            pline("%s‚Ì‘¹¸%s‚ğ•â“U‚µ‚½D", mhis(shkp),
-                  (umoney < ltmp) ? "‚Ìˆê•”" : "");
+            pline("%s¤ÎÂ»¼º%s¤òÊäÅ¶¤·¤¿¡¥", mhis(shkp),
+                  (umoney < ltmp) ? "¤Î°ìÉô" : "");
 #endif
             pay(umoney < ltmp ? umoney : ltmp, shkp);
             make_happy_shk(shkp, FALSE);
@@ -1541,13 +1541,13 @@ proceed:
 /*JP
             pline("%s is after your hide, not your money!", Monnam(shkp));
 */
-            pline("%s‚Í‚ ‚È‚½‚Ì–½‚ğ‘_‚Á‚Ä‚¢‚éC‚¨‹à‚Ç‚±‚ë‚¶‚á‚È‚¢I", Monnam(shkp));
+            pline("%s¤Ï¤¢¤Ê¤¿¤ÎÌ¿¤òÁÀ¤Ã¤Æ¤¤¤ë¡¤¤ª¶â¤É¤³¤í¤¸¤ã¤Ê¤¤¡ª", Monnam(shkp));
             if (umoney < 1000L) {
                 if (!umoney)
 /*JP
                     pline(no_money, stashed_gold ? " seem to" : "");
 */
-                    pline(no_money, stashed_gold ? "‚æ‚¤‚¾" : "");
+                    pline(no_money, stashed_gold ? "¤è¤¦¤À" : "");
                 else
                     pline(not_enough_money, mhim(shkp));
                 return 1;
@@ -1556,8 +1556,8 @@ proceed:
             You("try to appease %s by giving %s 1000 gold pieces.",
                 x_monnam(shkp, ARTICLE_THE, "angry", 0, FALSE), mhim(shkp));
 #else
-            You("‹à‰İ1000–‡‚ğ%s‚Éè“n‚µ‚Ä‚È‚¾‚ß‚æ‚¤‚Æ‚µ‚½D",
-                x_monnam(shkp, ARTICLE_THE, "“{‚Á‚½", 0, FALSE));
+            You("¶â²ß1000Ëç¤ò%s¤Ë¼êÅÏ¤·¤Æ¤Ê¤À¤á¤è¤¦¤È¤·¤¿¡¥",
+                x_monnam(shkp, ARTICLE_THE, "ÅÜ¤Ã¤¿", 0, FALSE));
 #endif
             pay(1000L, shkp);
             if (strncmp(eshkp->customer, plname, PL_NSIZ) || rn2(3))
@@ -1566,7 +1566,7 @@ proceed:
 /*JP
                 pline("But %s is as angry as ever.", shkname(shkp));
 */
-                pline("‚µ‚©‚µ%s‚Í‚Ü‚¾“{‚Á‚Ä‚¢‚éD", shkname(shkp));
+                pline("¤·¤«¤·%s¤Ï¤Ş¤ÀÅÜ¤Ã¤Æ¤¤¤ë¡¥", shkname(shkp));
         }
         return 1;
     }
@@ -1582,7 +1582,7 @@ proceed:
         long loan = eshkp->loan;
         char sbuf[BUFSZ];
         umoney = money_cnt(invent);
-#if 0 /*JP*//*––”ö‚É‰ñ‚·*/
+#if 0 /*JP*//*ËöÈø¤Ë²ó¤¹*/
         Sprintf(sbuf, "You owe %s %ld %s ", shkname(shkp), dtmp,
                 currency(dtmp));
 #endif
@@ -1591,21 +1591,21 @@ proceed:
 /*JP
                 Strcat(sbuf, "you picked up in the store.");
 */
-                        Strcpy(sbuf, "“X‚Ì’†‚ÅE‚Á‚½‚à‚Ì‚É‘Î‚µ‚ÄC");
+                        Strcpy(sbuf, "Å¹¤ÎÃæ¤Ç½¦¤Ã¤¿¤â¤Î¤ËÂĞ¤·¤Æ¡¤");
             else
 #if 0 /*JP*/
                 Strcat(sbuf,
                        "for gold picked up and the use of merchandise.");
 #else
-                Strcpy(sbuf,"E‚Á‚½‚¨‹à‚âg‚Á‚½G‰İ‚É‘Î‚µ‚ÄC");
+                Strcpy(sbuf,"½¦¤Ã¤¿¤ª¶â¤ä»È¤Ã¤¿»¨²ß¤ËÂĞ¤·¤Æ¡¤");
 #endif
         } else
 /*JP
             Strcat(sbuf, "for the use of merchandise.");
 */
-            Strcpy(sbuf, "g‚Á‚½G‰İ‚É‘Î‚µ‚ÄC");
-#if 1 /*JP*//*ã‚©‚çˆÚ“®*/
-        Sprintf(eos(sbuf), "%s‚É%ld%s‚ÌØ‚è‚ª‚ ‚éD",
+            Strcpy(sbuf, "»È¤Ã¤¿»¨²ß¤ËÂĞ¤·¤Æ¡¤");
+#if 1 /*JP*//*¾å¤«¤é°ÜÆ°*/
+        Sprintf(eos(sbuf), "%s¤Ë%ld%s¤Î¼Ú¤ê¤¬¤¢¤ë¡¥",
                 shkname(shkp), dtmp, currency(dtmp));
 #endif
         pline1(sbuf);
@@ -1615,9 +1615,9 @@ proceed:
                   stashed_gold ? " seem to" : "",
                   eshkp->credit ? " or credit" : "");
 #else
-            pline("‚µ‚©‚µC‚¨‹à%s‘«‚è‚È‚¢%sD",
-                  eshkp->credit ? "‚à—a‚¯‹à‚à" : "‚ª",
-                  stashed_gold ? "‚æ‚¤‚¾" : "");
+            pline("¤·¤«¤·¡¤¤ª¶â%sÂ­¤ê¤Ê¤¤%s¡¥",
+                  eshkp->credit ? "¤âÍÂ¤±¶â¤â" : "¤¬",
+                  stashed_gold ? "¤è¤¦¤À" : "");
 #endif
             return 1;
         } else {
@@ -1628,7 +1628,7 @@ proceed:
 /*JP
                 Your("debt is covered by your credit.");
 */
-                Your("Ø‹à‚Í—a‚¯‹à‚Å•â‚í‚ê‚½D");
+                Your("¼Ú¶â¤ÏÍÂ¤±¶â¤ÇÊä¤ï¤ì¤¿¡¥");
             } else if (!eshkp->credit) {
                 money2mon(shkp, dtmp);
                 eshkp->debit = 0L;
@@ -1636,7 +1636,7 @@ proceed:
 /*JP
                 You("pay that debt.");
 */
-                You("Ø‹à‚ğ•¥‚Á‚½D");
+                You("¼Ú¶â¤òÊ§¤Ã¤¿¡¥");
                 context.botl = 1;
             } else {
                 dtmp -= eshkp->credit;
@@ -1647,11 +1647,11 @@ proceed:
 /*JP
                 pline("That debt is partially offset by your credit.");
 */
-                pline("‚»‚ÌØ‹à‚Íˆê•”—a‚¯‹à‚Å‘ŠE‚³‚ê‚½D");
+                pline("¤½¤Î¼Ú¶â¤Ï°ìÉôÍÂ¤±¶â¤ÇÁê»¦¤µ¤ì¤¿¡¥");
 /*JP
                 You("pay the remainder.");
 */
-                You("c‚è‚ğ•¥‚Á‚½D");
+                You("»Ä¤ê¤òÊ§¤Ã¤¿¡¥");
                 context.botl = 1;
             }
             paid = TRUE;
@@ -1667,8 +1667,8 @@ proceed:
             You("%shave no money or credit%s.",
                 stashed_gold ? "seem to " : "", paid ? " left" : "");
 #else
-            You("%s‚¨‹à‚à—a‚¯‹à‚à‚Á‚Ä‚È‚¢%sD",
-                paid ? "‚à‚¤" : "", stashed_gold ? "‚æ‚¤‚¾" : "");
+            You("%s¤ª¶â¤âÍÂ¤±¶â¤â»ı¤Ã¤Æ¤Ê¤¤%s¡¥",
+                paid ? "¤â¤¦" : "", stashed_gold ? "¤è¤¦¤À" : "");
 #endif
             return 0;
         }
@@ -1677,13 +1677,13 @@ proceed:
             You("don't have enough money to buy%s the item%s you picked.",
                 eshkp->billct > 1 ? " any of" : "", plur(eshkp->billct));
 #else
-            pline("E‚Á‚½•i•¨‚ğ”ƒ‚¤‚É‚Í‚¨‹à‚ª‘«‚è‚È‚¢D");
+            pline("½¦¤Ã¤¿ÉÊÊª¤òÇã¤¦¤Ë¤Ï¤ª¶â¤¬Â­¤ê¤Ê¤¤¡¥");
 #endif
             if (stashed_gold)
 /*JP
                 pline("Maybe you have some gold stashed away?");
 */
-                You("‚Ç‚±‚©‚É‚¨‹à‚ğ‰B‚µ‚Ä‚¢‚é‚Ì‚©‚àH");
+                You("¤É¤³¤«¤Ë¤ª¶â¤ò±£¤·¤Æ¤¤¤ë¤Î¤«¤â¡©");
             return 0;
         }
 
@@ -1692,7 +1692,7 @@ proceed:
 /*JP
         iprompt = (eshkp->billct > 1 ? ynq("Itemized billing?") : 'y');
 */
-        iprompt = (eshkp->billct > 1 ? ynq("ŒÂ•Ê‚ÉŠ¨’è‚µ‚Ü‚·‚©H") : 'y');
+        iprompt = (eshkp->billct > 1 ? ynq("¸ÄÊÌ¤Ë´ªÄê¤·¤Ş¤¹¤«¡©") : 'y');
         itemize = (iprompt == 'y');
         if (iprompt == 'q')
             goto thanks;
@@ -1755,7 +1755,7 @@ proceed:
         verbalize("Thank you for shopping in %s %s!", s_suffix(shkname(shkp)),
                   shtypes[eshkp->shoptype - SHOPBASE].name);
 #else
-        verbalize("%s‚Ì%s‚Ö‚Ü‚½‚Ç‚¤‚¼I", shkname(shkp),
+        verbalize("%s¤Î%s¤Ø¤Ş¤¿¤É¤¦¤¾¡ª", shkname(shkp),
                   shtypes[eshkp->shoptype - SHOPBASE].name);
 #endif
     return 1;
@@ -1790,8 +1790,8 @@ boolean itemize;
         You("%shave no money or credit left.",
             stashed_gold ? "seem to " : "");
 #else
-        You("‚à‚¤‚¨‹à‚à—a‚¯‹à‚à‚È‚¢%sD",
-            stashed_gold ? "‚æ‚¤‚¾" : "");
+        You("¤â¤¦¤ª¶â¤âÍÂ¤±¶â¤â¤Ê¤¤%s¡¥",
+            stashed_gold ? "¤è¤¦¤À" : "");
 #endif
         return PAY_BROKE;
     }
@@ -1819,7 +1819,7 @@ boolean itemize;
 /*JP
         Sprintf(qsfx, " for %ld %s.  Pay?", ltmp, currency(ltmp));
 */
-        Sprintf(qsfx, "‚Í%ld%s‚Å‚·.”ƒ‚¢‚Ü‚·‚©H", ltmp, currency(ltmp));
+        Sprintf(qsfx, "¤Ï%ld%s¤Ç¤¹.Çã¤¤¤Ş¤¹¤«¡©", ltmp, currency(ltmp));
 #if 0 /*JP*/
         (void) safe_qbuf(qbuf, (char *) 0, qsfx, obj,
                          (quan == 1L) ? Doname2 : doname, ansimpleoname,
@@ -1827,7 +1827,7 @@ boolean itemize;
 #else
         (void) safe_qbuf(qbuf, (char *) 0, qsfx, obj,
                          (quan == 1L) ? Doname2 : doname, ansimpleoname,
-                         "‚»‚ê");
+                         "¤½¤ì");
 #endif
         if (yn(qbuf) == 'n') {
             buy = PAY_SKIP;                         /* don't want to buy */
@@ -1839,9 +1839,9 @@ boolean itemize;
                       simpleonames(obj), /* short name suffices */
                       save_quan > 1L ? "these" : "this one");
 #else
-            verbalize("‚»‚ê‚ğ”ƒ‚¤‚Ü‚¦‚É‘¼‚Ì%s‚ğ%s",
+            verbalize("¤½¤ì¤òÇã¤¦¤Ş¤¨¤ËÂ¾¤Î%s¤ò%s",
                       simpleonames(obj),
-                      ANGRY(shkp) ? "•¥‚¦I" : "•¥‚Á‚Ä‚­‚¾‚³‚¢D");
+                      ANGRY(shkp) ? "Ê§¤¨¡ª" : "Ê§¤Ã¤Æ¤¯¤À¤µ¤¤¡¥");
 #endif
             buy = PAY_SKIP; /* shk won't sell */
         }
@@ -1853,10 +1853,10 @@ boolean itemize;
             (ESHK(shkp)->credit > 0L) ? " or credit" : "",
             thesimpleoname(obj));
 #else
-        You("%s‚Ì‘ã‹à‚ğx•¥‚¤‚¾‚¯‚Ì‚¨‹à%s‚Á‚Ä‚È‚¢%sD",
+        You("%s¤ÎÂå¶â¤ò»ÙÊ§¤¦¤À¤±¤Î¤ª¶â%s»ı¤Ã¤Æ¤Ê¤¤%s¡¥",
             thesimpleoname(obj),
-            (ESHK(shkp)->credit > 0L) ? "‚à—a‚¯‹à‚à" : "‚ğ",
-            stashed_gold ? "‚æ‚¤‚¾" : "");
+            (ESHK(shkp)->credit > 0L) ? "¤âÍÂ¤±¶â¤â" : "¤ò",
+            stashed_gold ? "¤è¤¦¤À" : "");
 #endif
         buy = itemize ? PAY_SKIP : PAY_CANT;
     }
@@ -1877,8 +1877,8 @@ boolean itemize;
                   ltmp, "");
 #else
     shk_names_obj(shkp, obj,
-                  consumed ? "%s‚É‹à‰İ%ld–‡%s‚ğx•¥‚Á‚½D%s"
-                           : "%s‚ğ‹à‰İ%ld–‡%s‚Å”ƒ‚Á‚½D%s",
+                  consumed ? "%s¤Ë¶â²ß%ldËç%s¤ò»ÙÊ§¤Ã¤¿¡¥%s"
+                           : "%s¤ò¶â²ß%ldËç%s¤ÇÇã¤Ã¤¿¡¥%s",
                   ltmp, "");
 #endif
     obj->quan = save_quan; /* restore original count */
@@ -2020,16 +2020,16 @@ int croaked;
                 Sprintf(takes, ", shakes %s %s,", mhis(shkp),
                         mbodypart(shkp, HEAD));
 #else
-                Strcpy(takes, "ñ‚ğU‚èC");
+                Strcpy(takes, "¼ó¤ò¿¶¤ê¡¤");
 #endif
 #if 0 /*JP*/
             pline("%s %slooks at your corpse%s and %s.", Monnam(shkp),
                   (!shkp->mcanmove || shkp->msleeping) ? "wakes up, " : "",
                   takes, !inhishop(shkp) ? "disappears" : "sighs");
 #else
-            pline("%s‚Í%s‚ ‚È‚½‚Ì€‘Ì‚ğŒ©‚Ä%s%sD", Monnam(shkp),
-                  (!shkp->mcanmove || shkp->msleeping) ? "–Ú‚ğ‚³‚Ü‚·‚Æ" : "",
-                  takes, !inhishop(shkp) ? "p‚ğÁ‚µ‚½" : "—­‘§‚ğ‚Â‚¢‚½");
+            pline("%s¤Ï%s¤¢¤Ê¤¿¤Î»àÂÎ¤ò¸«¤Æ%s%s¡¥", Monnam(shkp),
+                  (!shkp->mcanmove || shkp->msleeping) ? "ÌÜ¤ò¤µ¤Ş¤¹¤È" : "",
+                  takes, !inhishop(shkp) ? "»Ñ¤ò¾Ã¤·¤¿" : "Î¯Â©¤ò¤Ä¤¤¤¿");
 #endif
         }
         rouse_shk(shkp, FALSE); /* wake shk for bones */
@@ -2047,7 +2047,7 @@ int croaked;
 /*JP
             pline("%s gratefully inherits all your possessions.",
 */
-            pline("%s‚Í‚ ‚È‚½‚Ì‚¿•¨‚ğ‚ ‚è‚ª‚½‚­ó‚¯‚Æ‚Á‚½D",
+            pline("%s¤Ï¤¢¤Ê¤¿¤Î»ı¤ÁÊª¤ò¤¢¤ê¤¬¤¿¤¯¼õ¤±¤È¤Ã¤¿¡¥",
                   shkname(shkp));
         set_repo_loc(shkp);
         goto clear;
@@ -2070,12 +2070,12 @@ int croaked;
 /*JP
             Strcat(takes, "wakes up and ");
 */
-            Strcat(takes, "–Ú‚ª‚³‚ß‚é‚ÆC");
+            Strcat(takes, "ÌÜ¤¬¤µ¤á¤ë¤È¡¤");
         if (distu(shkp->mx, shkp->my) > 2)
 /*JP
             Strcat(takes, "comes and ");
 */
-            Strcat(takes, "‹ß‚Ã‚«C");
+            Strcat(takes, "¶á¤Å¤­¡¤");
 #if 0 /*JP*/
         Strcat(takes, "takes");
 #endif
@@ -2090,7 +2090,7 @@ int croaked;
 /*JP
             pline("%s %s all your possessions.", shkname(shkp), takes);
 */
-            pline("%s‚Í%s‚ ‚È‚½‚Ì‚¿•¨‚·‚×‚Ä‚ğ‚à‚ç‚Á‚½D", shkname(shkp), takes);
+            pline("%s¤Ï%s¤¢¤Ê¤¿¤Î»ı¤ÁÊª¤¹¤Ù¤Æ¤ò¤â¤é¤Ã¤¿¡¥", shkname(shkp), takes);
             taken = TRUE;
             /* where to put player's invent (after disclosure) */
             set_repo_loc(shkp);
@@ -2103,9 +2103,9 @@ int croaked;
                   strncmp(eshkp->customer, plname, PL_NSIZ) ? "" : "you ",
                   shkp->female ? "her" : "him");
 #else
-            pline("%s‚Í%s%sØ‚è‚Ä‚¢‚é%ld%s‚ğó‚¯‚Æ‚Á‚½D", Monnam(shkp), takes,
+            pline("%s¤Ï%s%s¼Ú¤ê¤Æ¤¤¤ë%ld%s¤ò¼õ¤±¤È¤Ã¤¿¡¥", Monnam(shkp), takes,
                   strncmp(eshkp->customer, plname, PL_NSIZ) ?
-                  "" : "‚ ‚È‚½‚ª",
+                  "" : "¤¢¤Ê¤¿¤¬",
                   loss, currency(loss));
 #endif
             /* shopkeeper has now been paid in full */
@@ -2760,7 +2760,7 @@ boolean ininv, dummy, silent;
 /*JP
             You("got that for free!");
 */
-            You("‚»‚ê‚ğ‚½‚¾‚Åè‚É“ü‚ê‚½I");
+            You("¤½¤ì¤ò¤¿¤À¤Ç¼ê¤ËÆş¤ì¤¿¡ª");
         return;
     }
 
@@ -2808,7 +2808,7 @@ boolean ininv, dummy, silent;
 /*JP
             pline("%s has no interest in %s.", Monnam(shkp), the(xname(obj)));
 */
-            pline("%s‚Í%s‚É‹»–¡‚ğ¦‚³‚È‚¢D", Monnam(shkp), xname(obj));
+            pline("%s¤Ï%s¤Ë¶½Ì£¤ò¼¨¤µ¤Ê¤¤¡¥", Monnam(shkp), xname(obj));
             return;
         }
         if (!ininv) {
@@ -2816,8 +2816,8 @@ boolean ininv, dummy, silent;
             pline("%s will cost you %ld %s%s.", The(xname(obj)), ltmp,
                   currency(ltmp), (obj->quan > 1L) ? " each" : "");
 #else
-            pline("%s‚Í%s‚½‚Á‚½‚Ì%ld%s‚¾D", xname(obj),
-                  (obj->quan > 1L) ? "ˆê‚Â" : "", ltmp, currency(ltmp));
+            pline("%s¤Ï%s¤¿¤Ã¤¿¤Î%ld%s¤À¡¥", xname(obj),
+                  (obj->quan > 1L) ? "°ì¤Ä" : "", ltmp, currency(ltmp));
 #endif
         } else {
             long save_quan = obj->quan;
@@ -2831,12 +2831,12 @@ boolean ininv, dummy, silent;
                 Strcat(buf, "; only");
             }
 #else
-            Strcpy(buf, "u");
+            Strcpy(buf, "¡Ö");
             if (ANGRY(shkp)) {
-                Strcat(buf, "‚±‚ÌƒNƒ\‚Á‚½‚êC");
+                Strcat(buf, "¤³¤Î¥¯¥½¤Ã¤¿¤ì¡¤");
             } else {
                 append_honorific(buf);
-                Strcat(buf, "C");
+                Strcat(buf, "¡¤");
             }
 #endif
             obj->quan = 1L; /* fool xname() into giving singular */
@@ -2848,10 +2848,10 @@ boolean ininv, dummy, silent;
                   xname(obj),
                   (contentscount && obj->unpaid) ? and_its_contents : "");
 #else
-            pline("%sD%s%s‚½‚Á‚½‚Ì%ld%s‚¾Dv", buf, xname(obj),
-                  (save_quan > 1L) ? "‚Íˆê‚Â" : (contentscount && !obj->unpaid)
-                                                 ? "‚Ì’†g‚Í"
-                                                 : "‚Í",
+            pline("%s¡¥%s%s¤¿¤Ã¤¿¤Î%ld%s¤À¡¥¡×", buf, xname(obj),
+                  (save_quan > 1L) ? "¤Ï°ì¤Ä" : (contentscount && !obj->unpaid)
+                                                 ? "¤ÎÃæ¿È¤Ï"
+                                                 : "¤Ï",
                   (contentscount && obj->unpaid) ? and_its_contents : "");
                   ltmp, currency(ltmp),
 #endif
@@ -2866,17 +2866,17 @@ boolean ininv, dummy, silent;
                       (contentscount && obj->unpaid) ? and_its_contents : "",
                       ltmp, currency(ltmp), (obj->quan > 1L) ? " each" : "");
 #else
-            pline_The("%s%s%s%s‚½‚Á‚½‚Ì%ld%s‚¾.",
+            pline_The("%s%s%s%s¤¿¤Ã¤¿¤Î%ld%s¤À.",
                       the(xname(obj)),
-                      (contentscount && !obj->unpaid) ? "‚Ì’†g‚Í" : "",
+                      (contentscount && !obj->unpaid) ? "¤ÎÃæ¿È¤Ï" : "",
                       (contentscount && obj->unpaid) ? and_its_contents : "",
-                      (obj->quan > 1L) ? "‚»‚ê‚¼‚ê" : "", ltmp, currency(ltmp));
+                      (obj->quan > 1L) ? "¤½¤ì¤¾¤ì" : "", ltmp, currency(ltmp));
 #endif
         else
 /*JP
             pline("%s does not notice.", Monnam(shkp));
 */
-            pline("%s‚Í‹C‚ª‚Â‚¢‚Ä‚¢‚È‚¢D", Monnam(shkp));
+            pline("%s¤Ïµ¤¤¬¤Ä¤¤¤Æ¤¤¤Ê¤¤¡¥", Monnam(shkp));
     }
 }
 
@@ -2892,9 +2892,9 @@ char *buf;
                                            "most renowned and sacred" };
 #else
     static const char *const honored[] = {
-        "‚â‚Ÿ", "‚â‚ŸC–¼—_‚ ‚é", "‚â‚ŸCã•i‚È",
-        "‚â‚ŸC‘¸Œh‚·‚é",
-        "‚â‚ŸC‚–¼‚Å_¹‚È"
+        "¤ä¤¡", "¤ä¤¡¡¤Ì¾ÍÀ¤¢¤ë", "¤ä¤¡¡¤¾åÉÊ¤Ê",
+        "¤ä¤¡¡¤Âº·É¤¹¤ë",
+        "¤ä¤¡¡¤¹âÌ¾¤Ç¿ÀÀ»¤Ê"
         };
 #endif
     Strcat(buf, honored[rn2(SIZE(honored) - 1) + u.uevent.udemigod]);
@@ -2908,9 +2908,9 @@ char *buf;
                                                                  ? " lady"
                                                                  : " sir");
 #else
-        Strcat(buf, !is_human(youmonst.data) ? "¶•¨‚³‚ñ" : (flags.female)
-                                                          ? "‚¨ì‚³‚ñ"
-                                                          : "’U“ß‚³‚ñ");
+        Strcat(buf, !is_human(youmonst.data) ? "À¸Êª¤µ¤ó" : (flags.female)
+                                                          ? "¤ª¾î¤µ¤ó"
+                                                          : "Ã¶Æá¤µ¤ó");
 #endif
 }
 
@@ -3120,7 +3120,7 @@ boolean peaceful, silent;
                     You("have %ld %s credit remaining.", ESHK(shkp)->credit,
                         currency(ESHK(shkp)->credit));
 #else
-                    You("%ld%s‚Ì—a‚¯‹à‚ªc‚Á‚Ä‚¢‚éD", ESHK(shkp)->credit,
+                    You("%ld%s¤ÎÍÂ¤±¶â¤¬»Ä¤Ã¤Æ¤¤¤ë¡¥", ESHK(shkp)->credit,
                         currency(ESHK(shkp)->credit));
 #endif
                     return value;
@@ -3128,20 +3128,20 @@ boolean peaceful, silent;
 /*JP
                     You("have no credit remaining.");
 */
-                    pline("—a‚¯‹à‚Í‚È‚­‚È‚Á‚½D");
+                    pline("ÍÂ¤±¶â¤Ï¤Ê¤¯¤Ê¤Ã¤¿¡¥");
                     return 0;
                 }
 /*JP
                 still = "still ";
 */
-                still = "‚³‚ç‚É";
+                still = "¤µ¤é¤Ë";
             }
             if (obj->oclass == COIN_CLASS)
 #if 0 /*JP*/
                 You("%sowe %s %ld %s!", still, mon_nam(shkp), value,
                     currency(value));
 #else
-                You("%s%s‚É%ld%s‚ÌØ‚è‚ğ‚Â‚­‚Á‚½I", still, mon_nam(shkp), value,
+                You("%s%s¤Ë%ld%s¤Î¼Ú¤ê¤ò¤Ä¤¯¤Ã¤¿¡ª", still, mon_nam(shkp), value,
                     currency(value));
 #endif
             else
@@ -3149,7 +3149,7 @@ boolean peaceful, silent;
                 You("%sowe %s %ld %s for %s!", still, mon_nam(shkp), value,
                     currency(value), obj->quan > 1L ? "them" : "it");
 #else
-                You("%s%s‚É%ld%s‚ÌØ‚è‚ğ‚Â‚­‚Á‚½I", still, mon_nam(shkp), value,
+                You("%s%s¤Ë%ld%s¤Î¼Ú¤ê¤ò¤Ä¤¯¤Ã¤¿¡ª", still, mon_nam(shkp), value,
                     currency(value));
 #endif
         }
@@ -3162,14 +3162,14 @@ boolean peaceful, silent;
                 Norep("%s booms: \"%s, you are a thief!\"", Monnam(shkp),
                       plname);
 #else
-                Norep("%s‚Í‹©‚ñ‚¾Fu%sC‘Ò‚ÄI‚±‚Ì‚Ç‚ë‚Ú‚¤‚ßIv", Monnam(shkp),
+                Norep("%s¤Ï¶«¤ó¤À¡§¡Ö%s¡¤ÂÔ¤Æ¡ª¤³¤Î¤É¤í¤Ü¤¦¤á¡ª¡×", Monnam(shkp),
                       plname);
 #endif
             } else
 /*JP
                 Norep("You hear a scream, \"Thief!\"");
 */
-                Norep("‹àØ‚èº‚ğ•·‚¢‚½Cu‘Ò‚ÄI‚±‚Ì‚Ç‚ë‚Ú‚¤‚ßIv");
+                Norep("¶âÀÚ¤êÀ¼¤òÊ¹¤¤¤¿¡¤¡ÖÂÔ¤Æ¡ª¤³¤Î¤É¤í¤Ü¤¦¤á¡ª¡×");
         }
         hot_pursuit(shkp);
         (void) angry_guards(FALSE);
@@ -3254,7 +3254,7 @@ xchar x, y;
 /*JP
             pline("%s seems uninterested.", Monnam(shkp));
 */
-            pline("%s‚Í‹»–¡‚ª‚È‚¢‚æ‚¤‚¾D", Monnam(shkp));
+            pline("%s¤Ï¶½Ì£¤¬¤Ê¤¤¤è¤¦¤À¡¥", Monnam(shkp));
         return;
     }
 
@@ -3267,7 +3267,7 @@ xchar x, y;
 /*JP
             verbalize("Thank you, scum!");
 */
-            verbalize("‚ ‚è‚ª‚Æ‚æC‚±‚ÌƒNƒ\‚Á‚½‚êI");
+            verbalize("¤¢¤ê¤¬¤È¤è¡¤¤³¤Î¥¯¥½¤Ã¤¿¤ì¡ª");
         subfrombill(obj, shkp);
         return;
     }
@@ -3284,7 +3284,7 @@ xchar x, y;
 /*JP
   "Thank you for your contribution to restock this recently plundered shop.");
 */
-  "Šñ‘¡‚ğ‚Ç‚¤‚à‚ ‚è‚ª‚Æ‚¤DÅ‹ß“‚İ‚É‚ ‚Á‚ÄQ‚Á‚Ä‚½‚ñ‚¾D");
+  "´óÂ£¤ò¤É¤¦¤â¤¢¤ê¤¬¤È¤¦¡¥ºÇ¶áÅğ¤ß¤Ë¤¢¤Ã¤Æ»²¤Ã¤Æ¤¿¤ó¤À¡¥");
         subfrombill(obj, shkp);
         return;
     }
@@ -3304,7 +3304,7 @@ xchar x, y;
 /*JP
             Your("debt is %spaid off.", eshkp->debit ? "partially " : "");
 */
-            Your("Ø‹à‚Í%sx•¥‚í‚ê‚½D", eshkp->debit ? "ˆê•”" : "");
+            Your("¼Ú¶â¤Ï%s»ÙÊ§¤ï¤ì¤¿¡¥", eshkp->debit ? "°ìÉô" : "");
         } else {
             long delta = gltmp - eshkp->debit;
 
@@ -3315,14 +3315,14 @@ xchar x, y;
 /*JP
                 Your("debt is paid off.");
 */
-                Your("Ø‹à‚Íx•¥‚í‚ê‚½D");
+                Your("¼Ú¶â¤Ï»ÙÊ§¤ï¤ì¤¿¡¥");
             }
             if (eshkp->credit == delta)
 #if 0 /*JP*/
                 You("have established %ld %s credit.", delta,
                     currency(delta));
 #else
-                pline("%ld%s‚ğ—a‚¯‚½D", delta,
+                pline("%ld%s¤òÍÂ¤±¤¿¡¥", delta,
                       currency(delta));
 #endif
             else
@@ -3352,8 +3352,8 @@ xchar x, y;
         pline("%s seems uninterested%s.", Monnam(shkp),
               cgold ? " in the rest" : "");
 #else
-        pline("%s‚Í%s‹»–¡‚ª‚È‚¢‚æ‚¤‚¾D", Monnam(shkp),
-              cgold ? "c‚è•¨‚É‚Í" : "");
+        pline("%s¤Ï%s¶½Ì£¤¬¤Ê¤¤¤è¤¦¤À¡¥", Monnam(shkp),
+              cgold ? "»Ä¤êÊª¤Ë¤Ï" : "");
 #endif
         if (container)
             dropped_container(obj, shkp, FALSE);
@@ -3372,17 +3372,17 @@ xchar x, y;
 /*JP
             pline("%s cannot pay you at present.", shkname(shkp));
 */
-            pline("%s‚Í¡‚Ì‚Æ‚±‚ë‚Íx•¥‚¦‚È‚¢D", Monnam(shkp));
+            pline("%s¤Ïº£¤Î¤È¤³¤í¤Ï»ÙÊ§¤¨¤Ê¤¤¡¥", Monnam(shkp));
 #if 0 /*JP*/
             Sprintf(qbuf, "Will you accept %ld %s in credit for ", tmpcr,
                     currency(tmpcr));
             c = ynaq(safe_qbuf(qbuf, qbuf, "?", obj, doname, thesimpleoname,
                                (obj->quan == 1L) ? "that" : "those"));
 #else
-            Sprintf(qbuf, "‚É‚Â‚¢‚Ä%ld%s‚Ì—a‚¯‹à‚ğó‚¯‚¢‚ê‚Ü‚·‚©H", tmpcr,
+            Sprintf(qbuf, "¤Ë¤Ä¤¤¤Æ%ld%s¤ÎÍÂ¤±¶â¤ò¼õ¤±¤¤¤ì¤Ş¤¹¤«¡©", tmpcr,
                     currency(tmpcr));
             c = ynaq(safe_qbuf(qbuf, "", qbuf, obj, doname, thesimpleoname,
-                               "‚»‚ê"));
+                               "¤½¤ì"));
 #endif
             if (c == 'a') {
                 c = 'y';
@@ -3403,8 +3403,8 @@ xchar x, y;
             shk_names_obj(
                 shkp, obj,
                 (sell_how != SELL_NORMAL)
-                    ? "%s‚ğ‹à‰İ%ld–‡•ª‚Ì—a‚¯‹à‚Åó‚¯‚Æ‚Á‚½%sD"
-                    : "%s‚ğ“n‚µC‹à‰İ%ld–‡•ª‚Ì—a‚¯‹à‚ğ“¾‚½%sD",
+                    ? "%s¤ò¶â²ß%ldËçÊ¬¤ÎÍÂ¤±¶â¤Ç¼õ¤±¤È¤Ã¤¿%s¡¥"
+                    : "%s¤òÅÏ¤·¡¤¶â²ß%ldËçÊ¬¤ÎÍÂ¤±¶â¤òÆÀ¤¿%s¡¥",
                 tmpcr, "");
 #endif
             eshkp->credit += tmpcr;
@@ -3477,14 +3477,14 @@ xchar x, y;
                              one ? "that" : "those");
 #else
             Sprintf(qbuf,
-                    "%s‚Í‚ ‚È‚½‚Ì", Monnam(shkp));
+                    "%s¤Ï¤¢¤Ê¤¿¤Î", Monnam(shkp));
             Sprintf(qbuf,
-                    "%s‚É%ld‚Ì’l%sD”„‚è‚Ü‚·‚©H",
-                    (!ltmp && cltmp) ? "‚Ì’†g" : "",
+                    "%s¤Ë%ld¤ÎÃÍ%s¡¥Çä¤ê¤Ş¤¹¤«¡©",
+                    (!ltmp && cltmp) ? "¤ÎÃæ¿È" : "",
                     offer, 
-                    short_funds ? "‚µ‚©‚Â‚¯‚È‚©‚Á‚½" : "‚ğ‚Â‚¯‚½");
+                    short_funds ? "¤·¤«¤Ä¤±¤Ê¤«¤Ã¤¿" : "¤ò¤Ä¤±¤¿");
             (void) safe_qbuf(qbuf, qbuf, qsfx, obj, xname, simpleonames,
-                             "‚»‚ê");
+                             "¤½¤ì");
 #endif
         } else
             qbuf[0] = '\0'; /* just to pacify lint */
@@ -3520,9 +3520,9 @@ xchar x, y;
             shk_names_obj(shkp, obj,
                           (sell_how != SELL_NORMAL)
                            ? ((!ltmp && cltmp && only_partially_your_contents)
-                         ? "%s‚Ì’†g‚ğ‹à‰İ%ld–‡‚Å”„‚Á‚½%sD%s"
-                         : "%s‚ğ‹à‰İ%ld–‡‚Å”„‚Á‚½%sD%s")
-            : "%s‚ğ“n‚µC‹à‰İ%ld–‡‚Ì‘ã‚ğó‚¯‚Æ‚Á‚½%sD%s",
+                         ? "%s¤ÎÃæ¿È¤ò¶â²ß%ldËç¤ÇÇä¤Ã¤¿%s¡¥%s"
+                         : "%s¤ò¶â²ß%ldËç¤ÇÇä¤Ã¤¿%s¡¥%s")
+            : "%s¤òÅÏ¤·¡¤¶â²ß%ldËç¤ÎÂå½ş¤ò¼õ¤±¤È¤Ã¤¿%s¡¥%s",
                           offer, "");
 #endif
             break;
@@ -3572,7 +3572,7 @@ int mode; /* 0: deliver count 1: paged */
 /*JP
     putstr(datawin, 0, "Unpaid articles already used up:");
 */
-    putstr(datawin, 0, "‚·‚Å‚Ég‚Á‚Ä‚µ‚Ü‚Á‚½–¢•¥‚Ì•i–ÚF");
+    putstr(datawin, 0, "¤¹¤Ç¤Ë»È¤Ã¤Æ¤·¤Ş¤Ã¤¿Ì¤Ê§¤ÎÉÊÌÜ¡§");
     putstr(datawin, 0, "");
 
     totused = 0L;
@@ -3606,7 +3606,7 @@ int mode; /* 0: deliver count 1: paged */
         buf_p = xprname((struct obj *) 0, "usage charges and/or other fees",
                         GOLD_SYM, FALSE, eshkp->debit, 0L);
 #else
-        buf_p = xprname((struct obj *) 0, "g—p—¿‚Ü‚½‚Í‘¼‚Ìè”—¿",
+        buf_p = xprname((struct obj *) 0, "»ÈÍÑÎÁ¤Ş¤¿¤ÏÂ¾¤Î¼ê¿ôÎÁ",
                         GOLD_SYM, FALSE, eshkp->debit, 0L);
 #endif
         putstr(datawin, 0, buf_p);
@@ -3614,7 +3614,7 @@ int mode; /* 0: deliver count 1: paged */
 /*JP
     buf_p = xprname((struct obj *) 0, "Total:", '*', FALSE, totused, 0L);
 */
-    buf_p = xprname((struct obj *) 0, "‡ŒvF", '*', FALSE, totused, 0L);
+    buf_p = xprname((struct obj *) 0, "¹ç·×¡§", '*', FALSE, totused, 0L);
     putstr(datawin, 0, "");
     putstr(datawin, 0, buf_p);
     display_nhwindow(datawin, FALSE);
@@ -3687,15 +3687,15 @@ register xchar x, y;
 /*JP
             verbalize("Out of my way, scum!");
 */
-                    verbalize("‚Ç‚¯CƒNƒ\‚Á‚½‚êI");
+                    verbalize("¤É¤±¡¤¥¯¥½¤Ã¤¿¤ì¡ª");
         if (cansee(x, y)) {
 #if 0 /*JP*/
             pline("%s nimbly%s catches %s.", Monnam(shkp),
                   (x == shkp->mx && y == shkp->my) ? "" : " reaches over and",
                   the(xname(obj)));
 #else
-            pline("%s‚Í‚·‚Î‚â‚­%s%s‚ğ‚Â‚©‚Ü‚¦‚½D", Monnam(shkp),
-                  (x == shkp->mx && y == shkp->my) ? "" : "‹ß‚Ã‚¢‚Ä",
+            pline("%s¤Ï¤¹¤Ğ¤ä¤¯%s%s¤ò¤Ä¤«¤Ş¤¨¤¿¡¥", Monnam(shkp),
+                  (x == shkp->mx && y == shkp->my) ? "" : "¶á¤Å¤¤¤Æ",
                   xname(obj));
 #endif
             if (!canspotmon(shkp))
@@ -3842,10 +3842,10 @@ boolean croaked;
         Sprintf(eos(trapmsg), " removed from the %s",
                 (doorway_trap && saw_untrap == 1) ? "doorway" : "floor");
 #else
-        Sprintf(trapmsg, "%sã©‚ª%s‚©‚çÁ‚¦",
-                (saw_untrap > 3) ? "‚ ‚¿‚±‚¿‚Ì" : (saw_untrap > 1) ? "‰½ƒJŠ‚Ì"
+        Sprintf(trapmsg, "%sæ«¤¬%s¤«¤é¾Ã¤¨",
+                (saw_untrap > 3) ? "¤¢¤Á¤³¤Á¤Î" : (saw_untrap > 1) ? "²¿¥«½ê¤Î"
                                                                    : "",
-                (doorway_trap && saw_untrap == 1) ? "”à" : "°");
+                (doorway_trap && saw_untrap == 1) ? "Èâ" : "¾²");
 #endif
     } else
         trapmsg[0] = '\0'; /* not just lint suppression... */
@@ -3859,25 +3859,25 @@ boolean croaked;
               (saw_walls == 1) ? "a" : (saw_walls <= 3) ? "some" : "several",
               wallbuf, vtense(wallbuf, "close"));
 #else
-        pline("“Ë‘RC•Ç‚ª%s•Â‚Ü‚Á‚½I",
-              (saw_walls == 1) ? "" : (saw_walls <= 3) ? "‰½‰ÓŠ‚©" : "‚ ‚¿‚±‚¿‚Å");
+        pline("ÆÍÁ³¡¤ÊÉ¤¬%sÊÄ¤Ş¤Ã¤¿¡ª",
+              (saw_walls == 1) ? "" : (saw_walls <= 3) ? "²¿²Õ½ê¤«" : "¤¢¤Á¤³¤Á¤Ç");
 #endif
 
         if (saw_door)
 /*JP
             pline_The("shop door reappears!");
 */
-            pline("“X‚Ì”à‚ª‚Ü‚½Œ»‚í‚ê‚½I");
+            pline("Å¹¤ÎÈâ¤¬¤Ş¤¿¸½¤ï¤ì¤¿¡ª");
         if (saw_floor)
 /*JP
             pline_The("floor is repaired!");
 */
-            pline("°‚ÍC•œ‚³‚ê‚½I");
+            pline("¾²¤Ï½¤Éü¤µ¤ì¤¿¡ª");
         if (saw_untrap)
 /*JP
             pline("%s!", upstart(trapmsg));
 */
-            pline("%s‚½I", trapmsg);
+            pline("%s¤¿¡ª", trapmsg);
     } else {
         if (saw_door || saw_floor || saw_untrap)
 #if 0 /*JP*/
@@ -3888,23 +3888,23 @@ boolean croaked;
                   ((saw_door || saw_floor) && *trapmsg) ? " and " : "",
                   trapmsg);
 #else
-            pline("“Ë‘RC%s%s%s%s%s‚½!",
-                  saw_door ? "“X‚Ì”à‚ª‚Ü‚½Œ»‚í‚ê" : "",
-                  (saw_door && saw_floor) ? "C" : "",
-                  saw_floor ? "°‚Ì‚ªC•œ‚³‚ê" : "",
-                  ((saw_door || saw_floor) && *trapmsg) ? "C" : "",
+            pline("ÆÍÁ³¡¤%s%s%s%s%s¤¿!",
+                  saw_door ? "Å¹¤ÎÈâ¤¬¤Ş¤¿¸½¤ï¤ì" : "",
+                  (saw_door && saw_floor) ? "¡¤" : "",
+                  saw_floor ? "¾²¤Î½ı¤¬½¤Éü¤µ¤ì" : "",
+                  ((saw_door || saw_floor) && *trapmsg) ? "¡¤" : "",
                   trapmsg);
 #endif
         else if (inside_shop(u.ux, u.uy) == ESHK(shkp)->shoproom)
 /*JP
             You_feel("more claustrophobic than before.");
 */
-            You("‘O‚æ‚è•ÂŠ‹°•|Ç‹C–¡‚É‚È‚Á‚½D");
+            You("Á°¤è¤êÊÄ½ê¶²Éİ¾Éµ¤Ì£¤Ë¤Ê¤Ã¤¿¡¥");
         else if (!Deaf && !rn2(10))
 /*JP
             Norep("The dungeon acoustics noticeably change.");
 */
-            Norep("–À‹{‚Ì‰¹‹¿‚Í‚¢‚¿‚¶‚é‚µ‚­•Ï‚Á‚½D");
+            Norep("ÌÂµÜ¤Î²»¶Á¤Ï¤¤¤Á¤¸¤ë¤·¤¯ÊÑ¤Ã¤¿¡¥");
     }
     if (stop_picking)
         stop_occupation();
@@ -4001,7 +4001,7 @@ boolean catchup; /* restoring a level */
 /*JP
                 verbalize("Get your junk out of my wall!");
 */
-                verbalize("‚»‚ÌƒKƒ‰ƒNƒ^‚ğŠO‚É‚Á‚Äs‚«‚ÈI");
+                verbalize("¤½¤Î¥¬¥é¥¯¥¿¤ò³°¤Ë»ı¤Ã¤Æ¹Ô¤­¤Ê¡ª");
             unplacebc(); /* pick 'em up */
             placebc();   /* put 'em down */
         }
@@ -4075,7 +4075,7 @@ register struct monst *shkp;
 /*JP
                 Your("displaced image doesn't fool %s!", mon_nam(shkp));
 */
-                pline("%s‚Í‚ ‚È‚½‚ÌŒ¶‰e‚É‚¾‚Ü‚³‚ê‚È‚©‚Á‚½I", mon_nam(shkp));
+                pline("%s¤Ï¤¢¤Ê¤¿¤Î¸¸±Æ¤Ë¤À¤Ş¤µ¤ì¤Ê¤«¤Ã¤¿¡ª", mon_nam(shkp));
             (void) mattacku(shkp);
             return 0;
         }
@@ -4086,7 +4086,7 @@ register struct monst *shkp;
                     verbalize("%s, %s!  I was looking for %s.", Hello(shkp),
                               plname, eshkp->customer);
 #else
-                    verbalize("%sI‚í‚½‚µ‚Í%s‚ğ’T‚µ‚Ä‚¢‚Ü‚·D", Hello(shkp),
+                    verbalize("%s¡ª¤ï¤¿¤·¤Ï%s¤òÃµ¤·¤Æ¤¤¤Ş¤¹¡¥", Hello(shkp),
                               eshkp->customer);
 #endif
                 eshkp->following = 0;
@@ -4098,7 +4098,7 @@ register struct monst *shkp;
                     verbalize("%s, %s!  Didn't you forget to pay?",
                               Hello(shkp), plname);
 #else
-                    verbalize("%sIx•¥‚¢‚ğ–Y‚ê‚Ä‚¢‚Ü‚¹‚ñ‚©H",
+                    verbalize("%s¡ª»ÙÊ§¤¤¤òËº¤ì¤Æ¤¤¤Ş¤»¤ó¤«¡©",
                               Hello(shkp));
 #endif
                 followmsg = moves;
@@ -4107,7 +4107,7 @@ register struct monst *shkp;
                     pline("%s doesn't like customers who don't pay.",
                           Monnam(shkp));
 #else
-                    pline ("%s‚Í‹à‚ğ•¥‚í‚È‚¢‹q‚ªŒ™‚¢‚İ‚½‚¢‚¾D",
+                    pline ("%s¤Ï¶â¤òÊ§¤ï¤Ê¤¤µÒ¤¬·ù¤¤¤ß¤¿¤¤¤À¡¥",
                            Monnam(shkp));
 #endif
                     rile_shk(shkp);
@@ -4210,7 +4210,7 @@ register int fall;
 /*JP
     const char *grabs = "grabs";
 */
-    const char *grabs = "‚Â‚©‚ñ‚¾";
+    const char *grabs = "¤Ä¤«¤ó¤À";
 
     if (!shkp)
         return;
@@ -4229,7 +4229,7 @@ register int fall;
 /*JP
             You_feel("like a common thief.");
 */
-            You("“D–_“¯‘R‚È‹C‚ª‚µ‚½D");
+            You("Å¥ËÀÆ±Á³¤Êµ¤¤¬¤·¤¿¡¥");
             adjalign(-sgn(u.ualign.type));
         }
         return;
@@ -4243,23 +4243,23 @@ register int fall;
                     "Be careful, %s, or you might fall through the floor.",
                     flags.female ? "madam" : "sir");
 #else
-                verbalize("’ˆÓ‚µ‚Ä‚­‚¾‚³‚¢%sC°‚©‚ç—‚¿‚Ü‚·‚æD",
-                          flags.female ? "‚¨ì‚³‚ñ" : "‚¨‹q‚³‚ñ");
+                verbalize("Ãí°Õ¤·¤Æ¤¯¤À¤µ¤¤%s¡¤¾²¤«¤éÍî¤Á¤Ş¤¹¤è¡¥",
+                          flags.female ? "¤ª¾î¤µ¤ó" : "¤ªµÒ¤µ¤ó");
 #endif
             else
 #if 0 /*JP*/
                 verbalize("%s, do not damage the floor here!",
                           flags.female ? "Madam" : "Sir");
 #else
-                verbalize("%sC°‚É‚ğ‚Â‚¯‚È‚¢‚Å‚­‚¾‚³‚¢I",
-                          flags.female ? "‚¨ì‚³‚ñ" : "‚¨‹q‚³‚ñ");
+                verbalize("%s¡¤¾²¤Ë½ı¤ò¤Ä¤±¤Ê¤¤¤Ç¤¯¤À¤µ¤¤¡ª",
+                          flags.female ? "¤ª¾î¤µ¤ó" : "¤ªµÒ¤µ¤ó");
 #endif
         }
         if (Role_if(PM_KNIGHT)) {
 /*JP
             You_feel("like a common thief.");
 */
-            You("“D–_“¯‘R‚È‹C‚ª‚µ‚½D");
+            You("Å¥ËÀÆ±Á³¤Êµ¤¤¬¤·¤¿¡¥");
             adjalign(-sgn(u.ualign.type));
         }
     } else if (!um_dist(shkp->mx, shkp->my, 5)
@@ -4271,7 +4271,7 @@ register int fall;
 /*JP
             grabs = "knocks off";
 */
-            grabs = "’@‚«—‚µ‚½";
+            grabs = "Ã¡¤­Íî¤·¤¿";
 #if 0
             /* This is what should happen, but for balance
              * reasons, it isn't currently.
@@ -4292,7 +4292,7 @@ register int fall;
 /*JP
                     pline("%s curses you in anger and frustration!",
 */
-                    pline("“{‚è‚Å•s–‚Ì‚½‚Ü‚Á‚Ä‚¢‚é%s‚Í‚ ‚È‚½‚ğô‚Á‚½I",
+                    pline("ÅÜ¤ê¤ÇÉÔËş¤Î¤¿¤Ş¤Ã¤Æ¤¤¤ë%s¤Ï¤¢¤Ê¤¿¤ò¼ö¤Ã¤¿¡ª",
                           shkname(shkp));
                 else if (lang == 1)
                     growl(shkp);
@@ -4303,14 +4303,14 @@ register int fall;
                 pline("%s %s, and %s your backpack!", shkname(shkp),
                       makeplural(locomotion(shkp->data, "leap")), grabs);
 #else
-                pline("%s‚Í”ò‚Ñ‚Â‚¢‚ÄC‚ ‚È‚½‚Ì”w•‰‚¢‘Ü‚ğ%sI", shkname(shkp),
+                pline("%s¤ÏÈô¤Ó¤Ä¤¤¤Æ¡¤¤¢¤Ê¤¿¤ÎÇØÉé¤¤ÂŞ¤ò%s¡ª", shkname(shkp),
                       grabs);
 #endif
         } else
 /*JP
             pline("%s %s your backpack!", shkname(shkp), grabs);
 */
-            pline("%s‚Í‚ ‚È‚½‚Ì”w•‰‚¢‘Ü‚ğ%sI", shkname(shkp), grabs);
+            pline("%s¤Ï¤¢¤Ê¤¿¤ÎÇØÉé¤¤ÂŞ¤ò%s¡ª", shkname(shkp), grabs);
 
         for (obj = invent; obj; obj = obj2) {
             obj2 = obj->nobj;
@@ -4368,8 +4368,8 @@ boolean cant_mollify;
     boolean dugwall = (!strcmp(dmgstr, "dig into")    /* wand */
                        || !strcmp(dmgstr, "damage")); /* pick-axe */
 #else
-    boolean ni_wo = !strcmp(dmgstr, "ŒŠ‚ğ‚ ‚¯‚é");              /* wand */
-    boolean dugwall = (ni_wo || !strcmp(dmgstr, "‚Â‚¯‚é")); /* pick-axe */
+    boolean ni_wo = !strcmp(dmgstr, "·ê¤ò¤¢¤±¤ë");              /* wand */
+    boolean dugwall = (ni_wo || !strcmp(dmgstr, "½ı¤Ä¤±¤ë")); /* pick-axe */
 #endif
     boolean animal, pursue;
     struct damage *tmp_dam, *appear_here = 0;
@@ -4452,7 +4452,7 @@ boolean cant_mollify;
 /*JP
             pline("%s leaps towards you!", shkname(shkp));
 */
-            pline("%s‚Í‚ ‚È‚½‚É”ò‚Ñ‚©‚©‚Á‚½I", shkname(shkp));
+            pline("%s¤Ï¤¢¤Ê¤¿¤ËÈô¤Ó¤«¤«¤Ã¤¿¡ª", shkname(shkp));
             mnexto(shkp);
         }
         pursue = um_dist(shkp->mx, shkp->my, 1);
@@ -4470,11 +4470,11 @@ boolean cant_mollify;
 /*JP
                 You_hear("an angry voice:");
 */
-                You("“{‚è‚Ìº‚ğ•·‚¢‚½F");
+                You("ÅÜ¤ê¤ÎÀ¼¤òÊ¹¤¤¤¿¡§");
 /*JP
                 verbalize("Out of my way, scum!");
 */
-                verbalize("‚Ç‚¯IƒNƒ\‚Á‚½‚êI");
+                verbalize("¤É¤±¡ª¥¯¥½¤Ã¤¿¤ì¡ª");
                 wait_synch();
 #if defined(UNIX) || defined(VMS)
 #if defined(SYSV) || defined(ULTRIX) || defined(VMS)
@@ -4501,23 +4501,23 @@ boolean cant_mollify;
             verbalize("How dare you %s my %s?", dmgstr,
                       dugwall ? "shop" : "door");
 #else
-            verbalize("‚Ç‚¤‚µ‚Ä%s%s%s‚è‚µ‚½‚ñ‚¾H",
-                      dugwall ? "“X" : "”à",
-                      ni_wo ? "‚É" : "‚ğ",
+            verbalize("¤É¤¦¤·¤Æ%s%s%s¤ê¤·¤¿¤ó¤À¡©",
+                      dugwall ? "Å¹" : "Èâ",
+                      ni_wo ? "¤Ë" : "¤ò",
                       jpast(dmgstr));
 #endif
         } else {
 /*JP
             pline("%s shouts:", shkname(shkp));
 */
-            pline("%s‚Í‚³‚¯‚ñ‚¾F", shkname(shkp));
+            pline("%s¤Ï¤µ¤±¤ó¤À¡§", shkname(shkp));
 #if 0 /*JP*/
             verbalize("Who dared %s my %s?", dmgstr,
                       dugwall ? "shop" : "door");
 #else
-            verbalize("’N‚ª%s%s%s‚è‚µ‚½‚ñ‚¾‚ë‚¤H",
-                      dugwall ? "“X" : "”à",
-                      ni_wo ? "‚É" : "‚ğ",
+            verbalize("Ã¯¤¬%s%s%s¤ê¤·¤¿¤ó¤À¤í¤¦¡©",
+                      dugwall ? "Å¹" : "Èâ",
+                      ni_wo ? "¤Ë" : "¤ò",
                       jpast(dmgstr));
 #endif
         }
@@ -4529,13 +4529,13 @@ boolean cant_mollify;
 /*JP
         Your("invisibility does not fool %s!", shkname(shkp));
 */
-        pline("%s‚Í“§–¾‚È‚ ‚È‚½‚É‚¾‚Ü‚³‚ê‚È‚©‚Á‚½I", shkname(shkp));
+        pline("%s¤ÏÆ©ÌÀ¤Ê¤¢¤Ê¤¿¤Ë¤À¤Ş¤µ¤ì¤Ê¤«¤Ã¤¿¡ª", shkname(shkp));
 #if 0 /*JP*/
     Sprintf(qbuf, "%sYou did %ld %s worth of damage!%s  Pay?",
             !animal ? cad(TRUE) : "", cost_of_damage,
             currency(cost_of_damage), !animal ? "\"" : "");
 #else
-    Sprintf(qbuf,"u‚¨‚¢I%ld%s‚Ì‘¹ŠQ‚¾Iv•¥‚¢‚Ü‚·‚©H",
+    Sprintf(qbuf,"¡Ö¤ª¤¤¡ª%ld%s¤ÎÂ»³²¤À¡ª¡×Ê§¤¤¤Ş¤¹¤«¡©",
             cost_of_damage, currency(cost_of_damage));
 #endif
     if (yn(qbuf) != 'n') {
@@ -4545,7 +4545,7 @@ boolean cant_mollify;
 /*JP
         pline("Mollified, %s accepts your restitution.", shkname(shkp));
 */
-        pline("%s‚ÍCŠ´î‚ğ‚â‚í‚ç‚°”…‹à‚ğó‚¯‚Æ‚Á‚½D", shkname(shkp));
+        pline("%s¤Ï¡¤´¶¾ğ¤ò¤ä¤ï¤é¤²Çå½ş¶â¤ò¼õ¤±¤È¤Ã¤¿¡¥", shkname(shkp));
         /* move shk back to his home loc */
         home_shk(shkp, FALSE);
         pacify_shk(shkp);
@@ -4554,7 +4554,7 @@ boolean cant_mollify;
 /*JP
             verbalize("Oh, yes!  You'll pay!");
 */
-            verbalize("‚³‚ C•¥‚¤‚ñ‚¾I");
+            verbalize("¤µ¤¢¡¤Ê§¤¦¤ó¤À¡ª");
         else
             growl(shkp);
         hot_pursuit(shkp);
@@ -4619,7 +4619,7 @@ register struct obj *first_obj;
 /*JP
     putstr(tmpwin, 0, "Fine goods for sale:");
 */
-    putstr(tmpwin, 0, "”„‚è‚É‚Å‚Ä‚¢‚é‚·‚Î‚ç‚µ‚¢¤•iF");
+    putstr(tmpwin, 0, "Çä¤ê¤Ë¤Ç¤Æ¤¤¤ë¤¹¤Ğ¤é¤·¤¤¾¦ÉÊ¡§");
     putstr(tmpwin, 0, "");
     for (otmp = first_obj; otmp; otmp = otmp->nexthere) {
         if (otmp->oclass == COIN_CLASS)
@@ -4634,7 +4634,7 @@ register struct obj *first_obj;
 /*JP
             Strcpy(price, "no charge");
 */
-            Strcpy(price, "–³—¿");
+            Strcpy(price, "ÌµÎÁ");
             contentsonly = FALSE;
         } else {
 #if 0 /*JP*/
@@ -4642,15 +4642,15 @@ register struct obj *first_obj;
                     (otmp->quan) > 1L ? " each" : "");
 #else
             Sprintf(price, "%s%ld%s", 
-                    otmp->quan > 1L ? "‚»‚ê‚¼‚ê" : "", cost, currency(cost));
+                    otmp->quan > 1L ? "¤½¤ì¤¾¤ì" : "", cost, currency(cost));
 #endif
         }
 #if 0 /*JP*/
         Sprintf(buf, "%s%s, %s", contentsonly ? the_contents_of : "",
                 doname(otmp), price);
 #else
-        Sprintf(buf, "%s%sC%s", doname(otmp),
-                contentsonly ? "‚Ì’†g" : "", price);
+        Sprintf(buf, "%s%s¡¤%s", doname(otmp),
+                contentsonly ? "¤ÎÃæ¿È" : "", price);
 #endif
         putstr(tmpwin, 0, buf), cnt++;
     }
@@ -4662,7 +4662,7 @@ register struct obj *first_obj;
 #if 0 /*JP*/
             pline("%s!", upstart(buf)); /* buf still contains the string */
 #else
-            pline("%sI", buf); /* buf still contains the string */
+            pline("%s¡ª", buf); /* buf still contains the string */
 #endif
         } else {
             /* print cost in slightly different format, so can't reuse buf;
@@ -4672,16 +4672,16 @@ register struct obj *first_obj;
                     doname(first_obj));
 #else
             Sprintf(buf, "%s%s", doname(first_obj),
-                    contentsonly ? "‚Ì’†g" : "");
+                    contentsonly ? "¤ÎÃæ¿È" : "");
 #endif
 #if 0 /*JP*/
             pline("%s, price %ld %s%s%s", upstart(buf), cost, currency(cost),
                   (first_obj->quan > 1L) ? " each" : "",
                   contentsonly ? "." : shk_embellish(first_obj, cost));
 #else
-            pline("%s%s‚Í%s%ld%s‚¾D", 
+            pline("%s%s¤Ï%s%ld%s¤À¡¥", 
                   shk_embellish(first_obj, cost), buf,
-                  first_obj->quan > 1L ? "‚»‚ê‚¼‚ê" : "",
+                  first_obj->quan > 1L ? "¤½¤ì¤¾¤ì" : "",
                   cost, currency(cost));
 #endif
         }
@@ -4690,8 +4690,8 @@ register struct obj *first_obj;
 }
 
 /*JP
- “Xå‚Ì”„‚è•¶‹åB‰pŒê‚Å‚Í––”ö‚É•t‚­‚ª“ú–{Œê‚Å‚Íæ“ª‚É•t‚­B
- ’¼Œã‚ÉƒAƒCƒeƒ€–¼‚ª—ˆ‚é‚Ì‚ÅAƒAƒCƒeƒ€‚É‘Î‚·‚éŒ`—e‚Å‚à“Æ—§‚µ‚½•¶‚Å‚à—Ç‚¢B
+ Å¹¼ç¤ÎÇä¤êÊ¸¶ç¡£±Ñ¸ì¤Ç¤ÏËöÈø¤ËÉÕ¤¯¤¬ÆüËÜ¸ì¤Ç¤ÏÀèÆ¬¤ËÉÕ¤¯¡£
+ Ä¾¸å¤Ë¥¢¥¤¥Æ¥àÌ¾¤¬Íè¤ë¤Î¤Ç¡¢¥¢¥¤¥Æ¥à¤ËÂĞ¤¹¤ë·ÁÍÆ¤Ç¤âÆÈÎ©¤·¤¿Ê¸¤Ç¤âÎÉ¤¤¡£
  */
 STATIC_OVL const char *
 shk_embellish(itm, cost)
@@ -4712,7 +4712,7 @@ long cost;
 /*JP
                 return ", gourmets' delight!";
 */
-                return "ƒOƒ‹ƒ‚ª‹ƒ‚¢‚ÄŠì‚Ô";
+                return "¥°¥ë¥á¤¬µã¤¤¤Æ´î¤Ö";
             if (objects[itm->otyp].oc_name_known
                     ? objects[itm->otyp].oc_magic
                     : (o == AMULET_CLASS || o == RING_CLASS || o == WAND_CLASS
@@ -4721,26 +4721,26 @@ long cost;
 /*JP
                 return ", painstakingly developed!";
 */
-                return "ˆê‹‰‚Ì–‚—Í‚ğ”é‚ß‚½";
+                return "°ìµé¤ÎËâÎÏ¤òÈë¤á¤¿";
 /*JP
             return ", superb craftsmanship!";
 */
-            return "ˆê—¬El‚Ìì‚Á‚½";
+            return "°ìÎ®¿¦¿Í¤Îºî¤Ã¤¿";
         case 3:
 /*JP
             return ", finest quality.";
 */
-            return "Å‚‚Ì•i¿‚ğŒÖ‚é";
+            return "ºÇ¹â¤ÎÉÊ¼Á¤ò¸Ø¤ë";
         case 2:
 /*JP
             return ", an excellent choice.";
 */
-            return "‚³‚·‚ª‚¨‹q‚³‚ñ–Ú‚ª‚‚¢I";
+            return "¤µ¤¹¤¬¤ªµÒ¤µ¤óÌÜ¤¬¹â¤¤¡ª";
         case 1:
 /*JP
             return ", a real bargain.";
 */
-            return "–{“ú‚Ì–Ú‹Ê¤•iI";
+            return "ËÜÆü¤ÎÌÜ¶Ì¾¦ÉÊ¡ª";
         default:
             break;
         }
@@ -4748,7 +4748,7 @@ long cost;
 /*JP
         return ", one of a kind!";
 */
-        return "‚±‚ê‚Í¢ŠE‚É‚Ü‚½‚Æ‚È‚¢I";
+        return "¤³¤ì¤ÏÀ¤³¦¤Ë¤Ş¤¿¤È¤Ê¤¤¡ª";
     }
 /*JP
     return ".";
@@ -4761,39 +4761,39 @@ const char *Izchak_speaks[] = {
 /*JP
     "%s says: 'These shopping malls give me a headache.'",
 */
-    "%sH‚­w‚±‚ê‚çƒVƒ‡ƒbƒsƒ“ƒOŠX‚Í“ª’É‚Ìƒ^ƒl‚¾Dx",
+    "%sÛ©¤¯¡Ø¤³¤ì¤é¥·¥ç¥Ã¥Ô¥ó¥°³¹¤ÏÆ¬ÄË¤Î¥¿¥Í¤À¡¥¡Ù",
 /*JP
     "%s says: 'Slow down.  Think clearly.'",
 */
-    "%sH‚­w—‚¿’…‚¢‚ÄC–¾ğ‚Él‚¦‚æDx",
+    "%sÛ©¤¯¡ØÍî¤ÁÃå¤¤¤Æ¡¤ÌÀÚò¤Ë¹Í¤¨¤è¡¥¡Ù",
 /*JP
     "%s says: 'You need to take things one at a time.'",
 */
-    "%sH‚­wˆê“x‚ÉˆêŒÂ‚¸‚Âæ‚é•K—v‚ª‚ ‚éDx",
+    "%sÛ©¤¯¡Ø°ìÅÙ¤Ë°ì¸Ä¤º¤Ä¼è¤ëÉ¬Í×¤¬¤¢¤ë¡¥¡Ù",
 /*JP
     "%s says: 'I don't like poofy coffee... give me Columbian Supremo.'",
 */
-    "%sH‚­wƒzƒ‚‚Á‚Û‚¢ƒR[ƒq‚ÍD‚«‚¶‚á‚È‚¢DDDƒRƒƒ“ƒrƒAƒ“EƒXƒvƒŒƒ‚‚ğ‚½‚Ì‚ŞDx",
+    "%sÛ©¤¯¡Ø¥Û¥â¤Ã¤İ¤¤¥³¡¼¥Ò¤Ï¹¥¤­¤¸¤ã¤Ê¤¤¡¥¡¥¡¥¥³¥í¥ó¥Ó¥¢¥ó¡¦¥¹¥×¥ì¥â¤ò¤¿¤Î¤à¡¥¡Ù",
 /*JP
     "%s says that getting the devteam's agreement on anything is difficult.",
 */
-    "ŠJ”­ƒ`[ƒ€‚É‰½‚ç‚©‚Ì‹¦’è‚ğ‹‚ß‚é‚±‚Æ‚Í¢“ï‚¾‚Æ%s‚Íq‚×‚½D",
+    "³«È¯¥Á¡¼¥à¤Ë²¿¤é¤«¤Î¶¨Äê¤òµá¤á¤ë¤³¤È¤Ïº¤Æñ¤À¤È%s¤Ï½Ò¤Ù¤¿¡¥",
 /*JP
     "%s says that he has noticed those who serve their deity will prosper.",
 */
-    "%s‚Í_‚Éd‚¦‚Ä‚¢‚é‚â‚Â‚Í¬Œ÷‚µ‚Ä‚¢‚é‚Æq‚×‚½D",
+    "%s¤Ï¿À¤Ë»Å¤¨¤Æ¤¤¤ë¤ä¤Ä¤ÏÀ®¸ù¤·¤Æ¤¤¤ë¤È½Ò¤Ù¤¿¡¥",
 /*JP
     "%s says: 'Don't try to steal from me - I have friends in high places!'",
 */
-    "%sH‚­w„‚©‚ç“‚à‚¤‚È‚ñ‚Äv‚í‚È‚¢‚±‚Æ‚¾Dã‚Ì•û‚É’m‚è‡‚¢‚ª‚¢‚é‚ñ‚¾‚©‚çDx",
+    "%sÛ©¤¯¡Ø»ä¤«¤éÅğ¤â¤¦¤Ê¤ó¤Æ»×¤ï¤Ê¤¤¤³¤È¤À¡¥¾å¤ÎÊı¤ËÃÎ¤ê¹ç¤¤¤¬¤¤¤ë¤ó¤À¤«¤é¡¥¡Ù",
 /*JP
     "%s says: 'You may well need something from this shop in the future.'",
 */
-    "%sH‚­w«—ˆ‚±‚Ì“X‚Ì‰½‚©‚ª•K—v‚Æ‚È‚é‚¾‚ë‚¤x",
+    "%sÛ©¤¯¡Ø¾­Íè¤³¤ÎÅ¹¤Î²¿¤«¤¬É¬Í×¤È¤Ê¤ë¤À¤í¤¦¡Ù",
 /*JP
     "%s comments about the Valley of the Dead as being a gateway."
 */
-    "%s‚Í€‚Ì’J‚ÍƒQ[ƒgƒEƒFƒC‚¾‚ë‚¤‚ÆƒRƒƒ“ƒg‚ğq‚×‚½D"
+    "%s¤Ï»à¤ÎÃ«¤Ï¥²¡¼¥È¥¦¥§¥¤¤À¤í¤¦¤È¥³¥á¥ó¥È¤ò½Ò¤Ù¤¿¡¥"
 };
 
 void
@@ -4810,7 +4810,7 @@ struct monst *shkp;
 #if 0 /*JP*/
         pline("%s asks whether you've seen any untended shops recently.",
 #else
-        pline("%s‚ÍÅ‹ß‚Ç‚±‚©‚É“Xˆõ‚Ì‚¢‚È‚¢“X‚Í‚È‚¢‚©‚Æ‚½‚¸‚Ë‚½D",
+        pline("%s¤ÏºÇ¶á¤É¤³¤«¤ËÅ¹°÷¤Î¤¤¤Ê¤¤Å¹¤Ï¤Ê¤¤¤«¤È¤¿¤º¤Í¤¿¡¥",
 #endif
               Monnam(shkp));
         /* [Perhaps we ought to check whether this conversation
@@ -4825,8 +4825,8 @@ struct monst *shkp;
         pline("%s mentions how much %s dislikes %s customers.",
               shkname(shkp), mhe(shkp), eshk->robbed ? "non-paying" : "rude");
 #else
-        pline("%s‚Í%s‹q‚Í‘åŒ™‚¢‚¾‚ÆŒ¾‚Á‚½D",
-              shkname(shkp),  eshk->robbed ? "‹à‚ğx•¥‚í‚È‚¢" : "–³—ç‚È");
+        pline("%s¤Ï%sµÒ¤ÏÂç·ù¤¤¤À¤È¸À¤Ã¤¿¡¥",
+              shkname(shkp),  eshk->robbed ? "¶â¤ò»ÙÊ§¤ï¤Ê¤¤" : "ÌµÎé¤Ê");
 #endif
     } else if (eshk->following) {
         if (strncmp(eshk->customer, plname, PL_NSIZ)) {
@@ -4834,7 +4834,7 @@ struct monst *shkp;
             verbalize("%s %s!  I was looking for %s.",
                       Hello(shkp), plname, eshk->customer);
 #else
-            verbalize("%sI„‚Í%s‚ğ’T‚µ‚Ä‚¢‚Ü‚·D",
+            verbalize("%s¡ª»ä¤Ï%s¤òÃµ¤·¤Æ¤¤¤Ş¤¹¡¥",
                       Hello(shkp), eshk->customer);
 #endif
             eshk->following = 0;
@@ -4843,7 +4843,7 @@ struct monst *shkp;
             verbalize("%s %s!  Didn't you forget to pay?",
                       Hello(shkp), plname);
 #else
-            verbalize("%sIx•¥‚¢‚ğ–Y‚ê‚Ä‚¢‚Ü‚¹‚ñ‚©H", 
+            verbalize("%s¡ª»ÙÊ§¤¤¤òËº¤ì¤Æ¤¤¤Ş¤»¤ó¤«¡©", 
                       Hello(shkp));
 #endif
         }
@@ -4854,7 +4854,7 @@ struct monst *shkp;
         pline("%s says that your bill comes to %ld %s.",
               shkname(shkp), total, currency(total));
 #else
-        pline("%s‚ÍŠ¨’è‚ª%ld%s‚É‚È‚é‚ÆŒ¾‚Á‚½D",
+        pline("%s¤Ï´ªÄê¤¬%ld%s¤Ë¤Ê¤ë¤È¸À¤Ã¤¿¡¥",
               shkname(shkp), total, currency(total));
 #endif
     } else if (eshk->debit) {
@@ -4862,7 +4862,7 @@ struct monst *shkp;
         pline("%s reminds you that you owe %s %ld %s.",
               shkname(shkp), mhim(shkp), eshk->debit, currency(eshk->debit));
 #else
-        pline("‚ ‚È‚½‚Í%s‚É%ld%s‚ÌØ‚è‚ª‚ ‚é‚±‚Æ‚ğv‚¢‚¾‚µ‚½D",
+        pline("¤¢¤Ê¤¿¤Ï%s¤Ë%ld%s¤Î¼Ú¤ê¤¬¤¢¤ë¤³¤È¤ò»×¤¤¤À¤·¤¿¡¥",
               shkname(shkp), eshk->debit, currency(eshk->debit));
 #endif
     } else if (eshk->credit) {
@@ -4870,31 +4870,31 @@ struct monst *shkp;
         pline("%s encourages you to use your %ld %s of credit.",
               shkname(shkp), eshk->credit, currency(eshk->credit));
 #else
-        pline("%s‚Í%ld%s‚Ì—a‚¯‹à‚ğg‚¤‚æ‚¤Š©‚ß‚½D",
+        pline("%s¤Ï%ld%s¤ÎÍÂ¤±¶â¤ò»È¤¦¤è¤¦´«¤á¤¿¡¥",
               shkname(shkp), eshk->credit, currency(eshk->credit));
 #endif
     } else if (eshk->robbed) {
 /*JP
         pline("%s complains about a recent robbery.", shkname(shkp));
 */
-        pline("%s‚ÍÅ‹ß‚Ì‹­“‚É‚Â‚¢‚Ä‹ğ’s‚ğ‚±‚Ú‚µ‚½D", shkname(shkp));
+        pline("%s¤ÏºÇ¶á¤Î¶¯Åğ¤Ë¤Ä¤¤¤Æ¶òÃÔ¤ò¤³¤Ü¤·¤¿¡¥", shkname(shkp));
     } else if ((shkmoney = money_cnt(shkp->minvent)) < 50) {
 /*JP
         pline("%s complains that business is bad.", shkname(shkp));
 */
-        pline("%s‚Í¤”„‚ª|‚­‚¢‚Á‚Ä‚È‚¢‚Æ‹ğ’s‚ğ‚±‚Ú‚µ‚½D", shkname(shkp));
+        pline("%s¤Ï¾¦Çä¤¬»İ¤¯¤¤¤Ã¤Æ¤Ê¤¤¤È¶òÃÔ¤ò¤³¤Ü¤·¤¿¡¥", shkname(shkp));
     } else if (shkmoney > 4000) {
 /*JP
         pline("%s says that business is good.", shkname(shkp));
 */
-        pline("%s‚Í¤”„‚ª|‚­‚¢‚Á‚Ä‚¢‚é‚ÆŒ¾‚Á‚½D", shkname(shkp));
+        pline("%s¤Ï¾¦Çä¤¬»İ¤¯¤¤¤Ã¤Æ¤¤¤ë¤È¸À¤Ã¤¿¡¥", shkname(shkp));
     } else if (is_izchak(shkp, FALSE)) {
         pline(Izchak_speaks[rn2(SIZE(Izchak_speaks))], shkname(shkp));
     } else {
 /*JP
         pline("%s talks about the problem of shoplifters.", shkname(shkp));
 */
-        pline("%s‚Í–œˆø‚Ì–â‘è‚É‚Â‚¢‚Ä˜b‚µ‚½D", shkname(shkp));
+        pline("%s¤ÏËü°ú¤ÎÌäÂê¤Ë¤Ä¤¤¤ÆÏÃ¤·¤¿¡¥", shkname(shkp));
     }
 }
 
@@ -4918,7 +4918,7 @@ boolean silent;
         pline_The("Kop%s (disappointed) vanish%s into thin air.",
                   plur(cnt), (cnt == 1) ? "es" : "");
 #else
-        pline("‚ª‚Á‚©‚è‚µ‚½ŒxŠ¯‚Í‹ó‹C‚É‚Æ‚¯‚ÄÁ‚¦‚½D");
+        pline("¤¬¤Ã¤«¤ê¤·¤¿·Ù´±¤Ï¶õµ¤¤Ë¤È¤±¤Æ¾Ã¤¨¤¿¡¥");
 #endif
 }
 
@@ -5004,21 +5004,21 @@ boolean altusage;
 /*JP
         fmt = "%sYou owe%s %ld %s.";
 */
-        fmt = "%s%s%ld%s‚ÌØ‚è‚¾D";
+        fmt = "%s%s%ld%s¤Î¼Ú¤ê¤À¡¥";
 /*JP
         Sprintf(buf, "This is no free library, %s!  ", cad(FALSE));
 */
-        Strcpy(buf, "‚¨‚¢I‚±‚±‚Í}‘ŠÙ‚¶‚á‚È‚¢I");
+        Strcpy(buf, "¤ª¤¤¡ª¤³¤³¤Ï¿Ş½ñ´Û¤¸¤ã¤Ê¤¤¡ª");
         arg1 = rn2(2) ? buf : "";
 /*JP
         arg2 = ESHK(shkp)->debit > 0L ? " an additional" : "";
 */
-        arg2 = ESHK(shkp)->debit > 0L ? "‚³‚ç‚ÉŒ¾‚¦‚Î" : "";
+        arg2 = ESHK(shkp)->debit > 0L ? "¤µ¤é¤Ë¸À¤¨¤Ğ" : "";
     } else if (otmp->otyp == POT_OIL) {
 /*JP
         fmt = "%s%sThat will cost you %ld %s (Yendorian Fuel Tax).";
 */
-        fmt = "%s%s’l’i‚Í%ld%s(ƒCƒFƒ“ƒ_[”R—¿Å)‚¾D";
+        fmt = "%s%sÃÍÃÊ¤Ï%ld%s(¥¤¥§¥ó¥À¡¼Ç³ÎÁÀÇ)¤À¡¥";
     } else if (altusage && (otmp->otyp == BAG_OF_TRICKS
                             || otmp->otyp == HORN_OF_PLENTY)) {
         fmt = "%s%sEmptying that will cost you %ld %s.";
@@ -5030,17 +5030,17 @@ boolean altusage;
 /*JP
         fmt = "%s%sUsage fee, %ld %s.";
 */
-        fmt = "%s%sg—p—¿‚ÍC%ld%s‚¾D";
+        fmt = "%s%s»ÈÍÑÎÁ¤Ï¡¤%ld%s¤À¡¥";
         if (!rn2(3))
 /*JP
             arg1 = "Hey!  ";
 */
-            arg1 = "‚¨‚¢I";
+            arg1 = "¤ª¤¤¡ª";
         if (!rn2(3))
 /*JP
             arg2 = "Ahem.  ";
 */
-            arg2 = "ƒSƒzƒ“D";
+            arg2 = "¥´¥Û¥ó¡¥";
     }
 
     if (!muteshk(shkp)) {
@@ -5078,12 +5078,12 @@ register long amount;
 /*JP
             Your("credit is reduced by %ld %s.", amount, currency(amount));
 */
-            Your("—a‚¯‹à‚Í%ld%sŒ¸‚Á‚½D", amount, currency(amount));
+            Your("ÍÂ¤±¶â¤Ï%ld%s¸º¤Ã¤¿¡¥", amount, currency(amount));
         else
 /*JP
             Your("credit is erased.");
 */
-            Your("—a‚¯‹à‚Í’ Á‚µ‚É‚È‚Á‚½D");
+            Your("ÍÂ¤±¶â¤ÏÄ¢¾Ã¤·¤Ë¤Ê¤Ã¤¿¡¥");
         eshkp->credit -= amount;
     } else {
         delta = amount - eshkp->credit;
@@ -5091,17 +5091,17 @@ register long amount;
 /*JP
             Your("credit is erased.");
 */
-            Your("—a‚¯‹à‚Í’ Á‚µ‚É‚È‚Á‚½D");
+            Your("ÍÂ¤±¶â¤ÏÄ¢¾Ã¤·¤Ë¤Ê¤Ã¤¿¡¥");
         if (eshkp->debit)
 /*JP
             Your("debt increases by %ld %s.", delta, currency(delta));
 */
-            Your("Ø‹à‚Í%ld%s‘‚¦‚½D", delta, currency(delta));
+            Your("¼Ú¶â¤Ï%ld%sÁı¤¨¤¿¡¥", delta, currency(delta));
        else
 /*JP
             You("owe %s %ld %s.", shkname(shkp), delta, currency(delta));
 */
-            You("%s‚É%ld%s‚ÌØ‚è‚ğ‚Â‚­‚Á‚½D", shkname(shkp), delta, currency(delta));
+            You("%s¤Ë%ld%s¤Î¼Ú¤ê¤ò¤Ä¤¯¤Ã¤¿¡¥", shkname(shkp), delta, currency(delta));
         eshkp->debit += delta;
         eshkp->loan += delta;
         eshkp->credit = 0L;
@@ -5140,8 +5140,8 @@ register xchar x, y;
         pline("%s%s blocks your way!", shkname(shkp),
               Invis ? " senses your motion and" : "");
 #else
-        pline("%s‚Í%s‚ ‚È‚½‚Ì‘O‚É—§‚¿‚Ó‚³‚ª‚Á‚½I", shkname(shkp),
-              Invis ? "“®‚«‚ğŠ´‚¶‚Æ‚èC" : "");
+        pline("%s¤Ï%s¤¢¤Ê¤¿¤ÎÁ°¤ËÎ©¤Á¤Õ¤µ¤¬¤Ã¤¿¡ª", shkname(shkp),
+              Invis ? "Æ°¤­¤ò´¶¤¸¤È¤ê¡¤" : "");
 #endif
         return TRUE;
     }
@@ -5182,8 +5182,8 @@ register xchar x, y;
         pline("%s%s blocks your way!", shkname(shkp),
               Invis ? " senses your motion and" : "");
 #else
-        pline("%s%s‚ ‚È‚½‚Ì‘O‚É—§‚¿‚Ó‚³‚ª‚Á‚½I", shkname(shkp),
-              Invis ? "“®‚«‚ğŠ´‚¶‚Æ‚èC" : "");
+        pline("%s%s¤¢¤Ê¤¿¤ÎÁ°¤ËÎ©¤Á¤Õ¤µ¤¬¤Ã¤¿¡ª", shkname(shkp),
+              Invis ? "Æ°¤­¤ò´¶¤¸¤È¤ê¡¤" : "");
 #endif
         return TRUE;
     }
@@ -5191,7 +5191,7 @@ register xchar x, y;
 }
 
 /* "your " or "Foobar's " (note the trailing space) */
-/* u‚ ‚È‚½‚Ìv‚©uFoobar‚Ìv(––”ö‚É‹ó”’‚Í•s—v) */
+/* ¡Ö¤¢¤Ê¤¿¤Î¡×¤«¡ÖFoobar¤Î¡×(ËöÈø¤Ë¶õÇò¤ÏÉÔÍ×) */
 char *
 shk_your(buf, obj)
 char *buf;
@@ -5234,7 +5234,7 @@ struct obj *obj;
 #else
         if (shkp) {
             strcpy(buf, shkname(shkp));
-            strcat(buf, "‚Ì");
+            strcat(buf, "¤Î");
         } else {
             strcpy(buf, "");
         }
@@ -5255,14 +5255,14 @@ struct obj *obj;
 #else
         {
             strcpy(buf, mon_nam(obj->ocarry));
-            strcat(buf, "‚Ì");
+            strcat(buf, "¤Î");
             return buf;
         }
 #endif
     return (char *) 0;
 }
 
-#if 0 /*JP*//*—–\‚ÉŒÄ‚Ñ‚©‚¯‚é‚Æ‚«‚Ì“ñlÌB“ú–{Œê‚Å‚Íu‚¨‚¢v‚ÅÏ‚Ş‚Ì‚Åg‚í‚È‚¢*/
+#if 0 /*JP*//*ÍğË½¤Ë¸Æ¤Ó¤«¤±¤ë¤È¤­¤ÎÆó¿Í¾Î¡£ÆüËÜ¸ì¤Ç¤Ï¡Ö¤ª¤¤¡×¤ÇºÑ¤à¤Î¤Ç»È¤ï¤Ê¤¤*/
 STATIC_OVL const char *
 cad(altusage)
 boolean altusage; /* used as a verbalized exclamation:  \"Cad! ...\" */

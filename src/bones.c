@@ -2,6 +2,13 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985,1993. */
 /* NetHack may be freely redistributed.  See license for details. */
 
+/*
+**	Japanese version Copyright
+**	(c) Issei Numata, Naoki Hamada, Shigehiro Miyashita, 1994-2000
+**	For 3.4, Copyright (c) Kentaro Shirakata, 2002-2003
+**	JNetHack may be freely redistributed.  See license for details. 
+*/
+
 #include "hack.h"
 #include "lev.h"
 
@@ -349,14 +356,14 @@ struct obj *corpse;
 /*JP
             if (yn("Bones file already exists.  Replace it?") == 'y') {
 */
-            if (yn("œƒtƒ@ƒCƒ‹‚ªŠù‚É‘¶İ‚µ‚Ä‚é‚æD  ’u‚«Š·‚¦‚éH") == 'y') {
+            if (yn("¹ü¥Õ¥¡¥¤¥ë¤¬´û¤ËÂ¸ºß¤·¤Æ¤ë¤è¡¥  ÃÖ¤­´¹¤¨¤ë¡©") == 'y') {
                 if (delete_bonesfile(&u.uz))
                     goto make_bones;
                 else
 /*JP
                     pline("Cannot unlink old bones.");
 */
-                    pline("ŒÃ‚¢œ‚ğíœ‚Å‚«‚È‚©‚Á‚½D");
+                    pline("¸Å¤¤¹ü¤òºï½ü¤Ç¤­¤Ê¤«¤Ã¤¿¡¥");
             }
         }
         /* compression can change the file's name, so must
@@ -533,7 +540,7 @@ make_bones:
 /*JP
                 pline("Insufficient space to create bones file.");
 */
-                pline("œƒtƒ@ƒCƒ‹‚ğ¶¬‚·‚é‚½‚ß‚Ì[•ª‚È—Ìˆæ‚ª‚È‚¢D");
+                pline("¹ü¥Õ¥¡¥¤¥ë¤òÀ¸À®¤¹¤ë¤¿¤á¤Î½¼Ê¬¤ÊÎÎ°è¤¬¤Ê¤¤¡¥");
             (void) nhclose(fd);
             cancel_bonesfile();
             return;
@@ -581,7 +588,7 @@ getbones()
 /*JP
             pline("Discarding unuseable bones; no need to panic...");
 */
-            pline("g‚¦‚È‚¢œ‚ğÌ‚Ä‚½DQ‚Ä‚é•K—v‚Í‚È‚¢DDD");
+            pline("»È¤¨¤Ê¤¤¹ü¤ò¼Î¤Æ¤¿¡¥¹²¤Æ¤ëÉ¬Í×¤Ï¤Ê¤¤¡¥¡¥¡¥");
         ok = FALSE;
     } else {
         ok = TRUE;
@@ -589,7 +596,7 @@ getbones()
 /*JP
             if (yn("Get bones?") == 'n') {
 */
-            if (yn("œ‚ğE‚¤H") == 'n') {
+            if (yn("¹ü¤ò½¦¤¦¡©") == 'n') {
                 (void) nhclose(fd);
                 compress_bonesfile();
                 return 0;
@@ -603,7 +610,7 @@ getbones()
 /*JP
             Sprintf(errbuf, "This is bones level '%s', not '%s'!", oldbonesid,
 */
-            Sprintf(errbuf, "‚±‚Ìœ‚ÌƒŒƒxƒ‹‚Í'%s'‚Å‚ ‚Á‚ÄA'%s'‚Å‚Í‚È‚¢I", oldbonesid,
+            Sprintf(errbuf, "¤³¤Î¹ü¤Î¥ì¥Ù¥ë¤Ï'%s'¤Ç¤¢¤Ã¤Æ¡¢'%s'¤Ç¤Ï¤Ê¤¤¡ª", oldbonesid,
                     bonesid);
             if (wizard) {
                 pline1(errbuf);
@@ -647,7 +654,7 @@ getbones()
 /*JP
         if (yn("Unlink bones?") == 'n') {
 */
-        if (yn("œ‚ğÁ‚·H") == 'n') {
+        if (yn("¹ü¤ò¾Ã¤¹¡©") == 'n') {
             compress_bonesfile();
             return ok;
         }

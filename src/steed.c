@@ -357,7 +357,7 @@ kick_steed()
 #if 0 /*JP*/
     char He[4];
 #else
-	/* role.c Gender.he ‚Ì’l‚ªƒRƒs[‚³‚ê‚é */
+	/* role.c Gender.he ¤ÎÃÍ¤¬¥³¥Ô¡¼¤µ¤ì¤ë */
 	char He[16];
 #endif
     if (!u.usteed)

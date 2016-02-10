@@ -428,7 +428,7 @@ dodiscovered() /* free after Robert Viduya */
 /*JP
     putstr(tmpwin, 0, "Discoveries");
 */
-    putstr(tmpwin, 0, "”­Œ©•¨ˆê——");
+    putstr(tmpwin, 0, "È¯¸«Êª°ìÍ÷");
     putstr(tmpwin, 0, "");
 
     /* gather "unique objects" into a pseudo-class; note that they'll
@@ -439,7 +439,7 @@ dodiscovered() /* free after Robert Viduya */
 /*JP
                 putstr(tmpwin, iflags.menu_headings, "Unique items");
 */
-                putstr(tmpwin, iflags.menu_headings, "“ÁêƒAƒCƒeƒ€");
+                putstr(tmpwin, iflags.menu_headings, "ÆÃ¼ì¥¢¥¤¥Æ¥à");
             Sprintf(buf, "  %s", OBJ_NAME(objects[uniq_objs[i]]));
             putstr(tmpwin, 0, buf);
             ++ct;
@@ -478,7 +478,7 @@ dodiscovered() /* free after Robert Viduya */
 /*JP
         You("haven't discovered anything yet...");
 */
-        You("‚Ü‚¾‰½‚à”­Œ©‚µ‚Ä‚¢‚È‚¢DDD");
+        You("¤Ş¤À²¿¤âÈ¯¸«¤·¤Æ¤¤¤Ê¤¤¡¥¡¥¡¥");
     } else
         display_nhwindow(tmpwin, TRUE);
     destroy_nhwindow(tmpwin);

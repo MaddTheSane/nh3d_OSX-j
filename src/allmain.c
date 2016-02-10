@@ -48,27 +48,27 @@ boolean resuming;
        to use up the save file and require confirmation for explore mode */
     if (resuming && iflags.deferred_X)
         (void) enter_explore_mode();
-
+    
     /* side-effects from the real world */
     flags.moonphase = phase_of_the_moon();
     if (flags.moonphase == FULL_MOON) {
 /*JP
         You("are lucky!  Full moon tonight.");
 */
-        pline("儔僢僉乕両崱斢偼枮寧偩丏");
+        pline("ラッキ〖—海日は塔奉だˉ");
         change_luck(1);
     } else if (flags.moonphase == NEW_MOON) {
 /*JP
         pline("Be careful!  New moon tonight.");
 */
-        pline("拲堄偟傠両崱斢偼怴寧偩丏");
+        pline("庙罢しろ—海日は糠奉だˉ");
     }
     flags.friday13 = friday_13th();
     if (flags.friday13) {
 /*JP
         pline("Watch out!  Bad things can happen on Friday the 13th.");
 */
-        pline("梡怱偟傠両侾俁擔偺嬥梛擔偵偼傛偔側偄偙偲偑偁傞丏") ;
+        pline("脱看しろ—１３泣の垛退泣にはよくないことがあるˉ") ;
         change_luck(-1);
     }
 
@@ -272,7 +272,7 @@ boolean resuming;
 /*JP
                                 You("pass out from exertion!");
 */
-                                pline("旀楯偱堄幆傪幐偭偨両");
+                                pline("辱汐で罢急を己った—");
                                 exercise(A_CON, FALSE);
                                 fall_asleep(-10, FALSE);
                             }
@@ -290,7 +290,7 @@ boolean resuming;
                             u.uen = u.uenmax;
                         context.botl = 1;
                     }
-
+                    
                     if (!u.uinvulnerable) {
                         if (Teleportation && !rn2(85)) {
                             xchar old_ux = u.ux, old_uy = u.uy;
@@ -327,7 +327,7 @@ boolean resuming;
                             }
                         }
                     }
-
+                    
                     if (Searching && multi >= 0)
                         (void) dosearch0(1);
                     dosounds();
@@ -508,7 +508,7 @@ stop_occupation()
 /*JP
             You("stop %s.", occtxt);
 */
-            You("%s偺傪拞抐偟偨丏", occtxt);
+            You("%sのを面们したˉ", occtxt);
         occupation = 0;
         context.botl = 1; /* in case u.uhs changed */
         nomul(0);
@@ -650,7 +650,7 @@ boolean new_game; /* false => restoring an old game */
 /*JP
         Sprintf(eos(buf), " %s", genders[currentgend].adj);
 */
-        Sprintf(eos(buf), "偺%s", genders[currentgend].adj);
+        Sprintf(eos(buf), "の%s", genders[currentgend].adj);
 
 #if 0 /*JP*/
     pline(new_game ? "%s %s, welcome to NetHack!  You are a%s %s %s."
@@ -659,12 +659,12 @@ boolean new_game; /* false => restoring an old game */
           (currentgend && urole.name.f) ? urole.name.f : urole.name.m);
 #else
     if(new_game){
-        pline("%s丆NetHack偺悽奅傊両偙偺僎乕儉偱偼偁側偨偼%s%s(%s)偩丏",
+        pline("%s·NetHackの坤肠へ—このゲ〖ムではあなたは%s%s(%s)だˉ",
               Hello((struct monst *) 0), urace.adj,
               (currentgend && urole.name.f) ? urole.name.f : urole.name.m,
               buf);
     } else {
-        pline("%s丆NetHack偺悽奅傊両偁側偨偼%s%s偩両",
+        pline("%s·NetHackの坤肠へ—あなたは%s%sだ—",
               Hello((struct monst *) 0), urace.adj,
               (currentgend && urole.name.f) ? urole.name.f : urole.name.m);
     }

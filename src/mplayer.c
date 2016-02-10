@@ -93,10 +93,10 @@ char *nam;
     Strcat(nam, " the ");
     Strcat(nam, rank_of((int) mtmp->m_lev, monsndx(mtmp->data),
                         (boolean) mtmp->female));
-#else /*Ì†‚ð‘O‚É•t‚¯‚½‚¢‚Ì‚Åtmp_nam‚Éˆê’U\’z‚µ‚Änam‚É–ß‚·*/
+#else /*¾Î¹æ¤òÁ°¤ËÉÕ¤±¤¿¤¤¤Î¤Çtmp_nam¤Ë°ìÃ¶¹½ÃÛ¤·¤Ænam¤ËÌá¤¹*/
     Strcpy(tmp_nam, rank_of((int) mtmp->m_lev, monsndx(mtmp->data),
                         (boolean)mtmp->female));
-    Strcat(tmp_nam, "‚Ì");
+    Strcat(tmp_nam, "¤Î");
     Strcat(tmp_nam, nam);
     Strcpy(nam, tmp_nam);
 #endif
@@ -381,26 +381,26 @@ register struct monst *mtmp;
 #else
     static const char *same_class_msg[2][3] = {
         {
-            "Ž„‚Å‚·‚ç’B¬‚Å‚«‚È‚¢‚Ì‚ÉC‚¨‘O‚É’B¬‚Å‚«‚é‚Ì‚©H",
-            "‚¨‘O‚ª¬Œ÷‚·‚é‚È‚ñ‚Ä‚±‚Æ‚Í‚È‚¢‚ÈD",
-            "–¼—_‚ð‰ä‚ÉI‚¨‘O‚¶‚á‚È‚¢I",
+            "»ä¤Ç¤¹¤éÃ£À®¤Ç¤­¤Ê¤¤¤Î¤Ë¡¤¤ªÁ°¤ËÃ£À®¤Ç¤­¤ë¤Î¤«¡©",
+            "¤ªÁ°¤¬À®¸ù¤¹¤ë¤Ê¤ó¤Æ¤³¤È¤Ï¤Ê¤¤¤Ê¡¥",
+            "Ì¾ÍÀ¤ò²æ¤Ë¡ª¤ªÁ°¤¸¤ã¤Ê¤¤¡ª",
         },
         {
-            "Ž„‚Å‚·‚ç’B¬‚Å‚«‚È‚¢‚Ì‚ÉC‚ ‚È‚½‚É’B¬‚Å‚«‚ÄH",
-            "‚ ‚È‚½‚ª¬Œ÷‚·‚é‚È‚ñ‚Ä‚ ‚è‚¦‚Ü‚¹‚ñ‚íD",
-            "–¼—_‚ÍŽ„‚ÉI‚ ‚È‚½‚É‚È‚ñ‚Ä‚Æ‚ñ‚Å‚à‚È‚¢D",
+            "»ä¤Ç¤¹¤éÃ£À®¤Ç¤­¤Ê¤¤¤Î¤Ë¡¤¤¢¤Ê¤¿¤ËÃ£À®¤Ç¤­¤Æ¡©",
+            "¤¢¤Ê¤¿¤¬À®¸ù¤¹¤ë¤Ê¤ó¤Æ¤¢¤ê¤¨¤Þ¤»¤ó¤ï¡¥",
+            "Ì¾ÍÀ¤Ï»ä¤Ë¡ª¤¢¤Ê¤¿¤Ë¤Ê¤ó¤Æ¤È¤ó¤Ç¤â¤Ê¤¤¡¥",
         }
     },
     *other_class_msg[2][3] = {
         {
-            "‰ºO‚ª˜b‚µ‚©‚¯‚é‚©H‚Í‚Í[‚ñH",
-            "í‚¦I‚±‚Ì–ì˜YI",
-            "‚¨‘O‚Æ˜b‚·‚±‚Æ‚È‚Ç‚È‚É‚à‚È‚¢I",
+            "²¼½°¤¬ÏÃ¤·¤«¤±¤ë¤«¡©¤Ï¤Ï¡¼¤ó¡©",
+            "Àï¤¨¡ª¤³¤ÎÌîÏº¡ª",
+            "¤ªÁ°¤ÈÏÃ¤¹¤³¤È¤Ê¤É¤Ê¤Ë¤â¤Ê¤¤¡ª",
         },
         {
-            "Ž„‚Æ˜b‚µ‚½‚¢‚Å‚·‚Á‚ÄH",
-            "Œ•‚ðŽæ‚è‚È‚³‚¢I",
-            "‚ ‚È‚½‚Æ˜b‚·‚±‚Æ‚È‚Ç‚ ‚è‚Ü‚¹‚ñ‚íI",
+            "»ä¤ÈÏÃ¤·¤¿¤¤¤Ç¤¹¤Ã¤Æ¡©",
+            "·õ¤ò¼è¤ê¤Ê¤µ¤¤¡ª",
+            "¤¢¤Ê¤¿¤ÈÏÃ¤¹¤³¤È¤Ê¤É¤¢¤ê¤Þ¤»¤ó¤ï¡ª",
         }
     };
     int female;
@@ -416,7 +416,7 @@ register struct monst *mtmp;
                              : other_class_msg[rn2(3)]);
 #else
     female = (mtmp->female ? 1 : 0);
-    pline("˜b‚·H -- %s", (mtmp->data == &mons[urole.malenum]
+    pline("ÏÃ¤¹¡© -- %s", (mtmp->data == &mons[urole.malenum]
                           || mtmp->data == &mons[urole.femalenum])
           ? same_class_msg[female][rn2(3)]
           : other_class_msg[female][rn2(3)]);

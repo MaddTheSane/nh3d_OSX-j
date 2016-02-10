@@ -106,14 +106,14 @@ register boolean rockit;
 /*JP
         pline("Crash!  The ceiling collapses around you!");
 */
-        pline("‚°‚°‚ñI‚ ‚È‚½‚Ì‚Ü‚í‚è‚Ì“Vˆä‚ª•ö‚ê‚½I");
+        pline("¤²¤²¤ó¡ª¤¢¤Ê¤¿¤Î¤Ş¤ï¤ê¤ÎÅ·°æ¤¬Êø¤ì¤¿¡ª");
     else
 #if 0 /*JP*/
         pline("A mysterious force %s cave around you!",
               (levl[u.ux][u.uy].typ == CORR) ? "creates a" : "extends the");
 #else
-        pline("_”é“I‚È—Í‚É‚æ‚è‚ ‚È‚½‚Ì‚Ü‚í‚è%s‚½I",
-              (levl[u.ux][u.uy].typ == CORR) ? "‚É“´ŒA‚ª‚Å‚«" : "‚Ì“´ŒA‚ªL‚ª‚Á");
+        pline("¿ÀÈëÅª¤ÊÎÏ¤Ë¤è¤ê¤¢¤Ê¤¿¤Î¤Ş¤ï¤ê%s¤¿¡ª",
+              (levl[u.ux][u.uy].typ == CORR) ? "¤ËÆ¶·¢¤¬¤Ç¤­" : "¤ÎÆ¶·¢¤¬¹­¤¬¤Ã");
 #endif
     display_nhwindow(WIN_MESSAGE, TRUE);
 
@@ -203,7 +203,7 @@ int x, y;
 /*JP
         (madeby == BY_YOU && uwep && is_axe(uwep)) ? "chop" : "dig in";
 */
-        (madeby == BY_YOU && uwep && is_axe(uwep)) ? "Ó‚¯‚È‚¢" : "Œ@‚ê‚È‚¢";
+        (madeby == BY_YOU && uwep && is_axe(uwep)) ? "ºÕ¤±¤Ê¤¤" : "·¡¤ì¤Ê¤¤";
 
     if (On_stairs(x, y)) {
         if (x == xdnladder || x == xupladder) {
@@ -211,19 +211,19 @@ int x, y;
 /*JP
                 pline_The("ladder resists your effort.");
 */
-                pline("‚Í‚µ‚²‚ª×–‚‚ğ‚µ‚½D");
+                pline("¤Ï¤·¤´¤¬¼ÙËâ¤ò¤·¤¿¡¥");
         } else if (verbose)
 /*JP
             pline_The("stairs are too hard to %s.", verb);
 */
-            pline("ŠK’i‚Í‚Æ‚Ä‚àŒÅ‚­‚Ä%sD", verb);
+            pline("³¬ÃÊ¤Ï¤È¤Æ¤â¸Ç¤¯¤Æ%s¡¥", verb);
         return FALSE;
     } else if (IS_THRONE(levl[x][y].typ) && madeby != BY_OBJECT) {
         if (verbose)
 /*JP
             pline_The("throne is too hard to break apart.");
 */
-            pline("‹ÊÀ‚Í‚Æ‚Ä‚àŒÅ‚­‚ÄÓ‚¯‚È‚¢D");
+            pline("¶ÌºÂ¤Ï¤È¤Æ¤â¸Ç¤¯¤ÆºÕ¤±¤Ê¤¤¡¥");
         return FALSE;
     } else if (IS_ALTAR(levl[x][y].typ)
                && (madeby != BY_OBJECT || Is_astralevel(&u.uz)
@@ -232,21 +232,21 @@ int x, y;
 /*JP
             pline_The("altar is too hard to break apart.");
 */
-            pline_The("Õ’d‚Í‚Æ‚Ä‚àŒÅ‚­‚ÄÓ‚¯‚È‚¢D");
+            pline_The("º×ÃÅ¤Ï¤È¤Æ¤â¸Ç¤¯¤ÆºÕ¤±¤Ê¤¤¡¥");
         return FALSE;
     } else if (Is_airlevel(&u.uz)) {
         if (verbose)
 /*JP
             You("cannot %s thin air.", verb);
 */
-            You("‰½‚à‚È‚¢‹óŠÔ‚Í%sD", verb);
+            You("²¿¤â¤Ê¤¤¶õ´Ö¤Ï%s¡¥", verb);
         return FALSE;
     } else if (Is_waterlevel(&u.uz)) {
         if (verbose)
 /*JP
             pline_The("water splashes and subsides.");
 */
-            pline("…‚ªƒsƒVƒƒƒb‚Æ’µ‚Ë‚½D");
+            pline("¿å¤¬¥Ô¥·¥ã¥Ã¤ÈÄ·¤Í¤¿¡¥");
         return FALSE;
     } else if ((IS_ROCK(levl[x][y].typ) && levl[x][y].typ != SDOOR
                 && (levl[x][y].wall_info & W_NONDIGGABLE) != 0)
@@ -258,14 +258,14 @@ int x, y;
 /*JP
             pline_The("%s here is too hard to %s.", surface(x, y), verb);
 */
-            pline_The("%s‚Í‚Æ‚Ä‚àŒÅ‚­‚Ä%sD", surface(x,y), verb);
+            pline_The("%s¤Ï¤È¤Æ¤â¸Ç¤¯¤Æ%s¡¥", surface(x,y), verb);
         return FALSE;
     } else if (sobj_at(BOULDER, x, y)) {
         if (verbose)
 /*JP
             There("isn't enough room to %s here.", verb);
 */
-            pline("\•ª‚ÈêŠ‚ª‚È‚¢‚Ì‚Å%sD", verb);
+            pline("½½Ê¬¤Ê¾ì½ê¤¬¤Ê¤¤¤Î¤Ç%s¡¥", verb);
         return FALSE;
     } else if (madeby == BY_OBJECT
                /* the block against existing traps is mainly to
@@ -286,7 +286,7 @@ dig(VOID_ARGS)
 /*JP
     const char *verb = (!uwep || is_pick(uwep)) ? "dig into" : "chop through";
 */
-    const char *verb = (!uwep || is_pick(uwep)) ? "Œ@‚ê‚È‚¢" : "Ó‚¯‚È‚¢";
+    const char *verb = (!uwep || is_pick(uwep)) ? "·¡¤ì¤Ê¤¤" : "ºÕ¤±¤Ê¤¤";
 
     lev = &levl[dpx][dpy];
     /* perhaps a nymph stole your pick-axe while you were busy digging */
@@ -306,7 +306,7 @@ dig(VOID_ARGS)
 /*JP
             pline("This tree seems to be petrified.");
 */
-            pline("‚±‚Ì–Ø‚ÍÎ‰»‚µ‚Ä‚¢‚é‚æ‚¤‚¾D");
+            pline("¤³¤ÎÌÚ¤ÏÀĞ²½¤·¤Æ¤¤¤ë¤è¤¦¤À¡¥");
             return 0;
         }
         if (IS_ROCK(lev->typ) && !may_dig(dpx, dpy)
@@ -315,8 +315,8 @@ dig(VOID_ARGS)
             pline("This %s is too hard to %s.",
                   is_db_wall(dpx, dpy) ? "drawbridge" : "wall", verb);
 #else
-            pline("‚±‚Ì%s‚Í‚Æ‚Ä‚àŒÅ‚­‚Ä%sD",
-                  is_db_wall(dpx, dpy) ? "’µ‚Ë‹´" : "•Ç", verb);
+            pline("¤³¤Î%s¤Ï¤È¤Æ¤â¸Ç¤¯¤Æ%s¡¥",
+                  is_db_wall(dpx, dpy) ? "Ä·¤Í¶¶" : "ÊÉ", verb);
 #endif
             return 0;
         }
@@ -328,7 +328,7 @@ dig(VOID_ARGS)
 /*JP
                 You("fumble and drop %s.", yname(uwep));
 */
-                You("è‚ªŠŠ‚è%s‚ğ—‚µ‚½D", yname(uwep));
+                You("¼ê¤¬³ê¤ê%s¤òÍî¤·¤¿¡¥", yname(uwep));
                 dropx(uwep);
             } else {
                 if (u.usteed)
@@ -336,7 +336,7 @@ dig(VOID_ARGS)
                     pline("%s and %s %s!", Yobjnam2(uwep, "bounce"),
                           otense(uwep, "hit"), mon_nam(u.usteed));
 #else
-                    pline("%s‚Í’µ‚Ë‚©‚¦‚è%s‚É–½’†‚µ‚½I",
+                    pline("%s¤ÏÄ·¤Í¤«¤¨¤ê%s¤ËÌ¿Ãæ¤·¤¿¡ª",
                           xname(uwep), mon_nam(u.usteed));
 #endif
                 else
@@ -344,7 +344,7 @@ dig(VOID_ARGS)
                     pline("Ouch!  %s and %s you!", Yobjnam2(uwep, "bounce"),
                           otense(uwep, "hit"));
 #else
-                    pline("‚¢‚Ä‚ÁI%s‚Í’µ‚Ë‚©‚¦‚è‚ ‚È‚½‚É–½’†‚µ‚½I",
+                    pline("¤¤¤Æ¤Ã¡ª%s¤ÏÄ·¤Í¤«¤¨¤ê¤¢¤Ê¤¿¤ËÌ¿Ãæ¤·¤¿¡ª",
                           xname(uwep));
 #endif
                 set_wounded_legs(RIGHT_SIDE, 5 + rnd(5));
@@ -354,14 +354,14 @@ dig(VOID_ARGS)
 /*JP
             pline("Bang!  You hit with the broad side of %s!",
 */
-            pline("ƒoƒ“I%s‚Ì•¿‚Å‘Å‚Á‚Ä‚µ‚Ü‚Á‚½I",
+            pline("¥Ğ¥ó¡ª%s¤ÎÊÁ¤ÇÂÇ¤Ã¤Æ¤·¤Ş¤Ã¤¿¡ª",
                   the(xname(uwep)));
             break;
         default:
 /*JP
             Your("swing misses its mark.");
 */
-            You("‘_‚¢‚ğ’è‚ß‚ÄU‚è‚¨‚ë‚µ‚½‚ª‚Í‚¸‚µ‚½D");
+            You("ÁÀ¤¤¤òÄê¤á¤Æ¿¶¤ê¤ª¤í¤·¤¿¤¬¤Ï¤º¤·¤¿¡¥");
             break;
         }
         return 0;
@@ -441,7 +441,7 @@ dig(VOID_ARGS)
 /*JP
                 digtxt = "The statue shatters.";
 */
-                digtxt = "’¤‘œ‚Í‚±‚È‚²‚È‚É‚È‚Á‚½D";
+                digtxt = "Ä¦Áü¤Ï¤³¤Ê¤´¤Ê¤Ë¤Ê¤Ã¤¿¡¥";
             else
                 /* it was a statue trap; break_statue()
                  * printed a message and updated the screen
@@ -459,7 +459,7 @@ dig(VOID_ARGS)
 /*JP
             digtxt = "The boulder falls apart.";
 */
-            digtxt = "Šâ‚Í‚±‚È‚²‚È‚É‚È‚Á‚½D";
+            digtxt = "´ä¤Ï¤³¤Ê¤´¤Ê¤Ë¤Ê¤Ã¤¿¡¥";
         } else if (lev->typ == STONE || lev->typ == SCORR
                    || IS_TREE(lev->typ)) {
             if (Is_earthlevel(&u.uz)) {
@@ -476,7 +476,7 @@ dig(VOID_ARGS)
 /*JP
                 digtxt = "You cut down the tree.";
 */
-                digtxt = "–Ø‚ğØ‚è“|‚µ‚½D";
+                digtxt = "ÌÚ¤òÀÚ¤êÅİ¤·¤¿¡¥";
                 lev->typ = ROOM;
                 if (!rn2(5))
                     (void) rnd_treefruit_at(dpx, dpy);
@@ -484,7 +484,7 @@ dig(VOID_ARGS)
 /*JP
                 digtxt = "You succeed in cutting away some rock.";
 */
-                digtxt = "Šâ‚ğ­‚µØ‚è‚Æ‚Á‚½D";
+                digtxt = "´ä¤ò¾¯¤·ÀÚ¤ê¤È¤Ã¤¿¡¥";
                 lev->typ = CORR;
             }
         } else if (IS_WALL(lev->typ)) {
@@ -493,7 +493,7 @@ dig(VOID_ARGS)
 /*JP
                 dmgtxt = "damage";
 */
-                dmgtxt = "‚Â‚¯‚é";
+                dmgtxt = "½ı¤Ä¤±¤ë";
             }
             if (level.flags.is_maze_lev) {
                 lev->typ = ROOM;
@@ -506,26 +506,26 @@ dig(VOID_ARGS)
 /*JP
             digtxt = "You make an opening in the wall.";
 */
-            digtxt = "•Ç‚ÉŒŠ‚ğ‹ó‚¯‚½D";
+            digtxt = "ÊÉ¤Ë·ê¤ò¶õ¤±¤¿¡¥";
         } else if (lev->typ == SDOOR) {
             cvt_sdoor_to_door(lev); /* ->typ = DOOR */
 /*JP
             digtxt = "You break through a secret door!";
 */
-            digtxt = "”é–§‚Ì”à‚ğ’Ê‚è”²‚¯‚½I";
+            digtxt = "ÈëÌ©¤ÎÈâ¤òÄÌ¤êÈ´¤±¤¿¡ª";
             if (!(lev->doormask & D_TRAPPED))
                 lev->doormask = D_BROKEN;
         } else if (closed_door(dpx, dpy)) {
 /*JP
             digtxt = "You break through the door.";
 */
-            digtxt = "”à‚ğ’Ê‚è”²‚¯‚½D";
+            digtxt = "Èâ¤òÄÌ¤êÈ´¤±¤¿¡¥";
             if (shopedge) {
                 add_damage(dpx, dpy, 400L);
 /*JP
                 dmgtxt = "break";
 */
-                dmgtxt = "‰ó‚·";
+                dmgtxt = "²õ¤¹";
             }
             if (!(lev->doormask & D_TRAPPED))
                 lev->doormask = D_BROKEN;
@@ -556,14 +556,14 @@ dig(VOID_ARGS)
 /*JP
                 pline_The("debris from your digging comes to life!");
 */
-                pline("Šâ‚Ì”j•Ğ‚ª¶–½‚ğ‘Ñ‚Ñ‚½I");
+                pline("´ä¤ÎÇËÊÒ¤¬À¸Ì¿¤òÂÓ¤Ó¤¿¡ª");
         }
         if (IS_DOOR(lev->typ) && (lev->doormask & D_TRAPPED)) {
             lev->doormask = D_NODOOR;
 /*JP
             b_trapped("door", 0);
 */
-            b_trapped("”à", 0);
+            b_trapped("Èâ", 0);
             newsym(dpx, dpy);
         }
     cleanup:
@@ -577,8 +577,8 @@ dig(VOID_ARGS)
         static const char *const d_target[6] = { "",        "rock", "statue",
                                                  "boulder", "door", "tree" };
 #else
-        static const char *const d_target[6] = { "",   "Î", "’¤‘œ",
-                                                 "Šâ", "”à", "–Ø" };
+        static const char *const d_target[6] = { "",   "ÀĞ", "Ä¦Áü",
+                                                 "´ä", "Èâ", "ÌÚ" };
 #endif
         int dig_target = dig_typ(uwep, dpx, dpy);
 
@@ -588,8 +588,8 @@ dig(VOID_ARGS)
                 pline("This %s seems too hard to %s.",
                       IS_DOOR(lev->typ) ? "door" : "wall", verb);
 #else
-                pline("‚±‚Ì%s‚Í‚Æ‚Ä‚àŒÅ‚­‚Ä%sD",
-                      IS_DOOR(lev->typ) ? "”à" : "•Ç", verb);
+                pline("¤³¤Î%s¤Ï¤È¤Æ¤â¸Ç¤¯¤Æ%s¡¥",
+                      IS_DOOR(lev->typ) ? "Èâ" : "ÊÉ", verb);
 #endif
                 return 0;
             }
@@ -601,7 +601,7 @@ dig(VOID_ARGS)
 /*JP
             You("hit the %s with all your might.", d_target[dig_target]);
 */
-            You("%s‚ğ—Íˆê”t‘Å‚¿‚Â‚¯‚½D", d_target[dig_target]);
+            You("%s¤òÎÏ°ìÇÕÂÇ¤Á¤Ä¤±¤¿¡¥", d_target[dig_target]);
             did_dig_msg = TRUE;
         }
     }
@@ -708,7 +708,7 @@ int ttyp;
 /*JP
         Strcpy(surface_type, "grave");
 */
-        Strcpy(surface_type, "•æ");
+        Strcpy(surface_type, "Êè");
     else
         Strcpy(surface_type, surface(x, y));
     shopdoor = IS_DOOR(lev->typ) && *in_rooms(x, y, SHOPBASE);
@@ -732,22 +732,22 @@ int ttyp;
 /*JP
                 You("dig a pit in the %s.", surface_type);
 */
-                You("%s‚É—‚µŒŠ‚ğŒ@‚Á‚½D", surface_type);
+                You("%s¤ËÍî¤··ê¤ò·¡¤Ã¤¿¡¥", surface_type);
             if (shopdoor)
 /*JP
                 pay_for_damage("ruin", FALSE);
 */
-                pay_for_damage("‰ó‚·", FALSE);
+                pay_for_damage("²õ¤¹", FALSE);
         } else if (!madeby_obj && canseemon(madeby))
 /*JP
             pline("%s digs a pit in the %s.", Monnam(madeby), surface_type);
 */
-            pline("%s‚Í%s‚É—‚µŒŠ‚ğŒ@‚Á‚½D", Monnam(madeby), surface_type);
+            pline("%s¤Ï%s¤ËÍî¤··ê¤ò·¡¤Ã¤¿¡¥", Monnam(madeby), surface_type);
         else if (cansee(x, y) && flags.verbose)
 /*JP
             pline("A pit appears in the %s.", surface_type);
 */
-            pline("—‚µŒŠ‚ª%s‚ÉŒ»‚í‚ê‚½D", surface_type);
+            pline("Íî¤··ê¤¬%s¤Ë¸½¤ï¤ì¤¿¡¥", surface_type);
 
         if (at_u) {
             if (!wont_fall) {
@@ -765,8 +765,8 @@ int ttyp;
                     pline("%s %s over the pit.", Monnam(mtmp),
                           (is_flyer(mtmp->data)) ? "flies" : "floats");
 #else
-                    pline("%s‚Í%s—‚µŒŠ‚ğ‰z‚¦‚½D", Monnam(mtmp),
-                          (is_flyer(mtmp->data)) ? "”ò‚ñ‚Å" : "•‚‚¢‚Ä");
+                    pline("%s¤Ï%sÍî¤··ê¤ò±Û¤¨¤¿¡¥", Monnam(mtmp),
+                          (is_flyer(mtmp->data)) ? "Èô¤ó¤Ç" : "Éâ¤¤¤Æ");
 #endif
             } else if (mtmp != madeby)
                 (void) mintrap(mtmp);
@@ -777,27 +777,27 @@ int ttyp;
 /*JP
             You("dig a hole through the %s.", surface_type);
 */
-            You("%s‚ÉŒŠ‚ğŠJ‚¯‚½D", surface_type);
+            You("%s¤Ë·ê¤ò³«¤±¤¿¡¥", surface_type);
         else if (!madeby_obj && canseemon(madeby))
 #if 0 /*JP:T*/
             pline("%s digs a hole through the %s.", Monnam(madeby),
                   surface_type);
 #else
-            pline("%s‚Í%s‚ÉŒŠ‚ğŠJ‚¯‚½D", Monnam(madeby),
+            pline("%s¤Ï%s¤Ë·ê¤ò³«¤±¤¿¡¥", Monnam(madeby),
                   surface_type);
 #endif
         else if (cansee(x, y) && flags.verbose)
 /*JP
             pline("A hole appears in the %s.", surface_type);
 */
-            pline("%s‚ÉŒŠ‚ªŒ»‚í‚ê‚½D", surface_type);
+            pline("%s¤Ë·ê¤¬¸½¤ï¤ì¤¿¡¥", surface_type);
 
         if (at_u) {
             if (!u.ustuck && !wont_fall && !next_to_u()) {
 /*JP
                 You("are jerked back by your pet!");
 */
-                You("ƒyƒbƒg‚É‚æ‚Á‚Äˆø‚«–ß‚³‚ê‚½I");
+                You("¥Ú¥Ã¥È¤Ë¤è¤Ã¤Æ°ú¤­Ìá¤µ¤ì¤¿¡ª");
                 wont_fall = TRUE;
             }
 
@@ -814,7 +814,7 @@ int ttyp;
 /*JP
                     pay_for_damage("ruin", FALSE);
 */
-                    pay_for_damage("‚ß‚¿‚á‚ß‚¿‚á‚É‚·‚é", FALSE);
+                    pay_for_damage("¤á¤Á¤ã¤á¤Á¤ã¤Ë¤¹¤ë", FALSE);
 
             } else {
                 d_level newlevel;
@@ -826,12 +826,12 @@ int ttyp;
 /*JP
                     pay_for_damage("dig into", TRUE);
 */
-                    pay_for_damage("ŒŠ‚ğ‚ ‚¯‚é", TRUE);
+                    pay_for_damage("·ê¤ò¤¢¤±¤ë", TRUE);
 
 /*JP
                 You("fall through...");
 */
-                You("—‚¿‚½DDD");
+                You("Íî¤Á¤¿¡¥¡¥¡¥");
                 /* Earlier checks must ensure that the destination
                  * level exists and is in the present dungeon.
                  */
@@ -846,7 +846,7 @@ int ttyp;
 /*JP
                 pay_for_damage("ruin", FALSE);
 */
-                pay_for_damage("‚ß‚¿‚á‚ß‚¿‚á‚É‚·‚é", FALSE);
+                pay_for_damage("¤á¤Á¤ã¤á¤Á¤ã¤Ë¤¹¤ë", FALSE);
             if (newobjs)
                 impact_drop((struct obj *) 0, x, y, 0);
             if (mtmp) {
@@ -869,7 +869,7 @@ int ttyp;
 /*JP
                             pline("%s avoids the trap.", Monnam(mtmp));
 */
-                            pline("%s‚Íã©‚ğ”ğ‚¯‚½D", Monnam(mtmp));
+                            pline("%s¤Ïæ«¤òÈò¤±¤¿¡¥", Monnam(mtmp));
                         return;
                     } else {
                         get_level(&tolevel, depth(&u.uz) + 1);
@@ -906,7 +906,7 @@ const char *fillmsg;
 /*JP
         pline(fillmsg, typ == LAVAPOOL ? "lava" : "water");
 */
-        pline(fillmsg, typ == LAVAPOOL ? "—nŠâ" : "…");
+        pline(fillmsg, typ == LAVAPOOL ? "ÍÏ´ä" : "¿å");
     if (u_spot && !(Levitation || Flying)) {
         if (typ == LAVAPOOL)
             (void) lava_effects();
@@ -950,7 +950,7 @@ coord *cc;
         pline_The("%s %shere is too hard to dig in.", surface(dig_x, dig_y),
                   (dig_x != u.ux || dig_y != u.uy) ? "t" : "");
 #else
-        pline("%s‚Í‚Æ‚Ä‚àŒÅ‚­‚ÄŒ@‚ê‚È‚¢D", surface(dig_x, dig_y));
+        pline("%s¤Ï¤È¤Æ¤â¸Ç¤¯¤Æ·¡¤ì¤Ê¤¤¡¥", surface(dig_x, dig_y));
 #endif
 
     } else if (is_pool_or_lava(dig_x, dig_y)) {
@@ -958,8 +958,8 @@ coord *cc;
         pline_The("%s sloshes furiously for a moment, then subsides.",
                   is_lava(dig_x, dig_y) ? "lava" : "water");
 #else
-        pline("%s‚ÍŒƒ‚µ‚­”g‚¤‚Á‚½D",
-                  is_lava(dig_x, dig_y) ? "—nŠâ" : "…");
+        pline("%s¤Ï·ã¤·¤¯ÇÈ¤¦¤Ã¤¿¡¥",
+                  is_lava(dig_x, dig_y) ? "ÍÏ´ä" : "¿å");
 #endif
         wake_nearby(); /* splashing */
 
@@ -972,7 +972,7 @@ coord *cc;
 /*JP
             pline_The("drawbridge seems too hard to dig through.");
 */
-            pline("’µ‚Ë‹´‚Í‚Æ‚Ä‚àŒÅ‚­‚ÄŒ@‚ê‚»‚¤‚É‚È‚¢D");
+            pline("Ä·¤Í¶¶¤Ï¤È¤Æ¤â¸Ç¤¯¤Æ·¡¤ì¤½¤¦¤Ë¤Ê¤¤¡¥");
             return FALSE;
         } else {
             int x = dig_x, y = dig_y;
@@ -989,8 +989,8 @@ coord *cc;
             pline_The("boulder settles into the %spit.",
                       (dig_x != u.ux || dig_y != u.uy) ? "adjacent " : "");
 #else
-            pline("Šâ‚Í%s—‚µŒŠ‚ğ–„‚ß‚½D",
-                      (dig_x != u.ux || dig_y != u.uy) ? "—×‚Ì" : "");
+            pline("´ä¤Ï%sÍî¤··ê¤òËä¤á¤¿¡¥",
+                      (dig_x != u.ux || dig_y != u.uy) ? "ÎÙ¤Î" : "");
 #endif
             ttmp->ttyp = PIT; /* crush spikes */
         } else {
@@ -1001,7 +1001,7 @@ coord *cc;
 /*JP
             pline("KADOOM! The boulder falls in!");
 */
-            pline("‚Ç‚Ç[‚ñIŠâ‚Í—‚¿‚½I");
+            pline("¤É¤É¡¼¤ó¡ª´ä¤ÏÍî¤Á¤¿¡ª");
             (void) delfloortrap(ttmp);
         }
         delobj(boulder_here);
@@ -1026,7 +1026,7 @@ coord *cc;
                       surface(dig_x, dig_y),
                       (dig_x != u.ux || dig_y != u.uy) ? "t" : "");
 #else
-            pline("%s‚Í‚Æ‚Ä‚àŒÅ‚­‚ÄŒ@‚ê‚È‚¢D", surface(dig_x, dig_y));
+            pline("%s¤Ï¤È¤Æ¤â¸Ç¤¯¤Æ·¡¤ì¤Ê¤¤¡¥", surface(dig_x, dig_y));
 #endif
             return FALSE;
         }
@@ -1038,7 +1038,7 @@ coord *cc;
                     "As you dig, the hole fills with %s!");
 #else
         liquid_flow(dig_x, dig_y, typ, ttmp,
-                    "‚ ‚È‚½‚ªŒ@‚é‚ÆC%s‚ª—N‚¢‚Ä‚«‚½I");
+                    "¤¢¤Ê¤¿¤¬·¡¤ë¤È¡¤%s¤¬Í¯¤¤¤Æ¤­¤¿¡ª");
 #endif
         return TRUE;
 
@@ -1047,13 +1047,13 @@ coord *cc;
 /*JP
         pline_The("throne is too hard to break apart.");
 */
-        pline("‹ÊÀ‚Í‚Æ‚Ä‚àŒÅ‚­‚ÄÓ‚¯‚È‚¢D");
+        pline("¶ÌºÂ¤Ï¤È¤Æ¤â¸Ç¤¯¤ÆºÕ¤±¤Ê¤¤¡¥");
 
     } else if (IS_ALTAR(lev->typ)) {
 /*JP
         pline_The("altar is too hard to break apart.");
 */
-        pline("Õ’d‚Í‚Æ‚Ä‚àŒÅ‚­‚ÄÓ‚¯‚È‚¢D");
+        pline("º×ÃÅ¤Ï¤È¤Æ¤â¸Ç¤¯¤ÆºÕ¤±¤Ê¤¤¡¥");
 
     } else {
         typ = fillholetyp(dig_x, dig_y, FALSE);
@@ -1065,7 +1065,7 @@ coord *cc;
                         "As you dig, the hole fills with %s!");
 #else
             liquid_flow(dig_x, dig_y, typ, ttmp,
-                        "‚ ‚È‚½‚ªŒ@‚é‚ÆC%s‚ª—N‚¢‚Ä‚«‚½I");
+                        "¤¢¤Ê¤¿¤¬·¡¤ë¤È¡¤%s¤¬Í¯¤¤¤Æ¤­¤¿¡ª");
 #endif
             return TRUE;
         }
@@ -1115,19 +1115,19 @@ coord *cc;
 /*JP
         You_feel("like a despicable grave-robber!");
 */
-        pline("‚±‚ê‚Å‚Í‚Ü‚é‚Å•æ“D–_‚¾I");
+        pline("¤³¤ì¤Ç¤Ï¤Ş¤ë¤ÇÊèÅ¥ËÀ¤À¡ª");
     } else if (Role_if(PM_SAMURAI)) {
         adjalign(-sgn(u.ualign.type));
 /*JP
         You("disturb the honorable dead!");
 */
-        You("–¼—_‚ ‚é€Ò‚Ì–°‚è‚ğ–W‚°‚¾I");
+        You("Ì¾ÍÀ¤¢¤ë»à¼Ô¤ÎÌ²¤ê¤òË¸¤²¤À¡ª");
     } else if ((u.ualign.type == A_LAWFUL) && (u.ualign.record > -10)) {
         adjalign(-sgn(u.ualign.type));
 /*JP
         You("have violated the sanctity of this grave!");
 */
-        You("¹‚È‚é•æ’n‚ğ”Æ‚µ‚½I");
+        You("À»¤Ê¤ëÊèÃÏ¤òÈÈ¤·¤¿¡ª");
     }
 
     switch (rn2(5)) {
@@ -1136,7 +1136,7 @@ coord *cc;
 /*JP
         You("unearth a corpse.");
 */
-        You("€‘Ì‚ğŒ@‚è‹N‚µ‚½D");
+        You("»àÂÎ¤ò·¡¤êµ¯¤·¤¿¡¥");
         if (!!(otmp = mk_tt_object(CORPSE, dig_x, dig_y)))
             otmp->age -= 100; /* this is an *OLD* corpse */
         ;
@@ -1146,11 +1146,11 @@ coord *cc;
 /*JP
             pline(Hallucination ? "Dude!  The living dead!"
 */
-            pline(Hallucination ? "ƒ]ƒ“ƒr‚ª‚­‚é‚è‚Æ—Ö‚ğ•`‚¢‚½I"
+            pline(Hallucination ? "¥¾¥ó¥Ó¤¬¤¯¤ë¤ê¤ÈÎØ¤òÉÁ¤¤¤¿¡ª"
 /*JP
                                 : "The grave's owner is very upset!");
 */
-                                : "•æ‚ÌŠ—LÒ‚Í‚Æ‚Ä‚à‹Á‚¢‚½I");
+                                : "Êè¤Î½êÍ­¼Ô¤Ï¤È¤Æ¤â¶Ã¤¤¤¿¡ª");
         (void) makemon(mkclass(S_ZOMBIE, 0), dig_x, dig_y, NO_MM_FLAGS);
         break;
     case 3:
@@ -1158,11 +1158,11 @@ coord *cc;
 /*JP
             pline(Hallucination ? "I want my mummy!"
 */
-            pline(Hallucination ? "ƒ}ƒ~[‚ª•K—v‚¾I"
+            pline(Hallucination ? "¥Ş¥ß¡¼¤¬É¬Í×¤À¡ª"
 /*JP
                                 : "You've disturbed a tomb!");
 */
-                                : "•æ‚ğr‚µ‚Ä‚µ‚Ü‚Á‚½I");
+                                : "Êè¤ò¹Ó¤·¤Æ¤·¤Ş¤Ã¤¿¡ª");
         (void) makemon(mkclass(S_MUMMY, 0), dig_x, dig_y, NO_MM_FLAGS);
         break;
     default:
@@ -1170,7 +1170,7 @@ coord *cc;
 /*JP
         pline_The("grave seems unused.  Strange....");
 */
-        pline("‚±‚Ì•æ‚Í–¢g—p‚Ì‚æ‚¤‚¾DŠï–­‚¾DDD");
+        pline("¤³¤ÎÊè¤ÏÌ¤»ÈÍÑ¤Î¤è¤¦¤À¡¥´ñÌ¯¤À¡¥¡¥¡¥");
         break;
     }
     levl[dig_x][dig_y].typ = ROOM;
@@ -1199,7 +1199,7 @@ struct obj *obj;
 /*JP
     verb = ispick ? "dig" : "chop";
 */
-    verb = ispick ? "Œ@‚é" : "Ó‚­";
+    verb = ispick ? "·¡¤ë" : "ºÕ¤¯";
 
     if (u.utrap && u.utraptype == TT_WEB) {
 #if 0 /*JP:T*/
@@ -1208,8 +1208,8 @@ struct obj *obj;
                  res==1 => just got "You now wield a pick-axe." message */
               !res ? "Unfortunately," : "But", verb);
 #else
-        pline("%s‚­‚à‚Ì‘ƒ‚É‚Ğ‚Á‚©‚©‚Á‚Ä‚¢‚éŠÔ‚Í%sD",
-              !res ? "c”O‚È‚ª‚ç" : "‚µ‚©‚µ", jconj(verb, "‚È‚¢"));
+        pline("%s¤¯¤â¤ÎÁã¤Ë¤Ò¤Ã¤«¤«¤Ã¤Æ¤¤¤ë´Ö¤Ï%s¡¥",
+              !res ? "»ÄÇ°¤Ê¤¬¤é" : "¤·¤«¤·", jconj(verb, "¤Ê¤¤"));
 #endif
         return res;
     }
@@ -1246,7 +1246,7 @@ struct obj *obj;
 /*JP
     Sprintf(qbuf, "In what direction do you want to %s? [%s]", verb, dirsyms);
 */
-    Sprintf(qbuf, "‚Ç‚Ì•ûŒü‚ğ%sH[%s]", verb, dirsyms);
+    Sprintf(qbuf, "¤É¤ÎÊı¸ş¤ò%s¡©[%s]", verb, dirsyms);
     if (!getdir(qbuf))
         return res;
 
@@ -1268,7 +1268,7 @@ struct obj *obj;
 /*JP
     const char *verbing = ispick ? "digging" : "chopping";
 */
-    const char *verbing = ispick ? "Œ@‚é" : "Ó‚­";
+    const char *verbing = ispick ? "·¡¤ë" : "ºÕ¤¯";
 
     if (u.uswallow && attack(u.ustuck)) {
         ; /* return 1 */
@@ -1276,18 +1276,18 @@ struct obj *obj;
 /*JP
         pline("Turbulence torpedoes your %s attempts.", verbing);
 */
-        pline("%s‚Æ‚·‚é‚Æ—…—¬‚ª‹N‚«‚½D", jconj(verbing, "‚æ‚¤"));
+        pline("%s¤È¤¹¤ë¤ÈÍğ¿åÎ®¤¬µ¯¤­¤¿¡¥", jconj(verbing, "¤è¤¦"));
     } else if (u.dz < 0) {
         if (Levitation)
 /*JP
             You("don't have enough leverage.");
 */
-            You("•‚‚¢‚Ä‚¢‚é‚Ì‚Å‚Ó‚ñ‚Î‚è‚ª‚«‚©‚È‚¢D");
+            You("Éâ¤¤¤Æ¤¤¤ë¤Î¤Ç¤Õ¤ó¤Ğ¤ê¤¬¤­¤«¤Ê¤¤¡¥");
         else
 /*JP
             You_cant("reach the %s.", ceiling(u.ux, u.uy));
 */
-            You("%s‚É“Í‚©‚È‚¢D", ceiling(u.ux,u.uy));
+            You("%s¤ËÆÏ¤«¤Ê¤¤¡¥", ceiling(u.ux,u.uy));
     } else if (!u.dx && !u.dy && !u.dz) {
         char buf[BUFSZ];
         int dam;
@@ -1298,11 +1298,11 @@ struct obj *obj;
 /*JP
         You("hit yourself with %s.", yname(uwep));
 */
-        You("©•ª©g‚ğ%s‚Å’@‚¢‚½D", yname(uwep));
+        You("¼«Ê¬¼«¿È¤ò%s¤ÇÃ¡¤¤¤¿¡¥", yname(uwep));
 /*JP
         Sprintf(buf, "%s own %s", uhis(), OBJ_NAME(objects[obj->otyp]));
 */
-        Sprintf(buf, "©•ª©g‚ğ%s‚Å’@‚¢‚Ä", yname(uwep));
+        Sprintf(buf, "¼«Ê¬¼«¿È¤ò%s¤ÇÃ¡¤¤¤Æ", yname(uwep));
         losehp(Maybe_Half_Phys(dam), buf, KILLED_BY);
         context.botl = 1;
         return 1;
@@ -1315,7 +1315,7 @@ struct obj *obj;
 /*JP
             pline("Clash!");
 */
-            pline("ƒKƒ‰ƒKƒ‰I");
+            pline("¥¬¥é¥¬¥é¡ª");
             return 1;
         }
         lev = &levl[rx][ry];
@@ -1331,12 +1331,12 @@ struct obj *obj;
 /*JP
                     There("is a spider web there!");
 */
-                    pline("‚»‚±‚É‚Í‚­‚à‚Ì‘ƒ‚ª‚ ‚éI");
+                    pline("¤½¤³¤Ë¤Ï¤¯¤â¤ÎÁã¤¬¤¢¤ë¡ª");
                 }
 /*JP
                 pline("%s entangled in the web.", Yobjnam2(obj, "become"));
 */
-                Your("%s‚Í‚­‚à‚Ì‘ƒ‚É‚©‚ç‚Ü‚Á‚½D", xname(obj));
+                Your("%s¤Ï¤¯¤â¤ÎÁã¤Ë¤«¤é¤Ş¤Ã¤¿¡¥", xname(obj));
                 /* you ought to be able to let go; tough luck */
                 /* (maybe `move_into_trap()' would be better) */
                 nomul(-d(2, 2));
@@ -1344,23 +1344,23 @@ struct obj *obj;
 /*JP
                 nomovemsg = "You pull free.";
 */
-                nomovemsg = "‚Ğ‚«‚Í‚È‚µ‚½D";
+                nomovemsg = "¤Ò¤­¤Ï¤Ê¤·¤¿¡¥";
             } else if (lev->typ == IRONBARS) {
 /*JP
                 pline("Clang!");
 */
-                pline("ƒKƒcƒ“I");
+                pline("¥¬¥Ä¥ó¡ª");
                 wake_nearby();
             } else if (IS_TREE(lev->typ))
 /*JP
                 You("need an axe to cut down a tree.");
 */
-                You("–Ø‚ğØ‚é‚É‚Í•€‚ª•K—v‚¾D");
+                You("ÌÚ¤òÀÚ¤ë¤Ë¤ÏÉà¤¬É¬Í×¤À¡¥");
             else if (IS_ROCK(lev->typ))
 /*JP
                 You("need a pick to dig rock.");
 */
-                You("Œ@‚é‚É‚Í‚Â‚é‚Í‚µ‚ª•K—v‚¾D");
+                You("·¡¤ë¤Ë¤Ï¤Ä¤ë¤Ï¤·¤¬É¬Í×¤À¡¥");
             else if (!ispick && (sobj_at(STATUE, rx, ry)
                                  || sobj_at(BOULDER, rx, ry))) {
                 boolean vibrate = !rn2(3);
@@ -1369,15 +1369,15 @@ struct obj *obj;
                       sobj_at(STATUE, rx, ry) ? "statue" : "boulder",
                       vibrate ? " The axe-handle vibrates violently!" : "");
 #else
-                pline("%s‚ğØ‚ë‚¤‚Æ‚µ‚½‚ç‰Î‰Ô‚ªU‚Á‚½I%s",
-                      sobj_at(STATUE, rx, ry) ? "’¤‘œ" : "Šâ",
-                      vibrate ? "•€‚ÍŒƒ‚µ‚­U“®‚µ‚½I" : "");
+                pline("%s¤òÀÚ¤í¤¦¤È¤·¤¿¤é²Ğ²Ö¤¬»¶¤Ã¤¿¡ª%s",
+                      sobj_at(STATUE, rx, ry) ? "Ä¦Áü" : "´ä",
+                      vibrate ? "Éà¤Ï·ã¤·¤¯¿¶Æ°¤·¤¿¡ª" : "");
 #endif
                 if (vibrate)
 /*JP
                     losehp(Maybe_Half_Phys(2), "axing a hard object",
 */
-                    losehp(Maybe_Half_Phys(2), "ŒÅ‚¢‚à‚Ì‚É•€‚ğg‚¨‚¤‚Æ‚µ‚Ä",
+                    losehp(Maybe_Half_Phys(2), "¸Ç¤¤¤â¤Î¤ËÉà¤ò»È¤ª¤¦¤È¤·¤Æ",
                            KILLED_BY);
             } else if (u.utrap && u.utraptype == TT_PIT && trap
                        && (trap_with_u = t_at(u.ux, u.uy))
@@ -1410,20 +1410,20 @@ struct obj *obj;
                                                      "cutting the tree" };
 #else
             static const char * const d_action1[6] = {
-                "U‚è",
-                "Œ@‚è",
-                "’¤‘œ‚ğí‚è",
-                "Šâ‚ğ‘Å‚¿‚Â‚¯",
-                "”à‚ğí‚è",
-                "–Ø‚ğØ‚è"
+                "¿¶¤ê",
+                "·¡¤ê",
+                "Ä¦Áü¤òºï¤ê",
+                "´ä¤òÂÇ¤Á¤Ä¤±",
+                "Èâ¤òºï¤ê",
+                "ÌÚ¤òÀÚ¤ê"
               };
             static const char * const d_action2[6] = {
-                "U‚é",
-                "Œ@‚é",
-                "’¤‘œ‚ğí‚é",
-                "Šâ‚ğ‘Å‚¿‚Â‚¯‚é",
-                "”à‚ğí‚é",
-                "–Ø‚ğØ‚é"
+                "¿¶¤ë",
+                "·¡¤ë",
+                "Ä¦Áü¤òºï¤ë",
+                "´ä¤òÂÇ¤Á¤Ä¤±¤ë",
+                "Èâ¤òºï¤ë",
+                "ÌÚ¤òÀÚ¤ë"
               };
 #endif
             did_dig_msg = FALSE;
@@ -1450,14 +1450,14 @@ struct obj *obj;
 /*JP
                     You("start %s.", d_action[dig_target]);
 */
-                    You("%s‚Í‚¶‚ß‚½D", d_action1[dig_target]);
+                    You("%s¤Ï¤¸¤á¤¿¡¥", d_action1[dig_target]);
             } else {
 #if 0 /*JP*/
                 You("%s %s.", context.digging.chew ? "begin" : "continue",
                     d_action[dig_target]);
 #else
-                You("%s‚Ì‚ğ%s‚µ‚½D", d_action2[dig_target],
-                    context.digging.chew ? "ŠJn" : "ÄŠJ");
+                You("%s¤Î¤ò%s¤·¤¿¡¥", d_action2[dig_target],
+                    context.digging.chew ? "³«»Ï" : "ºÆ³«");
 #endif
                 context.digging.chew = FALSE;
             }
@@ -1468,7 +1468,7 @@ struct obj *obj;
 /*JP
         You("swing %s through thin air.", yobjnam(obj, (char *) 0));
 */
-        You("‰½‚à‚È‚¢‹óŠÔ‚Å%s‚ğU‚è‚Ü‚í‚µ‚½D", xname(obj));
+        You("²¿¤â¤Ê¤¤¶õ´Ö¤Ç%s¤ò¿¶¤ê¤Ş¤ï¤·¤¿¡¥", xname(obj));
     } else if (!can_reach_floor(FALSE)) {
         cant_reach_floor(u.ux, u.uy, FALSE, FALSE);
     } else if (is_pool_or_lava(u.ux, u.uy)) {
@@ -1477,8 +1477,8 @@ struct obj *obj;
         You("cannot stay under%s long enough.",
             is_pool(u.ux, u.uy) ? "water" : " the lava");
 #else
-        You("%s‚É‚Í’·ŠÔ‚¢‚ç‚ê‚È‚¢D",
-            is_pool(u.ux, u.uy) ? "…–Ê‰º" : "—nŠâ‚Ì’†");
+        You("%s¤Ë¤ÏÄ¹»ş´Ö¤¤¤é¤ì¤Ê¤¤¡¥",
+            is_pool(u.ux, u.uy) ? "¿åÌÌ²¼" : "ÍÏ´ä¤ÎÃæ");
 #endif
     } else if ((trap = t_at(u.ux, u.uy)) != 0
                && uteetering_at_seen_pit(trap)) {
@@ -1495,7 +1495,7 @@ struct obj *obj;
         pline("%s merely scratches the %s.", Yobjnam2(obj, (char *) 0),
               surface(u.ux, u.uy));
 #else
-        Your("%s‚Í%s‚É‚©‚·‚è‚ğ‚Â‚¯‚½‚¾‚¯‚¾‚Á‚½D", aobjnam(obj, (char *)0),
+        Your("%s¤Ï%s¤Ë¤«¤¹¤ê½ı¤ò¤Ä¤±¤¿¤À¤±¤À¤Ã¤¿¡¥", aobjnam(obj, (char *)0),
               surface(u.ux,u.uy));
 #endif
         u_wipe_engr(3);
@@ -1513,14 +1513,14 @@ struct obj *obj;
 /*JP
             You("start %s downward.", verbing);
 */
-            You("‰ºŒü‚«‚ÉŒ@‚è‚Í‚¶‚ß‚½D");
+            You("²¼¸ş¤­¤Ë·¡¤ê¤Ï¤¸¤á¤¿¡¥");
             if (*u.ushops)
                 shopdig(0);
         } else
 /*JP
             You("continue %s downward.", verbing);
 */
-            You("‰ºŒü‚«‚ÉŒ@‚é‚Ì‚ğÄŠJ‚µ‚½D");
+            You("²¼¸ş¤­¤Ë·¡¤ë¤Î¤òºÆ³«¤·¤¿¡¥");
         did_dig_msg = FALSE;
         set_occupation(dig, verbing, 0);
     }
@@ -1559,7 +1559,7 @@ boolean zap;
 /*JP
                 verbalize("Halt, vandal!  You're under arrest!");
 */
-                verbalize("~‚Ü‚ê–ì”ØlI‚¨‚Ü‚¦‚ğ‘ß•ß‚·‚éI");
+                verbalize("»ß¤Ş¤ìÌîÈÚ¿Í¡ª¤ª¤Ş¤¨¤òÂáÊá¤¹¤ë¡ª");
                 (void) angry_guards(!!Deaf);
             } else {
                 const char *str;
@@ -1568,26 +1568,26 @@ boolean zap;
 /*JP
                     str = "door";
 */
-                    str = "”à";
+                    str = "Èâ";
                 else if (IS_TREE(lev->typ))
 /*JP
                     str = "tree";
 */
-                    str = "–Ø";
+                    str = "ÌÚ";
                 else if (IS_ROCK(lev->typ))
 /*JP
                     str = "wall";
 */
-                    str = "•Ç";
+                    str = "ÊÉ";
                 else
 /*JP
                     str = "fountain";
 */
-                    str = "ò";
+                    str = "Àô";
 /*JP
                 verbalize("Hey, stop damaging that %s!", str);
 */
-                verbalize("‚¨‚¢C%s‚ğ”j‰ó‚·‚é‚Ì‚ğ‚â‚ß‚ëI", str);
+                verbalize("¤ª¤¤¡¤%s¤òÇË²õ¤¹¤ë¤Î¤ò¤ä¤á¤í¡ª", str);
                 context.digging.warned = TRUE;
             }
             if (is_digging())
@@ -1650,7 +1650,7 @@ register struct monst *mtmp;
 /*JP
             You_hear("crashing rock.");
 */
-            You_hear("Šâ‚Ì‚­‚¾‚¯‚é‰¹‚ğ•·‚¢‚½D");
+            You_hear("´ä¤Î¤¯¤À¤±¤ë²»¤òÊ¹¤¤¤¿¡¥");
         if (*in_rooms(mtmp->mx, mtmp->my, SHOPBASE))
             add_damage(mtmp->mx, mtmp->my, 0L);
         if (level.flags.is_maze_lev) {
@@ -1699,7 +1699,7 @@ boolean unexpected;
 /*JP
             You_feel("an unexpected draft.");
 */
-            You("v‚¢‚à‚æ‚ç‚¸C‚·‚«‚Ü•—‚ğŠ´‚¶‚½D");
+            You("»×¤¤¤â¤è¤é¤º¡¤¤¹¤­¤ŞÉ÷¤ò´¶¤¸¤¿¡¥");
         else
             /* U.S. classification system uses 1-A for eligible to serve
                and 4-F for ineligible due to physical or mental defect;
@@ -1760,7 +1760,7 @@ zap_dig()
                 You("pierce %s %s wall!", s_suffix(mon_nam(mtmp)),
                     mbodypart(mtmp, STOMACH));
 #else
-                You("%s‚Ì%s‚Ì•Ç‚ÉŒŠ‚ğŠJ‚¯‚½I", s_suffix(mon_nam(mtmp)),
+                You("%s¤Î%s¤ÎÊÉ¤Ë·ê¤ò³«¤±¤¿¡ª", s_suffix(mon_nam(mtmp)),
                     mbodypart(mtmp, STOMACH));
 #endif
             mtmp->mhp = 1; /* almost dead */
@@ -1781,25 +1781,25 @@ zap_dig()
                                   : "stairs",
                               ceiling(u.ux, u.uy));
 #else
-                    pline("Œõü‚Í%s‚Å”½Ë‚µ%s‚É–½’†‚µ‚½D",
+                    pline("¸÷Àş¤Ï%s¤ÇÈ¿¼Í¤·%s¤ËÌ¿Ãæ¤·¤¿¡¥",
                               (u.ux == xdnladder || u.ux == xupladder)
-                                  ? "‚Í‚µ‚²"
-                                  : "ŠK’i",
+                                  ? "¤Ï¤·¤´"
+                                  : "³¬ÃÊ",
                               ceiling(u.ux, u.uy));
 #endif
 /*JP
                 You("loosen a rock from the %s.", ceiling(u.ux, u.uy));
 */
-                pline("%s‚ÌŠâ‚ªƒKƒ^ƒKƒ^‚µ‚Í‚¶‚ß‚½D", ceiling(u.ux, u.uy));
+                pline("%s¤Î´ä¤¬¥¬¥¿¥¬¥¿¤·¤Ï¤¸¤á¤¿¡¥", ceiling(u.ux, u.uy));
 /*JP
                 pline("It falls on your %s!", body_part(HEAD));
 */
-                pline("‚»‚ê‚Í‚ ‚È‚½‚Ì%s‚É—‚¿‚Ä‚«‚½I", body_part(HEAD));
+                pline("¤½¤ì¤Ï¤¢¤Ê¤¿¤Î%s¤ËÍî¤Á¤Æ¤­¤¿¡ª", body_part(HEAD));
                 dmg = rnd((uarmh && is_metallic(uarmh)) ? 2 : 6);
 /*JP
                 losehp(Maybe_Half_Phys(dmg), "falling rock", KILLED_BY_AN);
 */
-                losehp(Maybe_Half_Phys(dmg), "—Šâ‚Å", KILLED_BY_AN);
+                losehp(Maybe_Half_Phys(dmg), "Íî´ä¤Ç", KILLED_BY_AN);
                 otmp = mksobj_at(ROCK, u.ux, u.uy, FALSE, FALSE);
                 if (otmp) {
                     (void) xname(otmp); /* set dknown, maybe bknown */
@@ -1883,7 +1883,7 @@ zap_dig()
 /*JP
                 pline_The("door is razed!");
 */
-                pline("”à‚Í•ö‚ê—‚¿‚½I");
+                pline("Èâ¤ÏÊø¤ìÍî¤Á¤¿¡ª");
             watch_dig((struct monst *) 0, zx, zy, TRUE);
             room->doormask = D_NODOOR;
             unblock_point(zx, zy); /* vision */
@@ -1903,7 +1903,7 @@ zap_dig()
 /*JP
                     pline_The("wall glows then fades.");
 */
-                    pline("•Ç‚Íˆêu‹P‚¢‚½D");
+                    pline("ÊÉ¤Ï°ì½Öµ±¤¤¤¿¡¥");
                 break;
             } else if (IS_TREE(room->typ)) { /* check trees before stone */
                 if (!(room->wall_info & W_NONDIGGABLE)) {
@@ -1913,7 +1913,7 @@ zap_dig()
 /*JP
                     pline_The("tree shudders but is unharmed.");
 */
-                    pline("–Ø‚Í‚ä‚ê‚½‚ª‚Â‚©‚È‚©‚Á‚½D");
+                    pline("ÌÚ¤Ï¤æ¤ì¤¿¤¬½ı¤Ä¤«¤Ê¤«¤Ã¤¿¡¥");
                 break;
             } else if (room->typ == STONE || room->typ == SCORR) {
                 if (!(room->wall_info & W_NONDIGGABLE)) {
@@ -1923,7 +1923,7 @@ zap_dig()
 /*JP
                     pline_The("rock glows then fades.");
 */
-                    pline("Î‚Íˆêu‹P‚¢‚½D");
+                    pline("ÀĞ¤Ï°ì½Öµ±¤¤¤¿¡¥");
                 break;
             }
         } else if (IS_ROCK(room->typ)) {
@@ -1969,7 +1969,7 @@ zap_dig()
 /*JP
         pay_for_damage(shopdoor ? "destroy" : "dig into", FALSE);
 */
-        pay_for_damage(shopdoor ? "”j‰ó‚·‚é" : "ŒŠ‚ğ‚ ‚¯‚é", FALSE);
+        pay_for_damage(shopdoor ? "ÇË²õ¤¹¤ë" : "·ê¤ò¤¢¤±¤ë", FALSE);
     return;
 }
 
@@ -2363,9 +2363,9 @@ long timeout;
             Your("%s%s %s away%c", obj == uwep ? "wielded " : "", cname,
                  otense(obj, "rot"), obj == uwep ? '!' : '.');
 #else
-            pline("‚ ‚È‚½‚Ì%s%s‚Í•…‚Á‚Ä‚µ‚Ü‚Á‚½%s",
-                     obj == uwep ? "è‚É‚µ‚Ä‚¢‚é" : "", cname,
-                     obj == uwep ? "I" : "D");
+            pline("¤¢¤Ê¤¿¤Î%s%s¤ÏÉå¤Ã¤Æ¤·¤Ş¤Ã¤¿%s",
+                     obj == uwep ? "¼ê¤Ë¤·¤Æ¤¤¤ë" : "", cname,
+                     obj == uwep ? "¡ª" : "¡¥");
 #endif
         }
         if (obj == uwep) {
@@ -2431,12 +2431,12 @@ bury_you()
 /*JP
             You_feel("a sensation like falling into a trap!");
 */
-            You("ã©‚É—‚¿‚é‚æ‚¤‚ÈŠ´Šo‚É‚¨‚»‚í‚ê‚½I");
+            You("æ«¤ËÍî¤Á¤ë¤è¤¦¤Ê´¶³Ğ¤Ë¤ª¤½¤ï¤ì¤¿¡ª");
         else
 /*JP
             pline_The("%s opens beneath you and you fall in!",
 */
-            pline("%s‚ª‰º•û‚ÉŠJ‚«C‚ ‚È‚½‚Í—‚¿‚½I",
+            pline("%s¤¬²¼Êı¤Ë³«¤­¡¤¤¢¤Ê¤¿¤ÏÍî¤Á¤¿¡ª",
                       surface(u.ux, u.uy));
 
         u.uburied = TRUE;
@@ -2466,7 +2466,7 @@ escape_tomb()
 /*JP
         You("attempt a teleport spell.");
 */
-        You("uŠÔˆÚ“®‚ğ‚İ‚½D");
+        You("½Ö´Ö°ÜÆ°¤ò»î¤ß¤¿¡¥");
         (void) dotele();        /* calls unearth_you() */
     } else if (u.uburied) { /* still buried after 'port attempt */
         boolean good;
@@ -2485,13 +2485,13 @@ escape_tomb()
                       : "phase",
                 surface(u.ux, u.uy));
 #else
-            You("%s‚É%s‚ë‚¤‚Æ‚µ‚½D",
+            You("%s¤Ë%s¤í¤¦¤È¤·¤¿¡¥",
                 surface(u.ux, u.uy),
                 (tunnels(youmonst.data) && !needspick(youmonst.data))
-                ? "ƒgƒ“ƒlƒ‹‚ğŒ@"
+                ? "¥È¥ó¥Í¥ë¤ò·¡"
                 : (amorphous(youmonst.data))
-                   ? "‚É‚¶‚İ‚Ì‚Ú"
-                   : "™X‚É‚Í‚¢‚ ‚ª");
+                   ? "¤Ë¤¸¤ß¤Î¤Ü"
+                   : "½ù¡¹¤Ë¤Ï¤¤¤¢¤¬");
 #endif
 
             good = (tunnels(youmonst.data) && !needspick(youmonst.data))
@@ -2511,7 +2511,7 @@ struct obj *otmp;
 /*JP
         pline_The("objects on the %s tumble into a hole!",
 */
-        pline_The("%s‚Ì•¨‘Ì‚ÍŒŠ‚É“]‚ª‚Á‚½I",
+        pline_The("%s¤ÎÊªÂÎ¤Ï·ê¤ËÅ¾¤¬¤Ã¤¿¡ª",
                   surface(otmp->ox, otmp->oy));
 
     bury_objs(otmp->ox, otmp->oy);

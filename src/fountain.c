@@ -28,7 +28,7 @@ const char *what;
 /*JP
     const char *umsg = "are floating high above the %s.";
 */
-    const char *umsg = "%s‚Ì—y‚©ã•û‚É•‚‚¢‚Ä‚¢‚éD";
+    const char *umsg = "%s¤ÎÍÚ¤«¾åÊı¤ËÉâ¤¤¤Æ¤¤¤ë¡¥";
 
     if (u.utrap && (u.utraptype == TT_INFLOOR || u.utraptype == TT_LAVA)) {
         /* when stuck in floor (not possible at fountain or sink location,
@@ -36,7 +36,7 @@ const char *what;
 /*JP
         umsg = "are trapped in the %s.";
 */
-        umsg = "%s‚É‚Â‚©‚Ü‚Á‚Ä‚¢‚éD";
+        umsg = "%s¤Ë¤Ä¤«¤Ş¤Ã¤Æ¤¤¤ë¡¥";
         what = surface(u.ux, u.uy); /* probably redundant */
     }
     You(umsg, what);
@@ -55,14 +55,14 @@ dowatersnakes()
             pline("An endless stream of %s pours forth!",
                   Hallucination ? makeplural(rndmonnam(NULL)) : "snakes");
 #else
-            pline("%s‚ª‚Ç‚Ç‚Á‚Æ—¬‚êo‚Ä‚«‚½I",
-                  Hallucination ? rndmonnam(NULL) : "Ö");
+            pline("%s¤¬¤É¤É¤Ã¤ÈÎ®¤ì½Ğ¤Æ¤­¤¿¡ª",
+                  Hallucination ? rndmonnam(NULL) : "¼Ø");
 #endif
         else
 /*JP
             You_hear("%s hissing!", something);
 */
-            You_hear("ƒV[ƒb‚Æ‚¢‚¤‰¹‚ğ•·‚¢‚½I");
+            You_hear("¥·¡¼¥Ã¤È¤¤¤¦²»¤òÊ¹¤¤¤¿¡ª");
         while (num-- > 0)
             if ((mtmp = makemon(&mons[PM_WATER_MOCCASIN], u.ux, u.uy,
                                 NO_MM_FLAGS)) != 0
@@ -72,7 +72,7 @@ dowatersnakes()
 /*JP
         pline_The("fountain bubbles furiously for a moment, then calms.");
 */
-        pline("ò‚Í“Ë‘RŒƒ‚µ‚­–A‚¾‚¿C‚â‚ª‚ÄÃ‚©‚É‚È‚Á‚½D");
+        pline("Àô¤ÏÆÍÁ³·ã¤·¤¯Ë¢¤À¤Á¡¤¤ä¤¬¤ÆÀÅ¤«¤Ë¤Ê¤Ã¤¿¡¥");
 }
 
 /* Water demon */
@@ -88,12 +88,12 @@ dowaterdemon()
 /*JP
                 You("unleash %s!", a_monnam(mtmp));
 */
-                You("%s‚ğ‰ğ‚«•ú‚µ‚½I", a_monnam(mtmp));
+                You("%s¤ò²ò¤­Êü¤·¤¿¡ª", a_monnam(mtmp));
             else
 /*JP
                 You_feel("the presence of evil.");
 */
-                You_feel("×ˆ«‚È‘¶İ‚ğŠ´‚¶‚½I");
+                You_feel("¼Ù°­¤ÊÂ¸ºß¤ò´¶¤¸¤¿¡ª");
 
             /* Give those on low levels a (slightly) better chance of survival
              */
@@ -102,7 +102,7 @@ dowaterdemon()
                 pline("Grateful for %s release, %s grants you a wish!",
                       mhis(mtmp), mhe(mtmp));
 #else
-                pline("%s‚Í‰ğ•ú‚ğ‚Æ‚Ä‚àŠ´Ó‚µC‚Ì‚¼‚İ‚ğ‚©‚È‚¦‚Ä‚­‚ê‚é‚æ‚¤‚¾I",
+                pline("%s¤Ï²òÊü¤ò¤È¤Æ¤â´¶¼Õ¤·¡¤¤Î¤¾¤ß¤ò¤«¤Ê¤¨¤Æ¤¯¤ì¤ë¤è¤¦¤À¡ª",
                       mhe(mtmp));
 #endif
                 /* give a wish and discard the monster (mtmp set to null) */
@@ -114,7 +114,7 @@ dowaterdemon()
 /*JP
         pline_The("fountain bubbles furiously for a moment, then calms.");
 */
-        pline("ò‚Í“Ë‘RŒƒ‚µ‚­–A‚¾‚¿C‚â‚ª‚ÄÃ‚©‚É‚È‚Á‚½D");
+        pline("Àô¤ÏÆÍÁ³·ã¤·¤¯Ë¢¤À¤Á¡¤¤ä¤¬¤ÆÀÅ¤«¤Ë¤Ê¤Ã¤¿¡¥");
 }
 
 /* Water Nymph */
@@ -130,12 +130,12 @@ dowaternymph()
 /*JP
             You("attract %s!", a_monnam(mtmp));
 */
-            pline("%s‚ªŒ»‚í‚ê‚½I", a_monnam(mtmp));
+            pline("%s¤¬¸½¤ï¤ì¤¿¡ª", a_monnam(mtmp));
         else
 /*JP
             You_hear("a seductive voice.");
 */
-            You_hear("–£˜f“I‚Èº‚ğ•·‚¢‚½D");
+            You_hear("Ì¥ÏÇÅª¤ÊÀ¼¤òÊ¹¤¤¤¿¡¥");
         mtmp->msleeping = 0;
         if (t_at(mtmp->mx, mtmp->my))
             (void) mintrap(mtmp);
@@ -143,12 +143,12 @@ dowaternymph()
 /*JP
         pline("A large bubble rises to the surface and pops.");
 */
-        pline("‘å‚«‚È–A‚ª•¦‚«o‚Ä‚Í‚¶‚¯‚½D");
+        pline("Âç¤­¤ÊË¢¤¬Ê¨¤­½Ğ¤Æ¤Ï¤¸¤±¤¿¡¥");
     else
 /*JP
         You_hear("a loud pop.");
 */
-        You_hear("‘å‚«‚È‚à‚Ì‚ª‚Í‚¶‚¯‚é‰¹‚ğ•·‚¢‚½D");
+        You_hear("Âç¤­¤Ê¤â¤Î¤¬¤Ï¤¸¤±¤ë²»¤òÊ¹¤¤¤¿¡¥");
 }
 
 /* Gushing forth along LOS from (u.ux, u.uy) */
@@ -164,12 +164,12 @@ int drinking;
 /*JP
             Your("thirst is quenched.");
 */
-            Your("Š‰‚«‚Í–ü‚³‚ê‚½D");
+            Your("³é¤­¤ÏÌş¤µ¤ì¤¿¡¥");
         else
 /*JP
             pline("Water sprays all over you.");
 */
-            pline("…‚µ‚Ô‚«‚ª‚ ‚È‚½‚É‚©‚©‚Á‚½D");
+            pline("¿å¤·¤Ö¤­¤¬¤¢¤Ê¤¿¤Ë¤«¤«¤Ã¤¿¡¥");
     }
 }
 
@@ -193,7 +193,7 @@ genericptr_t poolcnt;
 /*JP
         pline("Water gushes forth from the overflowing fountain!");
 */
-        pline("ò‚©‚ç…‚ª‚Ç‚Ç‚Á‚Æˆì‚êo‚½I");
+        pline("Àô¤«¤é¿å¤¬¤É¤É¤Ã¤È°î¤ì½Ğ¤¿¡ª");
 
     /* Put a pool at x, y */
     levl[x][y].typ = POOL;
@@ -215,12 +215,12 @@ dofindgem()
 /*JP
         You("spot a gem in the sparkling waters!");
 */
-        pline("‚«‚ç‚ß‚­…‚Ì’†‚É•óÎ‚ğŒ©‚Â‚¯‚½I");
+        pline("¤­¤é¤á¤¯¿å¤ÎÃæ¤ËÊõÀĞ¤ò¸«¤Ä¤±¤¿¡ª");
     else
 /*JP
         You_feel("a gem here!");
 */
-        You_feel("•óÎ‚ª‚ ‚é‚æ‚¤‚¾I");
+        You_feel("ÊõÀĞ¤¬¤¢¤ë¤è¤¦¤À¡ª");
     (void) mksobj_at(rnd_class(DILITHIUM_CRYSTAL, LUCKSTONE - 1), u.ux, u.uy,
                      FALSE, FALSE);
     SET_FOUNTAIN_LOOTED(u.ux, u.uy);
@@ -248,11 +248,11 @@ boolean isyou;
 /*JP
                     pline("%s yells:", Amonnam(mtmp));
 */
-                    pline("%s‚Í‹©‚ñ‚¾F", Amonnam(mtmp));
+                    pline("%s¤Ï¶«¤ó¤À¡§", Amonnam(mtmp));
 /*JP
                     verbalize("Hey, stop using that fountain!");
 */
-                    verbalize("‚¨‚¢Cò‚ğ‰˜‚·‚ÈI");
+                    verbalize("¤ª¤¤¡¤Àô¤ò±ø¤¹¤Ê¡ª");
                     break;
                 }
             }
@@ -261,14 +261,14 @@ boolean isyou;
 /*JP
                 pline_The("flow reduces to a trickle.");
 */
-                pline("—¬‚ê‚Í‚¿‚å‚ë‚¿‚å‚ë‚É‚È‚Á‚½D");
+                pline("Î®¤ì¤Ï¤Á¤ç¤í¤Á¤ç¤í¤Ë¤Ê¤Ã¤¿¡¥");
             return;
         }
         if (isyou && wizard) {
 /*JP
             if (yn("Dry up fountain?") == 'n')
 */
-            if (yn("ò‚ğŠ±ã‚ª‚ç‚¹‚Ü‚·‚©H") == 'n')
+            if (yn("Àô¤ò´³¾å¤¬¤é¤»¤Ş¤¹¤«¡©") == 'n')
                 return;
         }
         /* replace the fountain with ordinary floor */
@@ -279,7 +279,7 @@ boolean isyou;
 /*JP
             pline_The("fountain dries up!");
 */
-            pline("ò‚ÍŠ±ã‚ª‚Á‚½I");
+            pline("Àô¤Ï´³¾å¤¬¤Ã¤¿¡ª");
         /* The location is seen if the hero/monster is invisible
            or felt if the hero is blind. */
         newsym(x, y);
@@ -300,7 +300,7 @@ drinkfountain()
 /*JP
         floating_above("fountain");
 */
-        floating_above("ò");
+        floating_above("Àô");
         return;
     }
 
@@ -310,7 +310,7 @@ drinkfountain()
 /*JP
         pline("Wow!  This makes you feel great!");
 */
-        pline("ƒƒHI‚Æ‚Ä‚à‹C‚¿‚æ‚­‚È‚Á‚½I");
+        pline("¥ï¥©¡ª¤È¤Æ¤âµ¤»ı¤Á¤è¤¯¤Ê¤Ã¤¿¡ª");
         /* blessed restore ability */
         for (ii = 0; ii < A_MAX; ii++)
             if (ABASE(ii) < AMAX(ii)) {
@@ -329,7 +329,7 @@ drinkfountain()
 /*JP
         pline("A wisp of vapor escapes the fountain...");
 */
-        pline("‰Œ‚Ì‚©‚½‚Ü‚è‚ªò‚©‚ç“¦‚°‚½DDD");
+        pline("±ì¤Î¤«¤¿¤Ş¤ê¤¬Àô¤«¤éÆ¨¤²¤¿¡¥¡¥¡¥");
         exercise(A_WIS, TRUE);
         levl[u.ux][u.uy].blessedftn = 0;
         return;
@@ -339,7 +339,7 @@ drinkfountain()
 /*JP
         pline_The("cool draught refreshes you.");
 */
-        pline("—â‚½‚¢ˆê”t‚Å‚³‚Á‚Ï‚è‚µ‚½D");
+        pline("Îä¤¿¤¤°ìÇÕ¤Ç¤µ¤Ã¤Ñ¤ê¤·¤¿¡¥");
         u.uhunger += rnd(10); /* don't choke on water */
         newuhs(FALSE);
         if (mgkftn)
@@ -350,20 +350,20 @@ drinkfountain()
 /*JP
             You_feel("self-knowledgeable...");
 */
-            You("©•ª©g‚ª”»‚é‚æ‚¤‚È‹C‚ª‚µ‚½DDD");
+            You("¼«Ê¬¼«¿È¤¬È½¤ë¤è¤¦¤Êµ¤¤¬¤·¤¿¡¥¡¥¡¥");
             display_nhwindow(WIN_MESSAGE, FALSE);
             enlightenment(MAGICENLIGHTENMENT, ENL_GAMEINPROGRESS);
             exercise(A_WIS, TRUE);
 /*JP
             pline_The("feeling subsides.");
 */
-            pline("‚»‚ÌŠ´‚¶‚Í‚È‚­‚È‚Á‚½D");
+            pline("¤½¤Î´¶¤¸¤Ï¤Ê¤¯¤Ê¤Ã¤¿¡¥");
             break;
         case 20: /* Foul water */
 /*JP
             pline_The("water is foul!  You gag and vomit.");
 */
-            pline("…‚Í‚Ğ‚Ç‚­•s‰õ‚È–¡‚ª‚µ‚½I‚ ‚È‚½‚Í“f‚«–ß‚µ‚½D");
+            pline("¿å¤Ï¤Ò¤É¤¯ÉÔ²÷¤ÊÌ£¤¬¤·¤¿¡ª¤¢¤Ê¤¿¤ÏÅÇ¤­Ìá¤·¤¿¡¥");
             morehungry(rn1(20, 11));
             vomit();
             break;
@@ -371,24 +371,24 @@ drinkfountain()
 /*JP
             pline_The("water is contaminated!");
 */
-            pline("…‚Í‰˜õ‚³‚ê‚Ä‚¢‚éI");
+            pline("¿å¤Ï±øÀ÷¤µ¤ì¤Æ¤¤¤ë¡ª");
             if (Poison_resistance) {
 /*JP
                 pline("Perhaps it is runoff from the nearby %s farm.",
 */
-                pline("‚½‚Ô‚ñC‚±‚ê‚Í‹ß‚­‚Ì%s‚Ì”_ê‚©‚ç—¬‚ê‚Ä‚¢‚éD",
+                pline("¤¿¤Ö¤ó¡¤¤³¤ì¤Ï¶á¤¯¤Î%s¤ÎÇÀ¾ì¤«¤éÎ®¤ì¤Æ¤¤¤ë¡¥",
                       fruitname(FALSE));
 /*JP
                 losehp(rnd(4), "unrefrigerated sip of juice", KILLED_BY_AN);
 */
-                losehp(rnd(4),"•…‚Á‚½‰Ê`‚Ì‚µ‚½‚½‚è‚Å", KILLED_BY_AN);
+                losehp(rnd(4),"Éå¤Ã¤¿²Ì½Á¤Î¤·¤¿¤¿¤ê¤Ç", KILLED_BY_AN);
                 break;
             }
             losestr(rn1(4, 3));
 /*JP
             losehp(rnd(10), "contaminated water", KILLED_BY);
 */
-            losehp(rnd(10),"‰˜õ‚³‚ê‚½…‚Å", KILLED_BY);
+            losehp(rnd(10),"±øÀ÷¤µ¤ì¤¿¿å¤Ç", KILLED_BY);
             exercise(A_CON, FALSE);
             break;
         case 22: /* Fountain of snakes! */
@@ -403,7 +403,7 @@ drinkfountain()
 /*JP
             pline("This water's no good!");
 */
-            pline("‚±‚Ì…‚Í‚Æ‚Ä‚à‚Ü‚¸‚¢I");
+            pline("¤³¤Î¿å¤Ï¤È¤Æ¤â¤Ş¤º¤¤¡ª");
             morehungry(rn1(20, 11));
             exercise(A_CON, FALSE);
             for (obj = invent; obj; obj = obj->nobj)
@@ -417,26 +417,26 @@ drinkfountain()
 /*JP
                     You("feel transparent.");
 */
-                    You("“§–¾‚É‚È‚Á‚½‹C‚ª‚·‚éD");
+                    You("Æ©ÌÀ¤Ë¤Ê¤Ã¤¿µ¤¤¬¤¹¤ë¡¥");
                 } else {
 /*JP
                     You("feel very self-conscious.");
 */
-                    You("©ˆÓ¯‰ßè‚ÉŠ´‚¶‚½D");
+                    You("¼«°Õ¼±²á¾ê¤Ë´¶¤¸¤¿¡¥");
 /*JP
                     pline("Then it passes.");
 */
-                    pline("‚»‚ÌŠ´‚¶‚ÍÁ‚¦‚½D");
+                    pline("¤½¤Î´¶¤¸¤Ï¾Ã¤¨¤¿¡¥");
                 }
             } else {
 /*JP
                 You_see("an image of someone stalking you.");
 */
-                You("‰½‚©‚ª©•ª‚ÌŒã‚ğ‚Â‚¯‚Ä‚¢‚é‰f‘œ‚ğŒ©‚½D");
+                You("²¿¤«¤¬¼«Ê¬¤Î¸å¤ò¤Ä¤±¤Æ¤¤¤ë±ÇÁü¤ò¸«¤¿¡¥");
 /*JP
                 pline("But it disappears.");
 */
-                pline("‚µ‚©‚µC‚»‚ê‚ÍÁ‚¦‚Ä‚µ‚Ü‚Á‚½D");
+                pline("¤·¤«¤·¡¤¤½¤ì¤Ï¾Ã¤¨¤Æ¤·¤Ş¤Ã¤¿¡¥");
             }
             HSee_invisible |= FROMOUTSIDE;
             newsym(u.ux, u.uy);
@@ -461,7 +461,7 @@ drinkfountain()
 /*JP
             pline("This water gives you bad breath!");
 */
-            pline("…‚ğˆù‚ñ‚¾‚ç‘§‚ªL‚­‚È‚Á‚½I");
+            pline("¿å¤ò°û¤ó¤À¤éÂ©¤¬½­¤¯¤Ê¤Ã¤¿¡ª");
             for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
                 if (DEADMONSTER(mtmp))
                     continue;
@@ -476,7 +476,7 @@ drinkfountain()
 /*JP
             pline("This tepid water is tasteless.");
 */
-            pline("‚±‚Ì‚È‚Ü‚Ê‚é‚¢…‚Í–¡‚ª‚È‚¢D");
+            pline("¤³¤Î¤Ê¤Ş¤Ì¤ë¤¤¿å¤ÏÌ£¤¬¤Ê¤¤¡¥");
             break;
         }
     }
@@ -491,7 +491,7 @@ register struct obj *obj;
 /*JP
         floating_above("fountain");
 */
-        floating_above("ò");
+        floating_above("Àô");
         return;
     }
 
@@ -506,11 +506,11 @@ register struct obj *obj;
 /*JP
              "A freezing mist rises from the water and envelopes the sword.");
 */
-             "•X‚Ì–¶‚ª…‚©‚ç—§‚¿¸‚èCŒ•‚ğ‚Â‚Â‚ñ‚¾D");
+             "É¹¤ÎÌ¸¤¬¿å¤«¤éÎ©¤Á¾º¤ê¡¤·õ¤ò¤Ä¤Ä¤ó¤À¡¥");
 /*JP
             pline_The("fountain disappears!");
 */
-            pline("ò‚ÍÁ‚¦‚Ä‚µ‚Ü‚Á‚½I");
+            pline("Àô¤Ï¾Ã¤¨¤Æ¤·¤Ş¤Ã¤¿¡ª");
             curse(obj);
             if (obj->spe > -6 && !rn2(3))
                 obj->spe--;
@@ -523,11 +523,11 @@ register struct obj *obj;
 /*JP
               "From the murky depths, a hand reaches up to bless the sword.");
 */
-              "‚É‚²‚Á‚½[‚İ‚©‚çCŒ•‚ğj•Ÿ‚¹‚ñ‚Æè‚ªL‚Ñ‚Ä‚«‚½D");
+              "¤Ë¤´¤Ã¤¿¿¼¤ß¤«¤é¡¤·õ¤ò½ËÊ¡¤»¤ó¤È¼ê¤¬¿­¤Ó¤Æ¤­¤¿¡¥");
 /*JP
             pline("As the hand retreats, the fountain disappears!");
 */
-            pline("è‚ª‘Ş‚­‚ÆCò‚ÍÁ‚¦‚Ä‚µ‚Ü‚Á‚½I");
+            pline("¼ê¤¬Âà¤¯¤È¡¤Àô¤Ï¾Ã¤¨¤Æ¤·¤Ş¤Ã¤¿¡ª");
             obj = oname(obj, artiname(ART_EXCALIBUR));
             discover_artifact(ART_EXCALIBUR);
             bless(obj);
@@ -568,13 +568,13 @@ register struct obj *obj;
 /*JP
                 pline_The("water glows for a moment.");
 */
-                pline("…‚Í‹P‚«‚¾‚µ‚½D");
+                pline("¿å¤Ïµ±¤­¤À¤·¤¿¡¥");
             uncurse(obj);
         } else {
 /*JP
             pline("A feeling of loss comes over you.");
 */
-            pline("Šï–­‚È’E—ÍŠ´‚ª‚ ‚È‚½‚ğ‚¨‚»‚Á‚½D");
+            pline("´ñÌ¯¤ÊÃ¦ÎÏ´¶¤¬¤¢¤Ê¤¿¤ò¤ª¤½¤Ã¤¿¡¥");
         }
         break;
     case 21: /* Water Demon */
@@ -598,19 +598,19 @@ register struct obj *obj;
 /*JP
         pline("A strange tingling runs up your %s.", body_part(ARM));
 */
-        pline("Šï–­‚È‚µ‚Ñ‚ê‚ª‚ ‚È‚½‚Ì%s‚É‘–‚Á‚½D", body_part(ARM));
+        pline("´ñÌ¯¤Ê¤·¤Ó¤ì¤¬¤¢¤Ê¤¿¤Î%s¤ËÁö¤Ã¤¿¡¥", body_part(ARM));
         break;
     case 27: /* Strange feeling */
 /*JP
         You_feel("a sudden chill.");
 */
-        You("“Ë‘RŠ¦‚¯‚ğŠ´‚¶‚½D");
+        You("ÆÍÁ³´¨¤±¤ò´¶¤¸¤¿¡¥");
         break;
     case 28: /* Strange feeling */
 /*JP
         pline("An urge to take a bath overwhelms you.");
 */
-        pline("•—˜C‚É“ü‚è‚½‚¢‚Æ‚¢‚¤—~–]‚É‚©‚ç‚ê‚½D");
+        pline("É÷Ï¤¤ËÆş¤ê¤¿¤¤¤È¤¤¤¦ÍßË¾¤Ë¤«¤é¤ì¤¿¡¥");
         {
             long money = money_cnt(invent);
             struct obj *otmp;
@@ -632,7 +632,7 @@ register struct obj *obj;
 /*JP
                 You("lost some of your money in the fountain!");
 */
-                You("‹à‰İ‚ğ”–‡Cò‚É—‚Æ‚µ‚Ä‚µ‚Ü‚Á‚½I");
+                You("¶â²ß¤ò¿ôËç¡¤Àô¤ËÍî¤È¤·¤Æ¤·¤Ş¤Ã¤¿¡ª");
                 CLEAR_FOUNTAIN_LOOTED(u.ux, u.uy);
                 exercise(A_WIS, FALSE);
             }
@@ -653,7 +653,7 @@ register struct obj *obj;
 /*JP
             pline("Far below you, you see coins glistening in the water.");
 */
-            You("—y‚©‰º‚Ì…’†‚É‹à‰İ‚Ì‹P‚«‚ğ‚İ‚Â‚¯‚½D");
+            You("ÍÚ¤«²¼¤Î¿åÃæ¤Ë¶â²ß¤Îµ±¤­¤ò¤ß¤Ä¤±¤¿¡¥");
         exercise(A_WIS, TRUE);
         newsym(u.ux, u.uy);
         break;
@@ -670,7 +670,7 @@ int x, y;
 /*JP
         pline_The("pipes break!  Water spurts out!");
 */
-        pline("”zŠÇ‚ª‰ó‚ê…‚ª•¬o‚µ‚½I");
+        pline("ÇÛ´É¤¬²õ¤ì¿å¤¬Ê®½Ğ¤·¤¿¡ª");
     level.flags.nsinks--;
     levl[x][y].doormask = 0;
     levl[x][y].typ = FOUNTAIN;
@@ -688,7 +688,7 @@ drinksink()
 /*JP
         floating_above("sink");
 */
-        floating_above("—¬‚µ‘ä");
+        floating_above("Î®¤·Âæ");
         return;
     }
     switch (rn2(20)) {
@@ -696,29 +696,29 @@ drinksink()
 /*JP
         You("take a sip of very cold water.");
 */
-        You("‚Æ‚Ä‚à—â‚½‚¢…‚ğˆêŒûˆù‚ñ‚¾D");
+        You("¤È¤Æ¤âÎä¤¿¤¤¿å¤ò°ì¸ı°û¤ó¤À¡¥");
         break;
     case 1:
 /*JP
         You("take a sip of very warm water.");
 */
-        You("‚Æ‚Ä‚à‚ ‚½‚½‚©‚¢…‚ğˆêŒûˆù‚ñ‚¾D");
+        You("¤È¤Æ¤â¤¢¤¿¤¿¤«¤¤¿å¤ò°ì¸ı°û¤ó¤À¡¥");
         break;
     case 2:
 /*JP
         You("take a sip of scalding hot water.");
 */
-        You("‚Æ‚Ä‚à”M‚¢…‚ğˆêŒûˆù‚ñ‚¾D");
+        You("¤È¤Æ¤âÇ®¤¤¿å¤ò°ì¸ı°û¤ó¤À¡¥");
         if (Fire_resistance)
 /*JP
             pline("It seems quite tasty.");
 */
-            pline("‚Æ‚Ä‚à‚¨‚¢‚µ‚¢…‚¾D");
+            pline("¤È¤Æ¤â¤ª¤¤¤·¤¤¿å¤À¡¥");
         else
 /*JP
             losehp(rnd(6), "sipping boiling water", KILLED_BY);
 */
-            losehp(rnd(6), "•¦“«‚µ‚½…‚ğˆù‚ñ‚Å", KILLED_BY);
+            losehp(rnd(6), "Ê¨Æ­¤·¤¿¿å¤ò°û¤ó¤Ç", KILLED_BY);
         /* boiling water burns considered fire damage */
         break;
     case 3:
@@ -726,7 +726,7 @@ drinksink()
 /*JP
             pline_The("sink seems quite dirty.");
 */
-            pline("—¬‚µ‘ä‚Í‚Æ‚Ä‚à‰˜‚È‚ç‚µ‚¢D");
+            pline("Î®¤·Âæ¤Ï¤È¤Æ¤â±ø¤Ê¤é¤·¤¤¡¥");
         else {
             mtmp = makemon(&mons[PM_SEWER_RAT], u.ux, u.uy, NO_MM_FLAGS);
             if (mtmp)
@@ -735,8 +735,8 @@ drinksink()
                       (Blind || !canspotmon(mtmp)) ? "something squirmy"
                                                    : a_monnam(mtmp));
 #else
-                pline("‚°I—¬‚µ‘ä‚É%s‚ª‚¢‚éI",
-                      (Blind || !canspotmon(mtmp)) ? "g‚à‚¾‚¦‚·‚é‚æ‚¤‚È‚à‚Ì"
+                pline("¤²¡ªÎ®¤·Âæ¤Ë%s¤¬¤¤¤ë¡ª",
+                      (Blind || !canspotmon(mtmp)) ? "¿È¤â¤À¤¨¤¹¤ë¤è¤¦¤Ê¤â¤Î"
                                                    : a_monnam(mtmp));
 #endif
         }
@@ -754,8 +754,8 @@ drinksink()
         pline("Some %s liquid flows from the faucet.",
               Blind ? "odd" : hcolor(OBJ_DESCR(objects[otmp->otyp])));
 #else
-        pline("ÖŒû‚©‚ç%s‰t‘Ì‚ª—¬‚ê‚½D",
-              Blind ? "Šï–­‚È" :
+        pline("¼Ø¸ı¤«¤é%s±ÕÂÎ¤¬Î®¤ì¤¿¡¥",
+              Blind ? "´ñÌ¯¤Ê" :
               hcolor(OBJ_DESCR(objects[otmp->otyp])));
 #endif
         otmp->dknown = !(Blind || Hallucination);
@@ -769,7 +769,7 @@ drinksink()
 /*JP
             You("find a ring in the sink!");
 */
-            You("—¬‚µ‘ä‚Éw—Ö‚ğ‚İ‚Â‚¯‚½I");
+            You("Î®¤·Âæ¤Ë»ØÎØ¤ò¤ß¤Ä¤±¤¿¡ª");
             (void) mkobj_at(RING_CLASS, u.ux, u.uy, TRUE);
             levl[u.ux][u.uy].looted |= S_LRING;
             exercise(A_WIS, TRUE);
@@ -778,7 +778,7 @@ drinksink()
 /*JP
             pline("Some dirty water backs up in the drain.");
 */
-            pline("‰˜…‚ª”r…Œû‚©‚ç‹t—¬‚µ‚Ä‚«‚½D");
+            pline("±ø¿å¤¬ÇÓ¿å¸ı¤«¤éµÕÎ®¤·¤Æ¤­¤¿¡¥");
         break;
     case 6:
         breaksink(u.ux, u.uy);
@@ -787,19 +787,19 @@ drinksink()
 /*JP
         pline_The("water moves as though of its own will!");
 */
-        pline("…‚ªˆÓv‚ğ‚Á‚Ä‚¢‚é‚©‚Ì‚æ‚¤‚É“®‚¢‚½I");
+        pline("¿å¤¬°Õ»×¤ò»ı¤Ã¤Æ¤¤¤ë¤«¤Î¤è¤¦¤ËÆ°¤¤¤¿¡ª");
         if ((mvitals[PM_WATER_ELEMENTAL].mvflags & G_GONE)
             || !makemon(&mons[PM_WATER_ELEMENTAL], u.ux, u.uy, NO_MM_FLAGS))
 /*JP
             pline("But it quiets down.");
 */
-            pline("‚µ‚©‚µCÃ‚©‚É‚È‚Á‚½D");
+            pline("¤·¤«¤·¡¤ÀÅ¤«¤Ë¤Ê¤Ã¤¿¡¥");
         break;
     case 8:
 /*JP
         pline("Yuk, this water tastes awful.");
 */
-	pline("ƒIƒFC‚Æ‚Ä‚à‚Ğ‚Ç‚¢–¡‚ª‚·‚éD");
+	pline("¥ª¥§¡¤¤È¤Æ¤â¤Ò¤É¤¤Ì£¤¬¤¹¤ë¡¥");
         more_experienced(1, 0);
         newexplevel();
         break;
@@ -807,7 +807,7 @@ drinksink()
 /*JP
         pline("Gaggg... this tastes like sewage!  You vomit.");
 */
-        pline("ƒQƒF[D‰º…‚Ì‚æ‚¤‚È–¡‚ª‚·‚éI‚ ‚È‚½‚Í“f‚«–ß‚µ‚½D");
+        pline("¥²¥§¡¼¡¥²¼¿å¤Î¤è¤¦¤ÊÌ£¤¬¤¹¤ë¡ª¤¢¤Ê¤¿¤ÏÅÇ¤­Ìá¤·¤¿¡¥");
         morehungry(rn1(30 - ACURR(A_CON), 11));
         vomit();
         break;
@@ -815,12 +815,12 @@ drinksink()
 /*JP
         pline("This water contains toxic wastes!");
 */
-        pline("‚±‚Ì…‚Í—L“Å‚È”r…‚ğŠÜ‚ñ‚Å‚¢‚éI");
+        pline("¤³¤Î¿å¤ÏÍ­ÆÇ¤ÊÇÓ¿å¤ò´Ş¤ó¤Ç¤¤¤ë¡ª");
         if (!Unchanging) {
 /*JP
             You("undergo a freakish metamorphosis!");
 */
-            You("ŠïŒ`‚È•Ï‰»‚ğ‚µ‚Í‚¶‚ß‚½I");
+            You("´ñ·Á¤ÊÊÑ²½¤ò¤·¤Ï¤¸¤á¤¿¡ª");
             polyself(0);
         }
         break;
@@ -829,20 +829,20 @@ drinksink()
 /*JP
         You_hear("clanking from the pipes...");
 */
-        You_hear("”zŠÇ‚ÌƒJƒ`ƒ“‚Æ‚¢‚¤‰¹‚ğ•·‚¢‚½DDD");
+        You_hear("ÇÛ´É¤Î¥«¥Á¥ó¤È¤¤¤¦²»¤òÊ¹¤¤¤¿¡¥¡¥¡¥");
         break;
     case 12:
 /*JP
         You_hear("snatches of song from among the sewers...");
 */
-        You_hear("‰º…‚Ì’†‚©‚ç‚Æ‚¬‚ê‚Æ‚¬‚ê‚Ì‰Ì‚ğ•·‚¢‚½DDD");
+        You_hear("²¼¿å¤ÎÃæ¤«¤é¤È¤®¤ì¤È¤®¤ì¤Î²Î¤òÊ¹¤¤¤¿¡¥¡¥¡¥");
         break;
     case 19:
         if (Hallucination) {
 /*JP
             pline("From the murky drain, a hand reaches up... --oops--");
 */
-            pline("ˆÃ‚¢”r…Œû‚©‚çCè‚ªL‚Ñ‚Ä‚«‚½DD--‚¨‚Á‚Æ--");
+            pline("°Å¤¤ÇÓ¿å¸ı¤«¤é¡¤¼ê¤¬¿­¤Ó¤Æ¤­¤¿¡¥¡¥--¤ª¤Ã¤È--");
             break;
         }
     default:
@@ -850,8 +850,8 @@ drinksink()
         You("take a sip of %s water.",
             rn2(3) ? (rn2(2) ? "cold" : "warm") : "hot");
 #else
-        You("%s…‚ğˆêŒûˆù‚ñ‚¾D",
-            rn2(3) ? (rn2(2) ? "—â‚½‚¢" : "‚ ‚½‚½‚©‚¢") : "”M‚¢");
+        You("%s¿å¤ò°ì¸ı°û¤ó¤À¡¥",
+            rn2(3) ? (rn2(2) ? "Îä¤¿¤¤" : "¤¢¤¿¤¿¤«¤¤") : "Ç®¤¤");
 #endif
     }
 }
