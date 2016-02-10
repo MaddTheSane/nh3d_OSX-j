@@ -1,4 +1,8 @@
-dgn_comp
-lev_comp
+dgn_lex.c
+dgn_yacc.c
 makedefs
 tilemap
+dgn_comp
+lev_comp
+lev_lex.c
+lev_yacc.c

@@ -41,6 +41,10 @@ extern struct window_procs Gnome_procs;
 #ifdef MSWIN_GRAPHICS
 extern struct window_procs mswin_procs;
 #endif
+/*NetHack3D*/
+#ifdef NH3D_GRAPHICS
+extern struct window_procs nh3d_procs;
+#endif
 #ifdef WINCHAIN
 extern struct window_procs chainin_procs;
 extern void FDECL(chainin_procs_init, (int));
@@ -107,6 +111,10 @@ static struct win_choices {
 #endif
 #ifdef MSWIN_GRAPHICS
     { &mswin_procs, 0 CHAINR(0) },
+#endif
+/*Nethack3D*/
+#ifdef NH3D_GRAPHICS
+    { &nh3d_procs, 0 CHAINR(0) },
 #endif
 #ifdef WINCHAIN
     { &chainin_procs, chainin_procs_init, chainin_procs_chain },

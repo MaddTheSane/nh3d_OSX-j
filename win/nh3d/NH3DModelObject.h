@@ -101,7 +101,7 @@ typedef struct {
 	BOOL				hasChildObject;
 	BOOL				isChild;
 	NSInteger			numberOfChildObjects;
-	NSMutableArray		*childObjects;
+	NSMutableArray<NH3DModelObject*>		*childObjects;
 	
 	NH3DModelType		modelType;
 	
@@ -110,8 +110,8 @@ typedef struct {
 	float				yspeed;
 }
 
-
-- (instancetype)init NS_DESIGNATED_INITIALIZER; // init for particle emitter
+/// init for particle emitter
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 /*
 - (id) initWithOBJFile:(NSString *)name withTexture:(BOOL)flag; // 
 																// NOTICE.
@@ -132,17 +132,18 @@ typedef struct {
 @property (readonly) int normal_qty;
 @property (readonly) int texcords_qty;
 
-@property (readonly) NH3DVertexType *verts;
-@property (readonly) NH3DVertexType *norms;
+@property (readonly) NH3DVertexType *verts NS_RETURNS_INNER_POINTER;
+@property (readonly) NH3DVertexType *norms NS_RETURNS_INNER_POINTER;
 
-@property (readonly) NH3DFaceType *faces;
+@property (readonly) NH3DFaceType *faces NS_RETURNS_INNER_POINTER;
 //- (NH3DFaceType *)texReference;
 //- (NH3DFaceType *)normReference;
-@property (readonly) NH3DMapCoordType *texcoords;
+@property (readonly) NH3DMapCoordType *texcoords NS_RETURNS_INNER_POINTER;
 
 - (GLuint)texture;
 - (void)setTexture:(int)tex_id;
 - (BOOL)addTexture:(NSString *)textureName;
+@property (readonly) NSInteger numberOfTextures;
 @property BOOL useEnvironment;
 
 @property (getter=isAnimated) BOOL animated;
@@ -158,8 +159,7 @@ typedef struct {
 - (void)setParticleSpeedX:(float)x Y:(float)y;
 @property (nonatomic) float particleSlowdown;
 @property (nonatomic) float particleLife;
-- (void)setParticleSize:(float)value;
-
+@property (nonatomic) float particleSize;
 
 @property (readonly) BOOL hasChildObject;
 @property (readonly) NSInteger numberOfChildObjects;
@@ -185,9 +185,6 @@ typedef struct {
 @property NH3DMaterial currentMaterial;
 
 - (void)drawSelf;
-
-// 
-
 
 @end
 

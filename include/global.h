@@ -45,6 +45,12 @@
 #define CMDHELPFILE	"jcmdhelp"	/* file telling what commands do */
 #define HISTORY		"jhistory"	/* a file giving nethack's history */
 #define OPTIONFILE	"jopthelp"	/* a file explaining runtime options */
+#define OPTIONS_USED "options"  /* compile-time options, for #version */
+#define SYMBOLS "symbols"       /* replacement symbol sets */
+#define EPITAPHFILE "epitaph"   /* random epitaphs on graves */
+#define ENGRAVEFILE "engrave"   /* random engravings on the floor */
+#define BOGUSMONFILE "bogusmon" /* hallucinatory monsters */
+#define TRIBUTEFILE "tribute"   /* 3.6 tribute to Terry Pratchett */
 #endif
 
 #define LEV_EXT ".lev"          /* extension for special level files */
@@ -241,7 +247,8 @@ typedef uchar nhsym;
 #endif
 
 /*NetHack3D*/
-#if defined(X11_GRAPHICS) || defined(QT_GRAPHICS) || defined(GNOME_GRAPHICS) || defined(MSWIN_GRAPHICS) || defined(NH3D_GRAPHICS)
+#if defined(X11_GRAPHICS) || defined(QT_GRAPHICS) || defined(GNOME_GRAPHICS) \
+    || defined(WIN32) || defined(NH3D_GRAPHICS)
 #ifndef USE_TILES
 #define USE_TILES /* glyph2tile[] will be available */
 #endif

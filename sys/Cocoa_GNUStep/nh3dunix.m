@@ -10,21 +10,21 @@
 
 /* This file collects some Unix dependencies */
 
-#import "hack.h"	/* mainly for index() which depends on BSD */
+#include "hack.h" /* mainly for index() which depends on BSD */
 
-
-#import <sys/errno.h>
-#import <sys/stat.h>
+#include <errno.h>
+#include <sys/stat.h>
 #if defined(NO_FILE_LINKS) || defined(SUNOS4) || defined(POSIX_TYPES)
-#import <sys/fcntl.h>
+#include <fcntl.h>
 #endif
-#import <signal.h>
+#include <signal.h>
+#include <pwd.h>
+#include <ctype.h>
 
-/*#ifdef NH3D_GRAPHICS
-#import <sys/errno.h>
-#import <sys/fcntl.h>
+#ifdef NH3D_GRAPHICS
+#include <sys/errno.h>
+#include <sys/fcntl.h>
 #endif
-*/
 
 #ifdef _M_UNIX
 extern void NDECL(sco_mapon);
@@ -35,6 +35,11 @@ extern void NDECL(linux_mapon);
 extern void NDECL(linux_mapoff);
 #endif
 
+static void NDECL(wd_message);
+static boolean wiz_error_flag = FALSE;
+static struct passwd *NDECL(get_unix_pw);
+
+
 #ifndef NHSTDC
 extern int errno;
 #endif
@@ -43,8 +48,7 @@ static struct stat buf;
 
 /* see whether we should throw away this xlock file */
 static int
-veryold(fd)
-int fd;
+veryold(int fd)
 {
 	time_t date;
 	
@@ -82,8 +86,9 @@ return(1);
 static int
 eraseoldlocks()
 {
-	register int i;
+	int i;
 	
+    program_state.preserve_locks = 0; /* not required but shows intent */
 	/* cannot use maxledgerno() here, because we need to find a lock name
 	* before starting everything (including the dungeon initialization
 								  * that sets astral_level, needed for maxledgerno()) up
@@ -102,7 +107,7 @@ eraseoldlocks()
 void
 getlock()
 {
-	register int i = 0, fd, c;
+	int i = 0, fd, c;
 	const char *fq_lock;
 	
 #ifdef TTY_GRAPHICS
@@ -114,7 +119,7 @@ getlock()
 		*/
 	/* added check for window-system type -dlc */
 	if (!strcmp(windowprocs.name, "tty"))
-	    if (!isatty(0))
+		if (!isatty(0))
 			error("You must play from a terminal.");
 #endif
 	
@@ -135,20 +140,20 @@ getlock()
 			fq_lock = fqname(lock, LEVELPREFIX, 0);
 			
 			if((fd = open(fq_lock, 0)) == -1) {
-			    if(errno == ENOENT) goto gotlock; /* no such file */
-			    perror(fq_lock);
-			    unlock_file(HLOCK);
-			    error("Cannot open %s", fq_lock);
+				if(errno == ENOENT) goto gotlock; /* no such file */
+				perror(fq_lock);
+				unlock_file(HLOCK);
+				error("Cannot open %s", fq_lock);
 			}
 			
 			if(veryold(fd) /* closes fd if true */
-				&& eraseoldlocks())
-goto gotlock;
-(void) close(fd);
+			   && eraseoldlocks())
+				goto gotlock;
+			(void) close(fd);
 		} while(i < locknum);
-
-unlock_file(HLOCK);
-error("Too many hacks running now.");
+		
+		unlock_file(HLOCK);
+		error("Too many hacks running now.");
 	} else {
 		fq_lock = fqname(lock, LEVELPREFIX, 0);
 		if((fd = open(fq_lock, 0)) == -1) {
@@ -164,98 +169,86 @@ error("Too many hacks running now.");
 		
 		if(iflags.window_inited) {
 			/*JP
-		    c = yn("There is already a game in progress under your name.  Destroy old game?");
+			c = yn("There is already a game in progress under your name.  Destroy old game?");
 			*/
-		    c = yn("あなたの名前で不正終了したゲームが残っています．破棄しますか？");
+			 c = yn("あなたの名前で不正終了したゲームが残っています．破棄しますか？");
 		} else {
 #if 0 /*JP*/
-		    (void) printf("\nThere is already a game in progress under your name.");
-		    (void) printf("  Destroy old game? [yn] ");
+			(void) printf("\nThere is already a game in progress under your name.");
+			(void) printf("  Destroy old game? [yn] ");
 #else
-		    (void) printf("\nあなたの名前で不正終了したゲームが残っています．");
-		    (void) printf("破棄しますか？[yn] ");
+			(void) printf("\nあなたの名前で不正終了したゲームが残っています．");
+			(void) printf("破棄しますか？[yn] ");
 #endif
-		    (void) fflush(stdout);
-		    c = getchar();
-		    (void) putchar(c);
-		    (void) fflush(stdout);
-		    while (getchar() != '\n') ; /* eat rest of line and newline */
+			(void) fflush(stdout);
+			c = getchar();
+			(void) putchar(c);
+			(void) fflush(stdout);
+			while (getchar() != '\n') ; /* eat rest of line and newline */
 		}
-if(c == 'y' || c == 'Y')
-if(eraseoldlocks())
-goto gotlock;
-else {
+		if(c == 'y' || c == 'Y')
+			if(eraseoldlocks())
+				goto gotlock;
+			else {
 				unlock_file(HLOCK);
 				error("Couldn't destroy old game.");
-}
-else {
-	unlock_file(HLOCK);
-	error("%s", "");
-}
+			}
+			else {
+				unlock_file(HLOCK);
+				error("%s", "");
+			}
 	}
-
+	
 gotlock:
-fd = creat(fq_lock, FCMASK);
-unlock_file(HLOCK);
-if(fd == -1) {
-	error("cannot creat lock file (%s).", fq_lock);
-} else {
-	if(write(fd, (genericptr_t) &hackpid, sizeof(hackpid))
-	   != sizeof(hackpid)){
-		error("cannot write lock (%s)", fq_lock);
+	fd = creat(fq_lock, FCMASK);
+	unlock_file(HLOCK);
+	if(fd == -1) {
+		error("cannot creat lock file (%s).", fq_lock);
+	} else {
+		if(write(fd, (genericptr_t) &hackpid, sizeof(hackpid))
+		   != sizeof(hackpid)){
+			error("cannot write lock (%s)", fq_lock);
+		}
+		if(close(fd) == -1) {
+			error("cannot close lock (%s)", fq_lock);
+		}
 	}
-	if(close(fd) == -1) {
-		error("cannot close lock (%s)", fq_lock);
-	}
-}
 }
 
 void
-regularize(s)	/* normalize file name - we don't like .'s, /'s, spaces */
-register char *s;
+regularize(register char *s)	/* normalize file name - we don't like .'s, /'s, spaces */
 {
-	register unsigned char *lp;
-	
-#ifdef SJIS_FILESYSTEM
-	lp = (unsigned char *)ic2str( s );
-	strcpy(s, lp);
-	for (lp = s; *lp; lp++){
-	    if(is_kanji(*lp)){
-			lp++;
-			continue;
-	    }
-	    if(*lp == '.' || *lp == '/' || *lp == ' '){
-			*lp = '_';
-	    }
-	}
+    char *lp;
+    
+    while ((lp = index(s, '.')) || (lp = index(s, '/'))
+           || (lp = index(s, ' ')))
+        *lp = '_';
+#if defined(SYSV) && !defined(AIX_31) && !defined(SVR4) && !defined(LINUX) \
+&& !defined(__APPLE__)
+    /* avoid problems with 14 character file name limit */
+#ifdef COMPRESS
+    /* leave room for .e from error and .Z from compress appended to
+     * save files */
+    {
+#ifdef COMPRESS_EXTENSION
+        int i = 12 - strlen(COMPRESS_EXTENSION);
 #else
-	while((lp=index(s, '.')) || (lp=index(s, '/')) || (lp=index(s,' ')))
-		*lp = '_';
+        int i = 10; /* should never happen... */
 #endif
-#if defined(SYSV) && !defined(AIX_31) && !defined(SVR4) && !defined(LINUX) && !defined(__APPLE__)
-	/* avoid problems with 14 character file name limit */
-# ifdef COMPRESS
-	/* leave room for .e from error and .Z from compress appended to
-		* save files */
-	{
-#  ifdef COMPRESS_EXTENSION
-	    int i = 12 - strlen(COMPRESS_EXTENSION);
-#  else
-	    int i = 10;		/* should never happen... */
-#  endif
-	    if(strlen(s) > i)
-			s[i] = '\0';
-	}
-# else
-	if(strlen(s) > 11)
-		/* leave room for .nn appended to level files */
-		s[11] = '\0';
-# endif
+        if (strlen(s) > i)
+            s[i] = '\0';
+    }
+#else
+    if (strlen(s) > 11)
+    /* leave room for .nn appended to level files */
+        s[11] = '\0';
+#endif
 #endif
 }
 
+
 #if defined(TIMED_DELAY) && !defined(msleep) && defined(SYSV)
-#import <poll.h>
+#include <poll.h>
 
 void
 msleep(msec)
@@ -274,6 +267,13 @@ int
 dosh()
 {
 	register char *str;
+#ifdef SYSCF
+	if (!sysopt.shellers || !sysopt.shellers[0]
+		|| !check_user_string(sysopt.shellers)) {
+		Norep("Unknown command '!'.");
+		return 0;
+	}
+#endif
 	if(child(0)) {
 		if((str = getenv("SHELL")) != (char*)0)
 			(void) execl(str, str, (char *)0);
@@ -322,9 +322,9 @@ sco_mapoff();
 linux_mapoff();
 #endif
 (void) signal(SIGINT, (SIG_RET_TYPE) done1);
-#ifdef WIZARD
+//#ifdef WIZARD
 if(wizard) (void) signal(SIGQUIT,SIG_DFL);
-#endif
+//#endif
 if(wt) {
 	raw_print("");
 	wait_synch();
@@ -382,3 +382,105 @@ gid_t
 }
 
 #endif	/* GETRES_SUPPORT */
+
+void
+sethanguphandler(handler)
+void FDECL((*handler), (int));
+{
+#ifdef SA_RESTART
+    /* don't want reads to restart.  If SA_RESTART is defined, we know
+     * sigaction exists and can be used to ensure reads won't restart.
+     * If it's not defined, assume reads do not restart.  If reads restart
+     * and a signal occurs, the game won't do anything until the read
+     * succeeds (or the stream returns EOF, which might not happen if
+     * reading from, say, a window manager). */
+    struct sigaction sact;
+    
+    (void) memset((genericptr_t) &sact, 0, sizeof sact);
+    sact.sa_handler = (SIG_RET_TYPE) handler;
+    (void) sigaction(SIGHUP, &sact, (struct sigaction *) 0);
+#ifdef SIGXCPU
+    (void) sigaction(SIGXCPU, &sact, (struct sigaction *) 0);
+#endif
+#else /* !SA_RESTART */
+    (void) signal(SIGHUP, (SIG_RET_TYPE) handler);
+#ifdef SIGXCPU
+    (void) signal(SIGXCPU, (SIG_RET_TYPE) handler);
+#endif
+#endif /* ?SA_RESTART */
+}
+
+/* validate wizard mode if player has requested access to it */
+boolean
+authorize_wizard_mode()
+{
+    struct passwd *pw = get_unix_pw();
+    if (pw && sysopt.wizards && sysopt.wizards[0]) {
+        if (check_user_string(sysopt.wizards))
+            return TRUE;
+    }
+    wiz_error_flag = TRUE; /* not being allowed into wizard mode */
+    return FALSE;
+}
+
+boolean
+check_user_string(optstr)
+char *optstr;
+{
+    struct passwd *pw = get_unix_pw();
+    int pwlen;
+    char *eop, *w;
+    if (optstr[0] == '*')
+        return TRUE; /* allow any user */
+    if (!pw)
+        return FALSE;
+    pwlen = strlen(pw->pw_name);
+    eop = eos(optstr);
+    w = optstr;
+    while (w + pwlen <= eop) {
+        if (!*w)
+            break;
+        if (isspace(*w)) {
+            w++;
+            continue;
+        }
+        if (!strncmp(w, pw->pw_name, pwlen)) {
+            if (!w[pwlen] || isspace(w[pwlen]))
+                return TRUE;
+        }
+        while (*w && !isspace(*w))
+            w++;
+    }
+    return FALSE;
+}
+
+static struct passwd *
+get_unix_pw()
+{
+    char *user;
+    unsigned uid;
+    static struct passwd *pw = (struct passwd *) 0;
+    
+    if (pw)
+        return pw; /* cache answer */
+    
+    uid = (unsigned) getuid();
+    user = getlogin();
+    if (user) {
+        pw = getpwnam(user);
+        if (pw && ((unsigned) pw->pw_uid != uid))
+            pw = 0;
+    }
+    if (pw == 0) {
+        user = nh_getenv("USER");
+        if (user) {
+            pw = getpwnam(user);
+            if (pw && ((unsigned) pw->pw_uid != uid))
+                pw = 0;
+        }
+        if (pw == 0) {
+            pw = getpwuid(uid);
+        }
+    }
+    return pw;
+}

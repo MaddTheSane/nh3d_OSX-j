@@ -28,6 +28,7 @@ extern NH3DTileCache *_NH3DTileCache;
 @synthesize modelDrawingType;
 @synthesize special;
 @synthesize material = color;
+@synthesize bgGlyph;
 
 - (void)checkDrawingType
 {
@@ -36,17 +37,15 @@ extern NH3DTileCache *_NH3DTileCache;
 		) {
 		// draw type is corrwall object (10 = stone wall type / 0 = black wall type)
 		modelDrawingType = 0 ;
-	} else if ( player ) {
+	} else if (player) {
 		// draw type is playerpositon
 		modelDrawingType = 1;
-		
 	} else {
-		
 		switch (glyph) {
 			case S_stone + GLYPH_CMAP_OFF:
-				modelDrawingType = (    IS_WALL( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ )
-									|| IS_STWALL( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ )
-									|| IS_DOOR( levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ) ) ? 0 : 1 ;
+				modelDrawingType = (IS_WALL(levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ)
+									|| IS_STWALL(levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ)
+									|| IS_DOOR(levl[posX-MAP_MARGIN][posY-MAP_MARGIN].typ)) ? 0 : 1 ;
 				break;
 			case S_room + GLYPH_CMAP_OFF:
 			case S_corr + GLYPH_CMAP_OFF:
@@ -129,15 +128,24 @@ extern NH3DTileCache *_NH3DTileCache;
 
 /// Override NSObject designated initializer. Normary don't use this.
 - (instancetype) init {
-	
-	return [ self initWithParameter:' ' 
-							  glyph:S_stone+GLYPH_CMAP_OFF 
-							  color:0 
-							   posX:0 
-							   posY:0
-						    special:0 ];
+	return [self initWithParameter:' '
+							 glyph:S_stone+GLYPH_CMAP_OFF
+							 color:0
+							  posX:0
+							  posY:0
+						   special:0
+						   bgGlyph:NO_GLYPH];
 }
 
+- (instancetype)initWithParameter:(char)ch
+							glyph:(int)glf
+							color:(int)col
+							 posX:(int)x
+							 posY:(int)y
+						  special:(int)sp
+{
+	return [self initWithParameter:ch glyph:glf color:col posX:x posY:YES special:sp bgGlyph:NO_GLYPH];
+}
 
 // This is designated initializer.
 - (instancetype)initWithParameter:(char)ch 
@@ -146,6 +154,7 @@ extern NH3DTileCache *_NH3DTileCache;
 							 posX:(int)x
 							 posY:(int)y
 						  special:(int)sp
+						  bgGlyph:(int)bg
 {
 	if (self = [super init]) {
 		lock = [[NSRecursiveLock alloc] init];
@@ -161,22 +170,21 @@ extern NH3DTileCache *_NH3DTileCache;
 		player = NO;
 		hasAlternateSymbol = NO;
 		hasCursor = NO;
+		bgGlyph = bg;
 		
 		//tile = nil;
 		
-		[ self checkDrawingType ];
+		[self checkDrawingType];
 		
-		[ lock unlock ];
+		[lock unlock];
 	}
 	return self;
 }
 
-
 - (NSString *)symbol
 {
-	return [ NSString stringWithFormat:@"%c",symbol ];
+	return [NSString stringWithFormat:@"%c", symbol];
 }
-
 
 - (NSColor *)color
 {
@@ -184,95 +192,121 @@ extern NH3DTileCache *_NH3DTileCache;
 	
 	switch (color) {
 		case 0:
-			aColor = [ NSColor darkGrayColor ];
+			aColor = [NSColor darkGrayColor];
 			break;
 		case 1:
-			aColor = [ NSColor redColor ];
+			aColor = [NSColor redColor];
 			break;
 		case 2:
-			aColor = [ NSColor greenColor ];
+			aColor = [NSColor greenColor];
 			break;
 		case 3:
-			aColor = [ NSColor brownColor ];
+			aColor = [NSColor brownColor];
 			break;
 		case 4:
-			aColor = [ NSColor blueColor ];
+			aColor = [NSColor blueColor];
 			break;
 		case 5:
-			aColor = [ NSColor magentaColor ];
+			aColor = [NSColor magentaColor];
 			break;
 		case 6:
-			aColor = [ NSColor cyanColor ];
+			aColor = [NSColor cyanColor];
 			break;
 		case 7:
-			aColor = [ NSColor grayColor ];
+			aColor = [NSColor grayColor];
 			break;
 		case 8:
-			aColor = [ [NSColor grayColor] highlightWithLevel:0.5 ];
+			aColor = [[NSColor grayColor] highlightWithLevel:0.5];
 			break;
 		case 9:
-			aColor = [ NSColor orangeColor ];
+			aColor = [NSColor orangeColor];
 			break;
 		case 10:
-			aColor = [ [NSColor greenColor] highlightWithLevel:0.5 ];
+			aColor = [[NSColor greenColor] highlightWithLevel:0.5];
 			break;
 		case 11:
 			aColor = [ NSColor yellowColor ];
 			break;
 		case 12:
-			aColor = [ [NSColor blueColor] highlightWithLevel:0.5 ];
+			aColor = [[NSColor blueColor] highlightWithLevel:0.5];
 			break;
 		case 13:
-			aColor = [ [NSColor magentaColor] highlightWithLevel:0.5 ];
+			aColor = [[NSColor magentaColor] highlightWithLevel:0.5];
 			break;
 		case 14:
-			aColor = [ [NSColor cyanColor] highlightWithLevel:0.5 ];
+			aColor = [[NSColor cyanColor] highlightWithLevel:0.5];
 			break;
 		case 15:
-			aColor = [ NSColor whiteColor ];
+			aColor = [NSColor whiteColor];
 			break;
 		default:
-			aColor = [ NSColor windowBackgroundColor ];
+			aColor = [NSColor windowBackgroundColor];
+			break;
 	}
 
 	return aColor;
 }
 
-
 - (void)setPlayer:(BOOL)flag
 {
-	[ lock lock ];
+	[lock lock];
 	player = flag;
-	[ self checkDrawingType ];
-	[ lock unlock ];
+	[self checkDrawingType];
+	[lock unlock];
 }
-
 
 - (void)setCSymbol:(char)chr
 {
-	[ lock lock ];
+	[lock lock];
 	symbol = chr;
-	[ self checkDrawingType ];
-	[ lock unlock ];
+	[self checkDrawingType];
+	[lock unlock];
 }
 
 - (void)setHasAlternateSymbol:(BOOL)flag
 {
-	[ lock lock ];
+	[lock lock];
 	hasAlternateSymbol = flag;
-	[ lock unlock ];
+	[lock unlock];
 }
 
 - (void)setHasCursor:(BOOL)flag
 {
-	[ lock lock ];
+	[lock lock];
 	hasCursor = flag;
-	[ lock unlock ];
+	[lock unlock];
+}
+
+- (BOOL)hasBackground
+{
+	return bgGlyph != NO_GLYPH;
 }
 
 - (NSImage *)tile
-{	
+{
+#if 1
+	NSImage *tmpTile = [self foregroundTile];
+	if (!tmpTile) {
+		return nil;
+	}
 	
+	NSImage *bgtile = [self backgroundTile];
+	if (bgtile != nil) {
+		NSImage *tmpFG = tmpTile;
+		tmpTile = [bgtile copy];
+		[tmpTile lockFocus];
+		[tmpFG drawInRect:NSMakeRect(0, 0, tmpTile.size.width, tmpTile.size.height)];
+		[tmpTile unlockFocus];
+	}
+	
+	return tmpTile;
+#else
+	return [self foregroundTile];
+#endif
+}
+
+- (NSImage *)foregroundTile
+{
 /*	if ( tile == nil && glyph != S_stone + GLYPH_CMAP_OFF ) {
 		NSImage *img = [ [_NH3DTileCache tileImageFromGlyph:glyph] retain ];
 		tile = [ img copy ];
@@ -281,6 +315,19 @@ extern NH3DTileCache *_NH3DTileCache;
 	if ( glyph != S_stone + GLYPH_CMAP_OFF )
 		return [_NH3DTileCache tileImageFromGlyph:glyph];
 	else 
+		return nil;
+}
+
+- (NSImage *)backgroundTile
+{
+	/*	if ( tile == nil && glyph != S_stone + GLYPH_CMAP_OFF ) {
+		NSImage *img = [ [_NH3DTileCache tileImageFromGlyph:glyph] retain ];
+		tile = [ img copy ];
+		[ img release ];
+	 }*/
+	if ((bgGlyph != (S_stone + GLYPH_CMAP_OFF)) && (bgGlyph != (S_darkroom + GLYPH_CMAP_OFF)) && bgGlyph != NO_GLYPH)
+		return [_NH3DTileCache tileImageFromGlyph:bgGlyph];
+	else
 		return nil;
 }
 

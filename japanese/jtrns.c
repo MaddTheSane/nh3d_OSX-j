@@ -267,5 +267,5 @@ objclass_to_sym(oc)
       return ' '; /* 'S'? */
     if(oc == ARMOR_CLASS)
       return ']';
-    return def_oc_syms[oc];
+    return def_oc_syms[oc].sym;
 }

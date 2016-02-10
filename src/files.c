@@ -14,6 +14,16 @@
 #include <fcntl.h>
 #endif
 
+/* hal nh3d 2005 10 02 */
+#ifdef NH3D_GRAPHICS
+/*#include <sys/types.h>*/
+/*#include <unistd.h>*/
+#include <sys/fcntl.h>
+#include <sys/errno.h>
+/*#include <dirent.h>*/
+#endif
+/**/
+
 #include <errno.h>
 #ifdef _MSC_VER /* MSC 6.0 defines errno quite differently */
 #if (_MSC_VER >= 600)
@@ -872,6 +882,12 @@ void
 set_savefile_name(regularize_it)
 boolean regularize_it;
 {
+/* NetHack 3D */
+#if defined(NH3D_GRAPHICS)
+	extern void nh3d_set_savefile_name();
+	nh3d_set_savefile_name();
+	return;
+#endif	
 #ifdef VMS
     Sprintf(SAVEF, "[.save]%d%s", getuid(), plname);
     if (regularize_it)

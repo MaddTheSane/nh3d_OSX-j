@@ -13,7 +13,9 @@ extern short glyph2tile[];
 extern int total_tiles_used;
 
 
-@implementation NH3DTileCache
+@implementation NH3DTileCache {
+	NSMutableDictionary<NSNumber*,NSImage*> *tileDictCache;
+}
 @synthesize tileSize_X;
 @synthesize tileSize_Y;
 
@@ -23,11 +25,14 @@ extern int total_tiles_used;
 	return [self initWithNamed:TILE_FILE_NAME];
 }
 
-
 - (instancetype) initWithNamed:(NSString *)imageName   /* This is designated initializer. */
 {
 	if (self = [super init]) {
-		NSImage	*tileSource = [[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:imageName]];
+		tileDictCache = [[NSMutableDictionary alloc] initWithCapacity:TILES_PER_LINE * NUMBER_OF_TILES_ROW / 4];
+		NSImage	*tileSource = [NSImage imageNamed:imageName];
+		if (tileSource == nil) {
+			tileSource = [[NSImage alloc] initWithContentsOfFile:[[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:imageName]];
+		}
 		NSData  *tiffData;
 		
 		if ( tileSource == nil ) {
@@ -44,9 +49,7 @@ extern int total_tiles_used;
 		tiffData = tileSource.TIFFRepresentation;
 		bitMap = [[NSBitmapImageRep alloc] initWithData: tiffData];
 		
-		//[ tiffData release ];
-		
-		if ( ( bitMap.pixelsWide % TILES_PER_LINE) && ( bitMap.pixelsHigh % NUMBER_OF_TILES_ROW) ) {
+		if ((bitMap.pixelsWide % TILES_PER_LINE) && (bitMap.pixelsHigh % NUMBER_OF_TILES_ROW)) {
 			NSRunCriticalAlertPanel(@"Tile Format Error!",
 									@"%@: Does not support this TILE Pattern.",
 									@"OK",nil,nil, imageName);
@@ -61,11 +64,17 @@ extern int total_tiles_used;
 	return self;
 }
 
-	
+#define GET_RAW_PIXELS 1
 - (NSImage *)tileImageFromGlyph:(int)glyph
 {
-	NSUInteger p[tileSize_X*tileSize_Y];
-	NSImage *tileImg = [[NSImage alloc] initWithSize:NSMakeSize(tileSize_X,tileSize_Y)];
+	int tile = glyph2tile[glyph];
+	NSImage *tileImg = tileDictCache[@(tile)];
+	if (tileImg) {
+		return tileImg;
+	}
+	tileImg = [[NSImage alloc] initWithSize:NSMakeSize(tileSize_X,tileSize_Y)];
+#if GET_RAW_PIXELS
+	NSUInteger p[10];
 	NSBitmapImageRep *bmpRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
 																	   pixelsWide:tileSize_X
 																	   pixelsHigh:tileSize_Y
@@ -76,12 +85,14 @@ extern int total_tiles_used;
 																   colorSpaceName:NSDeviceRGBColorSpace
 																	  bytesPerRow:bitMap.bytesPerRow
 																	 bitsPerPixel:bitMap.bitsPerPixel];
+#endif
 	
-	int tile = glyph2tile[glyph];
-	int x,y,t_x,t_y;
+#if GET_RAW_PIXELS
+	int x,y;
+#endif
+	int t_x,t_y;
 	
-	if ( tile >= total_tiles_used || tile < 0 )
-	{
+	if (tile >= total_tiles_used || tile < 0) {
 		NSLog(@"ERROR:Asked for a TILE %d outside the allowed range.",tile);
 		return nil;
 	}
@@ -89,16 +100,24 @@ extern int total_tiles_used;
 	t_x = ( tile % TILES_PER_LINE ) * tileSize_X;
 	t_y = ( tile / TILES_PER_LINE ) * tileSize_Y;
 
-	for ( x=0 ; x<=tileSize_X ; x++ ) {
-		for ( y=0 ; y<=tileSize_Y ; y++ ) {
-			
+#if GET_RAW_PIXELS
+	for (x = 0; x <= tileSize_X; x++) {
+		for (y = 0; y <= tileSize_Y; y++) {
 			[bitMap getPixel:p atX:(t_x + x) y:(t_y + y)];
 			[bmpRep setPixel:p atX:x y:y];
 		}
 	}
+#else
+	[tileImg lockFocusFlipped:NO];
+	[bitMap drawInRect:NSMakeRect(0, 0, tileSize_X, tileSize_Y) fromRect:NSMakeRect(t_x, t_y, tileSize_X, tileSize_Y) operation:NSCompositeCopy fraction:1 respectFlipped:YES hints:nil];
+	[tileImg unlockFocus];
+#endif
 	
-	[ tileImg addRepresentation:bmpRep ];
-	tileImg.cacheMode = NSImageCacheNever;
+#if GET_RAW_PIXELS
+	[tileImg addRepresentation:bmpRep];
+#endif
+	//tileImg.cacheMode = NSImageCacheNever;
+	tileDictCache[@(tile)] = tileImg;
 	return tileImg;
 }
 

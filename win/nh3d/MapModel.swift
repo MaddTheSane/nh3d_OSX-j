@@ -74,7 +74,7 @@ class MapModel: NSObject {
 	override init() {
 		for x in 0 ..< MAPSIZE_COLUMN {
 			for y in 0 ..< MAPSIZE_ROW {
-				mapArray[Int(x)][Int(y)] = NH3DMapItem(parameter: 0x20, glyph: S_stone + GLYPH_CMAP_OFF, color: 0, posX: x, posY: y, special: 0)
+				mapArray[Int(x)][Int(y)] = NH3DMapItem(parameter: 0x20, glyph: S_stone + GLYPH_CMAP_OFF, color: 0, posX: x, posY: y, special: 0, bgGlyph: NO_GLYPH)
 			}
 		}
 		
@@ -90,7 +90,7 @@ class MapModel: NSObject {
 	@IBAction func toggleIndicator(sender: AnyObject?) {
 		if indicatorIsActive {
 			stopIndicator()
-			enemyIndicator.intValue = 0
+			enemyIndicator.integerValue = 0
 		} else {
 			startIndicator()
 		}
@@ -98,10 +98,10 @@ class MapModel: NSObject {
 
 	private func prepareAttributes() {
 		shadow.shadowColor = NSColor(calibratedWhite: 0, alpha: 0.7)
-		shadow.shadowOffset = NSMakeSize(2, -2) ;
-		shadow.shadowBlurRadius = 1.0 ;
+		shadow.shadowOffset = NSMakeSize(2, -2)
+		shadow.shadowBlurRadius = 1.0
 		
-		style.alignment = NSCenterTextAlignment;
+		style.alignment = .Center
 		
 		strAttributes[NSFontAttributeName] = NSFont(name: NH3DWINDOWFONT, size: NH3DWINDOWFONTSIZE + 4.0)  
 		strAttributes[NSShadowAttributeName] = shadow;
@@ -135,12 +135,12 @@ class MapModel: NSObject {
 		}
 	}
 	
-	func setMapModelGlyph(glf: Int32, xPos x: Int32, yPos y: Int32) {
+	func setMapModelGlyph(glf: Int32, xPos x: Int32, yPos y: Int32, bgGlyph: Int32) {
 		var ch: Int32 = 0
 		var color: Int32 = 0
 		var special: UInt32 = 0
 		
-		if ( mapArray[Int(x+MAP_MARGIN)][Int(y+MAP_MARGIN)].glyph == glf) {
+		if mapArray[Int(x+MAP_MARGIN)][Int(y+MAP_MARGIN)].glyph == glf && mapArray[Int(x+MAP_MARGIN)][Int(y+MAP_MARGIN)].bgGlyph == bgGlyph {
 			return
 		} else if x+MAP_MARGIN > MAPSIZE_COLUMN || y+MAP_MARGIN > MAPSIZE_ROW {
 			Swift_Panic("Illegal map size!!")
@@ -155,7 +155,7 @@ class MapModel: NSObject {
 			lock.lock()
 			
 			//  make map
-			mapArray[Int(x2)][Int(y2)] = NH3DMapItem(parameter: Int8(ch), glyph: glf, color: color, posX: x2, posY: y2, special: Int32(special))
+			mapArray[Int(x2)][Int(y2)] = NH3DMapItem(parameter: Int8(ch), glyph: glf, color: color, posX: x2, posY: y2, special: Int32(special), bgGlyph: bgGlyph)
 			
 			lock.unlock()
 			
@@ -198,7 +198,6 @@ class MapModel: NSObject {
 	}
 	
 	@objc(mapArrayAtX:atY:) func mapArray(x x: Int32, y: Int32) -> NH3DMapItem? {
-		
 		if (x < MAPSIZE_COLUMN) && (y < MAPSIZE_ROW) && (x >= 0) && (y >= 0) && (mapArray[Int(x)][Int(y)] != nil) {
 			return  mapArray[Int(x)][Int(y)];
 		} else {
@@ -231,7 +230,7 @@ class MapModel: NSObject {
 		lock.lock()
 		for x in 0 ..< MAPSIZE_COLUMN {
 			for y in 0 ..< MAPSIZE_ROW {
-				mapArray[Int(x)][Int(y)] = NH3DMapItem(parameter: 0x20, glyph: S_stone + GLYPH_CMAP_OFF, color: 0, posX: x, posY: y, special: 0)
+				mapArray[Int(x)][Int(y)] = NH3DMapItem(parameter: 0x20, glyph: S_stone + GLYPH_CMAP_OFF, color: 0, posX: x, posY: y, special: 0, bgGlyph: NO_GLYPH)
 			}
 		}
 		lock.unlock()

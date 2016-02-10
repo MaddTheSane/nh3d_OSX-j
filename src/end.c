@@ -57,6 +57,11 @@ STATIC_DCL int NDECL(num_extinct);
 
 #if defined(__BEOS__) || defined(MICRO) || defined(WIN32) || defined(OS2)
 extern void FDECL(nethack_exit, (int));
+#endif
+/* NetHack3D */
+# ifdef NH3D_GRAPHICS
+extern void nethack3d_exit(int status);
+# define nethack_exit nethack3d_exit
 #else
 #define nethack_exit exit
 #endif
@@ -1659,6 +1664,10 @@ int status;
     jputchar('\0'); /* reset terminal */
 #endif
     nethack_exit(status);
+#ifdef NH3D_GRAPHICS
+    /* quiet a warning */
+    exit(status);
+#endif
 }
 
 /* #vanquished command */
